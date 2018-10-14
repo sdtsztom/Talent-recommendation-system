@@ -6,3 +6,4 @@
 |Internal check on outline|Done|18/09/26|
 |details table draft|Done|18/09/30|
 |mature details table|Done|18/09/30|
+|model design in PowerDesinger|Done|18/10/08|

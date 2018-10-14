@@ -1,8 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     2018/10/8 21:44:51                           */
+/* Created on:     2018/10/9 17:38:18                           */
 /*==============================================================*/
 
+CREATE DATABASE tal_rec_sys
+GO
+USE tal_rec_sys
+GO
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -44,6 +48,13 @@ if exists (select 1
    where r.fkeyid = object_id('interview_place') and o.name = 'FK_INTERVIE_WP_IN_IP_WORK_PLA')
 alter table interview_place
    drop constraint FK_INTERVIE_WP_IN_IP_WORK_PLA
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('job') and o.name = 'FK_JOB_TYPE_IN_JOB')
+alter table job
+   drop constraint FK_JOB_TYPE_IN_JOB
 go
 
 if exists (select 1
@@ -174,13 +185,6 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('requirements_common_info') and o.name = 'FK_REQUIREM_JOB_TYPE__JOB_TYPE')
-alter table requirements_common_info
-   drop constraint FK_REQUIREM_JOB_TYPE__JOB_TYPE
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('role_grant') and o.name = 'FK_ROLE_GRA_ROLE_GRAN_STUFF')
 alter table role_grant
    drop constraint FK_ROLE_GRA_ROLE_GRAN_STUFF
@@ -216,9 +220,9 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('talents') and o.name = 'FK_TALENTS_FROM_IN_T_RECOMMEN')
+   where r.fkeyid = object_id('talents') and o.name = 'FK_TALENTS_FROM_IN_T_TALENTS_')
 alter table talents
-   drop constraint FK_TALENTS_FROM_IN_T_RECOMMEN
+   drop constraint FK_TALENTS_FROM_IN_T_TALENTS_
 go
 
 if exists (select 1
@@ -474,16 +478,9 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('recommend_people_from')
+           where  id = object_id('recommend_results')
             and   type = 'U')
-   drop table recommend_people_from
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('recommend_resluts')
-            and   type = 'U')
-   drop table recommend_resluts
+   drop table recommend_results
 go
 
 if exists (select 1
@@ -552,15 +549,6 @@ if exists (select 1
             and   indid > 0
             and   indid < 255)
    drop index requirements_common_info.dp_in_rec_FK
-go
-
-if exists (select 1
-            from  sysindexes
-           where  id    = object_id('requirements_common_info')
-            and   name  = 'job_type_in_req_info_FK'
-            and   indid > 0
-            and   indid < 255)
-   drop index requirements_common_info.job_type_in_req_info_FK
 go
 
 if exists (select 1
@@ -675,6 +663,13 @@ if exists (select 1
            where  id = object_id('talents')
             and   type = 'U')
    drop table talents
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('talents_from')
+            and   type = 'U')
+   drop table talents_from
 go
 
 if exists (select 1
@@ -878,6 +873,7 @@ go
 /*==============================================================*/
 create table job (
    jb_id                smallint             not null,
+   jb_jt_id             tinyint              not null,
    jb_name              char(40)             not null,
    jb_desc              varchar(256)         null,
    jb_sal               smallint             not null,
@@ -1077,22 +1073,12 @@ create nonclustered index rp_cor_uni_FK on recommend_people (rp_uni ASC)
 go
 
 /*==============================================================*/
-/* Table: recommend_people_from                                 */
+/* Table: recommend_results                                     */
 /*==============================================================*/
-create table recommend_people_from (
-   rpf_if               tinyint              not null,
-   rpf_desc             varchar(Max)         not null,
-   constraint PK_RECOMMEND_PEOPLE_FROM primary key (rpf_if)
-)
-go
-
-/*==============================================================*/
-/* Table: recommend_resluts                                     */
-/*==============================================================*/
-create table recommend_resluts (
+create table recommend_results (
    rec_res_id           tinyint              not null,
    rec_desc             char(40)             not null,
-   constraint PK_RECOMMEND_RESLUTS primary key (rec_res_id)
+   constraint PK_RECOMMEND_RESULTS primary key (rec_res_id)
 )
 go
 
@@ -1180,7 +1166,6 @@ go
 create table requirements_common_info (
    ri_id                int                  not null,
    ri_job_id            smallint             not null,
-   rr_wk_id             tinyint              not null,
    ri_dpt_id            smallint             not null,
    ri_desc              text                 not null,
    ri_req               text                 not null,
@@ -1196,16 +1181,6 @@ go
 
 
 create nonclustered index job_in_req_info_FK on requirements_common_info (ri_job_id ASC)
-go
-
-/*==============================================================*/
-/* Index: job_type_in_req_info_FK                               */
-/*==============================================================*/
-
-
-
-
-create nonclustered index job_type_in_req_info_FK on requirements_common_info (rr_wk_id ASC)
 go
 
 /*==============================================================*/
@@ -1351,6 +1326,16 @@ create nonclustered index "rp_id_in _talents_FK" on talents (tal_rp_id ASC)
 go
 
 /*==============================================================*/
+/* Table: talents_from                                          */
+/*==============================================================*/
+create table talents_from (
+   tf_id                tinyint              not null,
+   tf_desc              varchar(Max)         not null,
+   constraint PK_TALENTS_FROM primary key (tf_id)
+)
+go
+
+/*==============================================================*/
 /* Table: university                                            */
 /*==============================================================*/
 create table university (
@@ -1401,6 +1386,11 @@ alter table interview_place
       references work_place (wp_id)
 go
 
+alter table job
+   add constraint FK_JOB_TYPE_IN_JOB foreign key (jb_jt_id)
+      references job_type (jt_id)
+go
+
 alter table points_change
    add constraint FK_POINTS_C_PCH_COR_R_POINTS_C foreign key (pch_from_id)
       references points_change_rule (ptchr_id)
@@ -1418,7 +1408,7 @@ go
 
 alter table recommend
    add constraint FK_RECOMMEN_REC_COR_D_RECOMMEN foreign key (rec_recres_id)
-      references recommend_resluts (rec_res_id)
+      references recommend_results (rec_res_id)
 go
 
 alter table recommend
@@ -1491,11 +1481,6 @@ alter table requirements_common_info
       references job (jb_id)
 go
 
-alter table requirements_common_info
-   add constraint FK_REQUIREM_JOB_TYPE__JOB_TYPE foreign key (rr_wk_id)
-      references job_type (jt_id)
-go
-
 alter table role_grant
    add constraint FK_ROLE_GRA_ROLE_GRAN_STUFF foreign key (stf_id)
       references stuff (stf_id)
@@ -1522,8 +1507,8 @@ alter table talents
 go
 
 alter table talents
-   add constraint FK_TALENTS_FROM_IN_T_RECOMMEN foreign key (tal_from_id)
-      references recommend_people_from (rpf_if)
+   add constraint FK_TALENTS_FROM_IN_T_TALENTS_ foreign key (tal_from_id)
+      references talents_from (tf_id)
 go
 
 alter table talents
