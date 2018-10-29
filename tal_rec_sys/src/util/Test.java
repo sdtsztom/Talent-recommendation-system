@@ -6,7 +6,10 @@ import java.sql.*;
 public class Test {
 
     public static void main(String[] args) {
-        CommonConnection.setConnectUser("develop");
+        ConnectUser user=ConnectUser.DEV;   //这是一个枚举类
+        CommonConnection.setConnectUser(user);
+        // or simpler expression:
+        //CommonConnection.setConnectUser(ConnectUser.DEV);
         ResultSet rs=CommonConnection.makeQuery("select * from stuff");
         try{
             while(rs.next()){

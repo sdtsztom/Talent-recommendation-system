@@ -23,7 +23,7 @@ public class Config {
         loginUsers.put("sys", sys);
         loginUsers.put("admin", admin);
         loginUsers.put("stuff",stuff);
-        loginUsers.put("HR",HR);
+        loginUsers.put("hr",HR);
     }
 
     public static String getClassForName(){
@@ -34,12 +34,12 @@ public class Config {
         return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+userName+";password="+pwd;
     }
 
-    public static String getConnStr(String type) {
+    public static String getConnStr(ConnectUser user) {
         if(!init) {
             Config_init();
             init=true;
         }
-        LoginUser loginUser=loginUsers.get(type);
+        LoginUser loginUser=loginUsers.get(user.toString());
         return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+loginUser.getName()+";password="+loginUser.getPwd();
     }
 
