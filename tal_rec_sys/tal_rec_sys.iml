@@ -21,5 +21,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="sqljdbc42" level="project" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.0.M26" level="application_server_libraries" />
+    <orderEntry type="library" name="javax.mail" level="project" />
   </component>
 </module>

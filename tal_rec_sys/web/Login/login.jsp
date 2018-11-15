@@ -26,7 +26,7 @@
   </head>
   <body>
     <div id="login" class="divForm">
-        <form id="login_form" method="post" action="Trans.jsp">
+        <form id="login_form" method="post" action="../Trans.jsp">
             <br/><br/>
             用户名<input type="text" name="log_name" id="log_name"><br/><br/>
             密码&nbsp&nbsp&nbsp<input type="password" name="log_passwd" id="log_passwd"><br/><br/>

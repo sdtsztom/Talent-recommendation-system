@@ -1,6 +1,8 @@
 <%@ page import="util.CommonConnection" %>
-<%@ page import="util.ConnectUser" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="ienum.ConnectUser" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="bean.LoginUser" %>
+<%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/10/28
@@ -10,17 +12,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>积分查询页面</title>
+    <title>积分查询</title>
 </head>
 <body>
-    <%  //int stuff_id=0;   //for test
-        int stuff_id=Integer.valueOf(request.getParameter("stuff_id"));
+    <%
+        LoginUser user=(LoginUser)session.getAttribute("user");
+        if(user==null){
+            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+            return;
+        }
+        String id =user.getId()+"";
         CommonConnection.setConnectUser(ConnectUser.DEV);
-        ResultSet rs=CommonConnection.makeQuery("select stf_name,stf_pts from stuff where stf_id="+stuff_id);
-        rs.next();
-        String name=rs.getString("stf_name");
-        int points=rs.getInt("stf_pts");
-        rs.close();
+        String []rs=CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ id,2);
+        String name=rs[0];
+        int points=Integer.parseInt(rs[1]);
     %>
     员工名称：<%=name%><br/>
     累计积分：<%=""+points%>

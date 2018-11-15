@@ -3,4 +3,54 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>/Login/login.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>exec_register</servlet-name>
+        <servlet-class>servlet.exec_register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exec_register</servlet-name>
+        <url-pattern>/exec_register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>refuse_offer</servlet-name>
+        <servlet-class>servlet.refuse_offer</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>refuse_offer</servlet-name>
+        <url-pattern>/refuse_offer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>util_server</servlet-name>
+        <servlet-class>servlet.util_server</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>util_server</servlet-name>
+        <url-pattern>/util_server</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>ConfirmOfferFilter</filter-name>
+        <filter-class>filter.ConfirmOfferFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ConfirmOfferFilter</filter-name>
+        <url-pattern>/confirm_offer.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>SingleRecManagementFilter</filter-name>
+        <filter-class>filter.SingleRecManagementFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SingleRecManagementFilter</filter-name>
+        <url-pattern>/Single_Rec_Management/unexist.jsp</url-pattern>
+    </filter-mapping>
+
 </web-app>
