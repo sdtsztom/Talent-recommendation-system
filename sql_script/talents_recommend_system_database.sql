@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     2018/11/14 21:49:35                          */
+/* Created on:     2018/11/15 21:13:10                          */
 /*==============================================================*/
 --create database tal_rec_sys
 GO
@@ -1098,6 +1098,7 @@ create table recommend_people (
    rp_abi               varchar(Max)         not null,
    rp_res_path          varchar(Max)         not null,
    rp_vali              dm_if                not null,
+   rp_job               char(40)             not null,
    constraint PK_RECOMMEND_PEOPLE primary key (rp_id)
 )
 go

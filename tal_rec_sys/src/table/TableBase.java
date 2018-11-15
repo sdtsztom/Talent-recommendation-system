@@ -9,15 +9,17 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 
 public class TableBase {
-    private String [][]str_load=null;
-    private TableBase table_load=null;
-    private boolean switcher=true;  //开关，true使用str_load，false使用table_load
-    private int ncols=0;
-    private int nrows=0;
-    private String default_table_css="border=1px style=\"border-collapse:collapse;\"";
-    private int npage=1;
-    private boolean with_order=true;
+     String [][]str_load=null;
+     TableBase table_load=null;
+     boolean switcher=true;  //开关，true使用str_load，false使用table_load
+     int nrows=0;
+     int ncols=0;
+     String default_table_css="border=1px style=\"border-collapse:collapse;\"";
+     int npage=1;
+     boolean with_order=true;
 
+    public TableBase(){};
+    
     public TableBase(TableBase table_load){
         this.receive(table_load);
     }
@@ -35,16 +37,14 @@ public class TableBase {
         switcher=false;
         if(str_load!=null)str_load=null;
         int []s=table_load.shape();
-        nrows=s[0];
-        ncols=s[1];
+        makeShape(s[0],s[1]);
     }
 
     public void receive(String [][]str_load){
         this.str_load=str_load;
         switcher=true;
         if(table_load!=null)table_load=null;
-        nrows=str_load.length;
-        ncols=str_load[0].length;
+        makeShape(str_load.length,str_load[0].length);
     }
 
     public void setWith_order(boolean with_order){this.with_order=with_order;}
@@ -87,35 +87,35 @@ public class TableBase {
         return s;
     }
 
-    public String genHTML(String []head,String table_css) {
-        String content="";
-        if (head == null || head.length != ncols) return null;
-        if(head!=null)content+=genLine(true,head,0);
-        if(switcher)for(int i:iutil.range(str_load.length))content+=genLine(false,str_load[i],i);
-        else for(int i:iutil.range(nrows))content+=genLine(table_load,i);
-        return "<table "+table_css+">\n"+content+"</table>\n";
-    }
-
     public String genHTML(String []head){
         return genHTML(head,default_table_css);
     }
 
-    private String genLine(boolean ishead,String []line,int row){
+    public String genHTML(String []head,String table_css) {
+        // if you don't need head,pass null
         String content="";
-        String starttag=ishead?"<th>":"<td>";
-        String endtag=ishead?"</th>":"</td>";
-        if(ishead&&with_order)content+="<th>序号</th>";
-        if(!ishead&&with_order)content+="<td>"+(row+1)+"</td>";
-        for(String i:line){content+=starttag+i+endtag;}
+        if (head!=null&&head.length != ncols) return null;
+        if(head!=null)content+=genHead(head);
+        for(int i:iutil.range(nrows))content+=genLine(i);
+        return "<table "+table_css+">\n"+content+"</table>\n";
+    }
+
+    public String genHead(String []head){
+        String content="";
+        if(with_order)content+="<th>序号</th>";
+        for(String i:head){content+="<th>"+i+"</th>";}
         return "<tr>\n"+content+"\n</tr>\n";
     }
 
-    private String genLine(TableBase table,int row){
+    public String genLine(int row){
         String content="";
-        String starttag="<td>";
-        String endtag="</td>";
         if(with_order)content+="<td>"+(row+1)+"</td>";
-        for(int i: iutil.range(ncols))content+=starttag+table.getItem(row,i)+endtag;
+        for(int i: iutil.range(ncols))content+="<td>"+getItem(row,i)+"</td>";
         return "<tr>\n"+content+"\n</tr>\n";
+    }
+    
+    public void makeShape(int data_nrow,int data_ncol){
+        this.nrows=data_nrow;
+        this.ncols=data_ncol;
     }
 }
