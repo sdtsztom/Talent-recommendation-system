@@ -1,11 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     2018/10/9 17:38:18                           */
+/* Created on:     2018/11/14 21:49:35                          */
 /*==============================================================*/
-
-CREATE DATABASE tal_rec_sys
+--create database tal_rec_sys
 GO
-USE tal_rec_sys
+use tal_rec_sys
 GO
 
 if exists (select 1
@@ -13,6 +12,13 @@ if exists (select 1
    where r.fkeyid = object_id('departments') and o.name = 'FK_DEPARTME_DP_COR_CO_STUFF')
 alter table departments
    drop constraint FK_DEPARTME_DP_COR_CO_STUFF
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('interview') and o.name = 'FK_INTERVIE_INT_COR_R_RECRUITM')
+alter table interview
+   drop constraint FK_INTERVIE_INT_COR_R_RECRUITM
 go
 
 if exists (select 1
@@ -157,6 +163,13 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('recruitment_requirements') and o.name = 'FK_RECRUITM_RR_COR_ST_RECRUITM')
+alter table recruitment_requirements
+   drop constraint FK_RECRUITM_RR_COR_ST_RECRUITM
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('recruitment_requirements') and o.name = 'FK_RECRUITM_STUFF_TYP_STUFF_TY')
 alter table recruitment_requirements
    drop constraint FK_RECRUITM_STUFF_TYP_STUFF_TY
@@ -269,6 +282,15 @@ if exists (select 1
             and   indid > 0
             and   indid < 255)
    drop index interview.itv_cor_hr_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('interview')
+            and   name  = 'int_cor_rrid_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index interview.int_cor_rrid_FK
 go
 
 if exists (select 1
@@ -511,6 +533,15 @@ go
 if exists (select 1
             from  sysindexes
            where  id    = object_id('recruitment_requirements')
+            and   name  = 'rr_cor_sta_FK'
+            and   indid > 0
+            and   indid < 255)
+   drop index recruitment_requirements.rr_cor_sta_FK
+go
+
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('recruitment_requirements')
             and   name  = 'rec_cor_detail_FK'
             and   indid > 0
             and   indid < 255)
@@ -540,6 +571,13 @@ if exists (select 1
            where  id = object_id('recruitment_requirements')
             and   type = 'U')
    drop table recruitment_requirements
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('recruitment_requirements_stage')
+            and   type = 'U')
+   drop table recruitment_requirements_stage
 go
 
 if exists (select 1
@@ -742,7 +780,7 @@ go
 /* Table: degree                                                */
 /*==============================================================*/
 create table degree (
-   deg_id               tinyint              not null,
+   deg_id               tinyint              identity,
    deg_name             char(40)             not null,
    constraint PK_DEGREE primary key (deg_id)
 )
@@ -752,7 +790,7 @@ go
 /* Table: departments                                           */
 /*==============================================================*/
 create table departments (
-   dp_id                smallint             not null,
+   dp_id                smallint             identity,
    stf_id               smallint             null,
    dp_name              char(40)             not null,
    constraint PK_DEPARTMENTS primary key (dp_id)
@@ -773,7 +811,7 @@ go
 /* Table: emergency_degree                                      */
 /*==============================================================*/
 create table emergency_degree (
-   ed_id                tinyint              not null,
+   ed_id                tinyint              identity,
    ed_name              char(40)             not null,
    ed_desc              varchar(Max)         null,
    constraint PK_EMERGENCY_DEGREE primary key (ed_id)
@@ -784,11 +822,12 @@ go
 /* Table: interview                                             */
 /*==============================================================*/
 create table interview (
-   itv_id               int                  not null,
+   itv_id               int                  identity,
    itv_pl_id            smallint             not null,
    itv_res_id           tinyint              not null,
    itv_rp_id            int                  not null,
    itv_dealHR_id        smallint             not null,
+   itv_rr_id            int                  null,
    itv_rnd              tinyint              not null,
    itv_time             datetime             not null,
    itv_exmer_id         varchar(Max)         not null,
@@ -828,6 +867,16 @@ create nonclustered index itv_cor_rp_FK on interview (itv_rp_id ASC)
 go
 
 /*==============================================================*/
+/* Index: int_cor_rrid_FK                                       */
+/*==============================================================*/
+
+
+
+
+create nonclustered index int_cor_rrid_FK on interview (itv_rr_id ASC)
+go
+
+/*==============================================================*/
 /* Index: itv_cor_hr_FK                                         */
 /*==============================================================*/
 
@@ -841,7 +890,7 @@ go
 /* Table: interview_place                                       */
 /*==============================================================*/
 create table interview_place (
-   ip_id                smallint             not null,
+   ip_id                smallint             identity,
    ip_wp_id             tinyint              not null,
    ip_detail            varchar(Max)         not null,
    constraint PK_INTERVIEW_PLACE primary key (ip_id)
@@ -862,7 +911,7 @@ go
 /* Table: interview_results                                     */
 /*==============================================================*/
 create table interview_results (
-   ir_id                tinyint              not null,
+   ir_id                tinyint              identity,
    ir_desc              char(40)             not null,
    constraint PK_INTERVIEW_RESULTS primary key (ir_id)
 )
@@ -872,7 +921,7 @@ go
 /* Table: job                                                   */
 /*==============================================================*/
 create table job (
-   jb_id                smallint             not null,
+   jb_id                smallint             identity,
    jb_jt_id             tinyint              not null,
    jb_name              char(40)             not null,
    jb_desc              varchar(256)         null,
@@ -885,7 +934,7 @@ go
 /* Table: job_type                                              */
 /*==============================================================*/
 create table job_type (
-   jt_id                tinyint              not null,
+   jt_id                tinyint              identity,
    jt_name              char(40)             not null,
    jt_desc              varchar(Max)         null,
    constraint PK_JOB_TYPE primary key (jt_id)
@@ -896,7 +945,7 @@ go
 /* Table: points_change                                         */
 /*==============================================================*/
 create table points_change (
-   pch_id               int                  not null,
+   pch_id               int                  identity,
    pch_from_id          tinyint              not null,
    pch_stf_id           smallint             not null,
    pch_time             datetime             not null,
@@ -928,7 +977,7 @@ go
 /* Table: points_change_rule                                    */
 /*==============================================================*/
 create table points_change_rule (
-   ptchr_id             tinyint              not null,
+   ptchr_id             tinyint              identity,
    ptchr_desc           varchar(Max)         not null,
    ptchr_change         smallint             not null,
    constraint PK_POINTS_CHANGE_RULE primary key (ptchr_id)
@@ -939,7 +988,7 @@ go
 /* Table: recommend                                             */
 /*==============================================================*/
 create table recommend (
-   rec_id               int                  not null,
+   rec_id               int                  identity,
    rec_rp_id            int                  not null,
    rec_recstu_id        smallint             not null,
    rec_recres_id        tinyint              not null,
@@ -1025,7 +1074,7 @@ go
 /* Table: recommend_from                                        */
 /*==============================================================*/
 create table recommend_from (
-   recf_id              tinyint              not null,
+   recf_id              tinyint              identity,
    recf_desc            char(40)             not null,
    constraint PK_RECOMMEND_FROM primary key (recf_id)
 )
@@ -1035,7 +1084,7 @@ go
 /* Table: recommend_people                                      */
 /*==============================================================*/
 create table recommend_people (
-   rp_id                int                  not null,
+   rp_id                int                  identity,
    rp_deg               tinyint              not null,
    rp_uni               tinyint              not null,
    rp_name              char(40)             not null,
@@ -1048,6 +1097,7 @@ create table recommend_people (
    rp_maj               char(40)             not null,
    rp_abi               varchar(Max)         not null,
    rp_res_path          varchar(Max)         not null,
+   rp_vali              dm_if                not null,
    constraint PK_RECOMMEND_PEOPLE primary key (rp_id)
 )
 go
@@ -1076,7 +1126,7 @@ go
 /* Table: recommend_results                                     */
 /*==============================================================*/
 create table recommend_results (
-   rec_res_id           tinyint              not null,
+   rec_res_id           tinyint              identity,
    rec_desc             char(40)             not null,
    constraint PK_RECOMMEND_RESULTS primary key (rec_res_id)
 )
@@ -1086,7 +1136,7 @@ go
 /* Table: recommend_stage                                       */
 /*==============================================================*/
 create table recommend_stage (
-   rec_sta_id           tinyint              not null,
+   rec_sta_id           tinyint              identity,
    rec_sta_desc         char(40)             not null,
    constraint PK_RECOMMEND_STAGE primary key (rec_sta_id)
 )
@@ -1096,12 +1146,13 @@ go
 /* Table: recruitment_requirements                              */
 /*==============================================================*/
 create table recruitment_requirements (
-   rr_id                int                  not null,
+   rr_id                int                  identity,
    rr_wp_id             tinyint              not null,
    rr_ed_id             tinyint              not null,
    rr_st_id             tinyint              not null,
    rr_hr_id             smallint             not null,
-   ri_id                int                  not null,
+   rr_ri_id             int                  not null,
+   rr_sta_id            tinyint              not null,
    rr_num               smallint             not null,
    rr_el                datetime             not null,
    rr_ept               tinyint              null,
@@ -1137,7 +1188,17 @@ go
 
 
 
-create nonclustered index rec_cor_detail_FK on recruitment_requirements (ri_id ASC)
+create nonclustered index rec_cor_detail_FK on recruitment_requirements (rr_ri_id ASC)
+go
+
+/*==============================================================*/
+/* Index: rr_cor_sta_FK                                         */
+/*==============================================================*/
+
+
+
+
+create nonclustered index rr_cor_sta_FK on recruitment_requirements (rr_sta_id ASC)
 go
 
 /*==============================================================*/
@@ -1161,10 +1222,20 @@ create nonclustered index HRid_in_rec_FK on recruitment_requirements (rr_hr_id A
 go
 
 /*==============================================================*/
+/* Table: recruitment_requirements_stage                        */
+/*==============================================================*/
+create table recruitment_requirements_stage (
+   rrs_id               tinyint              identity,
+   rrs_desc             char(40)             not null,
+   constraint PK_RECRUITMENT_REQUIREMENTS_ST primary key (rrs_id)
+)
+go
+
+/*==============================================================*/
 /* Table: requirements_common_info                              */
 /*==============================================================*/
 create table requirements_common_info (
-   ri_id                int                  not null,
+   ri_id                int                  identity,
    ri_job_id            smallint             not null,
    ri_dpt_id            smallint             not null,
    ri_desc              text                 not null,
@@ -1197,7 +1268,7 @@ go
 /* Table: role                                                  */
 /*==============================================================*/
 create table role (
-   role_id              tinyint              not null,
+   role_id              tinyint              identity,
    role_desc            varchar(Max)         not null,
    constraint PK_ROLE primary key (role_id)
 )
@@ -1237,7 +1308,7 @@ go
 /* Table: stuff                                                 */
 /*==============================================================*/
 create table stuff (
-   stf_id               smallint             not null,
+   stf_id               smallint             identity,
    stf_job_id           smallint             not null,
    stf_dp_id            smallint             not null,
    stf_name             char(40)             not null,
@@ -1276,7 +1347,7 @@ go
 /* Table: stuff_type                                            */
 /*==============================================================*/
 create table stuff_type (
-   st_id                tinyint              not null,
+   st_id                tinyint              identity,
    st_name              char(20)             not null,
    st_desc              varchar(Max)         null,
    constraint PK_STUFF_TYPE primary key (st_id)
@@ -1287,7 +1358,7 @@ go
 /* Table: talents                                               */
 /*==============================================================*/
 create table talents (
-   tal_id               int                  not null,
+   tal_id               int                  identity,
    tal_from_id          tinyint              not null,
    tal_rp_id            int                  not null,
    tal_dealHR_id        smallint             not null,
@@ -1329,7 +1400,7 @@ go
 /* Table: talents_from                                          */
 /*==============================================================*/
 create table talents_from (
-   tf_id                tinyint              not null,
+   tf_id                tinyint              identity,
    tf_desc              varchar(Max)         not null,
    constraint PK_TALENTS_FROM primary key (tf_id)
 )
@@ -1339,7 +1410,7 @@ go
 /* Table: university                                            */
 /*==============================================================*/
 create table university (
-   uni_id               tinyint              not null,
+   uni_id               tinyint              identity,
    uni_name             char(40)             not null,
    constraint PK_UNIVERSITY primary key (uni_id)
 )
@@ -1349,7 +1420,7 @@ go
 /* Table: work_place                                            */
 /*==============================================================*/
 create table work_place (
-   wp_id                tinyint              not null,
+   wp_id                tinyint              identity,
    wp_name              char(40)             not null,
    wp_detail            varchar(Max)         not null,
    constraint PK_WORK_PLACE primary key (wp_id)
@@ -1359,6 +1430,11 @@ go
 alter table departments
    add constraint FK_DEPARTME_DP_COR_CO_STUFF foreign key (stf_id)
       references stuff (stf_id)
+go
+
+alter table interview
+   add constraint FK_INTERVIE_INT_COR_R_RECRUITM foreign key (itv_rr_id)
+      references recruitment_requirements (rr_id)
 go
 
 alter table interview
@@ -1457,8 +1533,13 @@ alter table recruitment_requirements
 go
 
 alter table recruitment_requirements
-   add constraint FK_RECRUITM_REC_COR_D_REQUIREM foreign key (ri_id)
+   add constraint FK_RECRUITM_REC_COR_D_REQUIREM foreign key (rr_ri_id)
       references requirements_common_info (ri_id)
+go
+
+alter table recruitment_requirements
+   add constraint FK_RECRUITM_RR_COR_ST_RECRUITM foreign key (rr_sta_id)
+      references recruitment_requirements_stage (rrs_id)
 go
 
 alter table recruitment_requirements

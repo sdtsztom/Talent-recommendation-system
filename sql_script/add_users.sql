@@ -1,4 +1,6 @@
 use tal_rec_sys
+GO
+
 -- user develop，测试开发可以临时使用的用户
 create login develop with password='123', default_database=tal_rec_sys
 create user develop for login develop with default_schema=dbo

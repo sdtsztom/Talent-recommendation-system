@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="util.CommonConnection" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="util.ConnectUser" %>
+<%@ page import="ienum.ConnectUser" %>
 <%
 
     String path = request.getContextPath();
@@ -30,7 +30,7 @@
         String Tpasswd = rs.getString("stf_pwd");
 
         if(passwd != Tpasswd){
-            response.sendRedirect("./index.jsp");
+            response.sendRedirect("./Login/login.jsp");
         }
 
         int job_id = rs.getInt("stf_job_id");

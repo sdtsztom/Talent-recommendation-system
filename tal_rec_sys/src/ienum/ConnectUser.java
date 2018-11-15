@@ -1,11 +1,11 @@
-package util;
+package ienum;
 
 public enum ConnectUser {
     DEV,SYS,ADMIN,HR,STUFF;
 
     @Override
     public String toString() {
-        String user="";
+        String user=null;
         switch (this){
             case DEV:{user= "develop";break;}
             case SYS:{user="sys";break;}

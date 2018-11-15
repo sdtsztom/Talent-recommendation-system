@@ -2,6 +2,7 @@ package util;
 
 import java.util.HashMap;
 import bean.LoginUser;
+import ienum.ConnectUser;
 
 public class Config {
     static boolean init=false;
@@ -10,6 +11,7 @@ public class Config {
     static String ip="localhost";
     static String port="1433";
     static String databaseName="tal_rec_sys";
+    static int confirm_days_limit=15;
 
     static HashMap<String,LoginUser> loginUsers=new HashMap<String,LoginUser>();
 
@@ -40,7 +42,7 @@ public class Config {
             init=true;
         }
         LoginUser loginUser=loginUsers.get(user.toString());
-        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+loginUser.getName()+";password="+loginUser.getPwd();
+        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+loginUser.getUsername()+";password="+loginUser.getPwd();
     }
 
 
@@ -51,6 +53,8 @@ public class Config {
             init=true;
         }
         LoginUser develop=loginUsers.get("develop");
-        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+develop.getName()+";password="+develop.getPwd();
+        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+develop.getUsername()+";password="+develop.getPwd();
     }
+
+
 }
