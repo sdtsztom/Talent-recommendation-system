@@ -2,9 +2,9 @@ use tal_rec_sys
 GO
 
 -- user develop，测试开发可以临时使用的用户
-create login develop with password='12345678a', default_database=tal_rec_sys
-create user develop for login develop with default_schema=dbo
-exec sp_addrolemember 'db_owner', 'develop'
+create login u_dev with password='12345678a', default_database=tal_rec_sys
+create user u_dev for login u_dev with default_schema=dbo
+exec sp_addrolemember 'db_owner', 'u_dev'
 
 -- user sys，系统操作使用的账户
 create login u_sys with password='12345678a', default_database=tal_rec_sys
