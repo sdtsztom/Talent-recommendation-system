@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     2018/11/14 21:49:35                          */
+/* Created on:     2018/11/19 18:00:21                          */
 /*==============================================================*/
 --create database tal_rec_sys
 GO
@@ -240,9 +240,9 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('talents') and o.name = 'FK_TALENTS_RP_ID_IN _RECOMMEN')
+   where r.fkeyid = object_id('talents') and o.name = 'FK_TALENTS_RP_ID_IN__RECOMMEN')
 alter table talents
-   drop constraint "FK_TALENTS_RP_ID_IN _RECOMMEN"
+   drop constraint FK_TALENTS_RP_ID_IN__RECOMMEN
 go
 
 if exists (select 1
@@ -1098,6 +1098,7 @@ create table recommend_people (
    rp_abi               varchar(Max)         not null,
    rp_res_path          varchar(Max)         not null,
    rp_vali              dm_if                not null,
+   rp_job               char(40)             not null,
    constraint PK_RECOMMEND_PEOPLE primary key (rp_id)
 )
 go
@@ -1593,7 +1594,7 @@ alter table talents
 go
 
 alter table talents
-   add constraint "FK_TALENTS_RP_ID_IN _RECOMMEN" foreign key (tal_rp_id)
+   add constraint FK_TALENTS_RP_ID_IN__RECOMMEN foreign key (tal_rp_id)
       references recommend_people (rp_id)
 go
 

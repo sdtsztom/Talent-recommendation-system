@@ -30,4 +30,14 @@ public class iutil {
         return value;
     }
 
+    public static String[][] transpose(String [][]array){
+        int nrow=array.length;
+        int ncol=array[0].length;
+        String [][]t_array=new String[ncol][nrow];
+        for(int i:range(nrow)){
+            for(int j:range(ncol))t_array[j][i]=array[i][j];
+        }
+        return t_array;
+    }
+
 }

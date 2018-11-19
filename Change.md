@@ -26,3 +26,13 @@
 - `util.iutil` provide a java implement of `range` function in Python.Maybe you'll need it.
 - `table.TableBase` is exciting.It allows you to create HTML table fastly(May be only 3 lines of code).See some simple usage in `example.TableBaseExample.java`.You can explore its code for more details.**For more complicated conditions**,you should also create you own **subclass** to cope with them.
 - Java bean `LoginUser` is perfected.**When login,you need to create a LoginUser object,fill these info and save it into session(attri name is "user")**
+
+### 2018/11/15 Second Commit
+- fix some problems of `TableBase`
+- modify `TableBase` to allow no head Table.
+- I have write a subclass of TableBase `Table_for_SRM_vOpen`，you may find how to write your subclass to fit it to your condition in it.
+- add new view recommend_person_details
+- fix the lack of column `rp_job` in table `recommend_people`
+
+### 2018/11/19
+- fix some problems may happen when creating database
