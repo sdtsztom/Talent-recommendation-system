@@ -33,3 +33,6 @@
 - I have write a subclass of TableBase `Table_for_SRM_vOpen`，you may find how to write your subclass to fit it to your condition in it.
 - add new view recommend_person_details
 - fix the lack of column `rp_job` in table `recommend_people`
+
+### 2018/11/19
+- fix some problems may happen when creating database
