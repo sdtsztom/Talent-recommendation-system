@@ -9,6 +9,7 @@
 <%@ page import="util.CommonConnection" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="ienum.ConnectUser" %>
+<%@ page import="bean.LoginUser" %>
 <%
 
     String path = request.getContextPath();
@@ -28,7 +29,6 @@
         ResultSet rs = CommonConnection.makeQuery("select * from stuff where stf_username = '" + name + "'");
         rs.next();
         String Tpasswd = rs.getString("stf_pwd");
-
         if(passwd != Tpasswd){
             response.sendRedirect("./Login/login.jsp");
         }

@@ -1,3 +1,4 @@
+<%@ page import="bean.LoginUser" %>
 <%
     /**
      * @Created: xsy
@@ -14,9 +15,12 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
 </head>
 <body>
+<%
+    session.setAttribute("user",new LoginUser("1","1","1","1")); //测试用session
+%>
 <sql:setDataSource var="dev" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_dev" password="12345678a"/>
 <sql:setDataSource var="stuff" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_stuff" password="12345678a"/>
-<c:set var="rec_recstu_id" value="1"/><%-- 用1测试 实际从session中获取 --%>
+<c:set var="rec_recstu_id" value="${user.id}"/>
 <c:set var="sql" value="select rec_id,
 rec_rr_id,
 stuff.stf_name,
