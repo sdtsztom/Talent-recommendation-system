@@ -7,29 +7,60 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <title>Title</title>
+    <title>员工推荐历史</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
 </head>
 <body>
-<c:set var="myvar" value="sss"/>
-<c:out value="${myvar}"/>
-<sql:setDataSource var="myMSSQL" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="SA" password="12345678"/>
-<sql:query dataSource="${myMSSQL}" var="result">
-    SELECT * from ;
-</sql:query>
+<sql:setDataSource var="dev" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_dev" password="12345678a"/>
+<sql:setDataSource var="stuff" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_stuff" password="12345678a"/>
+<c:set var="rec_recstu_id" value="1"/><%-- 用1测试 实际从session中获取 --%>
+<c:set var="sql" value="select rec_id,
+rec_rr_id,
+stuff.stf_name,
+recommend_people.rp_name,
+recommend_from.recf_desc,
+recommend_stage.rec_sta_desc,
+recommend_results.rec_desc
+from recommend
+inner join stuff on stuff.stf_id = recommend.rec_recstu_id
+inner join recommend_people on recommend_people.rp_id = recommend.rec_rp_id
+inner join recommend_from on recommend_from.recf_id = recommend.rec_from_id
+inner join recommend_stage on recommend_stage.rec_sta_id = recommend.rec_recsta_id
+inner join recommend_results on recommend_results.rec_res_id = recommend.rec_recres_id
+where rec_recstu_id=${rec_recstu_id}"/>
+<sql:query dataSource="${stuff}" var="recommend">${sql}</sql:query>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <table class="table">
+            <tr>
+                <th>推荐id</th>
+                <th>需求id</th>
+                <th>员工姓名</th>
+                <th>被推荐人姓名</th>
+                <th>途径</th>
+                <th>阶段</th>
+                <th>结果</th>
+            </tr>
+            <c:forEach var="row" items="${recommend.rows}">
+                <tr>
+                    <td><c:out value="${row.rec_id}"/></td>
+                    <td><c:out value="${row.rec_rr_id}"/></td>
+                    <td><c:out value="${row.stf_name}"/></td>
+                    <td><c:out value="${row.rp_name}"/></td>
+                    <td><c:out value="${row.recf_desc}"/></td>
+                    <td><c:out value="${row.rec_sta_desc}"/></td>
+                    <td><c:out value="${row.rec_desc}"/></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+</div>
 
-<table border="1" width="100%">
-    <tr>
-        <th>role_id</th>
-        <th>role_desc</th>
-    </tr>
-    <c:forEach var="row" items="${result.rows}">
-        <tr>
-            <td><c:out value="${row.role_id}"/></td>
-            <td><c:out value="${row.role_desc}"/></td>
-        </tr>
-    </c:forEach>
 </table>
 </body>
 </html>

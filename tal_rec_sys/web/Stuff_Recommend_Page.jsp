@@ -53,6 +53,8 @@
 </c:if>
 
 <c:if test="${ httpmethod eq 'POST' }">
+        <%--   ！！！待完善:须判断重复推荐！！！   --%>
+
         <c:forEach var="row" items="${recommend_requirements.rows}">
             <c:if test="${ row.rr_id eq param.rr_id }">
                 <c:set var="rr_hr_id" value="${row.rr_hr_id}"/>
