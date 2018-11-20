@@ -27,7 +27,7 @@ public class SingleRecManagementFilter implements Filter {
         //验证登录身份,并且其身份必须为HR
         HttpSession session=request.getSession();
         LoginUser user=(LoginUser) session.getAttribute("user");
-        if(user==null||user.getJob_type()!=JobType.HR.toString()){
+        if(user==null||user.getJob_type().equals(JobType.HR.toString())){
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
