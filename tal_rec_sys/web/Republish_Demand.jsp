@@ -19,6 +19,7 @@
 <sql:query dataSource="${stuff}" var="stuff_type">${selectAll} stuff_type;</sql:query>
 <sql:query dataSource="${stuff}" var="requirements_common_info">select ri_id,ri_desc,ri_req,departments.dp_name from requirements_common_info inner join departments on ri_dpt_id = departments.dp_id;</sql:query>
 <sql:query dataSource="${stuff}" var="emergency_degree">${selectAll} emergency_degree;</sql:query>
+<sql:query dataSource="${stuff}" var="recruitment_requirements_stage">${selectAll} recruitment_requirements_stage;</sql:query>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -28,7 +29,7 @@
     <script>
         /* 根据选择的rr_id自动更新表单内容 */
         <c:forEach var="row" items="${recruitment_requirements.rows}">
-            var v${row.rr_id} = ["${row.rr_num}","${row.rr_wp_id}","${row.rr_st_id}","${row.rr_el}","${row.rr_ept}","${row.rr_ri_id}","${row.rr_ed_id}","${row.rr_spreq}"];
+            var v${row.rr_id} = ["${row.rr_num}","${row.rr_wp_id}","${row.rr_st_id}","${row.rr_el}","${row.rr_ept}","${row.rr_ri_id}","${row.rr_ed_id}","${row.rr_spreq}","${row.rr_sta_id}"];
         </c:forEach>
         function getValue(rr_id,i) {
             return (eval("v"+rr_id)[i]);
@@ -42,6 +43,7 @@
             $("#ri_id").val(getValue(1,5));
             $("#ed_id").val(getValue(1,6));
             $("#rr_spreq").val(getValue(1,7));
+            $("#rrs_id").val(getValue(1,8));
             $("#rr_id").change(function(){
                 var rr_id = $("#rr_id").val();
                 $("#rr_num").val(getValue(rr_id,0));
@@ -52,6 +54,7 @@
                 $("#ri_id").val(getValue(rr_id,5));
                 $("#ed_id").val(getValue(rr_id,6));
                 $("#rr_spreq").val(getValue(rr_id,7));
+                $("#rrs_id").val(getValue(rr_id,8));
             });
         });
     </script>
@@ -61,7 +64,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <form method="post" action="Republish_Demand.jsp.jsp">
+            <form method="post" action="Republish_Demand.jsp">
                 <label>序号</label>
                 <select class="form-control" name="rr_id" id="rr_id">
                     <c:forEach var="row" items="${recruitment_requirements.rows}">
@@ -79,7 +82,7 @@
                     </c:forEach>
                 </select>
                 <label>员工类型</label>
-                <select class="form-control" name="jt_id" id="jt_id">
+                <select class="form-control" name="st_id" id="st_id">
                     <c:forEach var="row" items="${stuff_type.rows}">
                         <option value="${row.st_id}">${row.st_name} : ${row.st_desc}</option>
                     </c:forEach>
@@ -108,6 +111,12 @@
                     <label for="rr_num">额外需求</label>
                     <input type="text" class="form-control" id="rr_spreq" name="rr_spreq" placeholder="额外需求">
                 </div>
+                <label>需求处理阶段</label>
+                <select class="form-control" name="rrs_id" id="rrs_id">
+                    <c:forEach var="row" items="${recruitment_requirements_stage.rows}">
+                        <option value="${row.rrs_id}">${row.rrs_desc}</option>
+                    </c:forEach>
+                </select>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
@@ -117,9 +126,21 @@
 
 <c:if test="${ httpmethod eq 'POST' }">
     <% request.setCharacterEncoding("UTF-8"); %>
-    <%--<sql:update dataSource="${stuff}" var="recommend_person">
-        INSERT INTO recommend_people VALUES (${param.deg_id},${param.uni_id},'${param.name}','${param.sex}','${param.age}','${param.tel}','${param.email}','${param.stu}','${param.grt}','${param.major}','${param.abi}','${param.path}','是',${param.jb_id});
-    </sql:update>--%>
+    <sql:update dataSource="${stuff}" var="recruitment_requirements">
+        UPDATE recruitment_requirements
+        set rr_wp_id=${param.wp_id},
+        rr_ed_id=${param.ed_id},
+        rr_st_id=${param.st_id},
+        rr_hr_id=${rec_recstu_id},
+        rr_ri_id=${param.ri_id},
+        rr_sta_id=${param.rrs_id},
+        rr_num=${param.rr_num},
+        rr_el='${param.rr_el}',
+        rr_ept='${param.rr_ept}',
+        rr_spreq='${param.rr_spreq}'
+        where rr_id=${param.rr_id};
+    </sql:update>
+    rr_id${param.rr_id}  wp_id${param.wp_id} ed_id${param.ed_id} st_id${param.st_id} hr_id ri_id${param.ri_id} rrs_id${param.rrs_id} rr_num${param.rr_num} rr_el${param.rr_el}  rr_ept${param.rr_ept}  rr_spreq${param.rr_spreq}
     <c:out value="插入成功"/>
 </c:if>
 </table>
