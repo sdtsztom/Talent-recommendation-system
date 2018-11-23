@@ -13,13 +13,12 @@
 <sql:setDataSource var="dev" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_dev" password="12345678a"/>
 <sql:setDataSource var="stuff" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_stuff" password="12345678a"/>
 <c:set var="rec_recstu_id" value="${user.id}"/>
-<c:set var="selectAll" value="select * from"/>
-<sql:query dataSource="${stuff}" var="recruitment_requirements">${selectAll} recruitment_requirements;</sql:query>
-<sql:query dataSource="${stuff}" var="work_place">${selectAll} work_place;</sql:query>
-<sql:query dataSource="${stuff}" var="stuff_type">${selectAll} stuff_type;</sql:query>
+<sql:query dataSource="${stuff}" var="recruitment_requirements">select * from recruitment_requirements where rr_sta_id != 1;</sql:query>
+<sql:query dataSource="${stuff}" var="work_place">select wp_id,wp_name from work_place;</sql:query>
+<sql:query dataSource="${stuff}" var="stuff_type">select st_id,st_name,st_desc from stuff_type;</sql:query>
 <sql:query dataSource="${stuff}" var="requirements_common_info">select ri_id,ri_desc,ri_req,departments.dp_name from requirements_common_info inner join departments on ri_dpt_id = departments.dp_id;</sql:query>
-<sql:query dataSource="${stuff}" var="emergency_degree">${selectAll} emergency_degree;</sql:query>
-<sql:query dataSource="${stuff}" var="recruitment_requirements_stage">${selectAll} recruitment_requirements_stage;</sql:query>
+<sql:query dataSource="${stuff}" var="emergency_degree">select ed_id,ed_name from emergency_degree;</sql:query>
+<sql:query dataSource="${stuff}" var="recruitment_requirements_stage">select rrs_id,rrs_desc from recruitment_requirements_stage;</sql:query>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -128,7 +127,7 @@
     <% request.setCharacterEncoding("UTF-8"); %>
     <sql:update dataSource="${stuff}" var="recruitment_requirements">
         UPDATE recruitment_requirements
-        set rr_wp_id=${param.wp_id},
+        set rr_wp_id=${paam.wp_id},
         rr_ed_id=${param.ed_id},
         rr_st_id=${param.st_id},
         rr_hr_id=${rec_recstu_id},

@@ -21,9 +21,9 @@
 <sql:setDataSource var="stuff" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" user="u_stuff" password="12345678a"/>
 <c:set var="rec_recstu_id" value="${user.id}"/>
 <c:if test="${ httpmethod eq 'GET' }">
-    <sql:query dataSource="${stuff}" var="degree">select * from degree;</sql:query>
-    <sql:query dataSource="${stuff}" var="university">select * from university;</sql:query>
-    <sql:query dataSource="${stuff}" var="job">select * from job;</sql:query>
+    <sql:query dataSource="${stuff}" var="degree">select deg_id,deg_name from degree;</sql:query>
+    <sql:query dataSource="${stuff}" var="university">select uni_id,uni_name from university;</sql:query>
+    <sql:query dataSource="${stuff}" var="job">select jb_id,jb_name from job;</sql:query>
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">

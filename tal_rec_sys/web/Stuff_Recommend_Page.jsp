@@ -26,15 +26,15 @@
 <c:set var="rec_recres_id" value="6"/><%-- 处理结果为6:暂无 --%>
 <sql:query dataSource="${dev}" var="recommend_requirements">select * from recruitment_requirements;</sql:query>
 <c:if test="${ httpmethod eq 'GET' }">
-    <sql:query dataSource="${stuff}" var="recommend_check">select * from recommend;</sql:query>
+    <sql:query dataSource="${stuff}" var="recommend_check">select rec_recstu_id from recommend;</sql:query>
     <c:forEach var="row" items="${recommend_check.rows}">
         <c:if test="${ row.rec_recstu_id eq rec_recstu_id }" var="check">
             <h1 class="text-center">请勿重复推荐</h1>
         </c:if>
     </c:forEach>
     <c:if test="${not check}">
-        <sql:query dataSource="${stuff}" var="recommend_people">select * from recommend_people where rp_vali='是';</sql:query>
-        <sql:query dataSource="${stuff}" var="recommend_from">select * from recommend_from;</sql:query>
+        <sql:query dataSource="${stuff}" var="recommend_people">select rp_id,rp_name from recommend_people where rp_vali='是';</sql:query>
+        <sql:query dataSource="${stuff}" var="recommend_from">select recf_id,recf_desc from recommend_from;</sql:query>
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
