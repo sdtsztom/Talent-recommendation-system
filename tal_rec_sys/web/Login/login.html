@@ -1,0 +1,48 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: sdtsz
+  Date: 2018/10/14
+  Time: 11:19
+  To change this template use File | Settings | File Templates.
+-->
+<html>
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        .divForm{
+            position: absolute;/*绝对定位*/
+            width: 300px;
+            height: 200px;
+
+            border: 1px solid red;
+            text-align: center;/*(让div中的内容居中)*/
+            top: 50%;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: -150px;
+        }
+    </style>
+    <script>
+        onload=function(){
+            var s=window.location.search;
+            var s_array=s.split("=");
+            if(s_array[1]=="true"){
+                var msg=document.getElementById("alert_msg");
+                msg.style.display="block";
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="login" class="divForm">
+    <form id="login_form" method="post" action="/login_servlet">
+        <br/><br/>
+                    用户名<input type="text" name="username" id="log_name"><br/><br/>
+                    密码&nbsp&nbsp&nbsp<input type="password" name="pwd" id="log_passwd"><br/><br/>
+                    <div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
+        <input type="submit" value="登陆"><input type="reset" value="清除">
+    </form>
+</div>
+</body>
+</html>
