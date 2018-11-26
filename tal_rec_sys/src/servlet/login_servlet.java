@@ -2,6 +2,7 @@ package servlet;
 
 import bean.LoginUser;
 import ienum.ConnectUser;
+import ienum.JobType;
 import util.CommonConnection;
 
 import javax.servlet.ServletException;
@@ -10,50 +11,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.ResultSet;
 
 @WebServlet(name = "login_servlet")
 public class login_servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String pwd = request.getParameter("pwd").replaceAll(" ", "");
 
-        String name = request.getParameter("log_name");
-        String passwd = request.getParameter("log_passwd").replaceAll(" ","");
+        CommonConnection.setConnectUser(ConnectUser.SYS);
+        boolean right = CommonConnection.existQuery("select * from stuff where stf_username = '" + username + "' and stf_pwd='" + pwd + "'");
+        if (!right) {
+            response.sendRedirect("/Login/login.htmlhtml?error=true");
+            return;
+        }
+        String user_id = CommonConnection.singleResultQuery("select stf_id from stuff where stf_username='" + username + "'");
+        String jt_name=CommonConnection.singleResultQuery("select stf_jt_name from stuff_job_type where stf_id="+user_id);
+        JobType jt_type=null;
+        String redirect_path=null;
 
-        try{
-            CommonConnection.setConnectUser(ConnectUser.DEV);
-            ResultSet rs = CommonConnection.makeQuery("select * from stuff where stf_username = '" + name + "'");
-            if(rs.next()){
-                String True_passwd = rs.getString("stf_pwd");
-                True_passwd = True_passwd.trim();
-                if(!passwd.equals(True_passwd)){
-                    request.setAttribute("Login_message",-2);
-                    response.sendRedirect("/Login/login.jsp");
-                }else {
-                    int stf_id = rs.getInt("stf_id");
-                    String []values= CommonConnection.singleLineQuery("select stf_id,stf_username,stf_pwd from stuff where stf_username='"+ name+"'",3);
-                    rs = CommonConnection.makeQuery("select * from stuff_job_type where stf_id = '" + stf_id + "'");
-                    rs.next();
-                    String jt_name = rs.getString("stf_jt_name").trim();
-                    LoginUser user = new LoginUser(values[1],values[2],values[0],jt_name);
-                    request.getSession().setAttribute("user",user);
-                    if (jt_name.equals("开发人员")) {
-                        response.sendRedirect("Admin_function.jsp");
-                    } else if (jt_name.equals("人事人员")) {
-                        response.sendRedirect("Stuff_function.jsp");
-                    } else if (jt_name.equals("管理人员")) {
-                        response.sendRedirect("HR_function.jsp");
-                    }
-                }
-            }else{
-                request.setAttribute("Login_message",-1);
+        for(JobType i:JobType.values()){
+            if(jt_name.equals(i.toString())){
+                jt_type=i;
+                break;
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        switch (jt_type){
+            case HR:redirect_path="HR_function.jsp";break;
+            case ADMIN:redirect_path="Admin_function.jsp";break;
+            case STUFF:redirect_path="Stuff_function.jsp";break;
         }
+
+        LoginUser user = new LoginUser(user_id,username, jt_type);
+        request.getSession().setAttribute("user", user);
+        response.sendRedirect(redirect_path);
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
