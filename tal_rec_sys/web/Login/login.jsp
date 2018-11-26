@@ -42,30 +42,10 @@
 <%
         }else{
         int log_message = Integer.parseInt(request.getAttribute("Log_message").toString());
-        %>
-        message是：<%=log_message%>
-        <%
-        if(log_message > 0){
-            String username = request.getAttribute("Login_name").toString();
-        }
-            int NO_USER = -1;
-            int PASSWD_ERROR = -2;
-            int ADMIN = 1;
-            int HR = 2;
-            int STUFF = 3;
         switch (log_message){
             case -1 :
                 break;
             case -2:
-                break;
-            case 1:
-                response.sendRedirect("Admin_function.jsp");
-                break;
-            case 2:
-                response.sendRedirect("HR_function.jsp");
-                break;
-            case 3:
-                response.sendRedirect("Stuff_function.jsp");
                 break;
             }
         }
