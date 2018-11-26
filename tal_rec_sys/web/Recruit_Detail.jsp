@@ -188,5 +188,6 @@
         </tr>
 
     </table>
+    <a onclick="window.location.href = ''" >提交推荐人</a><br/>
 </body>
 </html>

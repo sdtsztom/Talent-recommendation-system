@@ -149,6 +149,7 @@
     </tr>
     <%
         }
+        CommonConnection.closeConnection();
     %>
 </table>
 </body>

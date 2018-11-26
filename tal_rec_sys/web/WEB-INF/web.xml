@@ -34,7 +34,7 @@
         <servlet-name>util_server</servlet-name>
         <url-pattern>/util_server</url-pattern>
     </servlet-mapping>
-
+    
     <servlet>
         <servlet-name>login_servlet</servlet-name>
         <servlet-class>servlet.login_servlet</servlet-class>
@@ -42,6 +42,15 @@
     <servlet-mapping>
         <servlet-name>login_servlet</servlet-name>
         <url-pattern>/login_servlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>publish_requirement</servlet-name>
+        <servlet-class>servlet.publish_requirement</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>publish_requirement</servlet-name>
+        <url-pattern>/publish_requirement</url-pattern>
     </servlet-mapping>
     
     <filter>

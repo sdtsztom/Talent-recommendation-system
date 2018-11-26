@@ -119,12 +119,11 @@
     </thead>
     <%
         LoginUser user=(LoginUser)session.getAttribute("user");
-        if(user==null){
+        if(user==null) {
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
 
-        LoginUser user = (LoginUser) session.getAttribute("user");
         String jb_name = user.getJob_type().trim();
         if(jb_name.equals("开发人员")) {
             CommonConnection.setConnectUser(ConnectUser.STUFF);
@@ -146,6 +145,7 @@
     </tr>
     <%
         }
+        CommonConnection.closeConnection();
     %>
 </table>
 </body>
