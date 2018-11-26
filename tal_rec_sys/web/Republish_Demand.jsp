@@ -142,6 +142,5 @@
     rr_id${param.rr_id}  wp_id${param.wp_id} ed_id${param.ed_id} st_id${param.st_id} hr_id ri_id${param.ri_id} rrs_id${param.rrs_id} rr_num${param.rr_num} rr_el${param.rr_el}  rr_ept${param.rr_ept}  rr_spreq${param.rr_spreq}
     <c:out value="插入成功"/>
 </c:if>
-</table>
 </body>
 </html>

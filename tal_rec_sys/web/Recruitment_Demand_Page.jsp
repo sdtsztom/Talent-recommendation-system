@@ -92,7 +92,5 @@ where rr_sta_id != 1"/>
     </div>
     <div class="col-md-4"></div>
 </div>
-
-</table>
 </body>
 </html>

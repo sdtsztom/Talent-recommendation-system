@@ -64,7 +64,5 @@ where rec_recstu_id=${rec_recstu_id}"/>
     </div>
     <div class="col-md-2"></div>
 </div>
-
-</table>
 </body>
 </html>

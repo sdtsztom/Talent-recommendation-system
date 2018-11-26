@@ -68,7 +68,5 @@ where rec_recstu_id=${rec_recstu_id} and rec_sta_id != 1"/>
     </div>
     <div class="col-md-2"></div>
 </div>
-
-</table>
 </body>
 </html>

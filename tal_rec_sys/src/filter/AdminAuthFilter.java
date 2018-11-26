@@ -1,7 +1,7 @@
 /**
  * @Created: xsy
  * @Data: 2018.11.20
- * @description: 判断是否有Stuff及以上权限 若为否则返回之前页面
+ * @description: 判断是否有Admin及以上权限 若为否则返回之前页面
  * */
 package filter;
 
@@ -11,7 +11,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class StuffAuthFilter implements Filter{
+public class AdminAuthFilter implements Filter{
+
     public void init(FilterConfig config) throws ServletException {
 
     }
@@ -21,14 +22,12 @@ public class StuffAuthFilter implements Filter{
         HttpServletResponse response = (HttpServletResponse) res;
         //request.getSession().setAttribute("user",new LoginUser("u","p","1","admin")); //test
         LoginUser stf = (LoginUser) request.getSession().getAttribute("user");
-        if(!stf.getJob_type().equals("Stuff")) {
+        if(!stf.getJob_type().equals("Admin")) {
             response.sendRedirect("/");
         }
         chain.doFilter(request,response);
     }
-
     public void destroy()  {
 
     }
-
 }

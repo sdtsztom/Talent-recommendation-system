@@ -75,6 +75,5 @@
         </sql:update>
         <c:out value="插入成功"/>
 </c:if>
-</table>
 </body>
 </html>
