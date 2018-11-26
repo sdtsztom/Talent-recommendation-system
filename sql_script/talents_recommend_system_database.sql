@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2016                    */
-/* Created on:     2018/11/19 18:00:21                          */
+/* Created on:     2018/11/20 16:14:53                          */
 /*==============================================================*/
 --create database tal_rec_sys
 GO
@@ -791,7 +791,7 @@ go
 /*==============================================================*/
 create table departments (
    dp_id                smallint             identity,
-   stf_id               smallint             null,
+   dp_contact           smallint             null,
    dp_name              char(40)             not null,
    constraint PK_DEPARTMENTS primary key (dp_id)
 )
@@ -804,7 +804,7 @@ go
 
 
 
-create nonclustered index dp_cor_contacts_FK on departments (stf_id ASC)
+create nonclustered index dp_cor_contacts_FK on departments (dp_contact ASC)
 go
 
 /*==============================================================*/
@@ -1429,7 +1429,7 @@ create table work_place (
 go
 
 alter table departments
-   add constraint FK_DEPARTME_DP_COR_CO_STUFF foreign key (stf_id)
+   add constraint FK_DEPARTME_DP_COR_CO_STUFF foreign key (dp_contact)
       references stuff (stf_id)
 go
 
