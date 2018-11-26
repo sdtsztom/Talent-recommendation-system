@@ -16,11 +16,11 @@ public class Config {
     static HashMap<String,LoginUser> loginUsers=new HashMap<String,LoginUser>();
 
     public static void Config_init() {
-        LoginUser develop=new LoginUser("develop","123");
-        LoginUser admin=new LoginUser("u_admin","123");
-        LoginUser sys=new LoginUser("u_sys","123");
-        LoginUser stuff=new LoginUser("u_stuff","123");
-        LoginUser HR=new LoginUser("u_HR","123");
+        LoginUser develop=new LoginUser("u_dev","12345678a");
+        LoginUser admin=new LoginUser("u_admin","12345678a");
+        LoginUser sys=new LoginUser("u_sys","12345678a");
+        LoginUser stuff=new LoginUser("u_stuff","12345678a");
+        LoginUser HR=new LoginUser("u_HR","12345678a");
         loginUsers.put("develop", develop);
         loginUsers.put("sys", sys);
         loginUsers.put("admin", admin);

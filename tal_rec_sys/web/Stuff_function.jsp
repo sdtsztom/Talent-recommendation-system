@@ -1,4 +1,5 @@
-<%--
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="bean.LoginUser" %><%--
   Created by IntelliJ IDEA.
   User: 10442
   Date: 2018/10/29
@@ -12,11 +13,15 @@
 </head>
 <body>
 <%
-        int stf_id = (int) session.getAttribute("stf_id");
-        session.setAttribute("stf_id",stf_id);
-    %>
-    <a href="" >功能1</a><br/>
-    <a href="" >功能2</a><br/>
-    <a href="" >功能3</a>
+    LoginUser user=(LoginUser)session.getAttribute("user");
+    if(user==null){
+        response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+        return;
+    }
+%>
+    <a onclick="window.location.href = ''" >提交推荐人</a><br/>
+    <a onclick="window.location.href = 'Query_Recruit.jsp'" >查询所有需求</a><br/>
+    <a onclick="window.location.href = ''" >查询历史推荐</a><br/>
+    <a onclick="window.location.href = ''" >查询积分</a><br/>
 </body>
 </html>

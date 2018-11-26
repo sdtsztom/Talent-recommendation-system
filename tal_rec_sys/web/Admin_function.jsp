@@ -1,4 +1,6 @@
-<%--
+<%@ page import="bean.LoginUser" %>
+<%@ page import="javax.mail.Session" %>
+<%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: 10442
   Date: 2018/10/20
@@ -9,19 +11,19 @@
 <html>
 <head>
     <title>功能选择</title>
-    <style>
-        .mid{
-            width: 300px;
-            height: 60%;
-            margin:  20% auto;
+    <%
+        LoginUser user=(LoginUser)session.getAttribute("user");
+        if(user==null){
+            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+            return;
         }
-    </style>
+    %>
 </head>
 <body>
-    <div class="mid">
-        <a href="" >功能1</a><br/>
-        <a href="" >功能2</a><br/>
-        <a href="" >功能3</a>
+    <div>
+        <a onclick="window.location.href = 'Recruit_Detail.jsp'" >查询所有需求</a><br/>
+        <a onclick="window.location.href = ''" >权限管理</a><br/>
+        <a onclick="window.location.href = ''" >查看所有推荐人</a>
     </div>
 </body>
 </html>

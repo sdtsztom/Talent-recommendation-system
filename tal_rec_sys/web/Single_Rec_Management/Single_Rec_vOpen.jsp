@@ -1,8 +1,6 @@
-<%@ page import="util.iutil" %>
-<%@ page import="ienum.JobType" %>
-<%@ page import="bean.LoginUser" %>
-<%@ page import="table.TableBase" %>
-<%@ page import="ienum.ConnectUser" %><%--
+<%@ page import="ienum.ConnectUser" %>
+<%@ page import="table.Table_for_SRM_vOpen" %>
+<%@ page import="bean.LoginUser" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/12
@@ -16,14 +14,14 @@
     String name=user.getUsername();
 %>
 <head>
-    <title>需求(id:<%=rrid%>)的管理页面(状态：开放中)</title>
+    <title>需求(id:<!--%=rrid%-->)的管理页面(状态：开放中)</title>
 </head>
 <body>
-<p>登陆人：<%=name%></p>
-<p>需求号：<%=rrid%></p>
+<p>登陆人：<!--%=name%--></p>
+<p>需求号：<!--%=rrid%--></p>
 <%
-    TableBase table=new TableBase("select rec_id,rec_stf_name,rec_rp_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR);
-    String []head={"推荐id","推荐人","被推荐人","推荐来源"};
+    Table_for_SRM_vOpen table=new Table_for_SRM_vOpen("select rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR);
+    String []head={"被推荐人id","被推荐人","推荐人","推荐来源","详细信息"};
     out.print(table.genHTML(head));
 %>
 <div><button><a href="...(workflow)">开始筛选</a></button></div>

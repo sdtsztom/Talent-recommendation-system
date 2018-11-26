@@ -4,11 +4,18 @@ import bean.LoginUser;
 import ienum.ConnectUser;
 import util.CommonConnection;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
 
-public class login_servlet extends javax.servlet.http.HttpServlet {
-    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+@WebServlet(name = "login_servlet")
+public class login_servlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String name = request.getParameter("log_name");
         String passwd = request.getParameter("log_passwd").replaceAll(" ","");
 
@@ -16,14 +23,14 @@ public class login_servlet extends javax.servlet.http.HttpServlet {
             CommonConnection.setConnectUser(ConnectUser.DEV);
             ResultSet rs = CommonConnection.makeQuery("select * from stuff where stf_username = '" + name + "'");
             if(rs.next()){
-                String Tpasswd = rs.getString("stf_pwd");
-                Tpasswd = Tpasswd.trim();
-                if(!passwd.equals(Tpasswd)){
+                String True_passwd = rs.getString("stf_pwd");
+                True_passwd = True_passwd.trim();
+                if(!passwd.equals(True_passwd)){
                     request.setAttribute("Login_message",-2);
                     response.sendRedirect("/Login/login.jsp");
                 }else {
                     int stf_id = rs.getInt("stf_id");
-                    String []values= CommonConnection.singleLineQuery("select stf_id,stf_username,stf_pwd from stuff where stf_username='"+ name+"'",4);
+                    String []values= CommonConnection.singleLineQuery("select stf_id,stf_username,stf_pwd from stuff where stf_username='"+ name+"'",3);
                     rs = CommonConnection.makeQuery("select * from stuff_job_type where stf_id = '" + stf_id + "'");
                     rs.next();
                     String jt_name = rs.getString("stf_jt_name").trim();
@@ -46,7 +53,7 @@ public class login_servlet extends javax.servlet.http.HttpServlet {
         }
     }
 
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

@@ -45,10 +45,20 @@
 
 ## 杂
 ### util_server(servlet)
+- author:tsz
+- Param(GET)
 |name|value|comment|
 |----|-----|-------|
 |type|type name|-|
 |...|...|depend on what type you choose|
+
+### recommend_person_details
+- author:tsz
+- Param(GET)
+|name|value|comment|
+|----|-----|-------|
+|user|LoginUser class|extract from session|
+|rpid|recommend person's id|-|
 
 ## SUCCESS PAGES
 ### refuse_offer_success

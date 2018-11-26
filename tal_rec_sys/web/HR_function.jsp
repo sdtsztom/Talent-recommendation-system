@@ -1,3 +1,5 @@
+<%@ page import="bean.LoginUser" %>
+<%@ page import="ienum.eErrorPage" %>
 <%--
   Created by IntelliJ IDEA.
   User: 10442
@@ -9,14 +11,17 @@
 <html>
 <head>
     <title>Title</title>
+    <%
+        LoginUser user=(LoginUser)session.getAttribute("user");
+        if(user==null){
+            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+            return;
+        }
+    %>
 </head>
 <body>
-<%
-        int stf_id = (int) session.getAttribute("stf_id");
-        session.setAttribute("stf_id",stf_id);
-    %>
-    <a href="" >功能1</a><br/>
-    <a href="" >功能2</a><br/>
-    <a href="" >功能3</a>
+    <a onclick="window.location.href = 'Publish_Requirements.jsp'" >发布需求</a><br/>
+    <a onclick="window.location.href = 'Query_Recruit_HR.jsp'" >查询所有需求</a><br/>
+    <a onclick="window.location.href = 'Query_Recruit_HR.jsp'" >查询已发布需求</a>
 </body>
 </html>
