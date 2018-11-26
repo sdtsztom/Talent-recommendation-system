@@ -1,4 +1,5 @@
-<%--
+<%@ page import="bean.LoginUser" %>
+<%@ page import="javax.mail.Session" %><%--
   Created by IntelliJ IDEA.
   User: 10442
   Date: 2018/10/20
@@ -18,7 +19,7 @@
     </style>
 </head>
 <body>
-    <div class="mid">
+    <div>
         <a href="" >功能1</a><br/>
         <a href="" >功能2</a><br/>
         <a href="" >功能3</a>
