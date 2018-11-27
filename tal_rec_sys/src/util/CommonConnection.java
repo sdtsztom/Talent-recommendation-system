@@ -97,6 +97,15 @@ public class CommonConnection {
         return have_rs;
     }
 
+    public static void makeUpdate(String sql_str){
+        if(!checkConnecting())return;
+        try {
+            sql.executeUpdate(sql_str);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean checkConnecting(){
         if(!connecting){
             System.out.println("Error:connection havn't established yet!");

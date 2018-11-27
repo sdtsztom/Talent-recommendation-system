@@ -36,3 +36,11 @@
 
 ### 2018/11/19
 - fix some problems may happen when creating database
+
+### 2018/11/27
+- enum generator
+- many new enum class
+- add some samples
+- fix bug of JobType class and tables_details_all excel
+- add a workfow Example(Tsk_Sift)
+- update schedule in README.html
