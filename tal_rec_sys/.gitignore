@@ -34,6 +34,7 @@ hs_err_pid*
 .idea/**/shelf
 .idea/*
 tal_rec_sys.iml
+src/example/Test*
 
 # Sensitive or high-churn files
 .idea/**/dataSources/

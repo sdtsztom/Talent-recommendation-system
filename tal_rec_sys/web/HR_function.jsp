@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>HR 功能页面</title>
     <%
         LoginUser user=(LoginUser)session.getAttribute("user");
         if(user==null){
@@ -20,8 +20,8 @@
     %>
 </head>
 <body>
-    <a onclick="window.location.href = 'Publish_Requirements.jsp'" >发布需求</a><br/>
-    <a onclick="window.location.href = 'Query_Recruit_HR.jsp'" >查询所有需求</a><br/>
-    <a onclick="window.location.href = 'Query_Recruit_HR.jsp'" >查询已发布需求</a>
+    <a href="w'Publish_Requirements.jsp" >发布需求</a><br/>
+    <a href="Query_Recruit_HR.jsp" >查询所有需求</a><br/>
+    <a href="Query_Recruit_HR.jsp" >查询已发布需求</a>
 </body>
 </html>
