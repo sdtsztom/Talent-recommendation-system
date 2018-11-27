@@ -51,7 +51,11 @@ public class SingleRecManagementFilter implements Filter {
         //判断请求的页面是否符合当前阶段，否则不予访问
         String stage= CommonConnection.singleResultQuery("select rec_sta_desc from recommend_stage where rec_sta_id="
                 +"(select rr_sta_id from recruitment_requirements where rr_id='"+rrid+"'");
-        RrStage enum_stage=RrStage.fromStr(stage);
+        RrStage enum_stage=null;
+        for(RrStage i:RrStage.values()){
+            if(stage.equals(i.toString()))enum_stage=i;
+        }
+
         String url=request.getRequestURI();
         Single_Rec_Management_Page corr_page=Single_Rec_Management_Page.convert(enum_stage);
         if(corr_page==null||!url.endsWith(corr_page.toString())){
