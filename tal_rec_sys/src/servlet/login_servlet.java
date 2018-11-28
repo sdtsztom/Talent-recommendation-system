@@ -21,7 +21,7 @@ public class login_servlet extends HttpServlet {
         CommonConnection.setConnectUser(ConnectUser.SYS);
         boolean right = CommonConnection.existQuery("select * from stuff where stf_username = '" + username + "' and stf_pwd='" + pwd + "'");
         if (!right) {
-            response.sendRedirect("/Login/login.htmlhtml?error=true");
+            response.sendRedirect("/Login/login.html?error=true");
             return;
         }
         String user_id = CommonConnection.singleResultQuery("select stf_id from stuff where stf_username='" + username + "'");

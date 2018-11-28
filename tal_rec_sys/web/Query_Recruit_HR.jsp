@@ -13,6 +13,12 @@
 <html>
 <head>
     <title>$Title$</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("tr:#light").css("background-color","red");
+        });
+    </script>
     <style>
 
         body {
@@ -124,16 +130,15 @@
             return;
         }
 
-        String jb_name = user.getJob_type().trim();
-        if(jb_name.equals("开发人员")) {
-            CommonConnection.setConnectUser(ConnectUser.STUFF);
-        }else if(jb_name.equals("人事人员")){
+        String jb_name = user.getJob_type().toString();
+        if(jb_name.equals("人事人员")) {
             CommonConnection.setConnectUser(ConnectUser.HR);
-        }else if(jb_name.equals("管理人员")){
-            CommonConnection.setConnectUser(ConnectUser.ADMIN);
+        }else {
+            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+            return;
         }
-        ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from " +
-                "recruitment_requirements left join work_place on rr_wp_id = wp_id" +
+        ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from \n" +
+                "recruitment_requirements left join work_place on rr_wp_id = wp_id\n" +
                 "where rr_hr_id = '" + user.getId() + "'");
         while(rs.next()){
     %>

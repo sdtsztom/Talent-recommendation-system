@@ -21,7 +21,7 @@
 </head>
 <body>
     <div>
-        <a onclick="window.location.href = 'Recruit_Detail.jsp'" >查询所有需求</a><br/>
+        <a onclick="window.location.href = 'Query_Recruit.jsp'" >查询所有需求</a><br/>
         <a onclick="window.location.href = ''" >权限管理</a><br/>
         <a onclick="window.location.href = ''" >查看所有推荐人</a>
     </div>

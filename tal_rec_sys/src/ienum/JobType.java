@@ -8,8 +8,8 @@ public enum JobType {
         String type=null;
         switch(this){
             case STUFF:type="开发人员";break;
-            case HR:type+="人事人员";break;
-            case ADMIN:type+="管理人员";break;
+            case HR:type="人事人员";break;
+            case ADMIN:type="管理人员";break;
         }
         return type;
     }
