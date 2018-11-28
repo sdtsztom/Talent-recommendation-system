@@ -14,6 +14,12 @@
 <html>
 <head>
     <title>$Title$</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("tr:#light").css("background-color","red");
+        });
+    </script>
     <style>
 
         body {
@@ -124,20 +130,16 @@
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
-
-        JobType jb_type = user.getJob_type();
-        ConnectUser connect_user=null;
-        switch (jb_type){
-            case HR:{connect_user=ConnectUser.HR;break;}
-            case STUFF:{connect_user=ConnectUser.STUFF;break;}
-            case ADMIN:{connect_user=ConnectUser.ADMIN;break;}
+        String jb_name = user.getJob_type().toString();
+        if(jb_name.equals("人事人员")) {
+            CommonConnection.setConnectUser(ConnectUser.HR);
+        }else {
+            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+            return;
         }
-
-        CommonConnection.setConnectUser(connect_user);
-
-        ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from " +
-                "recruitment_requirements join work_place on rr_wp_id = wp_id " +
-                "where rr_hr_id ="+user.getId());
+        ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from \n" +
+                "recruitment_requirements left join work_place on rr_wp_id = wp_id\n" +
+                "where rr_hr_id = '" + user.getId() + "'");
         while(rs.next()){
     %>
     <tr <% if (rs.getInt("rr_ed_id") == 1){%>id="light"<%}%>>
