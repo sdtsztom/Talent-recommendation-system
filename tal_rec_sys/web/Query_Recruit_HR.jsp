@@ -130,8 +130,8 @@
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
-        String jb_name = user.getJob_type().toString();
-        if(jb_name.equals("人事人员")) {
+        JobType jb_type = user.getJob_type();
+        if(jb_type==JobType.HR) {
             CommonConnection.setConnectUser(ConnectUser.HR);
         }else {
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
