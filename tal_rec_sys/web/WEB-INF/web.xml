@@ -53,4 +53,34 @@
         <url-pattern>/Single_Rec_Management/unexist.jsp</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>HRAuthFilter</filter-name>
+        <filter-class>filter.HRAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HRAuthFilter</filter-name>
+        <url-pattern>/RP_Detail.jsp</url-pattern>
+    </filter-mapping>
+
+    <!-- SpringConfig -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc-servlet.xml</param-value>
+        </init-param>
+        <!-- <load-on-startup>1</load-on-startup> -->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
 </web-app>
