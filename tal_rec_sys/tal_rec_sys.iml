@@ -11,6 +11,13 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="ApplicationContext" removed="false">
+          <file>file://$MODULE_DIR$/src/applicationContext.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -21,5 +28,17 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="javax.xml.bind-10.0-b28" level="project" />
+    <orderEntry type="library" name="spring-5.0.8.RELEASE" level="project" />
+    <orderEntry type="library" name="spring-5.0.8.RELEASE (2)" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" name="spring-4.1.6.RELEASE" level="project" />
+    <orderEntry type="library" name="spring-4.1.6" level="project" />
+    <orderEntry type="library" name="JSON-lib" level="project" />
+    <orderEntry type="library" name="commons-logging-1.1" level="project" />
+    <orderEntry type="library" name="commons-logging-1.1 (2)" level="project" />
+    <orderEntry type="library" name="JSON-lib (2)" level="project" />
+    <orderEntry type="library" name="jackson-databind-2.9.6" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.9.6" level="project" />
+    <orderEntry type="library" name="jackson-core-2.9.6" level="project" />
   </component>
 </module>

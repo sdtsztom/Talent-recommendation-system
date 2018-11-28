@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面试建立页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <script src="/js/Interview_build_page.js"></script>
+</head>
+<body>
+<div class="row" id="div">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form method="post" onsubmit="return false">
+            <label>面试地点</label>
+            <select class="form-control" name="ip_id" id="ip_id">
+                <option v-for="ip in ips" :value="ip.ip_id">{{ip.ip_detail}}</option>
+            </select>
+            <label>被推荐人</label>
+            <select class="form-control" name="rp_id" id="rp_id">
+                <option v-for="rp in rps" :value="rp.rp_id">{{rp.rp_name}}</option>
+            </select>
+            <label>处理HR</label>
+            <select class="form-control" name="dealHR_id" id="dealHR_id">
+                <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
+            </select>
+            <label>需求id</label>
+            <select class="form-control" name="rr_id" id="rr_id">
+                <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>
+            </select>
+            <div class="form-group">
+                <label for="itv_time">面试时间</label>
+                <input type="datetime-local" class="form-control" id="itv_time" name="itv_time">
+            </div>
+            <label>面试官</label>
+            <select class="form-control" name="exmer_id" id="exmer_id">
+                <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
+            </select>
+            <div class="form-group">
+                <label for="itv_detail">面试细节</label>
+                <input type="text" class="form-control" id="itv_detail" name="itv_detail">
+            </div>
+        </form>
+        <button onclick="submit()" class="btn btn-default">Submit</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</body>
+</html>

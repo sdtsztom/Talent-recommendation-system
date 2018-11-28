@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工推荐页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <script src="/js/Stuff_Recommend_Page.js"></script>
+</head>
+<body>
+<div class="row" id="div">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" v-if="check"><h2 class="text-center">请勿重复推荐</h2></div>
+    <div class="col-md-8" v-else>
+        <form onsubmit="return false">
+            <label>需求id</label>
+            <select class="form-control" name="rr_id" id="rr_id">
+                    <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>
+            </select>
+            <br/>
+            <label>被推荐人</label>
+            <select class="form-control" name="rp_id" id="rp_id">
+                    <option v-for="rp in rps" :value="rp.rp_id">{{rp.rp_name}}</option>
+            </select>
+            <br/>
+            <label>推荐途径</label>
+            <select class="form-control" name="recf_id" id="recf_id">
+                    <option v-for="recf in recfs" :value="recf.recf_id">{{recf.recf_desc}}</option>
+            </select>
+        </form>
+        <button class="btn btn-default" onclick="submit()">Submit</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</body>
+</html>
