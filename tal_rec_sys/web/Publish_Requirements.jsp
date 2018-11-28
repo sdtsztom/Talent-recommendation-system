@@ -27,7 +27,7 @@
     </tr>
 <%
     LoginUser user=(LoginUser)session.getAttribute("user");
-    if(!user.getJob_type().equals("管理人员")){
+    if(!user.getJob_type().toString().equals("人事人员")){
         response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
         return;
     }

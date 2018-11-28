@@ -16,14 +16,11 @@
     <%
         LoginUser user = (LoginUser) session.getAttribute("user");
         int ri_id = Integer.parseInt(request.getParameter("ri_id"));
-        if(!user.getJob_type().equals("管理人员")){
+        if(!user.getJob_type().toString().equals("人事人员")){
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
         CommonConnection.setConnectUser(ConnectUser.HR);
-        ResultSet workplace = CommonConnection.makeQuery("select wp_id,wp_name from work_place");
-        ResultSet stuff_type = CommonConnection.makeQuery("select st_id,st_name from stuff_type");
-        ResultSet emergecy = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree");
     %>
 </head>
 <body>
@@ -32,6 +29,7 @@
         招聘人数<input type="number" name="rr_num" id="rr_num"><br/>
         工作地点<select id="rr_wp_id" name="rr_wp_id">
         <%
+            ResultSet workplace = CommonConnection.makeQuery("select wp_id,wp_name from work_place");
             while(workplace.next()){
         %>
         <option value="<%=workplace.getString("wp_id")%>"><%=workplace.getString("wp_name")%></option>
@@ -41,6 +39,7 @@
         </select>
         员工类型<select id="rr_st_id" name="rr_st_id">
         <%
+            ResultSet stuff_type = CommonConnection.makeQuery("select st_id,st_name from stuff_type");
             while(stuff_type.next()){
         %>
         <option value="<%=stuff_type.getString("st_id")%>"><%=stuff_type.getString("st_name")%></option>
@@ -52,6 +51,7 @@
         工作年限<input type="number" name="rr_ept" id="rr_ept">
         紧急度<select id="rr_ed_id" name="rr_ed_id">
         <%
+            ResultSet emergecy = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree");
             while(emergecy.next()){
         %>
         <option value="<%=emergecy.getString("ed_id")%>"><%=emergecy.getString("ed_name")%></option>

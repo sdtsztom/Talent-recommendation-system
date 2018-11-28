@@ -2,6 +2,7 @@
 <%@ page import="ienum.ConnectUser" %>
 <%@ page import="bean.LoginUser" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.lang.String" %>
 <%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: 10442
@@ -16,7 +17,7 @@
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("tr:#light").css("background-color","");
+            $("tr:#light").css("background-color","red");
         });
     </script>
     <style>
@@ -129,13 +130,14 @@
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
-        String jb_name = user.getJob_type().trim();
+        String jb_name = user.getJob_type().toString();
         if(jb_name.equals("开发人员")) {
-            CommonConnection.setConnectUser(ConnectUser.ADMIN);
-        }else if(jb_name.equals("人事人员")){
             CommonConnection.setConnectUser(ConnectUser.STUFF);
-        }else if(jb_name.equals("管理人员")){
-            CommonConnection.setConnectUser(ConnectUser.HR);
+        }else if(jb_name.equals("管理人员")) {
+            CommonConnection.setConnectUser(ConnectUser.ADMIN);
+        }else{
+            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+            return;
         }
         ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from " +
                 "recruitment_requirements left join work_place on rr_wp_id = wp_id");
