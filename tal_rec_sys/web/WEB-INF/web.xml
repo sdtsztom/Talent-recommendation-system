@@ -68,7 +68,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SingleRecManagementFilter</filter-name>
-        <url-pattern>/Single_Rec_Management/unexist.jsp</url-pattern>
+        <url-pattern>/Single_Rec_Management/*</url-pattern>
     </filter-mapping>
 
 </web-app>

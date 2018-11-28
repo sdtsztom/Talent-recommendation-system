@@ -1,0 +1,7 @@
+TALENTS,1,放入人才库
+OTHERNEED,2,安排其它需求
+NOOFFER,3,不发放offer
+REFUSE,4,拒绝offer
+TAKE,5,接受offer并入职
+NONE,6,暂无
+OVERTIME,7,确认超时

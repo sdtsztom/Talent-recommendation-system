@@ -14,7 +14,7 @@ public enum JobType {
         return type;
     }
 
-//    public int toInt() {
+//    public int toId() {
 //        int type=0;
 //        switch(this){
 //            case STUFF:type+=1;break;

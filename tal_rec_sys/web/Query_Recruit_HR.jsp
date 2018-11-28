@@ -2,7 +2,8 @@
 <%@ page import="ienum.ConnectUser" %>
 <%@ page import="bean.LoginUser" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="ienum.eErrorPage" %><%--
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="ienum.JobType" %><%--
   Created by IntelliJ IDEA.
   User: 10442
   Date: 2018/11/1
@@ -120,7 +121,7 @@
         <th>工作地点</th>
         <th>招聘人数</th>
         <th>截止日期</th>
-        <th>#</th>
+        <th>查看详情</th>
     </tr>
     </thead>
     <%
@@ -130,6 +131,7 @@
             return;
         }
 
+<<<<<<< HEAD
         String jb_name = user.getJob_type().toString();
         if(jb_name.equals("人事人员")) {
             CommonConnection.setConnectUser(ConnectUser.HR);
@@ -140,17 +142,32 @@
         ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from \n" +
                 "recruitment_requirements left join work_place on rr_wp_id = wp_id\n" +
                 "where rr_hr_id = '" + user.getId() + "'");
+=======
+        JobType jb_type = user.getJob_type();
+        ConnectUser connect_user=null;
+        switch (jb_type){
+            case HR:{connect_user=ConnectUser.HR;break;}
+            case STUFF:{connect_user=ConnectUser.STUFF;break;}
+            case ADMIN:{connect_user=ConnectUser.ADMIN;break;}
+        }
+
+        CommonConnection.setConnectUser(connect_user);
+
+        ResultSet rs = CommonConnection.makeQuery("select rr_id,wp_name,rr_num,rr_el,rr_ed_id from " +
+                "recruitment_requirements join work_place on rr_wp_id = wp_id " +
+                "where rr_hr_id ="+user.getId());
+>>>>>>> dev
         while(rs.next()){
     %>
     <tr <% if (rs.getInt("rr_ed_id") == 1){%>id="light"<%}%>>
         <td><%=rs.getString("wp_name")%></td>
         <td><%=rs.getInt("rr_num")%></td>
         <td><%=rs.getString("rr_el")%></td>
-        <td><a onclick="window.location.href = 'Recruit_Detail.jsp?rr_id=<%=rs.getInt("rr_id") %>'">查看详情</a></td>
+        <td><a href="Recruit_Detail.jsp?rr_id=<%=rs.getInt("rr_id") %>">查看详情</a></td>
     </tr>
     <%
         }
-        CommonConnection.closeConnection();
+        rs.close();
     %>
 </table>
 </body>

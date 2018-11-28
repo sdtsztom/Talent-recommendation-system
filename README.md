@@ -101,7 +101,7 @@
     </tr>
     <!--                  Process3: Sift                      -->
     <tr>
-        <td rowspan="2">Sift</td>  <td>记录筛选结果</td>  <td rowspan="2">Tsk_sift</td>
+        <td rowspan="3">Sift</td>  <td>记录筛选结果</td>  <td rowspan="3">Tsk_sift</td>
         <td>record_sift_res</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
@@ -110,16 +110,14 @@
         <td>deal_points</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>    
-    <!-- This is not decide yet
     <tr>
         <td>结束判断</td>
         <td>isFinish</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
-    -->
     <!--                Process4: Arrangement After Sift                  -->
     <tr>
-        <td rowspan="5">Arrangement After Sift</td>  <td>情形选择</td>  <td rowspan="5">Tsk_Arr</td>
+        <td rowspan="6">Arrangement After Sift</td>  <td>情形选择</td>  <td rowspan="6">Tsk_Arr</td>
         <td>case_switch</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
@@ -143,16 +141,14 @@
         <td>notify</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
-    <!-- This is not decide yet
     <tr>
         <td>结束判断</td>
         <td>isFinish</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
-    -->
     <!--                Process5: Interview1                     -->
     <tr>
-        <td rowspan="2">Interview 1</td>  <td>记录面试结果</td>  <td rowspan="2">Tsk_Intv1</td>
+        <td rowspan="3">Interview 1</td>  <td>记录面试结果</td>  <td rowspan="3">Tsk_Intv1</td>
         <td>record_Intv1_res</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
@@ -161,13 +157,11 @@
         <td>deal_points</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>    
-    <!-- This is not decide yet
     <tr>
         <td>结束判断</td>
         <td>isFinish</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
-    -->
     <!--              Process6: Arrangement After Interview 1            -->
     <tr>
         <td >Arrangement After Interview 1</td>  <td colspan="3">REUSE Tsk_Arr</td>
@@ -175,7 +169,7 @@
     </tr>
     <!--                Process7: Interview2                     -->
     <tr>
-        <td rowspan="3">Interview 2</td>  <td>记录面试结果</td>  <td rowspan="3">Tsk_Intv2</td>
+        <td rowspan="4">Interview 2</td>  <td>记录面试结果</td>  <td rowspan="4">Tsk_Intv2</td>
         <td>record_Intv2_res</td>  <td>Undone</td>  <td>xsy</td>
         <td>-</td>
     </tr>
@@ -189,13 +183,11 @@
         <td>notify</td>  <td>Undone</td>  <td>xsy</td>
         <td>-</td>
     </tr>
-    <!-- This is not decide yet
     <tr>
         <td>结束判断</td>
         <td>isFinish</td>  <td>Undone</td>  <td>tsz</td>
         <td>-</td>
     </tr>
-    -->
     <!--                Process7: Offer Confirm                    -->
     <tr>
         <td rowspan="5">Offer Confirm</td>  <td>记录结果</td>  <td rowspan="5">Tsk_offer_confirm</td>
