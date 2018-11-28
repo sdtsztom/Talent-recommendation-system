@@ -1,7 +1,8 @@
 <%@ page import="bean.LoginUser" %>
 <%@ page import="util.CommonConnection" %>
 <%@ page import="ienum.ConnectUser" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: 10442
   Date: 2018/11/4
@@ -109,12 +110,12 @@
     LoginUser user = (LoginUser) session.getAttribute("user");
     String rr_id = request.getParameter("rr_id");
 
-    if(user.getJob_type().equals("管理人员")){
-        CommonConnection.setConnectUser(ConnectUser.ADMIN);
-    }else if(user.getJob_type().equals("人事人员")){
-        CommonConnection.setConnectUser(ConnectUser.HR);
-    }else if(user.getJob_type().equals("开发人员")){
+    if(user.getJob_type().toString().equals("开发人员")) {
         CommonConnection.setConnectUser(ConnectUser.STUFF);
+    }else if(user.getJob_type().toString().equals("管理人员")){
+        CommonConnection.setConnectUser(ConnectUser.ADMIN);
+    }else if(user.getJob_type().toString().equals("人事人员")){
+        CommonConnection.setConnectUser(ConnectUser.HR);
     }
 
     ResultSet rs = CommonConnection.makeQuery("select * from recruitment_requirements\n" +
@@ -127,67 +128,83 @@
             "left join job_type on jb_jt_id = jt_id\n" +
             "where rr_id = '" + rr_id + "'");
     rs.next();
-//    ResultSet rs2 = CommonConnection.makeQuery("select stf_name from stuff where stf_id = '" + rs.getString("dp_contact") + "'");
-//    rs2.next();
 %>
 <body>
-    <table class="bordered">
+<table class="bordered">
 
-        <tr>
-            <td>需求id</td>
-            <td><%=rr_id%></td>
-            <td>招聘人数</td>
-            <td><%=rs.getInt("rr_num")%></td>
-            <td>紧急度</td>
-            <td><%=rs.getString("ed_name")%></td>
-        </tr>
+    <tr>
+        <td>需求id</td>
+        <td><%=rr_id%></td>
+        <td>招聘人数</td>
+        <td><%=rs.getInt("rr_num")%></td>
+        <td>紧急度</td>
+        <td><%=rs.getString("ed_name")%></td>
+    </tr>
 
-        <tr>
-            <td>员工类型名</td>
-            <td><%=rs.getString("st_name")%></td>
-            <td>类型描述</td>
-            <td colspan="3"  ><%=rs.getString("st_desc")%></td>
-        </tr>
+    <tr>
+        <td>员工类型名</td>
+        <td><%=rs.getString("st_name")%></td>
+        <td>类型描述</td>
+        <td colspan="3"  ><%=rs.getString("st_desc")%></td>
+    </tr>
 
-        <tr>
-            <td>工作地点</td>
-            <td><%=rs.getString("wp_name")%></td>
-            <td>详细地点</td>
-            <td colspan="3"><%=rs.getString("wp_detail")%></td>
-        </tr>
+    <tr>
+        <td>工作地点</td>
+        <td><%=rs.getString("wp_name")%></td>
+        <td>详细地点</td>
+        <td colspan="3"><%=rs.getString("wp_detail")%></td>
+    </tr>
 
-        <tr>
-            <td>职位名称</td>
-            <td><%=rs.getString("jb_name")%></td>
-            <td rowspan="2">职位描述</td>
-            <td rowspan="2" colspan="3"><%=rs.getString("jb_desc")%></td>
-        </tr>
+    <tr>
+        <td>职位名称</td>
+        <td><%=rs.getString("jb_name")%></td>
+        <td rowspan="2">职位描述</td>
+        <td rowspan="2" colspan="3"><%=rs.getString("jb_desc")%></td>
+    </tr>
 
-        <tr>
-            <td>职位工资</td>
-            <td><%=rs.getInt("jb_sal")%></td>
-        </tr>
+    <tr>
+        <td>职位工资</td>
+        <td><%=rs.getInt("jb_sal")%></td>
+    </tr>
 
-        <tr>
-            <td>职能类别</td>
-            <td><%=rs.getString("jt_name")%></td>
-            <td>类别描述</td>
-            <td colspan="3"><%=rs.getString("jt_desc")%></td>
-        </tr>
+    <tr>
+        <td>职能类别</td>
+        <td><%=rs.getString("jt_name")%></td>
+        <td>类别描述</td>
+        <td colspan="3"><%=rs.getString("jt_desc")%></td>
+    </tr>
 
-        <tr>
-            <td>部门名称</td>
-            <td colspan="2"><%=rs.getString("dp_name")%></td>
-            <td>联系人</td>
-            <td colspan="2"><%=rs.getString("dp_contact")%></td>
-        </tr>
+    <tr>
+        <td>部门名称</td>
+        <td colspan="2"><%=rs.getString("dp_name")%></td>
+        <td>联系人</td>
+        <td colspan="2"><%=rs.getString("dp_contact")%></td>
+    </tr>
 
-        <tr>
-            <td >特殊要求</td>
-            <td colspan="5"><%=rs.getString("rr_spreq")%></td>
-        </tr>
+    <tr>
+        <td >特殊要求</td>
+        <td colspan="5"><%=rs.getString("rr_spreq")%></td>
+    </tr>
 
-    </table>
-    <a onclick="window.location.href = ''" >提交推荐人</a><br/>
+</table>
+<%
+    if(user.getJob_type().toString().equals("人事人员")){
+%>
+<a onclick="window.location.href = ''" >关闭需求</a><br/>
+<a onclick="window.location.href = ''" >更新需求</a><br/>
+<a onclick="window.location.href = ''" >处理需求</a><br/>
+<%
+    }else if(user.getJob_type().toString().equals("管理人员")){
+%>
+<a onclick="window.location.href = ''" >处理需求</a><br/>
+<%
+    }else if(user.getJob_type().toString().equals("开发人员")){
+%>
+<a onclick="window.location.href = ''" >提交推荐人</a><br/>
+<%
+    }
+    CommonConnection.closeConnection();
+%>
 </body>
 </html>
+
