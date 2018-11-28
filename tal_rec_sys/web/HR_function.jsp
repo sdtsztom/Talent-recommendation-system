@@ -20,8 +20,8 @@
     %>
 </head>
 <body>
-    <a href="w'Publish_Requirements.jsp" >发布需求</a><br/>
-    <a href="Query_Recruit_HR.jsp" >查询所有需求</a><br/>
-    <a href="Query_Recruit_HR.jsp" >查询已发布需求</a>
+    <a href="Publish_Requirements.jsp" >发布需求</a><br/>
+    <a href="Query_Recruit.jsp" >查询需求</a><br/>
+    <a href="Query_Recruit_HR.jsp" >管理已发布的需求</a>
 </body>
 </html>

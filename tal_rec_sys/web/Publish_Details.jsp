@@ -16,6 +16,7 @@
     <%
         LoginUser user = (LoginUser) session.getAttribute("user");
         int ri_id = Integer.parseInt(request.getParameter("ri_id"));
+        request.setAttribute("ri_id",ri_id);
         if(!user.getJob_type().toString().equals("人事人员")){
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
@@ -36,7 +37,7 @@
         <%
             }
         %>
-        </select>
+        </select><br/>
         员工类型<select id="rr_st_id" name="rr_st_id">
         <%
             ResultSet stuff_type = CommonConnection.makeQuery("select st_id,st_name from stuff_type");
@@ -46,9 +47,9 @@
         <%
             }
         %>
-        </select>
-        截止日期<input type="datetime-local" id="rr_el" name="rr_el">
-        工作年限<input type="number" name="rr_ept" id="rr_ept">
+        </select><br/>
+        截止日期<input type="datetime-local" id="rr_el" name="rr_el"><br/>
+        工作年限<input type="number" name="rr_ept" id="rr_ept"><br/>
         紧急度<select id="rr_ed_id" name="rr_ed_id">
         <%
             ResultSet emergecy = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree");
@@ -58,9 +59,12 @@
         <%
             }
         %>
-        </select>
-        特殊要求<input type="text" name="rr_spreq" id="rr_spreq">
+        </select><br/>
+        特殊要求<input type="text" name="rr_spreq" id="rr_spreq"><br/>
+        <input type="submit" value="提交" ><input type="reset" value="清空">
     </form>
+    <br/>
+    <a href="Publish_Requirements.jsp"></a>
 </div>
 </body>
 </html>
