@@ -2,7 +2,9 @@
 <%@ page import="util.CommonConnection" %>
 <%@ page import="ienum.ConnectUser" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="ienum.eErrorPage" %><%--
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="ienum.JobType" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: 10442
   Date: 2018/11/4
@@ -107,27 +109,38 @@
     </style>
 </head>
 <%
+    //验证用户
     LoginUser user = (LoginUser) session.getAttribute("user");
-    String rr_id = request.getParameter("rr_id");
-
-    if(user.getJob_type().toString().equals("开发人员")) {
-        CommonConnection.setConnectUser(ConnectUser.STUFF);
-    }else if(user.getJob_type().toString().equals("管理人员")){
-        CommonConnection.setConnectUser(ConnectUser.ADMIN);
-    }else if(user.getJob_type().toString().equals("人事人员")){
-        CommonConnection.setConnectUser(ConnectUser.HR);
+    if(user==null){
+        response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
+        return;
     }
 
-    ResultSet rs = CommonConnection.makeQuery("select * from recruitment_requirements\n" +
-            "left join work_place on rr_wp_id = wp_id\n" +
-            "left join stuff_type on rr_st_id = st_id\n" +
-            "left join requirements_common_info on rr_ri_id = ri_id\n" +
-            "left join emergency_degree on rr_ed_id = ed_id\n" +
-            "left join departments on ri_dpt_id = dp_id\n" +
-            "left join job on ri_job_id = jb_id\n" +
-            "left join job_type on jb_jt_id = jt_id\n" +
+    //获取招聘id
+    String rr_id = request.getParameter("rr_id");
+
+    //职能判断
+    JobType jb_type = user.getJob_type();
+    ConnectUser connect_user=null;
+    switch (jb_type){
+        case HR:{connect_user=ConnectUser.HR;break;}
+        case ADMIN:{connect_user=ConnectUser.HR;break;}
+        case STUFF:{connect_user=ConnectUser.STUFF;break;}
+    }
+    CommonConnection.setConnectUser(connect_user);
+
+    //招聘详情查询及判断
+    ResultSet rs = CommonConnection.makeQuery("select * from requirement_details \n" +
             "where rr_id = '" + rr_id + "'");
-    rs.next();
+    try{
+        if(!rs.next()){
+            response.sendRedirect(eErrorPage.NOTHISREQUIREMENT.toString());
+            return;
+        }
+        rs.next();
+    }catch (SQLException e){
+        e.printStackTrace();
+    }
 %>
 <body>
 <table class="bordered">
@@ -190,17 +203,17 @@
 <%
     if(user.getJob_type().toString().equals("人事人员")){
 %>
-<a onclick="window.location.href = ''" >关闭需求</a><br/>
-<a onclick="window.location.href = ''" >更新需求</a><br/>
-<a onclick="window.location.href = ''" >处理需求</a><br/>
+<a href="" >关闭需求</a>
+<a href="" >更新需求</a>
+<a href="" >处理需求</a>
 <%
     }else if(user.getJob_type().toString().equals("管理人员")){
 %>
-<a onclick="window.location.href = ''" >处理需求</a><br/>
+<a href="" >处理需求</a><br/>
 <%
     }else if(user.getJob_type().toString().equals("开发人员")){
 %>
-<a onclick="window.location.href = ''" >提交推荐人</a><br/>
+<a href="" >提交推荐人</a><br/>
 <%
     }
     CommonConnection.closeConnection();

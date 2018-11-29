@@ -33,10 +33,7 @@
     }
 
     CommonConnection.setConnectUser(ConnectUser.HR);
-    ResultSet rs = CommonConnection.makeQuery("select ri_id,jb_name,jt_name,jb_sal,dp_name from requirements_common_info\n" +
-            "left join job on requirements_common_info.ri_job_id = job.jb_id\n" +
-            "left join job_type on job.jb_jt_id = job_type.jt_id\n" +
-            "left join departments on requirements_common_info.ri_dpt_id = departments.dp_id");
+    ResultSet rs = CommonConnection.makeQuery("select * from requirement_info_view");
     while(rs.next()){
 %>
     <tr>
