@@ -13,6 +13,34 @@
 <html>
 <head>
     <title>Title</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/script/themes/default/default.css" />
+    <link rel="stylesheet" href="/script/plugins/code/prettify.css" />
+    <script charset="utf-8" src="/script/kindeditor-all.js"></script>
+    <script charset="utf-8" src="/script/lang/zh-CN.js"></script>
+    <script charset="utf-8" src="/script/plugins/code/prettify.js"></script>
+    <script>
+        KindEditor.ready(function(K) {
+            var editor1 = K.create('textarea[name="content1"]', {
+                cssPath : '/script/plugins/code/prettify.css',
+                uploadJson : '/script/upload_json.jsp',
+                fileManagerJson : '/script/file_manager_json.jsp',
+                allowFileManager : true,
+                afterCreate : function() {
+                    var self = this;
+                    K.ctrl(document, 13, function() {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function() {
+                        self.sync();
+                        document.forms['example'].submit();
+                    });
+                }
+            });
+            prettyPrint();
+        });
+    </script>
     <%
         LoginUser user = (LoginUser) session.getAttribute("user");
         int ri_id = Integer.parseInt(request.getParameter("ri_id"));
@@ -26,7 +54,7 @@
 </head>
 <body>
 <div>
-    <form id="login_form" action="publish_requirement">
+    <form id="login_form" action="/publish_requirement">
         招聘人数<input type="number" name="rr_num" id="rr_num"><br/>
         工作地点<select id="rr_wp_id" name="rr_wp_id">
         <%
@@ -52,19 +80,19 @@
         工作年限<input type="number" name="rr_ept" id="rr_ept"><br/>
         紧急度<select id="rr_ed_id" name="rr_ed_id">
         <%
-            ResultSet emergecy = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree");
-            while(emergecy.next()){
+            ResultSet emergency = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree");
+            while(emergency.next()){
         %>
-        <option value="<%=emergecy.getString("ed_id")%>"><%=emergecy.getString("ed_name")%></option>
+        <option value="<%=emergency.getString("ed_id")%>"><%=emergency.getString("ed_name")%></option>
         <%
             }
         %>
         </select><br/>
-        特殊要求<input type="text" name="rr_spreq" id="rr_spreq"><br/>
+        特殊要求<textarea name="rr_spreq" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea><br/>
         <input type="submit" value="提交" ><input type="reset" value="清空">
     </form>
     <br/>
-    <a href="Publish_Requirements.jsp"></a>
+    <a href="Publish_Requirements.jsp">返回</a>
 </div>
 </body>
 </html>
