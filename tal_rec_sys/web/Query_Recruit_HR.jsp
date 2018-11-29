@@ -4,7 +4,6 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="ienum.eErrorPage" %>
 <%@ page import="ienum.JobType" %>
-<%@ page import="java.util.List" %>
 <%@ page import="bean.Recruit" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Date" %>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>需求修改页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <script src="/js/Republish_Demand.js"></script>
+</head>
+<body>
+<div class="row" id="div">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form method="post" onsubmit="return false">
+            <label>序号</label>
+            <select class="form-control" name="rr_id" id="rr_id">
+                    <option value="">请选择</option>
+                    <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>
+            </select>
+            <div class="form-group">
+                <label for="rr_num">招聘人数</label>
+                <input type="text" class="form-control" id="rr_num" name="rr_num" placeholder="招聘人数">
+            </div>
+            <label>工作地点</label>
+            <select class="form-control" name="wp_id" id="wp_id">
+                <option value="">请选择序号</option>
+                <option v-for="wp in wps" :value="wp.wp_id">{{wp.wp_name}}</option>
+            </select>
+            <label>员工类型</label>
+            <select class="form-control" name="st_id" id="st_id">
+                <option value="">请选择序号</option>
+                <option v-for="st in sts" :value="st.st_id">{{st.st_name}} : {{st.st_desc}}</option>
+            </select>
+            <div class="form-group">
+                <label for="rr_el">截止日期</label>
+                <input type="text" class="form-control" id="rr_el" name="rr_el" placeholder="截止日期">
+            </div>
+            <div class="form-group">
+                <label for="rr_num">工作年限</label>
+                <input type="text" class="form-control" id="rr_ept" name="rr_ept" placeholder="工作年限">
+            </div>
+            <label>岗位招聘信息</label>
+            <select class="form-control" name="ri_id" id="ri_id">
+                <option value="">请选择序号</option>
+                <option v-for="ri in ris" :value="ri.ri_id">{{ri.ri_desc}} : {{ri.ri_req}} - {{ri.dp_name}}</option>
+            </select>
+            <label>紧急度</label>
+            <select class="form-control" name="ed_id" id="ed_id">
+                <option value="">请选择序号</option>
+                <option v-for="ed in eds" :value="ed.ed_id">{{ed.ed_name}}</option>
+            </select>
+            <div class="form-group">
+                <label for="rr_num">额外需求</label>
+                <input type="text" class="form-control" id="rr_spreq" name="rr_spreq" placeholder="额外需求">
+            </div>
+            <label>需求处理阶段</label>
+            <select class="form-control" name="rrs_id" id="rrs_id">
+                <option value="">请选择序号</option>
+                <option v-for="rrs in rrss" :value="rrs.rrs_id">{{rrs.rrs_desc}}</option>
+            </select>
+        </form>
+        <button onclick="submit()" class="btn btn-default">Submit</button>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+</body>
+</html>
