@@ -142,7 +142,6 @@
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
-
         ArrayList<Recruit> Recruit_list = new ArrayList<Recruit>();
 
         //职能判断
