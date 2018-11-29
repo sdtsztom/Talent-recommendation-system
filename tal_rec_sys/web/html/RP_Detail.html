@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>被推荐人详细信息</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div id="div" class="col-md-10">
+            <table class="table">
+                <tr>
+                    <th>被推荐人id</th>
+                    <th>学位</th>
+                    <th>学校</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>电话号码</th>
+                    <th>邮箱</th>
+                    <th>是否在读</th>
+                    <th>毕业时间</th>
+                    <th>专业</th>
+                    <th>能力</th>
+                    <th>简历路径</th>
+                    <th>工作名称</th>
+                </tr>
+                <tr v-for="rp in rps">
+                    <td>{{rp.rp_id}}</td>
+                    <td>{{rp.deg_name}}</td>
+                    <td>{{rp.uni_name}}</td>
+                    <td>{{rp.rp_name}}</td>
+                    <td>{{rp.rp_sex}}</td>
+                    <td>{{rp.rp_age}}</td>
+                    <td>{{rp.rp_tel_num}}</td>
+                    <td>{{rp.rp_email}}</td>
+                    <td>{{rp.rp_stu}}</td>
+                    <td>{{rp.rp_grt}}</td>
+                    <td>{{rp.rp_maj}}</td>
+                    <td>{{rp.rp_abi}}</td>
+                    <td>{{rp.rp_res_path}}</td>
+                    <td>{{rp.jb_name}}</td>
+                </tr>
+            </table>
+        <ul class="pagination">
+            <li class="page-item disabled"><a class="page-link" href="#"><<</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">>></a></li>
+        </ul>
+        <form method="post" onsubmit="return false">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="name">
+            </div>
+            <div class="form-group">
+                <label for="major">专业</label>
+                <input type="text" class="form-control" id="major" name="major" placeholder="major">
+            </div>
+            <div class="form-group">
+                <label for="abi">专业技能</label>
+                <input type="text" class="form-control" id="abi" name="abi" placeholder="abi">
+            </div>
+            <label>性别</label>
+            <select class="form-control" name="sex">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+            <label>是否在读</label>
+            <select class="form-control" name="stu">
+                <option value="是">是</option>
+                <option value="否">否</option>
+            </select>
+            <label>学历</label>
+            <select class="form-control" name="deg_id">
+                    <option v-for="deg in degs" :value="deg.deg_id">{{deg.deg_name}}</option>
+            </select>
+            <label>大学</label>
+            <select class="form-control" name="uni_id">
+                    <option  v-for="uni in unis" :value="uni.uni_id">{{uni.uni_name}}</option>
+            </select>
+            <label>职业</label>
+            <select class="form-control" name="jb_id">
+                    <option v-for="job in jobs" :value="job.jb_id">{{job.jb_name}}</option>
+            </select>
+            <button type="submit" class="btn btn-default">查询</button>
+        </form>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<script src="/js/RP_Detial.js"></script>
+</body>
+</html>
