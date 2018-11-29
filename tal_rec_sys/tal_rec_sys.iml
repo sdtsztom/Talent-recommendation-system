@@ -40,5 +40,12 @@
     <orderEntry type="library" name="jackson-databind-2.9.6" level="project" />
     <orderEntry type="library" name="jackson-annotations-2.9.6" level="project" />
     <orderEntry type="library" name="jackson-core-2.9.6" level="project" />
+    <orderEntry type="library" name="activiti" level="project" />
+    <orderEntry type="library" name="spring-activiti" level="project" />
+    <orderEntry type="library" name="slf4j-log4j12-1.7.25" level="project" />
+    <orderEntry type="library" name="slf4j-nop-1.7.25" level="project" />
+    <orderEntry type="library" name="slf4j-simple-1.7.25" level="project" />
+    <orderEntry type="library" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" name="activiti-bpmn-model-5.22.0" level="project" />
   </component>
 </module>
