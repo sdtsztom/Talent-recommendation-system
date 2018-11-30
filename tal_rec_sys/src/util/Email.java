@@ -10,31 +10,26 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
-public class Email {
+public class Email{
 
     //发件人地址
-    private static String senderAddress;
+    private static final String senderAddress = "m13372407504@163.com";
     //收件人地址
     private static String recipientAddress;
     //发件人账户名
-    private static String senderAccount;
+    private static final String senderAccount = "m13372407504@163.com";
     //发件人账户授权码
-    private static String senderPassword;
+    private static final String senderPassword = "qazsxdrfvgbhu123";
     //邮件标题
     private static String subject;
     //邮件内容
     private static String content;
 
-    Email(String senderAddress1,String recipientAddress1,String senderAccount1,String senderPassword1) throws Exception {
-        //设置发件与收件信息
-        senderAddress = senderAddress1;
-        recipientAddress = recipientAddress1;
-        senderAccount = senderAccount1;
-        senderPassword = senderPassword1;
+    public Email() {
 
     }
 
-    public void SendEmail() throws Exception{
+    public static void SendEmail() throws Exception{
         //1、连接邮件服务器的参数配置
         Properties props = new Properties();
 
@@ -91,6 +86,7 @@ public class Email {
          * MimeMessage.RecipientType.BCC：密送
          */
 
+        msg.setRecipient(MimeMessage.RecipientType.CC,new InternetAddress(senderAddress));
         msg.setRecipient(MimeMessage.RecipientType.TO,new InternetAddress(recipientAddress));
         //设置邮件主题
 
@@ -104,15 +100,15 @@ public class Email {
         return msg;
     }
 
-    private void changeRecipientAddress(String NewAddress){
+    public void changeRecipientAddress(String NewAddress){
         recipientAddress = NewAddress;
     }
 
-    private void changeSubject(String NewSubject){
+    public void changeSubject(String NewSubject){
         subject = NewSubject;
     }
 
-    private void changeContent(String NewContent){
+    public void changeContent(String NewContent){
         content = NewContent;
     }
 }

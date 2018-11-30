@@ -21,6 +21,8 @@ insert into departments values(NULL,'管理部门')
 
 -- table emergency_degree
 insert into emergency_degree values('一级','最高级紧急度')
+insert into emergency_degree values('二级','')
+insert into emergency_degree values('三级','')
 
 -- table work_place
 insert into work_place values('杭州','江干区杭州电子科技大学')

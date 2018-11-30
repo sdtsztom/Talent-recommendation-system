@@ -14,13 +14,13 @@ public enum JobType {
         return type;
     }
 
-//    public int toId() {
-//        int type=0;
-//        switch(this){
-//            case STUFF:type+=1;break;
-//            case HR:type+=2;break;
-//            case ADMIN:type+=3;break;
-//        }
-//        return type;
-//    }
+    public int toId() {
+        int type=-1;
+        switch(this){
+            case STUFF:type=1;break;
+            case HR:type=2;break;
+            case ADMIN:type=3;break;
+        }
+        return type;
+    }
 }
