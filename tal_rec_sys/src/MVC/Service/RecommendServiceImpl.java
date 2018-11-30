@@ -3,6 +3,7 @@ package MVC.Service;
 import MVC.DAO.*;
 import MVC.DAO.Impl.IDToDescDAOImpl;
 import bean.LoginUser;
+import ienum.JobType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +56,7 @@ public class RecommendServiceImpl implements RecommendService {
     public int RecommendPageInsert(HttpServletRequest request,String rp_id,String recf_id,String rr_id) throws Exception{
         HttpSession session = request.getSession();
         //测试用session
-        session.setAttribute("user",new LoginUser("1","1","1","1"));
+        session.setAttribute("user",new LoginUser("1","1", JobType.STUFF));
         LoginUser loginUser = (LoginUser)  session.getAttribute("user");
         List<Map> list = recruitmentRequirementsDAO.getHR(rr_id);
         String hr_id = "";
@@ -69,7 +70,7 @@ public class RecommendServiceImpl implements RecommendService {
     public List<Map> getRecommendByStuffId(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         //测试用session
-        session.setAttribute("user",new LoginUser("1","1","1","1"));
+        session.setAttribute("user",new LoginUser("1","1", JobType.STUFF));
         LoginUser loginUser = (LoginUser)  session.getAttribute("user");
         return recommendDAO.getDescByStuffId(loginUser.getId());
     }
@@ -78,7 +79,7 @@ public class RecommendServiceImpl implements RecommendService {
     public List<Map> getValidRecommendByStuffId(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         //测试用session
-        session.setAttribute("user",new LoginUser("1","1","1","1"));
+        session.setAttribute("user",new LoginUser("1","1", JobType.STUFF));
         LoginUser loginUser = (LoginUser)  session.getAttribute("user");
         return recommendDAO.getValidDescByStuffId(loginUser.getId());
     }
@@ -122,7 +123,7 @@ public class RecommendServiceImpl implements RecommendService {
     public int RRUpdate(HttpServletRequest request,String rr_id, String rr_wp_id, String rr_ed_id, String rr_st_id, String rr_ri_id, String rr_sta_id, String rr_num, String rr_el, String rr_ept, String rr_spreq) {
         HttpSession session = request.getSession();
         //测试用session
-        session.setAttribute("user",new LoginUser("1","1","1","1"));
+        session.setAttribute("user",new LoginUser("1","1", JobType.STUFF));
         LoginUser loginUser = (LoginUser)  session.getAttribute("user");
         return recruitmentRequirementsDAO.update(rr_id,rr_wp_id,rr_ed_id,rr_st_id,loginUser.getId(),rr_ri_id,rr_sta_id,rr_num,rr_el,rr_ept,rr_spreq);
     }
