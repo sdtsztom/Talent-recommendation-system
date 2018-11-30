@@ -1,13 +1,15 @@
-package MVC.Entity;
+package bean;
 
 public class TaskRepresentation {
 
     private String id;
     private String name;
+    private String ececutionid;
 
-    public TaskRepresentation(String id, String name) {
+    public TaskRepresentation(String id, String name,String ececutionid) {
         this.id = id;
         this.name = name;
+        this.ececutionid = ececutionid;
     }
 
     public String getId() {
@@ -24,5 +26,13 @@ public class TaskRepresentation {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEcecutionid() {
+        return ececutionid;
+    }
+
+    public void setEcecutionid(String ececutionid) {
+        this.ececutionid = ececutionid;
     }
 }

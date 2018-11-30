@@ -3,9 +3,9 @@
   <process id="Process" isClosed="false" isExecutable="true" name="testProcess" processType="None">
     <startEvent id="_2" name="StartEvent"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_3" name="ExclusiveGateway"/>
-    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.serviceTask1" id="ServiceTak1" name="ServiceTask"/>
+    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.Test.serviceTask.serviceTask1" id="ServiceTak1" name="ServiceTask"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_5" name="ExclusiveGateway"/>
-    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.serviceTask2" id="ServiceTask2" name="ServiceTask"/>
+    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.Test.serviceTask.serviceTask2" id="ServiceTask2" name="ServiceTask"/>
     <userTask activiti:exclusive="true" id="UserTask1" name="UserTask"/>
     <endEvent id="_8" name="EndEvent"/>
     <sequenceFlow id="_9" sourceRef="_2" targetRef="UserTask1"/>
@@ -16,7 +16,7 @@
     <sequenceFlow id="_12" sourceRef="_3" targetRef="_5">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var1 == 0}]]></conditionExpression>
     </sequenceFlow>
-    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.serviceTask3" id="ServiceTask3" name="ServiceTask"/>
+    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.Test.serviceTask.serviceTask3" id="ServiceTask3" name="ServiceTask"/>
     <sequenceFlow id="_14" sourceRef="_5" targetRef="ServiceTask2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var2 == 1}]]></conditionExpression>
     </sequenceFlow>
