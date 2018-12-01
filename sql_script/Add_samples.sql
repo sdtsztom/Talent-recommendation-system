@@ -113,6 +113,10 @@ insert into requirements_common_info values(1,1,'C++开发岗位','熟练掌握C++，优秀
 
 -- table recruitment_requirements
 insert into recruitment_requirements values(1,1,1,2,1,1,1,'2018/12/30',0,'无')
+insert into recruitment_requirements values(1,2,1,2,1,2,1,'2019/1/1',0,'无')
+insert into recruitment_requirements values(1,3,1,2,1,2,1,'2018/11/10',0,'无')
+insert into recruitment_requirements values(1,3,1,2,1,2,1,'2019/1/20',0,'无')
+insert into recruitment_requirements values(1,1,1,2,1,2,1,'2019/1/20',0,'无')
 
 -- table recommend
 insert into recommend values(1,1,6,5,1,2,1)

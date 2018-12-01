@@ -34,9 +34,8 @@ public class SingleRecManagementFilter implements Filter {
 
         //判断是否有此rrid
         String rrid=request.getParameter("rrid");
-        CommonConnection.setConnectUser(ConnectUser.SYS);
         String []result_set=CommonConnection.singleLineQuery("select rr_hr_id,rr_st,id from recruitment_requirements where rr_id="+
-                rrid+"'",2);
+                rrid+"'",2,ConnectUser.SYS);
         if(result_set==null){
             response.sendRedirect(eErrorPage.NOCORRESPONDINGRECORD.toString());
             return;
@@ -52,7 +51,7 @@ public class SingleRecManagementFilter implements Filter {
 
         //判断请求的页面是否符合当前阶段，否则不予访问
         String stage= CommonConnection.singleResultQuery("select rec_sta_desc from recommend_stage where rec_sta_id="
-                +"(select rr_sta_id from recruitment_requirements where rr_id='"+rrid+"'");
+                +"(select rr_sta_id from recruitment_requirements where rr_id='"+rrid+"'",ConnectUser.SYS);
         RrStage enum_stage=null;
         for(RrStage i:RrStage.values()){
             if(stage.equals(i.toString()))enum_stage=i;
