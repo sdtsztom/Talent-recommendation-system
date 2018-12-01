@@ -1,19 +1,19 @@
 package bean;
 
-public class Recruit {
+import Interface.Rs2List;
+import ienum.RrStage;
+
+import java.sql.ResultSet;
+import java.util.Date;
+
+public class Recruit implements Rs2List {
     private int rr_id;
+    private String jb_name;
     private int rr_num;
-    private String rr_el;
     private String wp_name;
     private String ed_name;
-
-    public Recruit(int rr_id, String ed_name, int rr_num, String wp_name,String rr_el){
-        this.ed_name = ed_name;
-        this.rr_el = rr_el;
-        this.rr_id = rr_id;
-        this.rr_num = rr_num;
-        this.wp_name = wp_name;
-    }
+    private Date rr_el;
+    private RrStage rrStage;
 
     public int getRr_id() {
         return rr_id;
@@ -23,9 +23,13 @@ public class Recruit {
         return rr_num;
     }
 
-    public String getRr_el() {
+    public Date getRr_el() {
         return rr_el;
     }
+
+    public String getJb_name() { return jb_name; }
+
+    public RrStage getRrStage() { return rrStage; }
 
     public String getWp_name() {
         return wp_name;
@@ -33,5 +37,29 @@ public class Recruit {
 
     public String getEd_name() {
         return ed_name;
+    }
+
+    public void setRrStage(int stage_id) {
+        RrStage rrStage_enum=null;
+        for(RrStage i:RrStage.values()){
+            if(i.toId()==stage_id)rrStage_enum=i;
+        }
+        this.rrStage = rrStage_enum;
+    }
+
+    public Recruit fromRs(ResultSet rs){
+        Recruit r=new Recruit();
+        try{
+            r.rr_id=rs.getInt("rr_id");
+            r.jb_name=rs.getString("jb_name").trim();
+            r.rr_num=rs.getInt("rr_num");
+            r.wp_name=rs.getString("wp_name").trim();
+            r.rr_el=rs.getDate("rr_el");
+            r.ed_name=rs.getString("ed_name").trim();
+            r.setRrStage(rs.getInt("rr_sta_id"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return r;
     }
 }
