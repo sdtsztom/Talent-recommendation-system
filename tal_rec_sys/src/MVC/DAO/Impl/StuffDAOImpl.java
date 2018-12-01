@@ -20,8 +20,7 @@ public class StuffDAOImpl implements StuffDAO {
 
     @Override
     public List<Map> getName() {
-        CommonConnection.setConnectUser(ConnectUser.DEV);
-        ResultSet rs = CommonConnection.makeQuery("select stf_id,stf_name from stuff;");
+        ResultSet rs = CommonConnection.makeQuery("select stf_id,stf_name from stuff;",ConnectUser.DEV);
         try{
             return JsonUtils.toMap(rs,"stf_id","stf_name");
         }catch (Exception e) {

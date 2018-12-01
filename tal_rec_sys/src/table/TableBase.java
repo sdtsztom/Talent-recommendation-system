@@ -50,8 +50,7 @@ public class TableBase {
     public void setWith_order(boolean with_order){this.with_order=with_order;}
 
     public void receive(String query, ConnectUser user){
-        CommonConnection.setConnectUser(user);
-        ResultSet rs=CommonConnection.makeQuery(query);
+        ResultSet rs=CommonConnection.makeQuery(query,user);
         String [][]str_data=null;
         try{
             ResultSetMetaData metars=rs.getMetaData();

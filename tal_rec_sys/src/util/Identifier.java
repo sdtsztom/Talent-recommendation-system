@@ -5,8 +5,7 @@ import ienum.ConnectUser;
 public class Identifier {
 
     public static boolean identify(String username,String encyptedPwd){
-        CommonConnection.setConnectUser(ConnectUser.SYS);
-        String pwd=CommonConnection.singleResultQuery("select stf_pwd from stuff where stf_username='"+username+"'");
+        String pwd=CommonConnection.singleResultQuery("select stf_pwd from stuff where stf_username='"+username+"'",ConnectUser.SYS);
         if(pwd==null)return false;
         if(encyptedPwd.equals(MD5.encrypt(pwd)))return true;
         else return false;
