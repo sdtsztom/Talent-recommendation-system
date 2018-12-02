@@ -106,7 +106,9 @@ insert into stuff values(2,2,'小红',20,'女','hh','123','xh@163.com',0,'187111111
 insert into stuff values(3,3,'小白',20,'男','hhh','123','xb@163.com',0,'18711111111')
 
 -- table recommend_people
-insert into recommend_people values(1,1,'小推','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是')
+insert into recommend_people values(1,1,'小推','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
+insert into recommend_people values(1,1,'小推2','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
+insert into recommend_people values(1,1,'小推3','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
 
 -- table requirements_common_info
 insert into requirements_common_info values(1,1,'C++开发岗位','熟练掌握C++，优秀应届毕业生')
@@ -119,4 +121,6 @@ insert into recruitment_requirements values(1,3,1,2,1,2,1,'2019/1/20',0,'无')
 insert into recruitment_requirements values(1,1,1,2,1,2,1,'2019/1/20',0,'无')
 
 -- table recommend
-insert into recommend values(1,1,6,5,1,2,1)
+insert into recommend values(1,1,6,2,2,2,1)
+insert into recommend values(2,1,6,2,2,2,1)
+insert into recommend values(3,1,6,2,2,2,1)
