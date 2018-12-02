@@ -7,14 +7,14 @@ public enum SRM_Page {
     public String toString() {
         String page_name=null;
         switch (this){
-            case OPEN:page_name="/Single_Rec_Management/Single_Rec_vOpen.jsp";break;
-            case W_SIFT:page_name="/Single_Rec_Management/Single_Rec_vSift.jsp";break;
-            case W_ARR_S:page_name="/Single_Rec_Management/Single_Rec_vSift_Arr.jsp";break;
-            case W_I1:page_name="/Single_Rec_Management/Single_Rec_vIntv1.jsp";break;
-            case W_ARR_I1:page_name="/Single_Rec_Management/Single_Rec_vIntv1_Arr.jsp";break;
-            case W_I2:page_name="/Single_Rec_Management/Single_Rec_vIntv2.jsp";break;
-            case W_OC:page_name="/Single_Rec_Management/Single_Rec_vOC.jsp";break;
-            case W_TW:page_name="/Single_Rec_Management/Single_Rec_vTW.jsp";break;
+            case OPEN:page_name="/SRMPages/Single_Rec_vOpen.jsp";break;
+            case W_SIFT:page_name="/SRMPages/Single_Rec_vSift.jsp";break;
+            case W_ARR_S:page_name="/SRMPages/Single_Rec_vSift_Arr.jsp";break;
+            case W_I1:page_name="/SRMPages/Single_Rec_vIntv1.jsp";break;
+            case W_ARR_I1:page_name="/SRMPages/Single_Rec_vIntv1_Arr.jsp";break;
+            case W_I2:page_name="/SRMPages/Single_Rec_vIntv2.jsp";break;
+            case W_OC:page_name="/SRMPages/Single_Rec_vOC.jsp";break;
+            case W_TW:page_name="/SRMPages/Single_Rec_vTW.jsp";break;
         }
         return page_name;
     }

@@ -58,9 +58,6 @@
             case ADMIN:{connect_user=ConnectUser.HR;break;}
             case STUFF:{connect_user=ConnectUser.STUFF;break;}
         }
-        CommonConnection.setConnectUser(connect_user);
-
-        ArrayList<Recruit> Recruit_list = new ArrayList<>();
 
         //招聘信息查询以及相关排序
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -82,18 +79,8 @@
                 }
             }
         }
-        ResultSet rs = CommonConnection.makeQuery(sql.toString());
+        ArrayList<Recruit> Recruit_list = CommonConnection.<Recruit>listQuery(sql.toString(),new Recruit(),connect_user);
 
-        //招聘信息存入ArrayList
-        try{
-            while(rs.next()) {
-                Recruit_list.add(new Recruit(rs.getInt("rr_id"),rs.getString("ed_name"),
-                        rs.getInt("rr_num"),rs.getString("wp_name"),rs.getString("rr_el")));
-            }
-            rs.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
 
         //打印招聘信息
         for(Recruit recruit:Recruit_list){

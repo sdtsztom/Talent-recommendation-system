@@ -38,11 +38,10 @@
         case ADMIN:{connect_user=ConnectUser.HR;break;}
         case STUFF:{connect_user=ConnectUser.STUFF;break;}
     }
-    CommonConnection.setConnectUser(connect_user);
 
     //招聘详情查询及判断
     ResultSet rs = CommonConnection.makeQuery("select * from requirement_details \n" +
-            "where rr_id = '" + rr_id + "'");
+            "where rr_id = '" + rr_id + "'",connect_user);
     try{
         if(!rs.next()){
             response.sendRedirect(eErrorPage.NOTHISREQUIREMENT.toString());

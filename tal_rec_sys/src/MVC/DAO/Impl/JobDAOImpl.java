@@ -15,16 +15,14 @@ public class JobDAOImpl implements JobDAO {
 
     @Override
     public List<Map> getName() throws Exception {
-        CommonConnection.setConnectUser(ConnectUser.DEV);
-        ResultSet rs = CommonConnection.makeQuery("select jb_id,jb_name from job");
+        ResultSet rs = CommonConnection.makeQuery("select jb_id,jb_name from job",ConnectUser.DEV);
         return JsonUtils.toMap(rs,"jb_id","jb_name");
     }
 
 
     @Override
     public List<Map> getAll() throws Exception {
-        CommonConnection.setConnectUser(ConnectUser.DEV);
-        ResultSet rs = CommonConnection.makeQuery("select jb_id,jb_jt_id,jb_name,jb_desc,jb_sal from job");
+        ResultSet rs = CommonConnection.makeQuery("select jb_id,jb_jt_id,jb_name,jb_desc,jb_sal from job",ConnectUser.DEV);
         return JsonUtils.toMap(rs,"jb_id","jb_jt_id","jb_name","jb_desc","jb_sal");
     }
 }

@@ -49,7 +49,9 @@
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
-        CommonConnection.setConnectUser(ConnectUser.HR);
+        ResultSet workplace = CommonConnection.makeQuery("select wp_id,wp_name from work_place",ConnectUser.HR);
+        ResultSet stuff_type = CommonConnection.makeQuery("select st_id,st_name from stuff_type",ConnectUser.HR);
+        ResultSet emergency = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree",ConnectUser.HR);
     %>
 </head>
 <body>
@@ -58,7 +60,6 @@
         招聘人数<input type="number" name="rr_num" id="rr_num"><br/>
         工作地点<select id="rr_wp_id" name="rr_wp_id">
         <%
-            ResultSet workplace = CommonConnection.makeQuery("select wp_id,wp_name from work_place");
             while(workplace.next()){
         %>
         <option value="<%=workplace.getString("wp_id")%>"><%=workplace.getString("wp_name")%></option>
@@ -68,7 +69,6 @@
         </select><br/>
         员工类型<select id="rr_st_id" name="rr_st_id">
         <%
-            ResultSet stuff_type = CommonConnection.makeQuery("select st_id,st_name from stuff_type");
             while(stuff_type.next()){
         %>
         <option value="<%=stuff_type.getString("st_id")%>"><%=stuff_type.getString("st_name")%></option>
@@ -80,7 +80,6 @@
         工作年限<input type="number" name="rr_ept" id="rr_ept"><br/>
         紧急度<select id="rr_ed_id" name="rr_ed_id">
         <%
-            ResultSet emergency = CommonConnection.makeQuery("select ed_id,ed_name from emergency_degree");
             while(emergency.next()){
         %>
         <option value="<%=emergency.getString("ed_id")%>"><%=emergency.getString("ed_name")%></option>

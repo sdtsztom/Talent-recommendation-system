@@ -18,14 +18,13 @@ public class login_servlet extends HttpServlet {
         String username = request.getParameter("username");
         String pwd = request.getParameter("pwd").replaceAll(" ", "");
 
-        CommonConnection.setConnectUser(ConnectUser.SYS);
-        boolean right = CommonConnection.existQuery("select * from stuff where stf_username = '" + username + "' and stf_pwd='" + pwd + "'");
+        boolean right = CommonConnection.existQuery("select * from stuff where stf_username = '" + username + "' and stf_pwd='" + pwd + "'",ConnectUser.SYS);
         if (!right) {
             response.sendRedirect("/Login/login.html?error=true");
             return;
         }
-        String user_id = CommonConnection.singleResultQuery("select stf_id from stuff where stf_username='" + username + "'");
-        String jt_name=CommonConnection.singleResultQuery("select stf_jt_name from stuff_job_type where stf_id="+user_id);
+        String user_id = CommonConnection.singleResultQuery("select stf_id from stuff where stf_username='" + username + "'",ConnectUser.SYS);
+        String jt_name=CommonConnection.singleResultQuery("select stf_jt_name from stuff_job_type where stf_id="+user_id,ConnectUser.SYS);
         JobType jt_type=null;
         String redirect_path=null;
 
