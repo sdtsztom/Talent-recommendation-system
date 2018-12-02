@@ -12,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>需求详情填写</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/script/themes/default/default.css" />
     <link rel="stylesheet" href="/script/plugins/code/prettify.css" />

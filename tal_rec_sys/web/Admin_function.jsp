@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>功能选择</title>
+    <title>ADMIN 功能页面</title>
     <%
         LoginUser user=(LoginUser)session.getAttribute("user");
         if(user==null){

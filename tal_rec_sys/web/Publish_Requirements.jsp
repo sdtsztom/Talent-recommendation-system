@@ -14,10 +14,13 @@
 <html>
 
 <head>
-    <title>$Title$</title>
+    <title>岗位信息选择</title>
+    <style>
+        @import "css/table.css";
+    </style>
 </head>
 <body>
-<table>
+<table class="bordered">
     <tr>
         <td>职位名称</td>
         <td>职能名称</td>
