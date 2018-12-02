@@ -16,26 +16,22 @@ import java.io.IOException;
  *  1. 应该还要对权限授予表中的项目做出反应
  */
 
-@WebFilter(filterName = "SingleRecManagementFilter")
-public class SingleRecManagementFilter implements Filter {
+@WebFilter(filterName = "SRMFilter")
+public class SRMFilter implements Filter {
     public void destroy() {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        //验证登录身份,并且其身份必须为HR
+
         HttpSession session=request.getSession();
         LoginUser user=(LoginUser) session.getAttribute("user");
-        if(user==null||user.getJob_type()!=JobType.HR){
-            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
-            return;
-        }
 
         //判断是否有此rrid
         String rrid=request.getParameter("rrid");
-        String []result_set=CommonConnection.singleLineQuery("select rr_hr_id,rr_st,id from recruitment_requirements where rr_id="+
-                rrid+"'",2,ConnectUser.SYS);
+        String []result_set=CommonConnection.singleLineQuery("select rr_hr_id,rr_sta_id from recruitment_requirements where rr_id="+
+                rrid,2,ConnectUser.SYS);
         if(result_set==null){
             response.sendRedirect(eErrorPage.NOCORRESPONDINGRECORD.toString());
             return;
@@ -50,16 +46,18 @@ public class SingleRecManagementFilter implements Filter {
         }
 
         //判断请求的页面是否符合当前阶段，否则不予访问
-        String stage= CommonConnection.singleResultQuery("select rec_sta_desc from recommend_stage where rec_sta_id="
-                +"(select rr_sta_id from recruitment_requirements where rr_id='"+rrid+"'",ConnectUser.SYS);
-        RrStage enum_stage=null;
+        RrStage stage=null;
+        int stage_id_int=Integer.parseInt(stage_id);
         for(RrStage i:RrStage.values()){
-            if(stage.equals(i.toString()))enum_stage=i;
+            if(stage_id_int==i.toId())stage=i;
         }
-
-        String url=request.getRequestURI();
-        SRM_Page corr_page= SRM_Page.convert(enum_stage);
-        if(corr_page==null||!url.endsWith(corr_page.toString())){
+        if(stage==null){
+            response.sendRedirect(eErrorPage.NOTMATCHEDSTAGE.toString());
+            return;
+        }
+        String url=request.getRequestURI(); //会略去参数
+        SRM_Page corr_page= SRM_Page.convert(stage);
+        if(corr_page==null||!url.equals(corr_page.toString())){
             response.sendRedirect(eErrorPage.NOTMATCHEDSTAGE.toString());
             return;
         }

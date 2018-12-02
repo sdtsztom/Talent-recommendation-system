@@ -27,8 +27,7 @@
         return;
     }
     String rpid=request.getParameter("rpid");
-    CommonConnection.setConnectUser(ConnectUser.HR);
-    ResultSet rs= CommonConnection.makeQuery("select * from recommend_person_details where rp_id="+rpid);
+    ResultSet rs= CommonConnection.makeQuery("select * from recommend_person_details where rp_id="+rpid,ConnectUser.HR);
     TableBase table=null;
     try{
         rs.next();
