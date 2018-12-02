@@ -6,6 +6,7 @@
 package filter;
 
 import bean.LoginUser;
+import ienum.JobType;
 import ienum.eErrorPage;
 
 import javax.servlet.*;
@@ -27,7 +28,7 @@ public class HRAuthFilter implements Filter {
             response.sendRedirect("/Login/login.html");
             return;
         }
-        if(!stf.getJob_type().equals("HR")) {
+        if(stf.getJob_type()!= JobType.HR) {
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }

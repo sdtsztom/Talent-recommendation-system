@@ -6,6 +6,7 @@
 package filter;
 
 import bean.LoginUser;
+import ienum.JobType;
 import ienum.eErrorPage;
 
 import javax.servlet.*;
@@ -27,7 +28,7 @@ public class AdminAuthFilter implements Filter{
             response.sendRedirect("/Login/login.html");
             return;
         }
-        if(!stf.getJob_type().equals("Admin")) {
+        if(stf.getJob_type()!= JobType.ADMIN) {
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
