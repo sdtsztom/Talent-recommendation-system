@@ -19,12 +19,14 @@
 </head>
 <body>
 <p>登录人：<%=name%></p>
-<p>需求号：<%=rrid%></p>
+<p>需求号：<%=rrid%></p><a href="/Query_Recruit_HR.jsp">需求详情</a>
 <%
     Table_for_SRM_vOpen table=new Table_for_SRM_vOpen("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR);
     String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息"};
     out.print(table.genHTML(head));
 %>
-<div><button><a href="...(workflow)">开始筛选</a></button></div>
+<div><button><a href="...(workflow)">开始筛选</a></button>
+    <button><a href="...">更新需求</a></button>
+</div>
 </body>
 </html>
