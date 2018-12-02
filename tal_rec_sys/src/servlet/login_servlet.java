@@ -35,9 +35,9 @@ public class login_servlet extends HttpServlet {
             }
         }
         switch (jt_type){
-            case HR:redirect_path="HR_function.jsp";break;
-            case ADMIN:redirect_path="Admin_function.jsp";break;
-            case STUFF:redirect_path="Stuff_function.jsp";break;
+            case HR:redirect_path="HR.html";break;
+            case ADMIN:redirect_path="Admin.html";break;
+            case STUFF:redirect_path="Stuff.html";break;
         }
 
         LoginUser user = new LoginUser(user_id,username, jt_type);

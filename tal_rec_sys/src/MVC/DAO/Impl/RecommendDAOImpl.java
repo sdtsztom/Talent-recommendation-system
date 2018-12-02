@@ -13,6 +13,7 @@ import java.util.Map;
 public class RecommendDAOImpl implements RecommendDAO {
     public List<Map> getDescByStuffId(String stu_id) throws Exception {
 
+
         ResultSet rs = CommonConnection.makeQuery("select rec_id,\n"+
                 "rec_rr_id,\n"+
                 "stuff.stf_name,\n"+

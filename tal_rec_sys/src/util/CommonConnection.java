@@ -42,7 +42,6 @@ public class CommonConnection {
 
     //caller should rember to close the returned ReslutSet!
     public static ResultSet makeQuery(String query,ConnectUser connect_user){
-        if(!checkConnecting())return null;
         setConnectUser(connect_user);
         ResultSet rs=null;
         try{
@@ -54,13 +53,23 @@ public class CommonConnection {
         return rs;
     }
 
+    public static int Update(String query) {
+        if(!checkConnecting()) return 0;
+        int rs = 0;
+        try {
+            rs=sql.executeUpdate(query);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     public static ResultSet limitQuery(String query,int limit,int page){
         // TO-DO
         return null;
     }
 
     public static String singleResultQuery(String query,ConnectUser connect_user){
-        if(!checkConnecting())return null;
         setConnectUser(connect_user);
         ResultSet rs=null;
         String result=null;
@@ -77,7 +86,6 @@ public class CommonConnection {
     }
 
     public static String[] singleLineQuery(String query, int ncol,ConnectUser connect_user){
-        if(!checkConnecting())return null;
         setConnectUser(connect_user);
         ResultSet rs=null;
         String []result=null;
@@ -95,9 +103,8 @@ public class CommonConnection {
     }
 
     public static boolean existQuery(String query,ConnectUser connect_user){
-        boolean have_rs=false;
         setConnectUser(connect_user);
-        if(!checkConnecting())return have_rs;
+        boolean have_rs=false;
         try{
             ResultSet rs=sql.executeQuery(query);
             have_rs=rs.next();
@@ -110,9 +117,8 @@ public class CommonConnection {
     }
 
     public static <E extends Rs2List> ArrayList<E> listQuery (String query,E e,ConnectUser connect_user){
-        ArrayList<E>list=null;
-        if(!checkConnecting())return list;
         setConnectUser(connect_user);
+        ArrayList<E>list=null;
         list=new ArrayList<E>();
         try {
             ResultSet rs=sql.executeQuery(query);
@@ -130,7 +136,6 @@ public class CommonConnection {
     //********************************************************************** Update Methods*************************************************************
 
     public static int Update(String query,ConnectUser connect_user) {
-        if(!checkConnecting()) return 0;
         setConnectUser(connect_user);
         int rs = 0;
         try {
@@ -143,13 +148,16 @@ public class CommonConnection {
     }
 
     public static boolean checkConnecting(){
-        if(!connecting){
-            System.out.println("Error:connection havn't established yet!");
-            return false;
-        }else return true;
+        if(!connecting)return false;
+        else return true;
     }
 
-    public static void closeConnection(){
+    public static void closeConnection(ConnectUser connect_user){
+        if(connect_user!=ConnectUser.ADMIN&&connect_user!=ConnectUser.DEV){
+            System.out.println("Error:closeConnection is a critical operation.\n"+
+                    "It requires you have right of Admin or Develop.\n"+
+                    "If you don't know what the operation may cause,don't do it.\n");
+        }
         try {
             sql.close();
             conn.close();

@@ -101,7 +101,6 @@
         <url-pattern>/SRMPages/*</url-pattern>
     </filter-mapping>
 
-
     <!-- SpringConfig -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
