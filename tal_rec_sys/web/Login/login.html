@@ -9,20 +9,10 @@ To change this template use File | Settings | File Templates.
 <head>
 <title>Login</title>
 <meta charset="UTF-8">
-<style type="text/css">
-.divForm{
-position: absolute;/*绝对定位*/
-width: 300px;
-height: 200px;
-
-border: 1px solid red;
-text-align: center;/*(让div中的内容居中)*/
-top: 50%;
-left: 50%;
-margin-top: -200px;
-margin-left: -150px;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <script>
     onload=function(){
         var s=window.location.search;
@@ -35,14 +25,71 @@ margin-left: -150px;
 </script>
 </head>
 <body>
-<div id="login" class="divForm">
-    <form id="login_form" method="post" action="/login_servlet">
-        <br/><br/>
-                    用户名<input type="text" name="username" id="log_name"><br/><br/>
-                    密码&nbsp&nbsp&nbsp<input type="password" name="pwd" id="log_passwd"><br/><br/>
-                    <div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
-        <input type="submit" value="登录"><input type="reset" value="清除">
-    </form>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    企业人才推荐系统 <small>人才内推实现</small>
+                </h1>
+            </div>
+            <div class="jumbotron">
+                <h1>
+                    Hello, world!
+                </h1>
+                <p>
+                    测试版
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="#">了解更多</a>
+                </p>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-3 column">
+                </div>
+                <div class="col-md-6 column">
+                    <form class="form-horizontal" id="login_form" method="post" action="/login_servlet" role="form">
+                        <div class="form-group">
+                            <label for="log_name" class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username" id="log_name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="log_passwd" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" name="pwd" id="log_passwd"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" />记住用户</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">登陆</button>
+                            </div>
+                        </div>
+                        <div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
+                    </form>
+                </div>
+                <div class="col-md-3 column">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!--<div id="login" class="divForm">-->
+    <!--<form id="login_form" method="post" action="/login_servlet">-->
+        <!--<br/><br/>-->
+                    <!--用户名<input type="text" name="username" id="log_name"><br/><br/>-->
+                    <!--密码&nbsp&nbsp&nbsp<input type="password" name="pwd" id="log_passwd"><br/><br/>-->
+                    <!--<div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>-->
+        <!--<input type="submit" value="登录"><input type="reset" value="清除">-->
+    <!--</form>-->
+<!--</div>-->
 </body>
 </html>
