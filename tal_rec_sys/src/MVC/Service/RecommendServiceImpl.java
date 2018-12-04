@@ -3,6 +3,7 @@ package MVC.Service;
 import MVC.DAO.*;
 import MVC.DAO.Impl.IDToDescDAOImpl;
 import bean.LoginUser;
+import bean.Stuff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -125,5 +126,15 @@ public class RecommendServiceImpl implements RecommendService {
         session.setAttribute("user",new LoginUser("1","1","1","1"));
         LoginUser loginUser = (LoginUser)  session.getAttribute("user");
         return recruitmentRequirementsDAO.update(rr_id,rr_wp_id,rr_ed_id,rr_st_id,loginUser.getId(),rr_ri_id,rr_sta_id,rr_num,rr_el,rr_ept,rr_spreq);
+    }
+
+    @Override
+    public int StuffInsert(Stuff stuff) {
+        return stuffDAO.insert(stuff);
+    }
+
+    @Override
+    public int RecommendUpdate(String rec_id, String rec_recres_id) {
+        return recommendDAO.Update(rec_id,rec_recres_id);
     }
 }
