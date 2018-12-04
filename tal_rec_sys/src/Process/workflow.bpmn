@@ -6,7 +6,8 @@
     <userTask activiti:exclusive="true" id="UserTask1" isForCompensation="true" name="HR发布招聘需求"/>
 	<!-- activiti:candidateUsers="${myService.candidateUsers(execution)}"-->
     <sequenceFlow id="flow1" sourceRef="startprocess" targetRef="UserTask1"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask1" name="Create/Update Data" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask1" name="Create/Update Data" activiti:class="MVC.ActivitiService.serviceTask.serviceTask1"/>
+	<!-- activiti:expression="#{service1.service1(execution)}" -->
     <sequenceFlow id="_10" sourceRef="UserTask1" targetRef="ServiceTask1"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay1" name="判断紧急度"/>
     <sequenceFlow id="_19" sourceRef="ServiceTask1" targetRef="ExclusiveGateWay1"/>
@@ -14,12 +15,12 @@
     <sequenceFlow id="_23" sourceRef="ExclusiveGateWay1" targetRef="UserTask2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var1 == 0}]]></conditionExpression>
     </sequenceFlow>
-    <serviceTask activiti:exclusive="true" id="mailTask1" name="发送邮件" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="mailTask1" name="发送邮件" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_27" sourceRef="mailTask1" targetRef="UserTask2"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay2" name="业务选择"/>
     <sequenceFlow id="_29" sourceRef="UserTask2" targetRef="ExclusiveGateWay2"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask2" name="更新招聘"  activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask5" name="关闭需求"  activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask2" name="更新招聘"  activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask5" name="关闭需求"  activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_33" sourceRef="ExclusiveGateWay2" targetRef="ServiceTask2">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check1 == 3}]]></conditionExpression>
     </sequenceFlow>
@@ -28,9 +29,9 @@
     </sequenceFlow>
     <sequenceFlow id="_36" sourceRef="ServiceTask2" targetRef="UserTask1"/>
     <userTask activiti:exclusive="true" id="UserTask3" name="推荐人才"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask4" name="录入人才信息" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask4" name="录入人才信息" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_43" sourceRef="UserTask3" targetRef="ServiceTask4"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask3" name="判断重复" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask3" name="判断重复" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_45" sourceRef="ExclusiveGateWay2" targetRef="ServiceTask3">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check1 == 2}]]></conditionExpression>
     </sequenceFlow>
@@ -45,14 +46,14 @@
     <sequenceFlow id="_52" sourceRef="ExclusiveGateWay3" targetRef="UserTask3">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var2 == 0}]]></conditionExpression>
     </sequenceFlow>
-    <serviceTask activiti:exclusive="true" id="mailTask2" name="发送邮件"  activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="mailTask2" name="发送邮件"  activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_54" sourceRef="ServiceTask4" targetRef="mailTask2"/>
     <sequenceFlow id="_55" sourceRef="mailTask2" targetRef="UserTask2"/>
     <userTask activiti:exclusive="true" id="UserTask4" name="HR筛选"/>
     <sequenceFlow id="_57" sourceRef="ServiceTask5" targetRef="UserTask4"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask6" name="记录筛选完毕" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask6" name="记录筛选完毕" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_3" sourceRef="UserTask4" targetRef="ServiceTask6"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask7" name="积分奖励发放" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask7" name="积分奖励发放" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_5" sourceRef="ServiceTask6" targetRef="ServiceTask7"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay4" name="判断筛选完毕"/>
     <sequenceFlow id="_7" sourceRef="ServiceTask7" targetRef="ExclusiveGateWay4"/>
@@ -65,10 +66,10 @@
     </sequenceFlow>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay5" name="业务选择"/>
     <sequenceFlow id="_13" sourceRef="UserTask5" targetRef="ExclusiveGateWay5"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask8" name="放入人才库" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask9" name="安排面试" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask8" name="放入人才库" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask9" name="安排面试" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <userTask activiti:exclusive="true" id="UserTask6" name="作出其他更改"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask10" name="作出数据更改" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask10" name="作出数据更改" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_20" sourceRef="ExclusiveGateWay5" targetRef="ServiceTask8">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check2 == 1}]]></conditionExpression>
     </sequenceFlow>
@@ -90,8 +91,8 @@
     <sequenceFlow id="_15" sourceRef="ExclusiveGateWay6" targetRef="UserTask7">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var4 == 1}]]></conditionExpression>
     </sequenceFlow>
-    <serviceTask activiti:exclusive="true" id="ServiceTask11" name="记录面试结果" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask12" name="积分奖励发放" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask11" name="记录面试结果" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask12" name="积分奖励发放" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_58" sourceRef="UserTask7" targetRef="ServiceTask11"/>
     <sequenceFlow id="_59" sourceRef="ServiceTask11" targetRef="ServiceTask12"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay7" name="判断面试完毕"/>
@@ -105,9 +106,9 @@
     </sequenceFlow>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay8" name="业务选择"/>
     <sequenceFlow id="_66" sourceRef="UserTask8" targetRef="ExclusiveGateWay8"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask13" name="安排面试" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask13" name="安排面试" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <userTask activiti:exclusive="true" id="UserTask9" name="安排其他需求"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask14" name="放入人才库" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask14" name="放入人才库" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_70" sourceRef="ExclusiveGateWay8" targetRef="ServiceTask13">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check3 == 1}]]></conditionExpression>
     </sequenceFlow>
@@ -117,18 +118,18 @@
     <sequenceFlow id="_72" sourceRef="ExclusiveGateWay8" targetRef="ServiceTask14">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check3 == 3}]]></conditionExpression>
     </sequenceFlow>
-    <serviceTask activiti:exclusive="true" id="ServiceTask15" name="作出数据更改" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask15" name="作出数据更改" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_74" sourceRef="UserTask9" targetRef="ServiceTask15"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay9" name="判断安排完毕"/>
     <sequenceFlow id="_76" sourceRef="ServiceTask15" targetRef="ExclusiveGateWay9"/>
     <sequenceFlow id="_77" sourceRef="ServiceTask13" targetRef="ExclusiveGateWay9"/>
     <sequenceFlow id="_78" sourceRef="ServiceTask14" targetRef="ExclusiveGateWay9"/>
     <userTask activiti:exclusive="true" id="UserTask10" name="二轮面试"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask16" name="记录面试结果" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask16" name="记录面试结果" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_81" sourceRef="UserTask10" targetRef="ServiceTask16"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask17" name="积分奖励发放" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask17" name="积分奖励发放" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_83" sourceRef="ServiceTask16" targetRef="ServiceTask17"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask18" name="发送邮件" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask18" name="发送邮件" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_85" sourceRef="ServiceTask17" targetRef="ServiceTask18"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay10" name="判断面试完毕"/>
     <sequenceFlow id="_87" sourceRef="ServiceTask18" targetRef="ExclusiveGateWay10"/>
@@ -147,10 +148,10 @@
     </sequenceFlow>
     <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateWay11" name="判断任职"/>
     <sequenceFlow id="_94" sourceRef="UserTask11" targetRef="ExclusiveGateWay11"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask19" name="记录结果" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask20" name="注册" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
-    <serviceTask activiti:exclusive="true" id="mailTask3" name="发送邮件" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
-    <serviceTask activiti:exclusive="true" id="ServiceTask21" name="积分奖励" activiti:class="MVC.ActivitiService.Test.blankserviceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask19" name="记录结果" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask20" name="注册" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" id="mailTask3" name="发送邮件" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" id="ServiceTask21" name="积分奖励" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
     <sequenceFlow id="_99" sourceRef="ServiceTask19" targetRef="ServiceTask20"/>
     <sequenceFlow id="_100" sourceRef="ServiceTask20" targetRef="ServiceTask21"/>
     <sequenceFlow id="_101" sourceRef="ServiceTask21" targetRef="mailTask3"/>

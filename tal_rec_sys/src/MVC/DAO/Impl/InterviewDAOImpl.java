@@ -13,4 +13,10 @@ public class InterviewDAOImpl implements InterviewDAO {
         CommonConnection.setConnectUser(ConnectUser.DEV);
         return CommonConnection.Update("INSERT INTO interview VALUES("+ip_id+",7,"+rp_id+","+dealHR_id+","+rr_id+",1,'"+itv_time+"',"+exmer_id+",'"+itv_detail+"');");
     }
+
+    @Override
+    public int update(String id,String res_id, String rnd) {
+        CommonConnection.setConnectUser(ConnectUser.DEV);
+        return CommonConnection.Update("update interview set itv_res_id ="+res_id+",itv_rnd="+rnd+" where itv_id="+id);
+    }
 }

@@ -1,4 +1,4 @@
-package MVC.ActivitiService.Test.userTask;
+package MVC.ActivitiService.userTask;
 
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
@@ -26,6 +26,7 @@ public class userTask1 implements userTask{
         taskVariables.put("check1",vars.get("check1"));
         taskVariables.put("check2",vars.get("check2"));
         taskVariables.put("check3",vars.get("check3"));
+        taskVariables.put("name",vars.get("name"));
         taskService.complete(taskId,taskVariables);
         System.out.println("HR发布招聘需求");
     }

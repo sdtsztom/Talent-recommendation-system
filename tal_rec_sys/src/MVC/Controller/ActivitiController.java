@@ -1,17 +1,20 @@
 package MVC.Controller;
 
-import MVC.ActivitiService.Test.userTask.UserTaskFactory;
-import MVC.ActivitiService.Test.userTask.userTask;
+import MVC.ActivitiService.serviceTask.OfferConfirm.deal_points;
+import MVC.ActivitiService.userTask.UserTaskFactory;
+import MVC.ActivitiService.userTask.userTask;
+import MVC.Service.MailService;
+import MVC.Service.PointService;
 import bean.TaskRepresentation;
 import MVC.ActivitiService.ActivitiService;
+import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -40,42 +43,31 @@ public class ActivitiController {
         return "ok";
     }
 
-    @RequestMapping(value = "/get",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
+    //根据需求Id获取TaskId
+    @RequestMapping(value = "/getTaskId",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     public String get(String name) {
-        return myService.getTaskIdByCategory(name);
-    }
-
-    @RequestMapping(value = "/setName",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
-    public void setName(String name) {
-        myService.setName(name);
+        return myService.getTaskIdByName(name);
     }
 
     //获取所有任务
-    @RequestMapping(value="/tasks",method = GET)
+    @RequestMapping(value="/Tasks",method = GET)
     public List<TaskRepresentation> getTasks() {
         List<Task> tasks = myService.getTasks();
-        List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
+        List<TaskRepresentation> list = new ArrayList<TaskRepresentation>();
         for(Task task : tasks) {
-            dtos.add(new TaskRepresentation(task.getId(),task.getName(),task.getExecutionId()));
+            list.add(new TaskRepresentation(task.getId(),task.getName(),task.getExecutionId(),task.getCreateTime(),task.getProcessDefinitionId(),task.getProcessInstanceId(),task.getTaskDefinitionKey()));
         }
-        return dtos;
+        return list;
     }
 
-    /*//获取任务
-    @RequestMapping(value="/tasks/username/{username}",method = RequestMethod.GET)
-    public List<TaskRepresentation> getTasksByUsername(@PathVariable String username) {
-        List<Task> tasks = myService.getTasksByUser(username);
-        List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
-        for(Task task : tasks) {
-            dtos.add(new TaskRepresentation(task.getId(),task.getName()));
-        }
-        return dtos;
-    }
 
-    //领取任务
-    @RequestMapping(value = "/claim/{taskId}/{username}",method = RequestMethod.GET)
-    public String claimTask(@PathVariable String taskId,@PathVariable String username) {
-        myService.claimTask(taskId,username);
-        return taskId + "claim by" + username ;
-    }*/
+    @Autowired
+    MailService mailService;
+    //测试邮件
+    @RequestMapping(value = "/mail",method = GET)
+    public String mail() throws Exception{
+
+        mailService.sentMail("837070594@qq.com","mail3-subject","mail3-content");
+        return "ok";
+    }
 }

@@ -9,5 +9,9 @@ public interface RecommendDAO {
     List<Map> getValidDescByStuffId(String stu_id) throws Exception;
 
     int InsertRecommend(String rp_id,String stu_id,String rr_id,String hr_id,String recf_id);
+
+    String getStuffIdByRPId(String RP_id) throws Exception;
+
+    int Update(String rec_id,String rec_recres_id);
 }
 
