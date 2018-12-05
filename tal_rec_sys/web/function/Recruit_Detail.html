@@ -1,17 +1,3 @@
-<%@ page import="bean.LoginUser" %>
-<%@ page import="util.CommonConnection" %>
-<%@ page import="ienum.ConnectUser" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="ienum.eErrorPage" %>
-<%@ page import="ienum.JobType" %>
-<%@ page import="java.sql.SQLException" %><%--
-  Created by IntelliJ IDEA.
-  User: 10442
-  Date: 2018/11/4
-  Time: 21:27
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>需求详情</title>
@@ -22,6 +8,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
     <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/Reccruit_Detail.js"></script>
     <style>
         [v-cloak] {
@@ -30,11 +17,31 @@
     </style>
 </head>
 <body>
-<div class="container" id="div" v-cloak>
+<div class="container"  id="div" v-cloak>
     <div class="row clearfix">
         <div class="col-md-12 column">
+            <div class="btn-group">
+                <button class="btn btn-default">Action</button><button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu" id="jobswitch">
+                    <li v-if="job_type == 2">
+                        <a href="" >关闭需求</a>
+                    </li>
+                    <li v-if="job_type == 2">
+                        <a href="" >更新需求</a>
+                    </li>
+                    <li v-if="job_type == 2">
+                        <a href="" >处理需求</a>
+                    </li>
+                    <li v-if="job_type == 3">
+                        <a href="" >处理需求</a>
+                    </li>
+                    <li v-if="job_type == 1">
+                        <a href="" >提交推荐人</a>
+                    </li>
+                </ul>
+            </div>
             <br/><br/>
-            <table class="table table-bordered">
+            <table class="table table-bordered" >
                 <tr>
                     <td>需求id</td>
                     <td>{{detail.rr_id}}</td>
@@ -93,20 +100,7 @@
         </div>
     </div>
 </div>
-<%--<a href="" >关闭需求</a>--%>
-<%--<a href="" >更新需求</a>--%>
-<%--<a href="" >处理需求</a>--%>
-<%--<%--%>
-    <%--}else if(user.getJob_type().toString().equals("管理人员")){--%>
-<%--%>--%>
-<%--<a href="" >处理需求</a><br/>--%>
-<%--<%--%>
-    <%--}else if(user.getJob_type().toString().equals("开发人员")){--%>
-<%--%>--%>
-<%--<a href="" >提交推荐人</a><br/>--%>
-<%--<%--%>
-    <%--}--%>
-<%--%>--%>
+
 </body>
 </html>
 

@@ -35,7 +35,6 @@ public class PublishController {
         result.add(publishService.getWorkplaceName());
         result.add(publishService.getStufftypeName());
         result.add(publishService.getEmergencyName());
-        System.out.println(result);
         return new ResResult(200,"查询成功",result);
     }
 

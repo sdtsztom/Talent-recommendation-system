@@ -34,6 +34,7 @@ public class login_servlet extends HttpServlet {
                 break;
             }
         }
+
         switch (jt_type){
             case HR:redirect_path="HR.html";break;
             case ADMIN:redirect_path="Admin.html";break;

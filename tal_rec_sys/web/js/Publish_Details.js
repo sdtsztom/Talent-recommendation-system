@@ -1,4 +1,5 @@
 $(function () {
+    gettype()
     getmc()
 });
 
@@ -13,6 +14,19 @@ function getmc(){
                     emn:msg.data[2]
                 }
             })
+        });
+}
+
+function gettype() {
+    $.get("/login_type",
+        function(msg){
+            if( msg === ""){
+                alert("请先登录")
+                top.location.href = '/Login/login.html';
+            }else if( msg !== "人事人员") {
+                alert("您没有权限");
+                history.go(-1)
+            }
         });
 }
 

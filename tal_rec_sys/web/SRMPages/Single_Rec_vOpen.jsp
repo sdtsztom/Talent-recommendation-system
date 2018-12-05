@@ -19,7 +19,7 @@
 </head>
 <body>
 <p>登录人：<%=name%></p>
-<p>需求号：<%=rrid%></p><a href="/function/Query_Recruit_HR.jsp">需求详情</a>
+<p>需求号：<%=rrid%></p><a href="/function/Query_Recruit_HR.html">需求详情</a>
 <%
     Table_for_SRM_vOpen table=new Table_for_SRM_vOpen("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR);
     String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息"};

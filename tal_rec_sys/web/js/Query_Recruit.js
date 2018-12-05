@@ -1,4 +1,5 @@
 $(function () {
+    gettype()
     getmc()
 });
 
@@ -19,5 +20,15 @@ function getmc(){
                     }
                 }
             })
+        });
+}
+
+function gettype() {
+    $.get("/login_type",
+        function(msg){
+            if( msg === ""){
+                alert("请先登录")
+                top.location.href = '/Login/login.html';
+            }
         });
 }
