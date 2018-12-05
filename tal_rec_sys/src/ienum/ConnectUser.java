@@ -11,7 +11,7 @@ public enum ConnectUser {
             case SYS:{user="sys";break;}
             case ADMIN:{user= "admin";break;}
             case HR:{user= "hr";break;}
-            case STUFF:{user= "struff";break;}
+            case STUFF:{user= "stuff";break;}
         }
         return user;
     }

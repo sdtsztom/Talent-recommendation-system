@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet(name = "publish_requirement")
 public class publish_requirement extends HttpServlet {
@@ -22,7 +24,6 @@ public class publish_requirement extends HttpServlet {
         if(request.getParameter("rr_spreq")!=null){
             rr_spreq = request.getParameter("rr_spreq");
         }
-        
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -7,6 +7,7 @@ import util.CommonConnection;
 import util.JsonUtils;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +28,11 @@ public class StuffDAOImpl implements StuffDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<Map> getEmail() throws SQLException {
+        ResultSet rs = CommonConnection.makeQuery("select stf_name,stf_email from stuff where stf_id = 1",ConnectUser.SYS);
+        return JsonUtils.toMap(rs,"stf_name","stf_email");
     }
 }
