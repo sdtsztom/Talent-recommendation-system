@@ -1,0 +1,112 @@
+<%@ page import="bean.LoginUser" %>
+<%@ page import="util.CommonConnection" %>
+<%@ page import="ienum.ConnectUser" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="ienum.JobType" %>
+<%@ page import="java.sql.SQLException" %><%--
+  Created by IntelliJ IDEA.
+  User: 10442
+  Date: 2018/11/4
+  Time: 21:27
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>需求详情</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <script src="/js/Reccruit_Detail.js"></script>
+    <style>
+        [v-cloak] {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="div" v-cloak>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <br/><br/>
+            <table class="table table-bordered">
+                <tr>
+                    <td>需求id</td>
+                    <td>{{detail.rr_id}}</td>
+                    <td>招聘人数</td>
+                    <td>{{detail.rr_num}}</td>
+                    <td>紧急度</td>
+                    <td>{{detail.ed_name}}</td>
+                </tr>
+
+                <tr>
+                    <td>员工类型名</td>
+                    <td>{{detail.st_name}}</td>
+                    <td>类型描述</td>
+                    <td colspan="3"  >{{detail.st_desc}}</td>
+                </tr>
+
+                <tr>
+                    <td>工作地点</td>
+                    <td>{{detail.wp_name}}</td>
+                    <td>详细地点</td>
+                    <td colspan="3">{{detail.wp_detail}}</td>
+                </tr>
+
+                <tr>
+                    <td>职位名称</td>
+                    <td>{{detail.jb_name}}</td>
+                    <td rowspan="2">职位描述</td>
+                    <td rowspan="2" colspan="3">{{detail.jb_desc}}</td>
+                </tr>
+
+                <tr>
+                    <td>职位工资</td>
+                    <td>{{detail.jb_sal}}</td>
+                </tr>
+
+                <tr>
+                    <td>职能类别</td>
+                    <td>{{detail.jt_name}}</td>
+                    <td>类别描述</td>
+                    <td colspan="3">{{detail.jt_desc}}</td>
+                </tr>
+
+                <tr>
+                    <td>部门名称</td>
+                    <td colspan="2">{{detail.dp_name}}</td>
+                    <td>联系人</td>
+                    <td colspan="2">{{detail.dp_contact}}</td>
+                </tr>
+
+                <tr>
+                    <td >特殊要求</td>
+                    <td colspan="5">{{detail.rr_spreq}}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+<%--<a href="" >关闭需求</a>--%>
+<%--<a href="" >更新需求</a>--%>
+<%--<a href="" >处理需求</a>--%>
+<%--<%--%>
+    <%--}else if(user.getJob_type().toString().equals("管理人员")){--%>
+<%--%>--%>
+<%--<a href="" >处理需求</a><br/>--%>
+<%--<%--%>
+    <%--}else if(user.getJob_type().toString().equals("开发人员")){--%>
+<%--%>--%>
+<%--<a href="" >提交推荐人</a><br/>--%>
+<%--<%--%>
+    <%--}--%>
+<%--%>--%>
+</body>
+</html>
+
