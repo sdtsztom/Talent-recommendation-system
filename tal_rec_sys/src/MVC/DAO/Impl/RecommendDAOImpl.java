@@ -53,4 +53,17 @@ public class RecommendDAOImpl implements RecommendDAO {
     public int InsertRecommend(String rp_id,String stu_id,String rr_id,String hr_id,String recf_id) {
         return CommonConnection.Update("INSERT INTO recommend VALUES ("+rp_id+","+stu_id+",6,2,"+rr_id+","+hr_id+","+recf_id+");",ConnectUser.DEV);
     }
+
+    @Override
+    public String getStuffIdByRPId(String RP_id)  throws Exception{
+        ResultSet rs = CommonConnection.makeQuery("select rec_recstu_id from recommend where rec_rp_id = " + RP_id + " ;",ConnectUser.DEV);
+        if(rs.first()) {
+            return rs.getString("rec_recstu_id");
+        } else return "null";
+    }
+
+    @Override
+    public int Update(String rec_id, String rec_recres_id) {
+        return CommonConnection.Update("update recommend set rec_recres_id="+rec_recres_id+" where rec_id="+rec_id+";",ConnectUser.DEV);
+    }
 }

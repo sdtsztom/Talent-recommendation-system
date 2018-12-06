@@ -2,6 +2,7 @@ package MVC.ActivitiService;
 
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
@@ -25,16 +26,36 @@ public class ActivitiService {
     private void ProcessBuild() {
         repositoryService
                 .createDeployment()//创建部署对象
-                .name("Process")//声明流程的名称
-                .category("")//修改category
-                .addClasspathResource("Process/Process.bpmn").addClasspathResource("Process/Process.png").deploy();
+                .name("workflow")//声明流程的名称
+                .category("workflow")//修改category
+                .addClasspathResource("Process/workflow.bpmn").addClasspathResource("Process/workflow.png").deploy();
+    }
+
+    //根据Execution的NAME获取task的id
+    public String getTaskIdByName(String name) {
+        List<Execution> list = runtimeService.createExecutionQuery().list();
+        List<Task> tasks = taskService.createTaskQuery().list();
+        for(Execution e : list)
+            if(e.getName().equals(name))
+                for(Task t : tasks)
+                    if (t.getExecutionId().equals(e.getId()))
+                        return t.getId();
+        return "null";
     }
 
     //开始流程
     public ProcessInstance startProcess() {
-        if(repositoryService.createDeploymentQuery().count()==0) ProcessBuild();
+        if(repositoryService.createDeploymentQuery().count()==0)
+        ProcessBuild();
         Map<String,Object> variables = new HashMap<String,Object>();
-        return runtimeService.startProcessInstanceByKey("Process",variables);
+        ProcessInstance pi = runtimeService.startProcessInstanceByKey("workflow",variables);
+        return pi;
+    }
+
+    //删除流程
+    public void deleteProcess(String name1,String name2) {
+        repositoryService.deleteDeployment(name1);
+        runtimeService.deleteProcessInstance(name2,"");
     }
 
     //获得任务列表
@@ -42,23 +63,4 @@ public class ActivitiService {
         return taskService.createTaskQuery().list();
     }
 
-    //处理任务1
-    public void userTask1(String taskId,String var1,String var2) {
-        Map<String,Object> taskVariables = new HashMap<String, Object>();
-        taskVariables.put("var1",var1);
-        taskVariables.put("var2",var2);
-        taskService.complete(taskId,taskVariables);
-    }
-
 }
-
-
-/*    //根据人物查询任务
-    public List<Task> getTasksByUser(String username) {
-        return taskService.createTaskQuery().taskCandidateUser(username).list();
-    }
-
-    //领取任务
-    public void claimTask(String taskId,String username) {
-        taskService.claim(taskId,username);
-    }*/
