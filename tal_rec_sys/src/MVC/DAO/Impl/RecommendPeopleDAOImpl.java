@@ -30,9 +30,11 @@ public class RecommendPeopleDAOImpl implements RecommendPeopleDAO {
         return JsonUtils.toMap(rs,"rp_id","deg_name","uni_name","rp_name","rp_sex","rp_age","rp_tel_num","rp_email","rp_stu","rp_grt","rp_maj","rp_abi","rp_res_path","rp_vali","jb_name");
     }
 
+
     @Override
     public int Insert(String name,String age,String tel,String email,String grt,String major,String abi,String path,String sex,String stu,String deg_id,String uni_id,String jb_id) {
         /* 待完善:检验重复插入 */
         return CommonConnection.Update("INSERT INTO recommend_people VALUES ("+deg_id+","+uni_id+",'"+name+"','"+sex+"',"+age+",'"+tel+"','"+email+"','"+stu+"','"+grt+"','"+major+"','"+abi+"','"+path+"','"+'是'+"',"+jb_id+");",ConnectUser.DEV);
     }
+
 }

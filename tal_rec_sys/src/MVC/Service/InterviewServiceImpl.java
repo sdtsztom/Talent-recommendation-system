@@ -44,4 +44,10 @@ public class InterviewServiceImpl implements InterviewService {
         list.add(recruitmentRequirementsDAO.getAll());
         return list;
     }
+
+    @Override
+    public int Update(String id, String rnd, String res) {
+        return interviewDAO.update(id,res,rnd);
+    }
 }
+
