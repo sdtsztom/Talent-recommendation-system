@@ -24,14 +24,14 @@ function getmc(){
                         var path
                         switch (parseInt(details.rr_sta_id)) {
                             case 1: alert("错误！ 已关闭"); return;
-                            case 2: path = "/SRMPages/Single_Rec_vOpen.jsp?rr_id=" + details.rr_id; break;
-                            case 4: path = "/SRMPages/Single_Rec_vSift.jsp?rr_id=" + details.rr_id; break;
-                            case 5: path = "/SRMPages/Single_Rec_vSift_Arr.jsp?rr_id=" + details.rr_id; break;
-                            case 6: path = "/SRMPages/Single_Rec_vIntv1.jsp?rr_id=" + details.rr_id; break;
-                            case 7: path = "/SRMPages/Single_Rec_vIntv1_Arr.jsp?rr_id=" + details.rr_id;break;
-                            case 8: path = "/SRMPages/Single_Rec_vIntv2.jsp?rr_id=" + details.rr_id;break;
-                            case 9: path = "/SRMPages/Single_Rec_vOC.jsp?rr_id=" + details.rr_id;break;
-                            case 10: path = "/SRMPages/Single_Rec_vTW.jsp?rr_id=" + details.rr_id;break;
+                            case 2: path = "/SRMPages/Single_Rec_vOpen.jsp?rrid=" + details.rr_id; break;
+                            case 4: path = "/SRMPages/Single_Rec_vSift.jsp?rrid=" + details.rr_id; break;
+                            case 5: path = "/SRMPages/Single_Rec_vSift_Arr.jsp?rrid=" + details.rr_id; break;
+                            case 6: path = "/SRMPages/Single_Rec_vIntv1.jsp?rrid=" + details.rr_id; break;
+                            case 7: path = "/SRMPages/Single_Rec_vIntv1_Arr.jsp?rrid=" + details.rr_id;break;
+                            case 8: path = "/SRMPages/Single_Rec_vIntv2.jsp?rrid=" + details.rr_id;break;
+                            case 9: path = "/SRMPages/Single_Rec_vOC.jsp?rrid=" + details.rr_id;break;
+                            case 10: path = "/SRMPages/Single_Rec_vTW.jsp?rrid=" + details.rr_id;break;
                         }
                         window.location.href = path
                     }
