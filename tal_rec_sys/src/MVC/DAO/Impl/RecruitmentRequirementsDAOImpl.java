@@ -67,6 +67,6 @@ public class RecruitmentRequirementsDAOImpl implements RecruitmentRequirementsDA
     @Override
     public int insert(int rr_wp_id, int rr_ed_id, int rr_st_id, int rr_hr_id, int rr_ri_id,int rr_num, String rr_el, int rr_ept, String rr_spreq){
         return CommonConnection.Update("insert into recruitment_requirements values(" + rr_wp_id+ "," + rr_ed_id + "," + rr_st_id + "," + rr_hr_id + "," +
-                rr_ri_id + "2," + rr_num + "," + rr_el +",'" + rr_ept + "'," + rr_spreq + ")");
+                rr_ri_id + ",2," + rr_num + ",'" + rr_el +"'," + rr_ept + ",'" + rr_spreq + "')");
     }
 }
