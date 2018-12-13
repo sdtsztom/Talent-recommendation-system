@@ -21,7 +21,7 @@ public class Table_for_SRM_vSift extends TableBase {
         if(col<ncols-2)return _getItem(row, col);
         else if (col==ncols-2)return "<button><a href=\"/recommend_person_details.jsp?rpid="+_getItem(row,1)+"\">查看详细信息</a></button>";
         else if(col==ncols-1){
-            String name="result-"+_getItem(row,0);
+            String name="res_"+_getItem(row,0);
             return "<input type=\"radio\" name=\""+name+"\" value=\"pass\">通过"+
                     "<input type=\"radio\" name=\""+name+"\" value=\"fail\">不通过";
         }

@@ -22,8 +22,8 @@
 <body>
 <form action="" method="post">
     <%
-        Table_for_SRM_vSift_Arr table=new Table_for_SRM_vSift_Arr("select rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR);
-        String []head={"被推荐人id","被推荐人","推荐人","推荐来源","详细信息","安排选项","面试/需求号"};
+        Table_for_SRM_vSift_Arr table=new Table_for_SRM_vSift_Arr("select rec_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR);
+        String []head={"推荐id","被推荐人","推荐人","推荐来源","详细信息","安排选项","面试/需求号"};
         out.print(table.genHTML(head));
     %>
 
