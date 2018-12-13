@@ -12,11 +12,8 @@ public class Tsk_sift {
 
     //**************************************API Function***********************************************
 
-    public static void record_res(ArrayList<Arrangement> arrangements){
-        Arrangement a=null;
-        Iterator<Arrangement> iterator=arrangements.iterator();
-        while(iterator.hasNext()){
-            a=iterator.next();
+    public static void record_res(Arrangement[] arrangements){
+        for(Arrangement a:arrangements){
             int rec_id=a.getRec_id();
             switch (a.getResult()){
                 case TALENTS:{talents(rec_id);break;}
@@ -25,11 +22,8 @@ public class Tsk_sift {
         }
     }
 
-    public static void deal_points(ArrayList<Arrangement> arrangements){
-        Arrangement a=null;
-        Iterator<Arrangement> iterator=arrangements.iterator();
-        while(iterator.hasNext()){
-            a=iterator.next();
+    public static void deal_points(Arrangement[] arrangements){
+        for(Arrangement a:arrangements){
             int rec_id=a.getRec_id();
             if(a.getResult()==Arr_result.PASS){
                 String stf_id= CommonConnection.singleResultQuery("select rec_recstu_id from recommend where rec_id="+rec_id,ConnectUser.SYS);

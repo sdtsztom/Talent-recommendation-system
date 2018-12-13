@@ -10,11 +10,8 @@ import java.util.Iterator;
 public class Tsk_sift_arr {
 
     //**************************************API Function***********************************************
-    public static void record_res(ArrayList<Arrangement> arrangements){
-        Arrangement a=null;
-        Iterator<Arrangement> iterator=arrangements.iterator();
-        while(iterator.hasNext()){
-            a=iterator.next();
+    public static void record_res(Arrangement[] arrangements){
+        for(Arrangement a:arrangements){
             int rec_id=a.getRec_id();
             switch (a.getResult()){
                 case INTERVIEW:{interview(rec_id); break;}
