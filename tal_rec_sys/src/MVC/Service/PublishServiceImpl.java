@@ -71,12 +71,12 @@ public class PublishServiceImpl implements PublishService {
         if(result == 1){
             List<Map> all = stuffDAO.getEmail();
             Email em = new Email();
-            em.changeSubject("有新需求发布，请及时查看！");
+            em.setSubject("有新需求发布，请及时查看！");
             for(Map email: all){
                 String name = email.get("stf_name").toString();
                 String Email = email.get("stf_email").toString();
-                em.changeRecipientAddress(Email);
-                em.changeContent("亲爱的员工 " + name +" :您好\r\n有一个新需求发布，请及时查看！");
+                em.setAddr_to(Email);
+                em.setContent("亲爱的员工 " + name +" :您好\r\n有一个新需求发布，请及时查看！");
             }
 
             return "redirect: /HR.html";

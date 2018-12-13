@@ -6,9 +6,9 @@ public class Email_Example {
     public static void main(String []args) {
 
         Email email = new Email();
-        email.changeRecipientAddress("1044203335@qq.com");//收件人
-        email.changeSubject("积分赛开跑啦");//标题
-        email.changeContent("积分活动开跑啦,只需存款100,无须流水直接提活动9/3～12/17止 , 积分可直接换现金.");//内容
+        email.setAddr_to("1044203335@qq.com");//收件人
+        email.setSubject("积分赛开跑啦");//标题
+        email.setContent("积分活动开跑啦,只需存款100,无须流水直接提活动9/3～12/17止 , 积分可直接换现金.");//内容
         try{
             email.SendEmail();
         }catch (Exception e){
