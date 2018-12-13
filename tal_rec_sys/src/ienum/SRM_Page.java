@@ -12,7 +12,7 @@ public enum SRM_Page {
             case W_ARR_S:page_name="/SRMPages/Single_Rec_vSift_Arr.jsp";break;
             case W_I1:page_name="/SRMPages/Single_Rec_vIntv1.jsp";break;
             case W_I2:page_name="/SRMPages/Single_Rec_vIntv2.jsp";break;
-            case W_OC:page_name="/SRMPages/Single_Rec_vOC.jsp";break;
+            case W_OC:page_name="/SRMPages/Single_Rec_vOfferConfirm.jsp";break;
             //case W_TW:page_name="/SRMPages/Single_Rec_vTW.jsp";break;
         }
         return page_name;
