@@ -22,8 +22,7 @@
             return;
         }
         String rec_id =user.getId()+"";
-        CommonConnection.setConnectUser(ConnectUser.DEV);
-        String []rs=CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ rec_id,2);
+        String []rs=CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ rec_id,2,ConnectUser.STUFF);
         String name=rs[0];
         int points=Integer.parseInt(rs[1]);
     %>
