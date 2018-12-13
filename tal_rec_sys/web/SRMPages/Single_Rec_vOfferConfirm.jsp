@@ -24,7 +24,7 @@
 <body>
 <form action="" method="post">
     <%
-        TableBase table=new TableBase ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc,rec_recsta from SRM_OC where rec_rr_id="+rrid, ConnectUser.HR);
+        TableBase table=new TableBase ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc,rec_sta from SRM_OC where rec_rr_id="+rrid, ConnectUser.HR);
         String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","状态","详细信息"};
         out.print(table.genHTML(head));
     %>
