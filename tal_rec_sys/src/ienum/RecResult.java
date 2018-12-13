@@ -2,7 +2,7 @@ package ienum;
 
 // 用于代表追踪的最终的安排结果
 
-public enum RResult{
+public enum RecResult {
     TALENTS,OTHERNEED,NOOFFER,REFUSE,TAKE,NONE,OVERTIME;
 
     @Override

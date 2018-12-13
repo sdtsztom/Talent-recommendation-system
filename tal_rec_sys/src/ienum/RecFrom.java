@@ -1,6 +1,6 @@
 package ienum;
 
-public enum RFrom{
+public enum RecFrom {
     FROM_STU,AFT_SIFT,AFT_I1;
 
     @Override

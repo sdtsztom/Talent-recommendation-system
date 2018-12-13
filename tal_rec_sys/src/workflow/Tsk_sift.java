@@ -40,7 +40,7 @@ public class Tsk_sift {
     }
 
     public static boolean finish(int rrid){
-        boolean unfinish_person=CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+RStage.W_SIFT.toId(),ConnectUser.SYS);
+        boolean unfinish_person=CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_SIFT.toId(),ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
             CommonConnection.Update("update recruitment_requirements set rr_sta_id="+RrStage.W_ARR_S+" where rr_id"+rrid,ConnectUser.SYS);
@@ -56,12 +56,12 @@ public class Tsk_sift {
         // 将被推荐人添加到人才库表
         CommonConnection.Update("insert into talents values("+values[0]+","+values[1]+","+ TalentsFrom.BF_SIFT.toId(),ConnectUser.SYS);
         // 更新阶段或(与)结果
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RStage.FINISH.toId()+
-                ",rec_recres_id="+ RResult.TALENTS.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
+        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
+                ",rec_recres_id="+ RecResult.TALENTS.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
 
     private static void pass(int rec_id){
         // 更新阶段或(与)结果
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RStage.W_ARR_S.toId()+ " where rec_id="+rec_id,ConnectUser.SYS);
+        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.W_ARR_S.toId()+ " where rec_id="+rec_id,ConnectUser.SYS);
     }
 }

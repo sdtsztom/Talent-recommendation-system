@@ -4,7 +4,7 @@ import bean.ConfirmUser;
 import util.CommonConnection;
 import ienum.ConnectUser;
 import util.MD5;
-import ienum.RStage;
+import ienum.RecStage;
 import ienum.eErrorPage;
 
 import javax.servlet.*;
@@ -49,7 +49,7 @@ public class ConfirmOfferFilter implements Filter {
             return;
         }
         // 验证是否有其对应推荐是否是等待入职状态(可能由于时间过期等原因，将推荐关闭)
-        boolean exist=CommonConnection.existQuery("select rec_id where rec_rp_id='"+id+"' and rec_recsta_id="+ RStage.W_OC.toId(),ConnectUser.SYS);
+        boolean exist=CommonConnection.existQuery("select rec_id where rec_rp_id='"+id+"' and rec_recsta_id="+ RecStage.W_OC.toId(),ConnectUser.SYS);
         if(!exist){
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;

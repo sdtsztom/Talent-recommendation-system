@@ -1,7 +1,7 @@
 package ienum;
 
 // 对应的是recommend stage
-public enum RStage{
+public enum RecStage {
     FINISH,W_SIFT,W_I1,W_I2,W_OC,W_TW,W_ARR_S,W_ARR_I1;
 
     @Override

@@ -44,7 +44,7 @@ public class Tsk_Itv1 {
     }
 
     public static boolean finish(int rrid){
-        boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RStage.W_I1.toId(), ConnectUser.SYS);
+        boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_I1.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
             CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_I2+" where rr_id"+rrid,ConnectUser.SYS);
@@ -54,7 +54,7 @@ public class Tsk_Itv1 {
     //**************************************API Function***********************************************
     public static void interview(int rec_id){
         // 更新阶段或(与)结果
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RStage.W_I2.toId()+" where rec_id="+rec_id, ConnectUser.SYS);
+        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.W_I2.toId()+" where rec_id="+rec_id, ConnectUser.SYS);
     }
     public static void talents(int rec_id){
         String []values= CommonConnection.singleLineQuery(
@@ -62,8 +62,8 @@ public class Tsk_Itv1 {
         // 将被推荐人添加到人才库表
         CommonConnection.Update("insert into talents values("+values[0]+","+values[1]+","+ TalentsFrom.AFT_I1.toId(),ConnectUser.SYS);
         // 更新阶段或(与)结果
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RStage.FINISH.toId()+
-                ",rec_recres_id="+ RResult.TALENTS.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
+        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
+                ",rec_recres_id="+ RecResult.TALENTS.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
     public static void otherneed(Arrangement a){
         int rec_id=a.getRec_id();
@@ -73,9 +73,9 @@ public class Tsk_Itv1 {
         String new_HR_id=CommonConnection.singleResultQuery("select rr_hr_id from recruitment_requirements where rr_id="+rr_id_of_otherNeed,ConnectUser.SYS);
         //推荐到其它需求
         CommonConnection.Update("insert into recommend values("+rr_id_of_otherNeed+","+values[1]+","+values[0]+","+
-                RFrom.AFT_I1.toId()+","+RrStage.OPEN.toId()+","+new_HR_id+","+RResult.NONE.toId()+")",ConnectUser.SYS);
+                RecFrom.AFT_I1.toId()+","+RrStage.OPEN.toId()+","+new_HR_id+","+ RecResult.NONE.toId()+")",ConnectUser.SYS);
         // 更新阶段或(与)结果
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RStage.FINISH.toId()+
-                ",rec_recres_id="+ RResult.OTHERNEED.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
+        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
+                ",rec_recres_id="+ RecResult.OTHERNEED.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
 }
