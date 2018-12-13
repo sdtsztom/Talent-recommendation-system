@@ -1,11 +1,49 @@
 use tal_rec_sys
 GO
 
--- veiw SRM_OPEN
-create view SRM_OPEN as select rec_id,rec_rp_id,rec_rr_id,stf_name as rec_stf_name,rp_name as rec_rp_name,recf_desc as rec_from_desc 
+-- veiw SRM_OPEN and SRM_SIFT
+create view SRM_OPEN_SIFT as select rec_id,rec_rp_id,rec_rr_id,stf_name as rec_stf_name,rp_name as rec_rp_name,recf_desc as rec_from_desc ,rec_sta_desc as rec_sta
 from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
 inner join recommend_people on recommend.rec_rp_id =recommend_people.rp_id
 inner join recommend_from on recommend.rec_from_id=recommend_from.recf_id
+inner join recommend_stage on recommend.rec_recsta_id=recommend_stage.rec_sta_id
+where rec_recsta_id=(select rec_sta_id from recommend_stage where rec_sta_desc='等待筛选')
+GO
+
+-- view SRM_SIFT_ARR
+create view SRM_SIFT_ARR as select rec_id,rec_rp_id,rec_rr_id,stf_name as rec_stf_name,rp_name as rec_rp_name,recf_desc as rec_from_desc ,rec_sta_desc as rec_sta
+from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
+inner join recommend_people on recommend.rec_rp_id =recommend_people.rp_id
+inner join recommend_from on recommend.rec_from_id=recommend_from.recf_id
+inner join recommend_stage on recommend.rec_recsta_id=recommend_stage.rec_sta_id
+where rec_recsta_id=(select rec_sta_id from recommend_stage where rec_sta_desc='等待安排(筛选后)')
+GO
+
+-- view SRM_INTV1
+create view SRM_INTV1 as select rec_id,rec_rp_id,rec_rr_id,stf_name as rec_stf_name,rp_name as rec_rp_name,recf_desc as rec_from_desc ,rec_sta_desc as rec_sta
+from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
+inner join recommend_people on recommend.rec_rp_id =recommend_people.rp_id
+inner join recommend_from on recommend.rec_from_id=recommend_from.recf_id
+inner join recommend_stage on recommend.rec_recsta_id=recommend_stage.rec_sta_id
+where rec_recsta_id=(select rec_sta_id from recommend_stage where rec_sta_desc='等待初轮面试')
+GO
+
+-- view SRM_INTV2
+create view SRM_INTV2 as select rec_id,rec_rp_id,rec_rr_id,stf_name as rec_stf_name,rp_name as rec_rp_name,recf_desc as rec_from_desc ,rec_sta_desc as rec_sta
+from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
+inner join recommend_people on recommend.rec_rp_id =recommend_people.rp_id
+inner join recommend_from on recommend.rec_from_id=recommend_from.recf_id
+inner join recommend_stage on recommend.rec_recsta_id=recommend_stage.rec_sta_id
+where rec_recsta_id=(select rec_sta_id from recommend_stage where rec_sta_desc='等待最终面试')
+GO
+
+-- view SRM_OC
+create view SRM_OC as select rec_id,rec_rp_id,rec_rr_id,stf_name as rec_stf_name,rp_name as rec_rp_name,recf_desc as rec_from_desc ,rec_sta_desc as rec_sta
+from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
+inner join recommend_people on recommend.rec_rp_id =recommend_people.rp_id
+inner join recommend_from on recommend.rec_from_id=recommend_from.recf_id
+inner join recommend_stage on recommend.rec_recsta_id=recommend_stage.rec_sta_id
+where rec_recsta_id in (select rec_sta_id from recommend_stage where rec_sta_desc='等待offer确认' or rec_sta_desc='等待入职')
 GO
 
 -- view stuff_job_type
