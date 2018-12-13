@@ -43,7 +43,7 @@ public class Tsk_sift {
         boolean unfinish_person=CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+RStage.W_SIFT.toId(),ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
-            CommonConnection.Update("update recruitment set rr_sta_id="+RrStage.W_ARR_S+" where rr_id"+rrid,ConnectUser.SYS);
+            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+RrStage.W_ARR_S+" where rr_id"+rrid,ConnectUser.SYS);
             return true;
         }
     }

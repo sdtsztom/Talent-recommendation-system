@@ -13,7 +13,7 @@ public class Table_for_SRM_vSift extends TableBase {
 
     @Override
     public void makeShape(int data_nrow, int data_ncol) {
-        super.makeShape(data_nrow, data_ncol+2);    //要增加一个查看简历的列和筛选的列
+        super.makeShape(data_nrow, data_ncol+2);
     }
 
     @Override
