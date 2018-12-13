@@ -18,8 +18,8 @@ import os.path as path
 
 # for test
 pass_num=2
-tablename='points_change_rule'
-class_name='PointsChangeRule'
+tablename='recommend_from'
+class_name='RecommendFrom'
 
 # config
 package_name='ienum'

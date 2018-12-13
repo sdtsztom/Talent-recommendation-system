@@ -37,17 +37,17 @@
         response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
         return;
     }
-    String id=user.getId();
+    String rec_id=user.getId();
     String name=user.getName();
     String sex=user.getSex();%>
 
 <%=name+sex+"，请完善您的注册信息："%>
 <form action="/exec_register" method="post">
-    <input type="hidden" name="id" value="<%=id%>">
+    <input type="hidden" name="rec_id" value="<%=rec_id%>">
     <input type="hidden" name="name" value="<%=name%>">
     <input type="hidden" name="sex" value="<%=sex%>">
     <input type="text" name="username" onblur="check_dup(this)"><br/>
-    <div id="warning" style="display:none;color:red">此用户名已被注册过，请重新选择用户名!</div>
+    <div rec_id="warning" style="display:none;color:red">此用户名已被注册过，请重新选择用户名!</div>
     <input type="password" name="pwd">
     <input type="submit" value="提交">
 </form>

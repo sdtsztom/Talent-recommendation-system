@@ -23,7 +23,7 @@ public class Table_for_SRM_vSift_Arr extends TableBase {
         else if(col==ncols-2)return "<input type=\"radio\" name=\"arr\" value=\"itv\">安排面试"+
                 "<input type=\"radio\" name=\"arr\" value=\"otherneed\">安排其它需求"+
                 "<input type=\"radio\" name=\"arr\" value=\"talents\">放入人才库";
-        else if(col==ncols-1)return "---";
+        else if(col==ncols-1)return "<input type=\"text\" name=\"id_otherNeed\">";
         else return null;
     }
 }

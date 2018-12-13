@@ -1,4 +1,5 @@
-<%--
+<%@ page import="bean.LoginUser" %>
+<%@ page import="ienum.RrStage" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
@@ -12,7 +13,7 @@
     String name=user.getUsername();
 %>
 <head>
-    <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_SIFT%>)</title>
+    <title>需求(rec_id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_I1%>)</title>
 </head>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>

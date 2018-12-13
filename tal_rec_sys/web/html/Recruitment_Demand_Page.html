@@ -10,7 +10,7 @@
     <script src="/js/Recruitment_Demand_Page.js"></script>
 </head>
 <body>
-<div class="row" id="div">
+<div class="row" rec_id="div">
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <table class="table">
@@ -29,7 +29,7 @@
                 <th>推荐人才</th>
             </tr>
             <tr v-for="rr in rrs">
-                <td>{{rr.rr_id}}</td>
+                <td>{{rr.rr_id_of_otherNeed}}</td>
                 <td>{{rr.wp_name}}</td>
                 <td>{{rr.ed_name}} : {{rr.ed_desc}}</td>
                 <td>{{rr.stf_name}}</td>

@@ -23,14 +23,14 @@
 <body>
 <%  //由于这个网站有过滤器的确保，因此不用检验session存不存在
     ConfirmUser user=(ConfirmUser)session.getAttribute("confirm_user");
-    String id=user.getId();
+    String rec_id=user.getId();
     String name=user.getName();
     String sex=user.getSex();
     %>
 <%=name+sex%>，恭喜您，您已被我公司提供了一份offer.请选择您是否接收我们的offer并按时履职。
 点击下方的接收按钮接收我们的offer并注册员工账号，点击决绝按钮拒绝我们的offer.
 <form action="Login/register.jsp" method="post" onsubmit="return choice_confirm()">
-    <input type="hidden" name="id" value="<%=id%>">
+    <input type="hidden" name="rec_id" value="<%=rec_id%>">
     <input type="hidden" name="name" value="<%=name%>">
     <input type="hidden" name="sex" value="<%=sex%>">
     <input type="submit"  value="接受">

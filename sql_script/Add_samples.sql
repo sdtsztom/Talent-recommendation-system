@@ -119,8 +119,12 @@ insert into recruitment_requirements values(1,2,1,2,1,2,1,'2019/1/1',0,'无')
 insert into recruitment_requirements values(1,3,1,2,1,2,1,'2018/11/10',0,'无')
 insert into recruitment_requirements values(1,3,1,2,1,2,1,'2019/1/20',0,'无')
 insert into recruitment_requirements values(1,1,1,2,1,2,1,'2019/1/20',0,'无')
+insert into recruitment_requirements values(1,2,1,2,1,4,1,'2019/1/1',0,'无')
 
 -- table recommend
 insert into recommend values(1,1,6,2,2,2,1)
 insert into recommend values(2,1,6,2,2,2,1)
 insert into recommend values(3,1,6,2,2,2,1)
+insert into recommend values(1,1,6,2,6,2,1)
+insert into recommend values(2,1,6,2,6,2,1)
+insert into recommend values(3,1,6,2,6,2,1)

@@ -53,17 +53,6 @@ public class CommonConnection {
         return rs;
     }
 
-    public static int Update(String query) {
-        if(!checkConnecting()) return 0;
-        int rs = 0;
-        try {
-            rs=sql.executeUpdate(query);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
     public static ResultSet limitQuery(String query,int limit,int page){
         // TO-DO
         return null;

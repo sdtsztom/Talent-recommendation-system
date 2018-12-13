@@ -1,4 +1,6 @@
-<%--
+<%@ page import="bean.LoginUser" %>
+<%@ page import="ienum.RrStage" %>
+<%@ page import="table.Table_for_SRM_vSift" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
@@ -12,7 +14,7 @@
     String name=user.getUsername();
 %>
 <head>
-    <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_SIFT%>)</title>
+    <title>需求(rec_id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_SIFT%>)</title>
 </head>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>

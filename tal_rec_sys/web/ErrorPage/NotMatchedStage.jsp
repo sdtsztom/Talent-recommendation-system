@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Not Matched Stage</title>
+    <title>Stage Not Match</title>
 </head>
 <body>
-Error:Not Matched Stage.
+Error:Stage not match.
 </body>
 </html>
