@@ -76,7 +76,6 @@ insert into recommend_stage values('等待最终面试')
 insert into recommend_stage values('等待offer确认')
 insert into recommend_stage values('等待入职')
 insert into recommend_stage values('等待安排(筛选后)')
-insert into recommend_stage values('等待安排(初轮面试后)')
 
 
 -- table recruitment_requirement_stage
@@ -86,7 +85,6 @@ insert into recruitment_requirements_stage values('暂时关闭')
 insert into recruitment_requirements_stage values('等待筛选')
 insert into recruitment_requirements_stage values('等待安排(筛选后)')
 insert into recruitment_requirements_stage values('等待初轮面试')
-insert into recruitment_requirements_stage values('等待安排(初轮面试后)')
 insert into recruitment_requirements_stage values('等待最终面试')
 insert into recruitment_requirements_stage values('等待offer确认')
 insert into recruitment_requirements_stage values('等待入职')

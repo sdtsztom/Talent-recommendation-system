@@ -15,7 +15,6 @@ public enum RStage{
             case W_OC:{stage="等待offer确认";break;}
             case W_TW:{stage="等待入职";break;}
             case W_ARR_S:{stage="等待安排(筛选后)";break;}
-            case W_ARR_I1:{stage="等待安排(初轮面试后)";break;}
         }
         return stage;
     }
@@ -30,7 +29,6 @@ public enum RStage{
             case W_OC:{id=5;break;}
             case W_TW:{id=6;break;}
             case W_ARR_S:{id=7;break;}
-            case W_ARR_I1:{id=8;break;}
         }
         return id;
     }
