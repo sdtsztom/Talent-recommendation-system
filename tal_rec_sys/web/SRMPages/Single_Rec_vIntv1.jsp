@@ -22,7 +22,7 @@
 <body>
 <form action="" method="post">
     <%
-        Table_for_SRM_vI1 table=new Table_for_SRM_vI1 ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN where rec_rr_id="+rrid, ConnectUser.HR,rrid);
+        Table_for_SRM_vI1 table=new Table_for_SRM_vI1 ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_INTV1 where rec_rr_id="+rrid, ConnectUser.HR,rrid);
         String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息","面试结果选项","需求号"};
         out.print(table.genHTML(head));
     %>
