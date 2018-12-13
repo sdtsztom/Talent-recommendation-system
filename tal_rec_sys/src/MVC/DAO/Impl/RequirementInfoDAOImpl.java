@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import util.CommonConnection;
 import util.JsonUtils;
 
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class RequirementInfoDAOImpl implements RequirementInfoDAO {
 
     @Override
     public List<Map> getAll() throws SQLException{
-        ResultSet rs = CommonConnection.makeQuery("select * from requirement_info_view", ConnectUser.HR);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select * from requirement_info_view", ConnectUser.HR);
         return JsonUtils.toMap(rs,"ri_id","jb_name","jt_name","jb_sal","dp_name");
     }
 

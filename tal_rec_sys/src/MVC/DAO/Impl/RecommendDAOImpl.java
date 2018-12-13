@@ -5,7 +5,7 @@ import ienum.ConnectUser;
 import org.springframework.stereotype.Repository;
 import util.CommonConnection;
 import util.JsonUtils;
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public class RecommendDAOImpl implements RecommendDAO {
     public List<Map> getDescByStuffId(String stu_id) throws Exception {
 
 
-        ResultSet rs = CommonConnection.makeQuery("select rec_id,\n"+
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rec_id,\n"+
                 "rec_rr_id,\n"+
                 "stuff.stf_name,\n"+
                 "recommend_people.rp_name,\n"+
@@ -32,7 +32,7 @@ public class RecommendDAOImpl implements RecommendDAO {
     }
 
     public List<Map> getValidDescByStuffId(String stu_id) throws Exception {
-        ResultSet rs = CommonConnection.makeQuery("select rec_id,\n"+
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rec_id,\n"+
                 "rec_rr_id,\n"+
                 "stuff.stf_name,\n"+
                 "recommend_people.rp_name,\n"+
@@ -56,7 +56,7 @@ public class RecommendDAOImpl implements RecommendDAO {
 
     @Override
     public String getStuffIdByRPId(String RP_id)  throws Exception{
-        ResultSet rs = CommonConnection.makeQuery("select rec_recstu_id from recommend where rec_rp_id = " + RP_id + " ;",ConnectUser.DEV);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rec_recstu_id from recommend where rec_rp_id = " + RP_id + " ;",ConnectUser.DEV);
         if(rs.first()) {
             return rs.getString("rec_recstu_id");
         } else return "null";

@@ -1,7 +1,7 @@
 package Interface;
 
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;
 
 public interface Rs2List {
-    Rs2List fromRs(ResultSet rs);
+    Rs2List fromRs(CachedRowSetImpl rs);
 }

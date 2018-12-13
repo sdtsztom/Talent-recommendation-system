@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import Interface.Rs2List;
+import com.sun.rowset.CachedRowSetImpl;
 import ienum.ConnectUser;
 
 /*
@@ -41,16 +42,20 @@ public class CommonConnection {
     //********************************************************************** Query Methods*************************************************************
 
     //caller should rember to close the returned ReslutSet!
-    public static ResultSet makeQuery(String query,ConnectUser connect_user){
+    public static CachedRowSetImpl makeQuery(String query,ConnectUser connect_user){
         setConnectUser(connect_user);
         ResultSet rs=null;
+        CachedRowSetImpl cached_rs=null;
         try{
+            cached_rs=new CachedRowSetImpl();
             rs=sql.executeQuery(query);
+            cached_rs.populate(rs);
+            rs.close();
         }catch(Exception e){
             System.out.println("the query caused error:"+query+"......");
             e.printStackTrace();
         }
-        return rs;
+        return cached_rs;
     }
 
     public static ResultSet limitQuery(String query,int limit,int page){
@@ -110,9 +115,12 @@ public class CommonConnection {
         ArrayList<E>list=null;
         list=new ArrayList<E>();
         try {
+            CachedRowSetImpl cached_rs=new CachedRowSetImpl();
             ResultSet rs=sql.executeQuery(query);
-            while(rs.next()){
-                list.add((E)e.fromRs(rs));
+            cached_rs.populate(rs);
+            rs.close();
+            while(cached_rs.next()){
+                list.add((E)e.fromRs(cached_rs));
             }
             rs.close();
         } catch (SQLException e1) {

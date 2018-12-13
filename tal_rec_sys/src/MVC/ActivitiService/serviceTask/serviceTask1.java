@@ -39,6 +39,7 @@ public class serviceTask1 implements JavaDelegate {
             if(rs.first()) {
                 ID_ = rs.getString("ID_");
             }
+            rs.close();
             query="update ACT_RU_EXECUTION set NAME_ = '"+name+"' where ID_ = "+ID_+";";
             int i = stat.executeUpdate(query);
             Conn.close();

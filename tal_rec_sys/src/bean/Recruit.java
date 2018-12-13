@@ -1,9 +1,9 @@
 package bean;
 
 import Interface.Rs2List;
+import com.sun.rowset.CachedRowSetImpl;
 import ienum.RrStage;
 
-import java.sql.ResultSet;
 import java.util.Date;
 
 public class Recruit implements Rs2List {
@@ -47,7 +47,7 @@ public class Recruit implements Rs2List {
         this.rrStage = rrStage_enum;
     }
 
-    public Recruit fromRs(ResultSet rs){
+    public Recruit fromRs(CachedRowSetImpl rs){
         Recruit r=new Recruit();
         try{
             r.rr_id=rs.getInt("rr_id");

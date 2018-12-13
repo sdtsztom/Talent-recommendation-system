@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import util.CommonConnection;
 import util.JsonUtils;
 
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class StuffDAOImpl implements StuffDAO {
 
     @Override
     public List<Map> getName() {
-        ResultSet rs = CommonConnection.makeQuery("select stf_id,stf_name from stuff;",ConnectUser.DEV);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select stf_id,stf_name from stuff;",ConnectUser.DEV);
         try{
             return JsonUtils.toMap(rs,"stf_id","stf_name");
         }catch (Exception e) {
@@ -33,13 +33,13 @@ public class StuffDAOImpl implements StuffDAO {
 
     @Override
     public List<Map> getEmail() throws SQLException {
-        ResultSet rs = CommonConnection.makeQuery("select stf_name,stf_email from stuff where stf_id = 1",ConnectUser.SYS);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select stf_name,stf_email from stuff where stf_id = 1",ConnectUser.SYS);
         return JsonUtils.toMap(rs,"stf_name","stf_email");
     }
 
     @Override
     public List<Map> getAll() {
-        ResultSet rs = CommonConnection.makeQuery("select stf_id,stf_job_id,stf_dp_id,stf_name,stf_age,stf_sex,stf_username,stf_pwd,stf_email,stf_pts,stf_tel from stuff;",ConnectUser.DEV);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select stf_id,stf_job_id,stf_dp_id,stf_name,stf_age,stf_sex,stf_username,stf_pwd,stf_email,stf_pts,stf_tel from stuff;",ConnectUser.DEV);
         try {
             return JsonUtils.toMap(rs,"stf_id","stf_job_id","stf_dp_id","stf_name","stf_age","stf_sex","stf_username","stf_pwd","stf_email","stf_pts","stf_tel");
         } catch (Exception e) {

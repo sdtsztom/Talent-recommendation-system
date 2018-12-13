@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import util.CommonConnection;
 import util.JsonUtils;
 
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;;
 import java.util.List;
 import java.util.Map;
 
@@ -15,26 +15,26 @@ public class RecruitmentRequirementsDAOImpl implements RecruitmentRequirementsDA
 
     @Override
     public List<Map> getAll() throws Exception{
-        ResultSet rs = CommonConnection.makeQuery("select rr_id,rr_wp_id,rr_ed_id,rr_st_id,rr_hr_id,rr_ri_id,rr_sta_id,rr_num,rr_el,rr_ept,rr_spreq from recruitment_requirements",ConnectUser.DEV);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rr_id,rr_wp_id,rr_ed_id,rr_st_id,rr_hr_id,rr_ri_id,rr_sta_id,rr_num,rr_el,rr_ept,rr_spreq from recruitment_requirements",ConnectUser.DEV);
         return JsonUtils.toMap(rs,"rr_id","rr_wp_id","rr_ed_id","rr_st_id","rr_hr_id","rr_ri_id","rr_sta_id","rr_num","rr_el","rr_ept","rr_spreq");
     }
 
     @Override
     public List<Map> getValid() throws Exception{
-        ResultSet rs = CommonConnection.makeQuery("select rr_id,rr_wp_id,rr_ed_id,rr_st_id,rr_hr_id,rr_ri_id,rr_sta_id,rr_num,rr_el,rr_ept,rr_spreq from recruitment_requirements where rr_sta_id != 1;",ConnectUser.DEV);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rr_id,rr_wp_id,rr_ed_id,rr_st_id,rr_hr_id,rr_ri_id,rr_sta_id,rr_num,rr_el,rr_ept,rr_spreq from recruitment_requirements where rr_sta_id != 1;",ConnectUser.DEV);
         return JsonUtils.toMap(rs,"rr_id","rr_wp_id","rr_ed_id","rr_st_id","rr_hr_id","rr_ri_id","rr_sta_id","rr_num","rr_el","rr_ept","rr_spreq");
     }
 
     @Override
     public List<Map> getHR(String rr_id) throws Exception{
-        ResultSet rs = CommonConnection.makeQuery("select rr_hr_id from recruitment_requirements where rr_id = "+rr_id+";",ConnectUser.DEV);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rr_hr_id from recruitment_requirements where rr_id = "+rr_id+";",ConnectUser.DEV);
         return JsonUtils.toMap(rs,"rr_hr_id");
 
     }
 
     @Override
     public List<Map> getValidDesc() throws Exception {
-        ResultSet rs = CommonConnection.makeQuery("select rr_id,\n" +
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rr_id,\n" +
                 "work_place.wp_name,\n" +
                 "emergency_degree.ed_name,emergency_degree.ed_desc,\n" +
                 "stuff_type.st_name,stuff_type.st_desc,\n" +

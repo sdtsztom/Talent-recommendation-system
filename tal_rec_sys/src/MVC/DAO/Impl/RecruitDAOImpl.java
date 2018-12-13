@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import util.CommonConnection;
 import util.JsonUtils;
 
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class RecruitDAOImpl implements RecruitDAO{
         if(order != null){
             sql += order;
         }
-        ResultSet rs = CommonConnection.makeQuery(sql,ConnectUser.HR);
+        CachedRowSetImpl rs = CommonConnection.makeQuery(sql,ConnectUser.HR);
         return JsonUtils.toMap(rs,"rr_id","jb_name","rr_num","wp_name","rr_el","rr_ed_id","ed_name","rr_sta_id","rrs_desc");
     }
 
@@ -34,13 +34,13 @@ public class RecruitDAOImpl implements RecruitDAO{
         if(order != null){
             sql+=order;
         }
-        ResultSet rs = CommonConnection.makeQuery(sql,connectUser);
+        CachedRowSetImpl rs = CommonConnection.makeQuery(sql,connectUser);
         return JsonUtils.toMap(rs,"rr_id","wp_name","rr_num","rr_el","ed_name");
     }
 
     @Override
     public List<Map> getDetails(String id,ConnectUser connectUser) throws SQLException{
-        ResultSet rs = CommonConnection.makeQuery("select * from requirement_details where rr_id = " + id,connectUser);
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select * from requirement_details where rr_id = " + id,connectUser);
         return JsonUtils.toMap(rs,"rr_id","rr_num","ed_name","st_name","st_desc","wp_name","wp_detail","jb_name",
                 "jb_desc","jb_sal","jt_name","jt_desc","dp_name","dp_contact","rr_spreq");
     }

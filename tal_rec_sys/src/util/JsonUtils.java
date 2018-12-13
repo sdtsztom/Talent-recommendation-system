@@ -3,7 +3,7 @@ package util;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import java.sql.ResultSet;
+import com.sun.rowset.CachedRowSetImpl;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -19,7 +19,7 @@ public class JsonUtils {
         return jsonArray.toString();
     }
 
-    public static List<Map> toMap(ResultSet rs, String... strings) throws SQLException {
+    public static List<Map> toMap(CachedRowSetImpl rs, String... strings) throws SQLException {
         Map<String,String> map = null;
         List<Map> list = new ArrayList<>();
         while(rs.next()) {
