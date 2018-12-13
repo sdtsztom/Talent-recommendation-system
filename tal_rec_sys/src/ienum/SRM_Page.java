@@ -13,7 +13,7 @@ public enum SRM_Page {
             case W_I1:page_name="/SRMPages/Single_Rec_vIntv1.jsp";break;
             case W_I2:page_name="/SRMPages/Single_Rec_vIntv2.jsp";break;
             case W_OC:page_name="/SRMPages/Single_Rec_vOC.jsp";break;
-            case W_TW:page_name="/SRMPages/Single_Rec_vTW.jsp";break;
+            //case W_TW:page_name="/SRMPages/Single_Rec_vTW.jsp";break;
         }
         return page_name;
     }
@@ -27,7 +27,7 @@ public enum SRM_Page {
             case W_I1:convertedPage=W_I1;break;
             case W_I2:convertedPage=W_I2;break;
             case W_OC:convertedPage=W_OC;break;
-            case W_TW:convertedPage=W_TW;break;
+            //case W_TW:convertedPage=W_TW;break;
         }
         return convertedPage;
     }
