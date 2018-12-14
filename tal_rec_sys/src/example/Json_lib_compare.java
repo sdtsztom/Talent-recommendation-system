@@ -10,10 +10,10 @@ import com.google.gson.Gson;
 public class Json_lib_compare {
     public static void main(String []argv){
         System.out.println("*******************************truth:*********************************");
-        Arrangement a=new Arrangement(0,Arr_result.PASS);
+        Arrangement a=new Arrangement("0",Arr_result.PASS);
         System.out.println(a.getResult());
 
-/*        System.out.println("***********************************net.jt.json***************************");
+/*        System.out.println("***********************************net.sf.json***************************");
         String str=JsonUtils.toJSONString(a);
         System.out.println(str);
         Arrangement b=JsonUtils.<Arrangement>Str2Obj(str,Arrangement.class);

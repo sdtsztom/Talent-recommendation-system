@@ -12,7 +12,7 @@ public class Tsk_Itv2 {
     //**************************************API Function***********************************************
     public static void record_res(Arrangement[] arrangements){
         for(Arrangement a:arrangements){
-            int rec_id=a.getRec_id();
+            String rec_id=a.getRec_id();
             switch (a.getResult()){
                 case PASS:{pass(rec_id); break;}
                 case NOOFFER:{
@@ -23,7 +23,7 @@ public class Tsk_Itv2 {
 
     public static void deal_points(Arrangement[] arrangements){
         for(Arrangement a:arrangements){
-            int rec_id=a.getRec_id();
+            String rec_id=a.getRec_id();
             if(a.getResult()== Arr_result.PASS){
                 String stf_id= CommonConnection.singleResultQuery("select rec_recstu_id from recommend where rec_id="+rec_id, ConnectUser.SYS);
                 CommonConnection.Update("insert into points_change values("+ PointsChangeRule.PASS_I2.toId()+
@@ -45,11 +45,11 @@ public class Tsk_Itv2 {
         }
     }
     //**************************************API Function***********************************************
-    private static void pass(int rec_id){
+    private static void pass(String rec_id){
         // 更新阶段或(与)结果
         CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.W_OC.toId()+ " where rec_id="+rec_id,ConnectUser.SYS);
     }
-    private static void noOffer(int rec_id){
+    private static void noOffer(String rec_id){
         CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
                 ",rec_recres_id="+ RecResult.NOOFFER.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }

@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Tsk_offer_confirm {
-    public static void record_res(String rpid){
+    public static void record_res(String rpid,String username,String pwd){
+    }
+
+    public static void record_res(String rpid,Boolean refuse){
     }
 
     public static void deal_points(String rpid){

@@ -1,4 +1,4 @@
-package workflow.Tsk_forWF;
+package workflow.Tsk4WF;
 
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;

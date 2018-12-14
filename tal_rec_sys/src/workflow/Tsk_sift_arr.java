@@ -12,7 +12,7 @@ public class Tsk_sift_arr {
     //**************************************API Function***********************************************
     public static void record_res(Arrangement[] arrangements){
         for(Arrangement a:arrangements){
-            int rec_id=a.getRec_id();
+            String rec_id=a.getRec_id();
             switch (a.getResult()){
                 case INTERVIEW:{interview(rec_id); break;}
                 case TALENTS:{talents(rec_id);break;}
@@ -34,11 +34,11 @@ public class Tsk_sift_arr {
         }
     }
     //**************************************API Function***********************************************
-    public static void interview(int rec_id){
+    public static void interview(String rec_id){
         // 更新阶段或(与)结果
         CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.W_I1.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
-    public static void talents(int rec_id){
+    public static void talents(String rec_id){
         String []values= CommonConnection.singleLineQuery(
                 "select rec_recstu_id,rec_dealHR_id from recommend where rec_id="+rec_id,2,ConnectUser.SYS);
         // 将被推荐人添加到人才库表
@@ -48,8 +48,8 @@ public class Tsk_sift_arr {
                 ",rec_recres_id="+ RecResult.TALENTS.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
     public static void otherneed(Arrangement a){
-        int rec_id=a.getRec_id();
-        int rr_id_of_otherNeed=a.getRr_id_of_otherNeed();
+        String rec_id=a.getRec_id();
+        String rr_id_of_otherNeed=a.getRr_id_of_otherNeed();
         String []values= CommonConnection.singleLineQuery(
                 "select rec_rp_id,rec_dealHR_id from recommend where rec_id="+rec_id,2,ConnectUser.SYS);
         String new_HR_id=CommonConnection.singleResultQuery("select rr_hr_id from recruitment_requirements where rr_id="+rr_id_of_otherNeed,ConnectUser.SYS);

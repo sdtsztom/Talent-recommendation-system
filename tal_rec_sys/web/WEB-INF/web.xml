@@ -10,7 +10,7 @@
 
     <servlet>
         <servlet-name>exec_register</servlet-name>
-        <servlet-class>servlet.exec_register</servlet-class>
+        <servlet-class>servlet.Packer4WF.Register</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>exec_register</servlet-name>
@@ -19,7 +19,7 @@
 
     <servlet>
         <servlet-name>refuse_offer</servlet-name>
-        <servlet-class>servlet.refuse_offer</servlet-class>
+        <servlet-class>servlet.Packer4WF.OfferRefuse</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>refuse_offer</servlet-name>
