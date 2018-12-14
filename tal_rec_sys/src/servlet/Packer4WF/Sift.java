@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-@WebServlet(name = "SiftServlet")
-public class SiftServlet extends HttpServlet {
+@WebServlet(name = "Sift")
+public class Sift extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Enumeration<String> keys=request.getParameterNames();
         ArrayList<Arrangement> arrangements=new ArrayList<Arrangement>();
