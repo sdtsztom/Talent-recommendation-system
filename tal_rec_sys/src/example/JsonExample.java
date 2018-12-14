@@ -16,8 +16,8 @@ public class JsonExample {
 
         //****************************Object&Str******************************
         Arrangement a=new Arrangement("0",Arr_result.PASS);
-        String str2=JSON.toJSONString(a);
-        Arrangement b=JSON.parseObject(str2,Arrangement.class);
+        String str=JSON.toJSONString(a);
+        Arrangement b=JSON.parseObject(str,Arrangement.class);
         System.out.println(b.getRec_id()+"/"+b.getResult());
 
         //****************************List&Str******************************
@@ -28,5 +28,10 @@ public class JsonExample {
         ArrayList<Arrangement>arrs=(ArrayList<Arrangement>)JSON.parseArray(json,Arrangement.class);
         System.out.println(arrs.get(0).getRec_id()+"/"+arrs.get(0).getResult());
         System.out.println(arrs.get(1).getRec_id()+"/"+arrs.get(1).getResult());
+
+        //************************List2Json2Array*******************************
+        Arrangement []arrs2=JSON.parseObject(json,Arrangement[].class);
+        System.out.println(arrs2[0].getRec_id()+"/"+arrs2[0].getResult());
+        System.out.println(arrs2[1].getRec_id()+"/"+arrs2[1].getResult());
     }
 }
