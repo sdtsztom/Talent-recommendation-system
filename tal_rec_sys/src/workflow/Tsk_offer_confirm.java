@@ -14,7 +14,7 @@ public class Tsk_offer_confirm {
     public static void record_res(String rec_id,String username,String pwd){
         String rpid=CommonConnection.singleResultQuery("select rec_rp_id from recommend where rec_id="+rec_id,ConnectUser.SYS);
         rp2stuff procedure=new rp2stuff(rpid,username,pwd);
-        CommonConnection.execProcedure(procedure);
+        CommonConnection.execProcedure(procedure,ConnectUser.SYS);
     }
     //拒绝
     public static void record_res(String rec_id){

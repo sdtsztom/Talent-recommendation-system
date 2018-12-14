@@ -145,7 +145,8 @@ public class CommonConnection {
         return rs;
     }
 
-    public static void execProcedure(Procedure procedureClass){
+    public static void execProcedure(Procedure procedureClass,ConnectUser connectUser){
+        setConnectUser(connectUser);
         try{
             CallableStatement procedure=conn.prepareCall("{"+procedureClass.getProcedureName()+"}");
             procedureClass.setProcedure(procedure);
