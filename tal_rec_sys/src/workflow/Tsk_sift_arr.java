@@ -3,6 +3,7 @@ package workflow;
 import bean.Arrangement;
 import email_template.SiftEmailTemplate;
 import ienum.*;
+import procedure.pointsReward;
 import util.CommonConnection;
 
 public class Tsk_sift_arr {
@@ -42,14 +43,10 @@ public class Tsk_sift_arr {
         CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.W_I1.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
     public static void talents(String rec_id){
-        String []values= CommonConnection.singleLineQuery(
-                "select rec_recstu_id,rec_dealHR_id from recommend where rec_id="+rec_id,2,ConnectUser.SYS);
-        // 将被推荐人添加到人才库表
-        CommonConnection.Update("insert into talents values("+values[0]+","+values[1]+","+ TalentsFrom.AFT_SIFT.toId(),ConnectUser.SYS);
-        // 更新阶段或(与)结果
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
-                ",rec_recres_id="+ RecResult.TALENTS.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
+        pointsReward procedure=new pointsReward(Integer.parseInt(rec_id),TalentsFrom.AFT_SIFT.toId());
+        CommonConnection.execProcedure(procedure,ConnectUser.SYS);
     }
+
     public static void otherneed(Arrangement a){
         String rec_id=a.getRec_id();
         String rr_id_of_otherNeed=a.getRr_id_of_otherNeed();

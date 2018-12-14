@@ -6,7 +6,7 @@ import org.activiti.engine.delegate.JavaDelegate;
 import workflow.Tsk_offer_confirm;
 import workflow.Tsk_sift;
 
-public class OfferAccept implements JavaDelegate {
+public class TskOfferAccept implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String recid=(String)delegateExecution.getVariable("recid");
