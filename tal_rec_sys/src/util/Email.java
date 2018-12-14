@@ -21,7 +21,7 @@ public class Email{
 
     public Email() { }
 
-    public static void SendEmail() throws Exception{
+    public void SendEmail() throws Exception{
         //1、连接邮件服务器的参数配置
         Properties props = new Properties();
 
@@ -63,7 +63,7 @@ public class Email{
      * @throws AddressException
      */
 
-    private static MimeMessage getMimeMessage(Session session) throws Exception{
+    private MimeMessage getMimeMessage(Session session) throws Exception{
 
         //创建一封邮件的实例对象
         MimeMessage msg = new MimeMessage(session);
