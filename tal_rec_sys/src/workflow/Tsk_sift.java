@@ -3,6 +3,7 @@ package workflow;
 import bean.Arrangement;
 import ienum.*;
 import procedure.pointsReward;
+import procedure.put2talents;
 import util.CommonConnection;
 
 public class Tsk_sift {
@@ -42,7 +43,7 @@ public class Tsk_sift {
     //****************************************API Function*************************************
 
     private static void talents(String rec_id){
-        pointsReward procedure=new pointsReward(Integer.parseInt(rec_id),TalentsFrom.BF_SIFT.toId());
+        put2talents procedure=new put2talents(Integer.parseInt(rec_id),TalentsFrom.BF_SIFT.toId());
         CommonConnection.execProcedure(procedure,ConnectUser.SYS);
     }
 
