@@ -7,6 +7,8 @@ public class Arrangement {
     private Arr_result result;
     private int rr_id_of_otherNeed =-1;   //当Arrangement为安排到其它需求时，所提供的需求id
 
+    public Arrangement(){}
+
     public Arrangement(int rec_id, Arr_result result){
         this.rec_id = rec_id;
         this.result=result;
@@ -28,4 +30,16 @@ public class Arrangement {
     }
 
     public int getRr_id_of_otherNeed(){return rr_id_of_otherNeed;}
+
+    public void setRec_id(int rec_id) {
+        this.rec_id = rec_id;
+    }
+
+    public void setResult(Arr_result result) {
+        this.result = result;
+    }
+
+    public void setRr_id_of_otherNeed(int rr_id_of_otherNeed) {
+        this.rr_id_of_otherNeed = rr_id_of_otherNeed;
+    }
 }
