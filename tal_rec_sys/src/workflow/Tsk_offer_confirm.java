@@ -2,6 +2,7 @@ package workflow;
 
 import bean.Arrangement;
 import ienum.*;
+import procedure.pointsReward;
 import procedure.rp2stuff;
 import util.CommonConnection;
 import util.iutil;
@@ -22,10 +23,11 @@ public class Tsk_offer_confirm {
                 ",rec_recres_id="+ RecResult.REFUSE.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
 
-    public static void deal_points(String rpid){
-        String stf_id= CommonConnection.singleResultQuery("select rec_recstu_id from recommend where rec_rp_id="+rpid+" and rec_recsta_id="+RecStage.W_OC.toId(), ConnectUser.SYS);
-        CommonConnection.Update("insert into points_change values("+ PointsChangeRule.TW.toId()+
-                ","+stf_id+","+ iutil.getDate()+")",ConnectUser.SYS);
+    public static void deal_points(String rec_id){
+        String stf_id= CommonConnection.singleResultQuery("select rec_recstu_id from recommend where rec_id="+rec_id, ConnectUser.SYS);
+        //本来应该是wake work时的奖励，但是来不及做了，就用offer confirm来代替take work
+        pointsReward procedure=new pointsReward(Integer.parseInt(stf_id),PointsChangeRule.TW.toId());
+        CommonConnection.execProcedure(procedure,ConnectUser.SYS);
     }
 
     public static boolean finish(int rrid){

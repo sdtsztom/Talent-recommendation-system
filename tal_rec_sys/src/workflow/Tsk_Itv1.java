@@ -2,6 +2,7 @@ package workflow;
 
 import bean.Arrangement;
 import ienum.*;
+import procedure.pointsReward;
 import util.CommonConnection;
 import util.iutil;
 
@@ -27,8 +28,8 @@ public class Tsk_Itv1 {
             String rec_id=a.getRec_id();
             if(a.getResult()==Arr_result.INTERVIEW){
                 String stf_id= CommonConnection.singleResultQuery("select rec_recstu_id from recommend where rec_id="+rec_id,ConnectUser.SYS);
-                CommonConnection.Update("insert into points_change values("+PointsChangeRule.PASS_I1.toId()+
-                        ","+stf_id+","+ iutil.getDate()+")",ConnectUser.SYS);
+                pointsReward procedure=new pointsReward(Integer.parseInt(stf_id),PointsChangeRule.PASS_I1.toId());
+                CommonConnection.execProcedure(procedure,ConnectUser.SYS);
             }
         }
     }
