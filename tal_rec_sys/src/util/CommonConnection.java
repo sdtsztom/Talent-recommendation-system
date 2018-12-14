@@ -3,6 +3,7 @@ package util;
 import java.sql.*;
 import java.util.ArrayList;
 
+import Interface.Procedure;
 import Interface.Rs2List;
 import com.sun.rowset.CachedRowSetImpl;
 import ienum.ConnectUser;
@@ -142,6 +143,19 @@ public class CommonConnection {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public static void execProcedure(Procedure procedureClass,ConnectUser connectUser){
+        setConnectUser(connectUser);
+        try{
+            CallableStatement procedure=conn.prepareCall("{"+procedureClass.getProcedureName()+"}");
+            procedureClass.setProcedure(procedure);
+            procedure.execute();
+            procedureClass.receive(procedure);
+            procedure.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static boolean checkConnecting(){

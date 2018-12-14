@@ -2,6 +2,7 @@ package workflow;
 
 import bean.Arrangement;
 import ienum.*;
+import procedure.pointsReward;
 import util.CommonConnection;
 import util.iutil;
 
@@ -26,10 +27,14 @@ public class Tsk_Itv2 {
             String rec_id=a.getRec_id();
             if(a.getResult()== Arr_result.PASS){
                 String stf_id= CommonConnection.singleResultQuery("select rec_recstu_id from recommend where rec_id="+rec_id, ConnectUser.SYS);
-                CommonConnection.Update("insert into points_change values("+ PointsChangeRule.PASS_I2.toId()+
-                        ","+stf_id+","+ iutil.getDate()+")",ConnectUser.SYS);
+                pointsReward procedure=new pointsReward(Integer.parseInt(stf_id),PointsChangeRule.PASS_I2.toId());
+                CommonConnection.execProcedure(procedure,ConnectUser.SYS);
             }
         }
+    }
+
+    public static void makeIntv(){
+
     }
 
     public static void email(){
@@ -40,7 +45,7 @@ public class Tsk_Itv2 {
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_I2.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
-            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_OC+" where rr_id"+rrid,ConnectUser.SYS);
+            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_OC.toId()+" where rr_id"+rrid,ConnectUser.SYS);
             return true;
         }
     }

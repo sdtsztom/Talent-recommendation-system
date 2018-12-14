@@ -87,6 +87,6 @@ inner join job on requirements_common_info.ri_job_id = job.jb_id
 GO
 
 -- view recommend_notify
-create view recommend_notify as select rec_id,rec_recstu_id,stf_email as recstu_email,rp_email
+create view recommend_notify as select rec_id,rec_recstu_id,rp_name,stf_email as recstu_email,rp_email
 from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
 inner join recommend_people on recommend.rec_rp_id=recommend_people.rp_id
