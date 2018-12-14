@@ -34,7 +34,7 @@ public class Tsk_offer_confirm {
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_OC.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
-            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.FINISH+" where rr_id"+rrid,ConnectUser.SYS);
+            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.FINISH.toId()+" where rr_id"+rrid,ConnectUser.SYS);
             return true;
         }
     }

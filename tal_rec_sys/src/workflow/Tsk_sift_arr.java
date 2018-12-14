@@ -1,11 +1,9 @@
 package workflow;
 
 import bean.Arrangement;
+import email_template.SiftEmailTemplate;
 import ienum.*;
 import util.CommonConnection;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Tsk_sift_arr {
 
@@ -21,15 +19,20 @@ public class Tsk_sift_arr {
         }
     }
 
-    public static void email(){
-
+    public static void email(Arrangement[] arrangements){
+        for(Arrangement a:arrangements){
+            String rec_id=a.getRec_id();
+            String []values=CommonConnection.singleLineQuery("rp_name,recstu_email from recommend_notify where rec_id="+rec_id,2,ConnectUser.SYS);
+            SiftEmailTemplate email=new SiftEmailTemplate(values[1],values[0],a.getResult());
+            email.send();
+        }
     }
 
     public static boolean finish(int rrid){
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_ARR_S.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
-            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_I1+" where rr_id"+rrid,ConnectUser.SYS);
+            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_I1.toId()+" where rr_id"+rrid,ConnectUser.SYS);
             return true;
         }
     }

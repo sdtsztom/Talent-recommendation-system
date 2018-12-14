@@ -33,6 +33,10 @@ public class Tsk_Itv2 {
         }
     }
 
+    public static void makeIntv(){
+
+    }
+
     public static void email(){
 
     }
@@ -41,7 +45,7 @@ public class Tsk_Itv2 {
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_I2.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
-            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_OC+" where rr_id"+rrid,ConnectUser.SYS);
+            CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_OC.toId()+" where rr_id"+rrid,ConnectUser.SYS);
             return true;
         }
     }
