@@ -42,3 +42,24 @@ BEGIN
 	update stuff set stf_pts=stf_pts+(select ptchr_change from points_change_rule) where stf_id=@rec_recstf_id
 END
 GO
+
+-- put2talents
+CREATE PROCEDURE put2talents(@rec_id int,@from_id tinyint) AS
+BEGIN
+	DECLARE @rec_recstf_id char(40),@rec_dealHR_id char(40)
+	select @rec_recstf_id=rec_recstu_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
+	insert into talents values(@rec_recstf_id,@rec_dealHR_id,@from_id)
+	update recommend set rec_recsta_id=0,rec_recres_id=1 where rec_id=@rec_id
+END
+GO
+
+-- put2otherneed
+CREATE PROCEDURE put2otherneed(@rec_id int,@otherneed_id int,@from_id tinyint) AS
+BEGIN
+	DECLARE @newHR_id char(40),@rec_dealHR_id char(40),@rpid char(40)
+	select @rpid=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
+	select @newHR_id=rr_hr_id from recruitment_requirements where rr_id=@otherneed_id
+	insert into recommend values(@otherneed_id,@rec_dealHR_id,@rpid,@from_id,2,@newHR_id,6)
+	update recommend set rec_recsta_id=1,rec_recres_id=2 where rec_id=@rec_id
+END
+GO
