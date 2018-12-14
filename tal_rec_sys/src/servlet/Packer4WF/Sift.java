@@ -1,6 +1,7 @@
 package servlet.Packer4WF;
 
 import bean.Arrangement;
+import com.alibaba.fastjson.JSON;
 import ienum.Arr_result;
 import com.alibaba.fastjson.JSONArray;
 
@@ -13,8 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-@WebServlet(name = "SiftServlet")
-public class SiftServlet extends HttpServlet {
+@WebServlet(name = "Sift")
+public class Sift extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Enumeration<String> keys=request.getParameterNames();
         ArrayList<Arrangement> arrangements=new ArrayList<Arrangement>();
@@ -27,6 +28,9 @@ public class SiftServlet extends HttpServlet {
             else if(key.equals("fail"))arr=Arr_result.TALENTS;
             arrangements.add(new Arrangement(rec_id,arr));
         }
+        String json_str=JSON.toJSONString(arrangements);
+        //************************pass it to workflow************************
+        response.sendRedirect("");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
