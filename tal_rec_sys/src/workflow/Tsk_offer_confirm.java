@@ -2,6 +2,7 @@ package workflow;
 
 import bean.Arrangement;
 import ienum.*;
+import procedure.rp2stuff;
 import util.CommonConnection;
 import util.iutil;
 
@@ -9,10 +10,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Tsk_offer_confirm {
-    public static void record_res(String rpid,String username,String pwd){
+    //接受
+    public static void record_res(String rec_id,String username,String pwd){
+        String rpid=CommonConnection.singleResultQuery("select rec_rp_id from recommend where rec_id="+rec_id,ConnectUser.SYS);
+        rp2stuff procedure=new rp2stuff(rpid,username,pwd);
+        CommonConnection.execProcedure(procedure);
     }
-
-    public static void record_res(String rpid,Boolean refuse){
+    //拒绝
+    public static void record_res(String rec_id){
+        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
+                ",rec_recres_id="+ RecResult.REFUSE.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
 
     public static void deal_points(String rpid){

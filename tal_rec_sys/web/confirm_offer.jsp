@@ -1,7 +1,3 @@
-<%@ page import="util.CommonConnection" %>
-<%@ page import="ienum.ConnectUser" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="bean.LoginUser" %>
 <%@ page import="bean.ConfirmUser" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
@@ -29,12 +25,7 @@
     %>
 <%=name+sex%>，恭喜您，您已被我公司提供了一份offer.请选择您是否接收我们的offer并按时履职。
 点击下方的接收按钮接收我们的offer并注册员工账号，点击决绝按钮拒绝我们的offer.
-<form action="Login/register.jsp" method="post" onsubmit="return choice_confirm()">
-    <input type="hidden" name="rec_id" value="<%=rec_id%>">
-    <input type="hidden" name="name" value="<%=name%>">
-    <input type="hidden" name="sex" value="<%=sex%>">
-    <input type="submit"  value="接受">
-    <input type="submit" formaction="/refuse_offer" value="拒绝">
-</form>
+<button onclick="choice_confirm(this)"><a href="/Login/register.jsp">接受</a></button>
+<button onclick="choice_confirm(this)"><a href="/OfferRefuse">拒绝</a></button>
 </body>
 </html>
