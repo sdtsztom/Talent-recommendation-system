@@ -2,6 +2,7 @@ package email_template;
 
 import ienum.ConnectUser;
 import util.CommonConnection;
+import util.Config;
 import util.MD5;
 
 public class Intv2Pass2RpEmailTemplate extends emailTemplateBase{
@@ -27,6 +28,6 @@ public class Intv2Pass2RpEmailTemplate extends emailTemplateBase{
 
     public void genContent(){
         this.content=rp_name+sex+",恭喜您已经通过了最终面试，我们将对你提供对应职位。请在"+formattedDDL+"之前点击下方链接选择接受或拒绝offer，逾期将视为自动拒绝offer!\n" +
-                "http://localhost:8080/confirm_offer.jsp?u="+rpid+"&v="+ MD5.encrypt(tel_num);
+                "http://"+ Config.getWebServerIp()+":"+Config.getWebServerPort()+"/confirm_offer.jsp?u="+rpid+"&v="+ MD5.encrypt(tel_num);
     }
 }
