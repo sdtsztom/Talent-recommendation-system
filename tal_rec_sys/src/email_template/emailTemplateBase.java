@@ -15,6 +15,7 @@ public abstract class emailTemplateBase {
     abstract void genContent();
 
     public void send(){
+		setSubject();
         genContent();
         Email email=new Email();
         email.setAddr_to(addrto);
