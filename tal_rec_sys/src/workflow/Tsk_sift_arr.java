@@ -1,7 +1,7 @@
 package workflow;
 
 import bean.Arrangement;
-import email_template.SiftEmailTemplate;
+import email_template.SiftArrEmailTemplate;
 import ienum.*;
 import procedure.put2otherneed;
 import procedure.put2talents;
@@ -25,7 +25,7 @@ public class Tsk_sift_arr {
         for(Arrangement a:arrangements){
             String rec_id=a.getRec_id();
             String []values=CommonConnection.singleLineQuery("rp_name,recstu_email from recommend_notify where rec_id="+rec_id,2,ConnectUser.SYS);
-            SiftEmailTemplate email=new SiftEmailTemplate(values[1],values[0],a.getResult());
+            SiftArrEmailTemplate email=new SiftArrEmailTemplate(values[1],values[0],a.getResult());
             email.send();
         }
     }

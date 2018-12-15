@@ -2,11 +2,11 @@ package email_template;
 
 import ienum.Arr_result;
 
-public class SiftEmailTemplate extends emailTemplateBase {
+public class SiftArrEmailTemplate extends emailTemplateBase {
     private String rp_name;
     private String Arr;
 
-    public SiftEmailTemplate(String addrto, String rp_name, Arr_result arr){
+    public SiftArrEmailTemplate(String addrto, String rp_name, Arr_result arr){
         super(addrto);
         this.rp_name=rp_name;
         switch (arr){
