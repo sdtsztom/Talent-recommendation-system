@@ -25,7 +25,7 @@
 
     <!-- configure the InternalResourceViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          rec_id="internalResourceViewResolver">
+          name="internalResourceViewResolver">
         <!-- 前缀 -->
         <property name="prefix" value="/html/" />
         <!-- 后缀 -->

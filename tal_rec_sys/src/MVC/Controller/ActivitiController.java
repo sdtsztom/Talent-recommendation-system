@@ -5,8 +5,10 @@ import MVC.ActivitiService.userTask.UserTaskFactory;
 import MVC.ActivitiService.userTask.userTask;
 import MVC.Service.MailService;
 import MVC.Service.PointService;
+import bean.Arrangement;
 import bean.TaskRepresentation;
 import MVC.ActivitiService.ActivitiService;
+import com.alibaba.fastjson.JSON;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -39,7 +41,7 @@ public class ActivitiController {
     @RequestMapping(value = "/complete/{task}",method = GET)
     public String userTask(@PathVariable String task, @RequestParam Map<String,String> map) {
         userTask userTask = userTaskFactory.getuserTask(task);
-        userTask.execute(map.get("taskId"),map);
+        userTask.execute(get(JSON.parseObject(map.get("json"),Arrangement.class).getRec_id()),map);
         return "ok";
     }
 
