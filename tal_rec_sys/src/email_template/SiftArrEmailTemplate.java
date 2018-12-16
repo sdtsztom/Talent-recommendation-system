@@ -1,14 +1,18 @@
 package email_template;
 
 import ienum.Arr_result;
+import ienum.ConnectUser;
+import util.CommonConnection;
 
 public class SiftArrEmailTemplate extends emailTemplateBase {
     private String rp_name;
     private String Arr;
 
-    public SiftArrEmailTemplate(String addrto, String rp_name, Arr_result arr){
-        super(addrto);
-        this.rp_name=rp_name;
+    public SiftArrEmailTemplate(String rec_id, Arr_result arr){
+        super();
+        String []values= CommonConnection.singleLineQuery("rp_name,recstu_email from recommend_notify where rec_id="+rec_id,2, ConnectUser.SYS);
+        setAddrto(values[1]);
+        this.rp_name=values[0];
         switch (arr){
             case INTERVIEW:Arr="安排面试";
             case TALENTS:Arr="放入人才库";

@@ -97,6 +97,22 @@ public class CommonConnection {
         return result;
     }
 
+    public static Date singleDataQuery(String query,ConnectUser connect_user){
+        setConnectUser(connect_user);
+        ResultSet rs=null;
+        Date result=null;
+        try{
+            rs=sql.executeQuery(query);
+            rs.next();
+            result=rs.getDate(1);
+            rs.close();
+        }catch(Exception e){
+            System.out.println("the query caused error:"+query+"......");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static boolean existQuery(String query,ConnectUser connect_user){
         setConnectUser(connect_user);
         boolean have_rs=false;

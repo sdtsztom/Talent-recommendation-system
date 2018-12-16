@@ -7,12 +7,17 @@ public abstract class emailTemplateBase {
     String subject;
     String content;
 
+    public emailTemplateBase(){};
     public emailTemplateBase(String addrto){
         this.addrto=addrto;
     }
 
     abstract void setSubject();
     abstract void genContent();
+
+    public void setAddrto(String addrto) {
+        this.addrto = addrto;
+    }
 
     public void send(){
 		setSubject();
