@@ -24,8 +24,7 @@ public class Tsk_sift_arr {
     public static void email(Arrangement[] arrangements){
         for(Arrangement a:arrangements){
             String rec_id=a.getRec_id();
-            String []values=CommonConnection.singleLineQuery("rp_name,recstu_email from recommend_notify where rec_id="+rec_id,2,ConnectUser.SYS);
-            SiftArrEmailTemplate email=new SiftArrEmailTemplate(values[1],values[0],a.getResult());
+            SiftArrEmailTemplate email=new SiftArrEmailTemplate(rec_id,a.getResult());
             email.send();
         }
     }
