@@ -37,7 +37,7 @@
         response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
         return;
     }
-    String rec_id=user.getId();
+    String user_id =user.getId();
     String name=user.getName();
     String sex=user.getSex();%>
 

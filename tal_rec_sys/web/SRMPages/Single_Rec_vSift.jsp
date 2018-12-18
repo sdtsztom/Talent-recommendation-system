@@ -15,7 +15,7 @@
     String name=user.getUsername();
 %>
 <head>
-    <title>需求(rec_id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_SIFT%>)</title>
+    <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_SIFT%>)</title>
 </head>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>

@@ -10,23 +10,23 @@
     <script src="/js/Stuff_Recommend_Page.js"></script>
 </head>
 <body>
-<div class="row" rec_id="div">
+<div class="row" id="div">
     <div class="col-md-2"></div>
     <div class="col-md-8" v-if="check"><h2 class="text-center">请勿重复推荐</h2></div>
     <div class="col-md-8" v-else>
         <form onsubmit="return false">
             <label>需求id</label>
-            <select class="form-control" name="rr_id_of_otherNeed" rec_id="rr_id_of_otherNeed">
-                    <option v-for="rr in rrs" :value="rr.rr_id_of_otherNeed">{{rr.rr_id_of_otherNeed}}</option>
+            <select class="form-control" name="rr_id" id="rr_id">
+                    <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>
             </select>
             <br/>
             <label>被推荐人</label>
-            <select class="form-control" name="rp_id" rec_id="rp_id">
+            <select class="form-control" name="rp_id" id="rp_id">
                     <option v-for="rp in rps" :value="rp.rp_id">{{rp.rp_name}}</option>
             </select>
             <br/>
             <label>推荐途径</label>
-            <select class="form-control" name="recf_id" rec_id="recf_id">
+            <select class="form-control" name="recf_id" id="recf_id">
                     <option v-for="recf in recfs" :value="recf.recf_id">{{recf.recf_desc}}</option>
             </select>
         </form>
