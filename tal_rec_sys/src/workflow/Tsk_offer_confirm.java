@@ -11,16 +11,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Tsk_offer_confirm {
-    //接受
-    public static void record_res(String rec_id,String username,String pwd){
-        String rpid=CommonConnection.singleResultQuery("select rec_rp_id from recommend where rec_id="+rec_id,ConnectUser.SYS);
-        rp2stuff procedure=new rp2stuff(rpid,username,pwd);
-        CommonConnection.execProcedure(procedure,ConnectUser.SYS);
-    }
-    //拒绝
-    public static void record_res(String rec_id){
-        CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
-                ",rec_recres_id="+ RecResult.REFUSE.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
+    public static void record_res(String type,String rec_id,String username,String pwd){
+        if(type.equals("confirm")){
+            String rpid=CommonConnection.singleResultQuery("select rec_rp_id from recommend where rec_id="+rec_id,ConnectUser.SYS);
+            rp2stuff procedure=new rp2stuff(rpid,username,pwd);
+            CommonConnection.execProcedure(procedure,ConnectUser.SYS);
+        }else if(type.equals("refuse")){
+            CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.FINISH.toId()+
+                    ",rec_recres_id="+ RecResult.REFUSE.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
+        }
     }
 
     public static void deal_points(String rec_id){

@@ -82,22 +82,14 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>servlet.Packer4WF.Register</servlet-class>
+        <servlet-name>OfferConfirm</servlet-name>
+        <servlet-class>servlet.Packer4WF.OfferConfirm</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/Packer4WF/Register</url-pattern>
+        <servlet-name>OfferConfirm</servlet-name>
+        <url-pattern>/Packer4WF/OfferConfirm</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>OfferRefuse</servlet-name>
-        <servlet-class>servlet.Packer4WF.OfferRefuse</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>OfferRefuse</servlet-name>
-        <url-pattern>/Packer4WF/OfferRefuse</url-pattern>
-    </servlet-mapping>
     
     <!--****************************** Filters ************************-->
     
