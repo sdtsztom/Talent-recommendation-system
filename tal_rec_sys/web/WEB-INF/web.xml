@@ -9,24 +9,6 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>servlet.Packer4WF.Register</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>OfferRefuse</servlet-name>
-        <servlet-class>servlet.Packer4WF.OfferRefuse</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>OfferRefuse</servlet-name>
-        <url-pattern>/OfferRefuse</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>util_server</servlet-name>
         <servlet-class>servlet.util_server</servlet-class>
     </servlet>
@@ -51,6 +33,70 @@
     <servlet-mapping>
         <servlet-name>publish_requirement</servlet-name>
         <url-pattern>/publish_requirement</url-pattern>
+    </servlet-mapping>
+
+    <!-- ************************Servlet for Workflow************************* -->
+    <servlet>
+        <servlet-name>Open2Sift</servlet-name>
+        <servlet-class>servlet.Packer4WF.Open2Sift</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Open2Sift</servlet-name>
+        <url-pattern>/Packer4WF/Open2Sift</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Sift</servlet-name>
+        <servlet-class>servlet.Packer4WF.Sift</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Sift</servlet-name>
+        <url-pattern>/Packer4WF/Sift</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SiftArr</servlet-name>
+        <servlet-class>servlet.Packer4WF.SiftArr</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SiftArr</servlet-name>
+        <url-pattern>/Packer4WF/SiftArr</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Intv1</servlet-name>
+        <servlet-class>servlet.Packer4WF.Intv1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Intv1</servlet-name>
+        <url-pattern>/Packer4WF/Intv1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Intv2</servlet-name>
+        <servlet-class>servlet.Packer4WF.Intv2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Intv2</servlet-name>
+        <url-pattern>/Packer4WF/Intv2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>servlet.Packer4WF.Register</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Packer4WF/Register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OfferRefuse</servlet-name>
+        <servlet-class>servlet.Packer4WF.OfferRefuse</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OfferRefuse</servlet-name>
+        <url-pattern>/Packer4WF/OfferRefuse</url-pattern>
     </servlet-mapping>
     
     <!--****************************** Filters ************************-->

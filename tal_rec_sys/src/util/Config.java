@@ -6,10 +6,12 @@ import ienum.ConnectUser;
 
 public class Config {
     static boolean init=false;
+    static String webServerIp="localhost";
+    static String webServerPort="8080";
     static String className="com.microsoft.sqlserver.jdbc.SQLServerDriver";
     static String conPostfix="jdbc:sqlserver://";
-    static String ip="localhost";
-    static String port="1433";
+    static String databaseIp ="localhost";
+    static String databasePort ="1433";
     static String databaseName="tal_rec_sys";
     static int confirm_days_limit=15;
 
@@ -33,7 +35,7 @@ public class Config {
     }
 
     public static String getConnStr(String userName,String pwd) {
-        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+userName+";password="+pwd;
+        return conPostfix+ databaseIp +":"+ databasePort +";DatabaseName="+databaseName+";user="+userName+";password="+pwd;
     }
 
     public static String getConnStr(ConnectUser user) {
@@ -42,7 +44,7 @@ public class Config {
             init=true;
         }
         LoginUser loginUser=loginUsers.get(user.toString());
-        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+loginUser.getUsername()+";password="+loginUser.getPwd();
+        return "jdbc:sqlserver://"+ databaseIp +":"+ databasePort +";DatabaseName="+databaseName+";user="+loginUser.getUsername()+";password="+loginUser.getPwd();
     }
 
 
@@ -53,8 +55,10 @@ public class Config {
             init=true;
         }
         LoginUser develop=loginUsers.get("develop");
-        return "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+databaseName+";user="+develop.getUsername()+";password="+develop.getPwd();
+        return "jdbc:sqlserver://"+ databaseIp +":"+ databasePort +";DatabaseName="+databaseName+";user="+develop.getUsername()+";password="+develop.getPwd();
     }
 
+    public static String getWebServerIp(){return webServerIp;}
 
+    public static String getWebServerPort(){return webServerPort;}
 }

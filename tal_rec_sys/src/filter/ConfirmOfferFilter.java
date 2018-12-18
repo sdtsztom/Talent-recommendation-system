@@ -56,7 +56,7 @@ public class ConfirmOfferFilter implements Filter {
         }
         // put session
         String name=res[0];
-        String sex=res[1]=="男"?"先生":"女士";
+        String sex=res[1].equals("男")?"先生":"女士";
         HttpSession session=request.getSession();
         ConfirmUser user=new ConfirmUser(id,name,sex);
         session.setAttribute("confirm_user",user);
