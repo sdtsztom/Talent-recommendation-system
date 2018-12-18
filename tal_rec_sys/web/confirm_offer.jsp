@@ -19,7 +19,7 @@
 <body>
 <%  //由于这个网站有过滤器的确保，因此不用检验session存不存在
     ConfirmUser user=(ConfirmUser)session.getAttribute("confirm_user");
-    String rec_id=user.getId();
+    String user_id =user.getId();
     String name=user.getName();
     String sex=user.getSex();
     %>

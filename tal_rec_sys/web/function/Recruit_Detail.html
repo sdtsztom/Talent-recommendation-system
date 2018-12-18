@@ -17,12 +17,12 @@
     </style>
 </head>
 <body>
-<div class="container"  rec_id="div" v-cloak>
+<div class="container"  id="div" v-cloak>
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="btn-group">
                 <button class="btn btn-default">Action</button><button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
-                <ul class="dropdown-menu" rec_id="jobswitch">
+                <ul class="dropdown-menu" id="jobswitch">
                     <li v-if="job_type == 2">
                         <a href="" >关闭需求</a>
                     </li>
@@ -44,7 +44,7 @@
             <table class="table table-bordered" >
                 <tr>
                     <td>需求id</td>
-                    <td>{{detail.rr_id_of_otherNeed}}</td>
+                    <td>{{detail.rr_id}}</td>
                     <td>招聘人数</td>
                     <td>{{detail.rr_num}}</td>
                     <td>紧急度</td>
