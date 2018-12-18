@@ -24,11 +24,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <td>职位名称</td>
-                    <td>职能名称</td>
-                    <td>工资</td>
-                    <td>部门名称</td>
-                    <td>点此创建</td>
+                    <th>职位名称</th>
+                    <th>职能名称</th>
+                    <th>工资</th>
+                    <th>部门名称</th>
+                    <th>点此创建</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,8 @@
                     <td>{{details.jb_sal}}</td>
                     <td>{{details.dp_name}}</td>
                     <td><a @click="goto(details)" target="right">选择此条信息</a></td>
-                </tr>>
+                </tr>
+                </tbody>
             </table>
             <ul class="pagination">
                 <li><a href="#">Prev</a></li>
