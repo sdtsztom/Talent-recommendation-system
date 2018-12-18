@@ -1,4 +1,4 @@
-package MVC.ActivitiService.serviceTask.OfferConfirm;
+package workflow.OfferConfirm;
 
 import MVC.DAO.RecommendDAO;
 import MVC.DAO.StuffDAO;

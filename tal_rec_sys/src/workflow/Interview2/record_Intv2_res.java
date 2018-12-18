@@ -1,4 +1,4 @@
-package MVC.ActivitiService.serviceTask.Interview2;
+package workflow.Interview2;
 
 import MVC.Service.InterviewService;
 import org.activiti.engine.delegate.DelegateExecution;

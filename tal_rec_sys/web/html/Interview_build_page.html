@@ -10,37 +10,42 @@
     <script src="/js/Interview_build_page.js"></script>
 </head>
 <body>
-<div class="row" rec_id="div">
+<div class="row" name="div">
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <form method="post" onsubmit="return false">
+            <label>面试轮数</label>
+            <select class="form-control" name="ip_rnd">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
             <label>面试地点</label>
-            <select class="form-control" name="ip_id" rec_id="ip_id">
+            <select class="form-control" name="ip_id" id="ip_id">
                 <option v-for="ip in ips" :value="ip.ip_id">{{ip.ip_detail}}</option>
             </select>
             <label>被推荐人</label>
-            <select class="form-control" name="rp_id" rec_id="rp_id">
+            <select class="form-control" name="rp_id" id="rp_id">
                 <option v-for="rp in rps" :value="rp.rp_id">{{rp.rp_name}}</option>
             </select>
             <label>处理HR</label>
-            <select class="form-control" name="dealHR_id" rec_id="dealHR_id">
+            <select class="form-control" name="dealHR_id" id="dealHR_id">
                 <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
             </select>
             <label>需求id</label>
-            <select class="form-control" name="rr_id_of_otherNeed" rec_id="rr_id_of_otherNeed">
+            <select class="form-control" name="rr_id_of_otherNeed" id="rr_id_of_otherNeed">
                 <option v-for="rr in rrs" :value="rr.rr_id_of_otherNeed">{{rr.rr_id_of_otherNeed}}</option>
             </select>
             <div class="form-group">
                 <label for="itv_time">面试时间</label>
-                <input type="datetime-local" class="form-control" rec_id="itv_time" name="itv_time">
+                <input type="datetime-local" class="form-control" id="itv_time" name="itv_time">
             </div>
             <label>面试官</label>
-            <select class="form-control" name="exmer_id" rec_id="exmer_id">
+            <select class="form-control" name="exmer_id" id="exmer_id">
                 <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
             </select>
             <div class="form-group">
                 <label for="itv_detail">面试细节</label>
-                <input type="text" class="form-control" rec_id="itv_detail" name="itv_detail">
+                <input type="text" class="form-control" id="itv_detail" name="itv_detail">
             </div>
         </form>
         <button onclick="submit()" class="btn btn-default">Submit</button>

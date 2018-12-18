@@ -1,7 +1,6 @@
 package MVC.ActivitiService;
 
 import org.activiti.engine.*;
-import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -28,7 +27,7 @@ public class ActivitiService {
                 .createDeployment()//创建部署对象
                 .name("workflow")//声明流程的名称
                 .category("workflow")//修改category
-                .addClasspathResource("Process/workflow.bpmn").addClasspathResource("Process/workflow.png").deploy();
+                .addClasspathResource("Process/workflow.txt").addClasspathResource("Process/workflow.png").deploy();
     }
 
     //根据Execution的NAME获取task的id

@@ -1,17 +1,19 @@
-package MVC.ActivitiService.serviceTask.OfferConfirm;
+package workflow.OfferConfirm;
 
 import MVC.Service.RecommendService;
+import bean.Stuff;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class record implements JavaDelegate {
+//新员工注册
+public class register_new_stuff implements JavaDelegate {
 
     @Autowired
     RecommendService recommendService;
 
     @Override
     public void execute(DelegateExecution delegateExecution) {
-        recommendService.RecommendUpdate((String)delegateExecution.getVariable("rec_id"),(String)delegateExecution.getVariable("rec_recres_id"));
+        recommendService.StuffInsert((Stuff) delegateExecution.getVariable("stuff"));
     }
 }
