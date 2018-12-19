@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" name="m1541481804649" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process name="workflow" isClosed="false" isExecutable="true" name="workflow" processType="None">
+    <startEvent name="startprocess" name="Start"/>
+    <endEvent name="endprocess" name="End"/>
+    <userTask activiti:exclusive="true" name="UserTask1" isForCompensation="true" name="HR发布招聘需求"/>
+	<!-- activiti:candidateUsers="${myService.candidateUsers(execution)}"-->
+    <sequenceFlow name="flow1" sourceRef="startprocess" targetRef="UserTask1"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask1" name="Create/Update Data" activiti:class="MVC.ActivitiService.serviceTask.serviceTask1"/>
+	<!-- activiti:expression="#{service1.service1(execution)}" -->
+    <sequenceFlow name="_10" sourceRef="UserTask1" targetRef="ServiceTask1"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay1" name="判断紧急度"/>
+    <sequenceFlow name="_19" sourceRef="ServiceTask1" targetRef="ExclusiveGateWay1"/>
+    <userTask activiti:exclusive="true" name="UserTask2" name="员工推荐"/>
+    <sequenceFlow name="_23" sourceRef="ExclusiveGateWay1" targetRef="UserTask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var1 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask activiti:exclusive="true" name="mailTask1" name="发送邮件" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_27" sourceRef="mailTask1" targetRef="UserTask2"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay2" name="业务选择"/>
+    <sequenceFlow name="_29" sourceRef="UserTask2" targetRef="ExclusiveGateWay2"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask2" name="更新招聘"  activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask5" name="关闭需求"  activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_33" sourceRef="ExclusiveGateWay2" targetRef="ServiceTask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check1 == 3}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_34" sourceRef="ExclusiveGateWay2" targetRef="ServiceTask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check1 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_36" sourceRef="ServiceTask2" targetRef="UserTask1"/>
+    <userTask activiti:exclusive="true" name="UserTask3" name="推荐人才"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask4" name="录入人才信息" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_43" sourceRef="UserTask3" targetRef="ServiceTask4"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask3" name="判断重复" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_45" sourceRef="ExclusiveGateWay2" targetRef="ServiceTask3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check1 == 2}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_48" sourceRef="ExclusiveGateWay1" targetRef="mailTask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var1 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay3" name="判断重复推荐"/>
+    <sequenceFlow name="_50" sourceRef="ServiceTask3" targetRef="ExclusiveGateWay3"/>
+    <sequenceFlow name="_51" sourceRef="ExclusiveGateWay3" targetRef="UserTask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var2 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_52" sourceRef="ExclusiveGateWay3" targetRef="UserTask3">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var2 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask activiti:exclusive="true" name="mailTask2" name="发送邮件"  activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_54" sourceRef="ServiceTask4" targetRef="mailTask2"/>
+    <sequenceFlow name="_55" sourceRef="mailTask2" targetRef="UserTask2"/>
+    <userTask activiti:exclusive="true" name="UserTask4" name="HR筛选"/>
+    <sequenceFlow name="_57" sourceRef="ServiceTask5" targetRef="UserTask4"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask6" name="记录筛选完毕" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_3" sourceRef="UserTask4" targetRef="ServiceTask6"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask7" name="积分奖励发放" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_5" sourceRef="ServiceTask6" targetRef="ServiceTask7"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay4" name="判断筛选完毕"/>
+    <sequenceFlow name="_7" sourceRef="ServiceTask7" targetRef="ExclusiveGateWay4"/>
+    <sequenceFlow name="_8" sourceRef="ExclusiveGateWay4" targetRef="UserTask4">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var3 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask activiti:exclusive="true" name="UserTask5" name="安排结果"/>
+    <sequenceFlow name="_11" sourceRef="ExclusiveGateWay4" targetRef="UserTask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var3 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay5" name="业务选择"/>
+    <sequenceFlow name="_13" sourceRef="UserTask5" targetRef="ExclusiveGateWay5"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask8" name="放入人才库" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask9" name="安排面试" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <userTask activiti:exclusive="true" name="UserTask6" name="作出其他更改"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask10" name="作出数据更改" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_20" sourceRef="ExclusiveGateWay5" targetRef="ServiceTask8">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check2 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_21" sourceRef="ExclusiveGateWay5" targetRef="UserTask6">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check2 == 2}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_24" sourceRef="ExclusiveGateWay5" targetRef="ServiceTask9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check2 == 3}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_26" sourceRef="UserTask6" targetRef="ServiceTask10"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay6" name="判断安排完毕"/>
+    <sequenceFlow name="_35" sourceRef="ServiceTask8" targetRef="ExclusiveGateWay6"/>
+    <sequenceFlow name="_37" sourceRef="ServiceTask10" targetRef="ExclusiveGateWay6"/>
+    <sequenceFlow name="_38" sourceRef="ServiceTask9" targetRef="ExclusiveGateWay6"/>
+    <sequenceFlow name="_39" sourceRef="ExclusiveGateWay6" targetRef="UserTask5">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var4 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask activiti:exclusive="true" name="UserTask7" name="一轮面试"/>
+    <sequenceFlow name="_15" sourceRef="ExclusiveGateWay6" targetRef="UserTask7">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var4 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask activiti:exclusive="true" name="ServiceTask11" name="记录面试结果" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask12" name="积分奖励发放" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_58" sourceRef="UserTask7" targetRef="ServiceTask11"/>
+    <sequenceFlow name="_59" sourceRef="ServiceTask11" targetRef="ServiceTask12"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay7" name="判断面试完毕"/>
+    <sequenceFlow name="_61" sourceRef="ServiceTask12" targetRef="ExclusiveGateWay7"/>
+    <sequenceFlow name="_62" sourceRef="ExclusiveGateWay7" targetRef="UserTask7">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var5 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask activiti:exclusive="true" name="UserTask8" name="安排结果"/>
+    <sequenceFlow name="_64" sourceRef="ExclusiveGateWay7" targetRef="UserTask8">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var5 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay8" name="业务选择"/>
+    <sequenceFlow name="_66" sourceRef="UserTask8" targetRef="ExclusiveGateWay8"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask13" name="安排面试" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <userTask activiti:exclusive="true" name="UserTask9" name="安排其他需求"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask14" name="放入人才库" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_70" sourceRef="ExclusiveGateWay8" targetRef="ServiceTask13">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check3 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_71" sourceRef="ExclusiveGateWay8" targetRef="UserTask9">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check3 == 2}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_72" sourceRef="ExclusiveGateWay8" targetRef="ServiceTask14">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${check3 == 3}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask activiti:exclusive="true" name="ServiceTask15" name="作出数据更改" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_74" sourceRef="UserTask9" targetRef="ServiceTask15"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay9" name="判断安排完毕"/>
+    <sequenceFlow name="_76" sourceRef="ServiceTask15" targetRef="ExclusiveGateWay9"/>
+    <sequenceFlow name="_77" sourceRef="ServiceTask13" targetRef="ExclusiveGateWay9"/>
+    <sequenceFlow name="_78" sourceRef="ServiceTask14" targetRef="ExclusiveGateWay9"/>
+    <userTask activiti:exclusive="true" name="UserTask10" name="二轮面试"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask16" name="记录面试结果" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_81" sourceRef="UserTask10" targetRef="ServiceTask16"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask17" name="积分奖励发放" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_83" sourceRef="ServiceTask16" targetRef="ServiceTask17"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask18" name="发送邮件" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_85" sourceRef="ServiceTask17" targetRef="ServiceTask18"/>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay10" name="判断面试完毕"/>
+    <sequenceFlow name="_87" sourceRef="ServiceTask18" targetRef="ExclusiveGateWay10"/>
+    <sequenceFlow name="_88" sourceRef="ExclusiveGateWay10" targetRef="UserTask10">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var7 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_89" sourceRef="ExclusiveGateWay9" targetRef="UserTask10">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var6 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_90" sourceRef="ExclusiveGateWay9" targetRef="UserTask8">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var6 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask activiti:exclusive="true" name="UserTask11" name="任职确认"/>
+    <sequenceFlow name="_92" sourceRef="ExclusiveGateWay10" targetRef="UserTask11">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var7 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay11" name="判断任职"/>
+    <sequenceFlow name="_94" sourceRef="UserTask11" targetRef="ExclusiveGateWay11"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask19" name="记录结果" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask20" name="注册" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" name="mailTask3" name="发送邮件" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask21" name="积分奖励" activiti:class="MVC.ActivitiService.serviceTask.blankServiceTask"/>
+    <sequenceFlow name="_99" sourceRef="ServiceTask19" targetRef="ServiceTask20"/>
+    <sequenceFlow name="_100" sourceRef="ServiceTask20" targetRef="ServiceTask21"/>
+    <sequenceFlow name="_101" sourceRef="ServiceTask21" targetRef="mailTask3"/>
+    <sequenceFlow name="_102" sourceRef="ExclusiveGateWay11" targetRef="ServiceTask19">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var8 == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay12" name="判断确认任职完毕"/>
+    <sequenceFlow name="_105" sourceRef="ExclusiveGateWay11" targetRef="ExclusiveGateWay12">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var8 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_106" sourceRef="mailTask3" targetRef="ExclusiveGateWay12"/>
+    <sequenceFlow name="_107" sourceRef="ExclusiveGateWay12" targetRef="UserTask11">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var9 == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow name="_108" sourceRef="ExclusiveGateWay12" targetRef="endprocess">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${var9 == 1}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" name="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="workflow">
+      <bpmndi:BPMNShape bpmnElement="UserTask1" name="Shape-UserTask1">
+        <omgdc:Bounds height="55.0" width="85.0" x="-10.0" y="55.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endprocess" name="Shape-endprocess">
+        <omgdc:Bounds height="32.0" width="32.0" x="1550.0" y="640.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startprocess" name="Shape-startprocess">
+        <omgdc:Bounds height="32.0" width="32.0" x="15.0" y="-15.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask1" name="Shape-ServiceTask1">
+        <omgdc:Bounds height="55.0" width="85.0" x="-5.0" y="125.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay1" name="Shape-ExclusiveGateWay1" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="30.0" y="205.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask2" name="Shape-UserTask2">
+        <omgdc:Bounds height="55.0" width="85.0" x="175.0" y="260.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailTask1" name="Shape-mailTask1">
+        <omgdc:Bounds height="55.0" width="85.0" x="5.0" y="300.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay2" name="Shape-ExclusiveGateWay2" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="95.0" y="410.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask2" name="Shape-ServiceTask2">
+        <omgdc:Bounds height="55.0" width="85.0" x="260.0" y="175.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask5" name="Shape-ServiceTask5">
+        <omgdc:Bounds height="55.0" width="85.0" x="5.0" y="705.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask3" name="Shape-UserTask3">
+        <omgdc:Bounds height="55.0" width="85.0" x="270.0" y="535.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask4" name="Shape-ServiceTask4">
+        <omgdc:Bounds height="55.0" width="85.0" x="270.0" y="600.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask3" name="Shape-ServiceTask3">
+        <omgdc:Bounds height="55.0" width="85.0" x="70.0" y="560.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay3" name="Shape-ExclusiveGateWay3" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="220.0" y="430.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailTask2" name="Shape-mailTask2">
+        <omgdc:Bounds height="55.0" width="85.0" x="270.0" y="665.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask4" name="Shape-UserTask4">
+        <omgdc:Bounds height="55.0" width="85.0" x="510.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask6" name="Shape-ServiceTask6">
+        <omgdc:Bounds height="55.0" width="85.0" x="510.0" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask7" name="Shape-ServiceTask7">
+        <omgdc:Bounds height="55.0" width="85.0" x="515.0" y="205.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay4" name="Shape-ExclusiveGateWay4" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="545.0" y="290.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask5" name="Shape-UserTask5">
+        <omgdc:Bounds height="55.0" width="85.0" x="520.0" y="370.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay5" name="Shape-ExclusiveGateWay5" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="550.0" y="460.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask8" name="Shape-ServiceTask8">
+        <omgdc:Bounds height="55.0" width="85.0" x="410.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask9" name="Shape-ServiceTask9">
+        <omgdc:Bounds height="55.0" width="85.0" x="650.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask6" name="Shape-UserTask6">
+        <omgdc:Bounds height="55.0" width="85.0" x="525.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask10" name="Shape-ServiceTask10">
+        <omgdc:Bounds height="55.0" width="85.0" x="525.0" y="635.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay6" name="Shape-ExclusiveGateWay6" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="555.0" y="740.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask7" name="Shape-UserTask7">
+        <omgdc:Bounds height="55.0" width="85.0" x="945.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask11" name="Shape-ServiceTask11">
+        <omgdc:Bounds height="55.0" width="85.0" x="945.0" y="135.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask12" name="Shape-ServiceTask12">
+        <omgdc:Bounds height="55.0" width="85.0" x="945.0" y="220.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay7" name="Shape-ExclusiveGateWay7" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="975.0" y="285.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask8" name="Shape-UserTask8">
+        <omgdc:Bounds height="55.0" width="85.0" x="945.0" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay8" name="Shape-ExclusiveGateWay8" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="975.0" y="425.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask13" name="Shape-ServiceTask13">
+        <omgdc:Bounds height="55.0" width="85.0" x="850.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask9" name="Shape-UserTask9">
+        <omgdc:Bounds height="55.0" width="85.0" x="965.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask14" name="Shape-ServiceTask14">
+        <omgdc:Bounds height="55.0" width="85.0" x="1090.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask15" name="Shape-ServiceTask15">
+        <omgdc:Bounds height="55.0" width="85.0" x="965.0" y="615.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay9" name="Shape-ExclusiveGateWay9" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="1000.0" y="735.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask10" name="Shape-UserTask10">
+        <omgdc:Bounds height="55.0" width="85.0" x="1240.0" y="45.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask16" name="Shape-ServiceTask16">
+        <omgdc:Bounds height="55.0" width="85.0" x="1240.0" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask17" name="Shape-ServiceTask17">
+        <omgdc:Bounds height="55.0" width="85.0" x="1240.0" y="210.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask18" name="Shape-ServiceTask18">
+        <omgdc:Bounds height="55.0" width="85.0" x="1245.0" y="285.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay10" name="Shape-ExclusiveGateWay10" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="1275.0" y="380.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="UserTask11" name="Shape-UserTask11">
+        <omgdc:Bounds height="55.0" width="85.0" x="1370.0" y="25.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay11" name="Shape-ExclusiveGateWay11" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="1400.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask19" name="Shape-ServiceTask19">
+        <omgdc:Bounds height="55.0" width="85.0" x="1380.0" y="185.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask20" name="Shape-ServiceTask20">
+        <omgdc:Bounds height="55.0" width="85.0" x="1380.0" y="255.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailTask3" name="Shape-mailTask3">
+        <omgdc:Bounds height="55.0" width="85.0" x="1380.0" y="410.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask21" name="Shape-ServiceTask21">
+        <omgdc:Bounds height="55.0" width="85.0" x="1385.0" y="330.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ExclusiveGateWay12" name="Shape-ExclusiveGateWay12" isMarkerVisible="false">
+        <omgdc:Bounds height="32.0" width="32.0" x="1540.0" y="275.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_35" name="BPMNEdge__35" sourceElement="_14" targetElement="ExclusiveGateWay6">
+        <omgdi:waypoint x="475.0" y="605.0"/>
+        <omgdi:waypoint x="475.0" y="575.0"/>
+        <omgdi:waypoint x="555.0" y="756.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_34" name="BPMNEdge__34" sourceElement="ExclusiveGateWay2" targetElement="ServiceTask5">
+        <omgdi:waypoint x="95.0" y="426.0"/>
+        <omgdi:waypoint x="40.0" y="469.0"/>
+        <omgdi:waypoint x="40.0" y="705.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_37" name="BPMNEdge__37" sourceElement="_18" targetElement="ExclusiveGateWay6">
+        <omgdi:waypoint x="571.0" y="690.0"/>
+        <omgdi:waypoint x="571.0" y="740.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_36" name="BPMNEdge__36" sourceElement="ServiceTask2" targetElement="UserTask1">
+        <omgdi:waypoint x="260.0" y="202.5"/>
+        <omgdi:waypoint x="75.0" y="83.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_39" name="BPMNEdge__39" sourceElement="ExclusiveGateWay6" targetElement="UserTask5">
+        <omgdi:waypoint x="587.0" y="756.0"/>
+        <omgdi:waypoint x="765.0" y="615.0"/>
+        <omgdi:waypoint x="605.0" y="397.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_38" name="BPMNEdge__38" sourceElement="_16" targetElement="ExclusiveGateWay6">
+        <omgdi:waypoint x="680.0" y="605.0"/>
+        <omgdi:waypoint x="680.0" y="613.0"/>
+        <omgdi:waypoint x="587.0" y="756.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_108" name="BPMNEdge__108" sourceElement="ExclusiveGateWay12" targetElement="endprocess">
+        <omgdi:waypoint x="1561.0" y="302.0"/>
+        <omgdi:waypoint x="1561.0" y="640.8013158464294"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_107" name="BPMNEdge__107" sourceElement="ExclusiveGateWay12" targetElement="UserTask11">
+        <omgdi:waypoint x="1555.0" y="276.0"/>
+        <omgdi:waypoint x="1555.0" y="214.0"/>
+        <omgdi:waypoint x="1455.0" y="52.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" name="BPMNEdge_flow1" sourceElement="startprocess" targetElement="UserTask1">
+        <omgdi:waypoint x="31.0" y="17.0"/>
+        <omgdi:waypoint x="31.0" y="56.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_106" name="BPMNEdge__106" sourceElement="_97" targetElement="ExclusiveGateWay12">
+        <omgdi:waypoint x="1465.0" y="437.5"/>
+        <omgdi:waypoint x="1540.0" y="291.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_101" name="BPMNEdge__101" sourceElement="_98" targetElement="_97">
+        <omgdi:waypoint x="1425.0" y="385.0"/>
+        <omgdi:waypoint x="1425.0" y="410.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_100" name="BPMNEdge__100" sourceElement="_96" targetElement="_98">
+        <omgdi:waypoint x="1425.0" y="310.0"/>
+        <omgdi:waypoint x="1425.0" y="330.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_105" name="BPMNEdge__105" sourceElement="ExclusiveGateWay11" targetElement="ExclusiveGateWay12">
+        <omgdi:waypoint x="1432.0" y="126.0"/>
+        <omgdi:waypoint x="1515.0" y="195.0"/>
+        <omgdi:waypoint x="1540.0" y="291.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_43" name="BPMNEdge__43" sourceElement="UserTask3" targetElement="ServiceTask4">
+        <omgdi:waypoint x="312.5" y="590.0"/>
+        <omgdi:waypoint x="312.5" y="600.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_102" name="BPMNEdge__102" sourceElement="ExclusiveGateWay11" targetElement="_95">
+        <omgdi:waypoint x="1420.0" y="138.0"/>
+        <omgdi:waypoint x="1420.0" y="170.0"/>
+        <omgdi:waypoint x="1420.0" y="185.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_45" name="BPMNEdge__45" sourceElement="ExclusiveGateWay2" targetElement="ServiceTask3">
+        <omgdi:waypoint x="111.0" y="442.0"/>
+        <omgdi:waypoint x="111.0" y="560.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_48" name="BPMNEdge__48" sourceElement="ExclusiveGateWay1" targetElement="mailTask1">
+        <omgdi:waypoint x="46.0" y="237.0"/>
+        <omgdi:waypoint x="46.0" y="300.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-3.0" width="0.0" x="0.0" y="-6.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_51" name="BPMNEdge__51" sourceElement="ExclusiveGateWay3" targetElement="UserTask2">
+        <omgdi:waypoint x="220.0" y="446.0"/>
+        <omgdi:waypoint x="210.0" y="370.0"/>
+        <omgdi:waypoint x="210.0" y="315.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_50" name="BPMNEdge__50" sourceElement="ServiceTask3" targetElement="ExclusiveGateWay3">
+        <omgdi:waypoint x="155.0" y="587.5"/>
+        <omgdi:waypoint x="220.0" y="446.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_52" name="BPMNEdge__52" sourceElement="ExclusiveGateWay3" targetElement="UserTask3">
+        <omgdi:waypoint x="252.0" y="446.0"/>
+        <omgdi:waypoint x="313.0" y="509.0"/>
+        <omgdi:waypoint x="313.0" y="535.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="30.0" width="0.0" x="0.0" y="-3.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_55" name="BPMNEdge__55" sourceElement="mailTask2" targetElement="UserTask2">
+        <omgdi:waypoint x="355.0" y="692.5"/>
+        <omgdi:waypoint x="380.0" y="468.0"/>
+        <omgdi:waypoint x="260.0" y="287.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_54" name="BPMNEdge__54" sourceElement="ServiceTask4" targetElement="mailTask2">
+        <omgdi:waypoint x="312.5" y="655.0"/>
+        <omgdi:waypoint x="312.5" y="665.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_57" name="BPMNEdge__57" sourceElement="ServiceTask5" targetElement="UserTask4">
+        <omgdi:waypoint x="90.0" y="732.5"/>
+        <omgdi:waypoint x="400.0" y="290.0"/>
+        <omgdi:waypoint x="510.0" y="72.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_59" name="BPMNEdge__59" sourceElement="_46" targetElement="_47">
+        <omgdi:waypoint x="987.5" y="190.0"/>
+        <omgdi:waypoint x="987.5" y="220.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_58" name="BPMNEdge__58" sourceElement="UserTask7" targetElement="_46">
+        <omgdi:waypoint x="987.5" y="100.0"/>
+        <omgdi:waypoint x="987.5" y="135.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_62" name="BPMNEdge__62" sourceElement="ExclusiveGateWay7" targetElement="UserTask7">
+        <omgdi:waypoint x="1007.0" y="301.0"/>
+        <omgdi:waypoint x="1125.0" y="230.0"/>
+        <omgdi:waypoint x="1030.0" y="72.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_61" name="BPMNEdge__61" sourceElement="_47" targetElement="ExclusiveGateWay7">
+        <omgdi:waypoint x="991.0" y="275.0"/>
+        <omgdi:waypoint x="991.0" y="285.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_64" name="BPMNEdge__64" sourceElement="ExclusiveGateWay7" targetElement="UserTask8">
+        <omgdi:waypoint x="991.0" y="317.0"/>
+        <omgdi:waypoint x="991.0" y="345.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_66" name="BPMNEdge__66" sourceElement="UserTask8" targetElement="ExclusiveGateWay8">
+        <omgdi:waypoint x="991.0" y="400.0"/>
+        <omgdi:waypoint x="991.0" y="425.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_71" name="BPMNEdge__71" sourceElement="ExclusiveGateWay8" targetElement="UserTask9">
+        <omgdi:waypoint x="990.0" y="456.0"/>
+        <omgdi:waypoint x="990.0" y="490.0"/>
+        <omgdi:waypoint x="990.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_70" name="BPMNEdge__70" sourceElement="ExclusiveGateWay8" targetElement="_67">
+        <omgdi:waypoint x="975.0" y="441.0"/>
+        <omgdi:waypoint x="875.0" y="500.0"/>
+        <omgdi:waypoint x="875.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_72" name="BPMNEdge__72" sourceElement="ExclusiveGateWay8" targetElement="_69">
+        <omgdi:waypoint x="1007.0" y="441.0"/>
+        <omgdi:waypoint x="1135.0" y="480.0"/>
+        <omgdi:waypoint x="1135.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_74" name="BPMNEdge__74" sourceElement="UserTask9" targetElement="_73">
+        <omgdi:waypoint x="1007.5" y="580.0"/>
+        <omgdi:waypoint x="1007.5" y="615.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_77" name="BPMNEdge__77" sourceElement="_67" targetElement="ExclusiveGateWay9">
+        <omgdi:waypoint x="885.0" y="580.0"/>
+        <omgdi:waypoint x="885.0" y="600.0"/>
+        <omgdi:waypoint x="1000.0" y="751.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_76" name="BPMNEdge__76" sourceElement="_73" targetElement="ExclusiveGateWay9">
+        <omgdi:waypoint x="1016.0" y="670.0"/>
+        <omgdi:waypoint x="1016.0" y="735.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_78" name="BPMNEdge__78" sourceElement="_69" targetElement="ExclusiveGateWay9">
+        <omgdi:waypoint x="1135.0" y="580.0"/>
+        <omgdi:waypoint x="1135.0" y="640.0"/>
+        <omgdi:waypoint x="1032.0" y="751.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_81" name="BPMNEdge__81" sourceElement="UserTask10" targetElement="_80">
+        <omgdi:waypoint x="1282.5" y="100.0"/>
+        <omgdi:waypoint x="1282.5" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_83" name="BPMNEdge__83" sourceElement="_80" targetElement="_82">
+        <omgdi:waypoint x="1282.5" y="185.0"/>
+        <omgdi:waypoint x="1282.5" y="210.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_85" name="BPMNEdge__85" sourceElement="_82" targetElement="_84">
+        <omgdi:waypoint x="1285.0" y="265.0"/>
+        <omgdi:waypoint x="1285.0" y="285.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_88" name="BPMNEdge__88" sourceElement="ExclusiveGateWay10" targetElement="UserTask10">
+        <omgdi:waypoint x="1275.0" y="396.0"/>
+        <omgdi:waypoint x="1220.0" y="230.0"/>
+        <omgdi:waypoint x="1240.0" y="72.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_87" name="BPMNEdge__87" sourceElement="_84" targetElement="ExclusiveGateWay10">
+        <omgdi:waypoint x="1291.0" y="340.0"/>
+        <omgdi:waypoint x="1291.0" y="380.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_89" name="BPMNEdge__89" sourceElement="ExclusiveGateWay9" targetElement="UserTask10">
+        <omgdi:waypoint x="1032.0" y="751.0"/>
+        <omgdi:waypoint x="1200.0" y="385.0"/>
+        <omgdi:waypoint x="1240.0" y="72.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3" name="BPMNEdge__3" sourceElement="UserTask4" targetElement="_2">
+        <omgdi:waypoint x="552.5" y="100.0"/>
+        <omgdi:waypoint x="552.5" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5" name="BPMNEdge__5" sourceElement="_2" targetElement="_4">
+        <omgdi:waypoint x="555.0" y="185.0"/>
+        <omgdi:waypoint x="555.0" y="205.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_90" name="BPMNEdge__90" sourceElement="ExclusiveGateWay9" targetElement="UserTask8">
+        <omgdi:waypoint x="1000.0" y="751.0"/>
+        <omgdi:waypoint x="825.0" y="500.0"/>
+        <omgdi:waypoint x="945.0" y="372.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7" name="BPMNEdge__7" sourceElement="_4" targetElement="ExclusiveGateWay4">
+        <omgdi:waypoint x="561.0" y="260.0"/>
+        <omgdi:waypoint x="561.0" y="290.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8" name="BPMNEdge__8" sourceElement="ExclusiveGateWay4" targetElement="UserTask4">
+        <omgdi:waypoint x="577.0" y="306.0"/>
+        <omgdi:waypoint x="690.0" y="185.0"/>
+        <omgdi:waypoint x="595.0" y="72.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_92" name="BPMNEdge__92" sourceElement="ExclusiveGateWay10" targetElement="UserTask11">
+        <omgdi:waypoint x="1307.0" y="396.0"/>
+        <omgdi:waypoint x="1351.0" y="321.0"/>
+        <omgdi:waypoint x="1370.0" y="52.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_94" name="BPMNEdge__94" sourceElement="UserTask11" targetElement="ExclusiveGateWay11">
+        <omgdi:waypoint x="1416.0" y="80.0"/>
+        <omgdi:waypoint x="1416.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11" name="BPMNEdge__11" sourceElement="ExclusiveGateWay4" targetElement="UserTask5">
+        <omgdi:waypoint x="561.0" y="322.0"/>
+        <omgdi:waypoint x="561.0" y="370.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="2.0" width="0.0" x="0.0" y="4.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_99" name="BPMNEdge__99" sourceElement="_95" targetElement="_96">
+        <omgdi:waypoint x="1422.5" y="240.0"/>
+        <omgdi:waypoint x="1422.5" y="255.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10" name="BPMNEdge__10" sourceElement="UserTask1" targetElement="ServiceTask1">
+        <omgdi:waypoint x="35.0" y="111.0"/>
+        <omgdi:waypoint x="35.0" y="125.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_13" name="BPMNEdge__13" sourceElement="UserTask5" targetElement="ExclusiveGateWay5">
+        <omgdi:waypoint x="565.0" y="425.0"/>
+        <omgdi:waypoint x="565.0" y="435.0"/>
+        <omgdi:waypoint x="565.0" y="461.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_15" name="BPMNEdge__15" sourceElement="ExclusiveGateWay6" targetElement="UserTask7">
+        <omgdi:waypoint x="587.0" y="756.0"/>
+        <omgdi:waypoint x="790.0" y="655.0"/>
+        <omgdi:waypoint x="945.0" y="72.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_19" name="BPMNEdge__19" sourceElement="ServiceTask1" targetElement="ExclusiveGateWay1">
+        <omgdi:waypoint x="46.0" y="180.0"/>
+        <omgdi:waypoint x="46.0" y="205.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_20" name="BPMNEdge__20" sourceElement="ExclusiveGateWay5" targetElement="_14">
+        <omgdi:waypoint x="550.0" y="476.0"/>
+        <omgdi:waypoint x="460.0" y="525.0"/>
+        <omgdi:waypoint x="460.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_21" name="BPMNEdge__21" sourceElement="ExclusiveGateWay5" targetElement="UserTask6">
+        <omgdi:waypoint x="566.0" y="476.0"/>
+        <omgdi:waypoint x="570.0" y="479.0"/>
+        <omgdi:waypoint x="570.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_24" name="BPMNEdge__24" sourceElement="ExclusiveGateWay5" targetElement="_16">
+        <omgdi:waypoint x="581.0" y="475.0"/>
+        <omgdi:waypoint x="685.0" y="475.0"/>
+        <omgdi:waypoint x="685.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_23" name="BPMNEdge__23" sourceElement="ExclusiveGateWay1" targetElement="UserTask2">
+        <omgdi:waypoint x="62.0" y="221.0"/>
+        <omgdi:waypoint x="175.0" y="287.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-2.0" width="0.0" x="0.0" y="9.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_26" name="BPMNEdge__26" sourceElement="UserTask6" targetElement="_18">
+        <omgdi:waypoint x="567.5" y="605.0"/>
+        <omgdi:waypoint x="567.5" y="635.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_27" name="BPMNEdge__27" sourceElement="mailTask1" targetElement="UserTask2">
+        <omgdi:waypoint x="90.0" y="327.5"/>
+        <omgdi:waypoint x="175.0" y="287.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_29" name="BPMNEdge__29" sourceElement="UserTask2" targetElement="ExclusiveGateWay2">
+        <omgdi:waypoint x="175.0" y="287.5"/>
+        <omgdi:waypoint x="127.0" y="426.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_33" name="BPMNEdge__33" sourceElement="ExclusiveGateWay2" targetElement="ServiceTask2">
+        <omgdi:waypoint x="127.0" y="426.0"/>
+        <omgdi:waypoint x="307.0" y="263.0"/>
+        <omgdi:waypoint x="307.0" y="230.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-69.0" width="0.0" x="0.0" y="4.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

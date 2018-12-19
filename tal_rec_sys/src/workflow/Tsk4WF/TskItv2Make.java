@@ -1,12 +1,11 @@
-package MVC.ActivitiService.serviceTask.Interview2;
+package workflow.Tsk4WF;
 
 import MVC.Service.InterviewService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//记录面试结果
-public class record_Intv2_res implements JavaDelegate {
+public class TskItv2Make implements JavaDelegate {
 
     @Autowired
     InterviewService interviewService;

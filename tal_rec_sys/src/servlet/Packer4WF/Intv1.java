@@ -35,7 +35,7 @@ public class Intv1 extends HttpServlet {
         }
         String json_str= JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("");
+        response.sendRedirect("/complete/7?josn="+json_str);//userTask7
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

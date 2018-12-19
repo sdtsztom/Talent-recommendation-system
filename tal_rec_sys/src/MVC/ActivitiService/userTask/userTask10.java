@@ -14,9 +14,8 @@ public class userTask10 implements userTask{
     @Override
     public void execute(String taskId,Map<String,String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();
-        //taskVariables.put("var10",vars);
+        taskVariables.put("json",vars.get("json"));
         taskService.complete(taskId,taskVariables);
-        System.out.println("二轮面试");
     }
 
 }

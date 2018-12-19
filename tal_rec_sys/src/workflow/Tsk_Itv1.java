@@ -40,7 +40,7 @@ public class Tsk_Itv1 {
 
     }
 
-    public static boolean finish(int rrid){
+    public static boolean finish(String rrid){
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_I1.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{
