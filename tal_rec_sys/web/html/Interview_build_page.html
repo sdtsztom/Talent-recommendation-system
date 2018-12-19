@@ -10,10 +10,19 @@
     <script src="/js/Interview_build_page.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
+<div class="row" name="div">
+=======
 <div class="row" id="div">
+>>>>>>> 6e999eaffbe30fc8dfc9e2d36ef2b96de52f3ad4
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <form method="post" onsubmit="return false">
+            <label>面试轮数</label>
+            <select class="form-control" name="ip_rnd">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
             <label>面试地点</label>
             <select class="form-control" name="ip_id" id="ip_id">
                 <option v-for="ip in ips" :value="ip.ip_id">{{ip.ip_detail}}</option>
@@ -27,8 +36,13 @@
                 <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
             </select>
             <label>需求id</label>
+<<<<<<< HEAD
+            <select class="form-control" name="rr_id_of_otherNeed" id="rr_id_of_otherNeed">
+                <option v-for="rr in rrs" :value="rr.rr_id_of_otherNeed">{{rr.rr_id_of_otherNeed}}</option>
+=======
             <select class="form-control" name="rr_id" id="rr_id">
                 <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>
+>>>>>>> 6e999eaffbe30fc8dfc9e2d36ef2b96de52f3ad4
             </select>
             <div class="form-group">
                 <label for="itv_time">面试时间</label>

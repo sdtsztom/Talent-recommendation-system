@@ -1,6 +1,7 @@
 package workflow;
 
 import bean.Arrangement;
+import email_template.Intv2Pass2RpEmailTemplate;
 import ienum.*;
 import procedure.pointsReward;
 import util.CommonConnection;
@@ -37,11 +38,18 @@ public class Tsk_Itv2 {
 
     }
 
-    public static void email(){
+    public static void email(Arrangement[] arrangements){
+        for(Arrangement arrangement:arrangements) {
+            String rec_id = arrangement.getRec_id();
+            Intv2Pass2RpEmailTemplate emailTemplate = new Intv2Pass2RpEmailTemplate(rec_id);
+            emailTemplate.genContent();
+            emailTemplate.setSubject();
+            emailTemplate.send();
+        }
 
     }
 
-    public static boolean finish(int rrid){
+    public static boolean finish(String rrid){
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_I2.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{

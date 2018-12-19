@@ -24,8 +24,7 @@
     </mvc:annotation-driven>
 
     <!-- configure the InternalResourceViewResolver -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          id="internalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" name="internalResourceViewResolver">
         <!-- 前缀 -->
         <property name="prefix" value="/html/" />
         <!-- 后缀 -->
