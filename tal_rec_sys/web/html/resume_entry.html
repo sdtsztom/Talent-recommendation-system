@@ -10,62 +10,62 @@
     <script src="/js/resume_entry.js"></script>
 </head>
 <body>
-<div class="row" rec_id="div">
+<div class="row" id="div">
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <form method="post" onsubmit="return false">
             <div class="form-group">
                 <label for="name">姓名</label>
-                <input type="text" class="form-control" rec_id="name" name="name" placeholder="name">
+                <input type="text" class="form-control" id="name" name="name" placeholder="name">
             </div>
             <div class="form-group">
                 <label for="age">年龄</label>
-                <input type="text" class="form-control" rec_id="age" name="age" placeholder="age">
+                <input type="text" class="form-control" id="age" name="age" placeholder="age">
             </div>
             <div class="form-group">
                 <label for="tel">电话</label>
-                <input type="text" class="form-control" rec_id="tel" name="tel" placeholder="tel">
+                <input type="text" class="form-control" id="tel" name="tel" placeholder="tel">
             </div>
             <div class="form-group">
                 <label for="email">邮箱</label>
-                <input type="email" class="form-control" rec_id="email" name="email" placeholder="email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="email">
             </div>
             <div class="form-group">
                 <label for="grt">毕业时间</label>
-                <input type="date" class="form-control" name="grt" rec_id="grt">
+                <input type="date" class="form-control" name="grt" id="grt">
             </div>
             <div class="form-group">
                 <label for="major">专业</label>
-                <input type="text" class="form-control" rec_id="major" name="major" placeholder="major">
+                <input type="text" class="form-control" id="major" name="major" placeholder="major">
             </div>
             <div class="form-group">
                 <label for="abi">专业技能</label>
-                <input type="text" class="form-control" rec_id="abi" name="abi" placeholder="abi">
+                <input type="text" class="form-control" id="abi" name="abi" placeholder="abi">
             </div>
             <div class="form-group">
                 <label for="path">简历路径</label>
-                <input type="text" class="form-control" rec_id="path" name="path" placeholder="path">
+                <input type="text" class="form-control" id="path" name="path" placeholder="path">
             </div>
             <label>性别</label>
-            <select class="form-control" name="sex" rec_id="sex">
+            <select class="form-control" name="sex" id="sex">
                 <option value="男">男</option>
                 <option value="女">女</option>
             </select>
             <label>是否在读</label>
-            <select class="form-control" name="stu" rec_id="stu">
+            <select class="form-control" name="stu" id="stu">
                 <option value="是">是</option>
                 <option value="否">否</option>
             </select>
             <label>学历</label>
-            <select class="form-control" name="deg_id" rec_id="deg_id">
+            <select class="form-control" name="deg_id" id="deg_id">
                     <option v-for="deg in degs" :value="deg.deg_id">{{deg.deg_name}}</option>
             </select>
             <label>大学</label>
-            <select class="form-control" name="uni_id" rec_id="uni_id">
+            <select class="form-control" name="uni_id" id="uni_id">
                     <option v-for="uni in unis" :value="uni.uni_id">{{uni.uni_name}}</option>
             </select>
             <label>职业</label>
-            <select class="form-control" name="jb_id" rec_id="jb_id">
+            <select class="form-control" name="jb_id" id="jb_id">
                     <option v-for="job in jobs" :value="job.jb_id">{{job.jb_name}}</option>
             </select>
         </form>

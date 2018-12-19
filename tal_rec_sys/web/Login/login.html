@@ -48,17 +48,17 @@ To change this template use File | Settings | File Templates.
                 <div class="col-md-3 column">
                 </div>
                 <div class="col-md-6 column">
-                    <form class="form-horizontal" rec_id="login_form" method="post" action="/check_login" role="form">
+                    <form class="form-horizontal" id="login_form" method="post" action="/check_login" role="form">
                         <div class="form-group">
                             <label for="log_name" class="col-sm-2 control-label">用户名</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="username" rec_id="log_name" />
+                                <input type="text" class="form-control" name="username" id="log_name" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="log_passwd" class="col-sm-2 control-label">密码</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" name="pwd" rec_id="log_passwd"/>
+                                <input type="password" class="form-control" name="pwd" id="log_passwd"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -73,7 +73,7 @@ To change this template use File | Settings | File Templates.
                                 <button type="submit" class="btn btn-default">登陆</button>
                             </div>
                         </div>
-                        <div rec_id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
+                        <div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
                     </form>
                 </div>
                 <div class="col-md-3 column">
@@ -82,12 +82,12 @@ To change this template use File | Settings | File Templates.
         </div>
     </div>
 </div>
-<!--<div rec_id="login" class="divForm">-->
-    <!--<form rec_id="login_form" method="post" action="/login_servlet">-->
+<!--<div id="login" class="divForm">-->
+    <!--<form id="login_form" method="post" action="/login_servlet">-->
         <!--<br/><br/>-->
-                    <!--用户名<input type="text" name="username" rec_id="log_name"><br/><br/>-->
-                    <!--密码&nbsp&nbsp&nbsp<input type="password" name="pwd" rec_id="log_passwd"><br/><br/>-->
-                    <!--<div rec_id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>-->
+                    <!--用户名<input type="text" name="username" id="log_name"><br/><br/>-->
+                    <!--密码&nbsp&nbsp&nbsp<input type="password" name="pwd" id="log_passwd"><br/><br/>-->
+                    <!--<div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>-->
         <!--<input type="submit" value="登录"><input type="reset" value="清除">-->
     <!--</form>-->
 <!--</div>-->

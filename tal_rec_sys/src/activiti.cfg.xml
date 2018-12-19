@@ -3,7 +3,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<<<<<<< HEAD
     <bean name="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+=======
+    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+>>>>>>> 6e999eaffbe30fc8dfc9e2d36ef2b96de52f3ad4
         <property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;DatabaseName=activiti" />
         <property name="jdbcDriver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
         <property name="jdbcUsername" value="u_dev" />

@@ -12,35 +12,35 @@
                                 expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-  <!--  <bean rec_id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+  <!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
         <property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=tal_rec_sys" />
         <property name="username" value="u_dev" />
         <property name="password" value="12345678a" />
     </bean>
 
-    <bean rec_id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
-    <bean rec_id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
         <property name="dataSource" ref="dataSource" />
         <property name="transactionManager" ref="transactionManager" />
         <property name="databaseSchemaUpdate" value="true" />
         <property name="jobExecutorActivate" value="false" />
     </bean>
 
-    <bean rec_id="processEngineFactory" class="org.activiti.spring.ProcessEngineFactoryBean">
+    <bean id="processEngineFactory" class="org.activiti.spring.ProcessEngineFactoryBean">
         <property name="processEngineConfiguration" ref="processEngineConfiguration" />
     </bean>
 
-    <bean rec_id="runtimeService" factory-bean="processEngineFactory" factory-method="getRuntimeService" />
-    <bean rec_id="repositoryService" factory-bean="processEngineFactory" factory-method="getRepositoryService" />
-    <bean rec_id="taskService" factory-bean="processEngineFactory" factory-method="getTaskService" />
-    <bean rec_id="managementService" factory-bean="processEngineFactory" factory-method="getManagementService" />
-    <bean rec_id="formService" factory-bean="processEngineFactory" factory-method="getFormService" />
-    <bean rec_id="identityService" factory-bean="processEngineFactory" factory-method="getIdentityService" />
-    <bean rec_id="historyService" factory-bean="processEngineFactory" factory-method="getHistoryService" />
+    <bean id="runtimeService" factory-bean="processEngineFactory" factory-method="getRuntimeService" />
+    <bean id="repositoryService" factory-bean="processEngineFactory" factory-method="getRepositoryService" />
+    <bean id="taskService" factory-bean="processEngineFactory" factory-method="getTaskService" />
+    <bean id="managementService" factory-bean="processEngineFactory" factory-method="getManagementService" />
+    <bean id="formService" factory-bean="processEngineFactory" factory-method="getFormService" />
+    <bean id="identityService" factory-bean="processEngineFactory" factory-method="getIdentityService" />
+    <bean id="historyService" factory-bean="processEngineFactory" factory-method="getHistoryService" />
 -->
 </beans>
