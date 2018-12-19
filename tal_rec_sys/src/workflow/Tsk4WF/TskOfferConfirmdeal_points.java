@@ -1,4 +1,4 @@
-package workflow.OfferConfirm;
+package workflow.Tsk4WF;
 
 import MVC.Service.PointService;
 import ienum.Point;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 //积分奖励
 @Service
-public class deal_points implements JavaDelegate {
+public class TskOfferConfirmdeal_points implements JavaDelegate {
 
     @Autowired
     PointService pointService;

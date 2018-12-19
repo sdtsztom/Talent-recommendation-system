@@ -10,9 +10,15 @@ public class TskSiftFinish implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) {
-        String json = (String)delegateExecution.getVariable("json");
-        Arrangement arrangement = JSON.parseObject(json,Arrangement.class);
-        boolean finish = Tsk_sift.finish(arrangement.getRec_id());
+        String json=(String)delegateExecution.getVariable("json");
+        Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
+        boolean finish;
+        for(Arrangement arrangement:arrangements) {
+            if(Tsk_sift.finish(arrangement.getRec_id()) == false) {
+                finish = false;
+            }
+        }
+        finish = true;
         delegateExecution.setVariable("isFinish",finish);
     }
 }

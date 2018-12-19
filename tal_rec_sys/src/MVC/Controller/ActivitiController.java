@@ -1,6 +1,5 @@
 package MVC.Controller;
 
-import MVC.ActivitiService.serviceTask.OfferConfirm.deal_points;
 import MVC.ActivitiService.userTask.UserTaskFactory;
 import MVC.ActivitiService.userTask.userTask;
 import MVC.Service.MailService;
