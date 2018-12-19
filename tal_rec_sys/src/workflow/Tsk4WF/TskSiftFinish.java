@@ -23,9 +23,10 @@ public class TskSiftFinish implements JavaDelegate {
         delegateExecution.setVariable("isFinish",finish);
     }
 
-    public static void exec_debug(String json){
+    public static boolean exec_debug(String json){
         Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
         String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+arrangements[0].getRec_id(), ConnectUser.SYS);
         boolean finish = Tsk_sift.finish(rrid);
+        return finish;
     }
 }
