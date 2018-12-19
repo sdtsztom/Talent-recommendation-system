@@ -2,7 +2,7 @@
 <%@ page import="table.Table_for_SRM_vOpen" %>
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
-<%@ page import="ienum.SRM_Page" %><%--
+<%@ page import="ienum.WF_Servlets" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/12
@@ -17,10 +17,13 @@
 %>
 <head>
     <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.OPEN%>)</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <p>登录人：<%=name%></p>
-<p>需求号：<%=rrid%></p><a href="/function/Query_Recruit_HR.html">需求详情</a>
+<p>需求号：<%=rrid%></p>
+<a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
+<a href="/function/Query_Recruit_HR.html">返回</a>
 <%
     Table_for_SRM_vOpen table=new Table_for_SRM_vOpen("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_OPEN_SIFT where rec_rr_id="+rrid, ConnectUser.HR);
     String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息"};
@@ -28,7 +31,7 @@
 %>
 
 <%-- should be done in workflow --%>
-<div><button><a href="<%=SRM_Page.W_SIFT%>?rrid=<%=rrid%>">开始筛选</a></button>
+<div><button><a href="<%=WF_Servlets.OPEN2SIFT%>?rrid=<%=rrid%>">开始筛选</a></button>
     <button><a href="...">更新需求</a></button>
 </div>
 </body>

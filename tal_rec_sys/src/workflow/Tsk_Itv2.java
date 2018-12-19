@@ -41,10 +41,10 @@ public class Tsk_Itv2 {
     public static void email(Arrangement[] arrangements){
         for(Arrangement arrangement:arrangements) {
             String rec_id = arrangement.getRec_id();
-            Intv2Pass2RpEmailTemplate emailTemplate = new Intv2Pass2RpEmailTemplate(rec_id);
-            emailTemplate.genContent();
-            emailTemplate.setSubject();
-            emailTemplate.send();
+            if(arrangement.getResult()==Arr_result.PASS){
+                Intv2Pass2RpEmailTemplate emailTemplate = new Intv2Pass2RpEmailTemplate(rec_id);
+                emailTemplate.send();
+            }
         }
 
     }

@@ -14,10 +14,14 @@ public class TableBase {
      boolean switcher=true;  //开关，true使用str_load，false使用table_load
      int nrows=0;
      int ncols=0;
-     String default_table_css="border=1px style=\"border-collapse:collapse;\"";
+     //String default_table_css="border=1px style=\"border-collapse:collapse;\"";
+    //要求bootstrip的样式设定
+    //<link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+     String default_table_css="class=\"table\"";
      int npage=1;
      boolean with_order=true;
 
+     //*******************************Initialize*************************************
     public TableBase(){};
     
     public TableBase(TableBase table_load){
@@ -31,7 +35,9 @@ public class TableBase {
     public TableBase(String query,ConnectUser user){
         this.receive(query,user);
     }
+    //*******************************Initialize*************************************
 
+    //*******************************Receive Methods*************************************
     public void receive(TableBase table_load){
         this.table_load=table_load;
         switcher=false;
@@ -46,8 +52,6 @@ public class TableBase {
         if(table_load!=null)table_load=null;
         makeShape(str_load.length,str_load[0].length);
     }
-
-    public void setWith_order(boolean with_order){this.with_order=with_order;}
 
     public void receive(String query, ConnectUser user){
         CachedRowSetImpl rs=CommonConnection.makeQuery(query,user);
@@ -70,6 +74,14 @@ public class TableBase {
         }
         this.receive(str_data);
     }
+    //*******************************Receive Methods*************************************
+
+    public void makeShape(int data_nrow,int data_ncol){
+        this.nrows=data_nrow;
+        this.ncols=data_ncol;
+    }
+
+    public void setWith_order(boolean with_order){this.with_order=with_order;}
 
     public String _getItem(int row,int col){
         if(switcher)return str_load[row][col];
@@ -86,35 +98,65 @@ public class TableBase {
         return s;
     }
 
+    //****************************************HTML Generator*******************************************
+    public String[] genTableWrapper(String table_css){
+        String pre="<div><table "+table_css+">\n";
+        String post="\n</table></div>\n";
+        String table_wapper[]={pre,post};
+        return table_wapper;
+    }
+
+    public String genHead(String []head){
+        // 产生的内容不包含换行符
+        String head_content="";
+        String item_wrapper[]={"<th>","</th>"};
+        String line_wrapper[]={"<tr>\n","\n</tr>"};
+
+        if(with_order)head_content+="<th>序号</th>";
+
+        for(String i:head){head_content+=item_wrapper[0]+i+item_wrapper[1];}
+
+        return line_wrapper[0]+head_content+line_wrapper[1];
+    }
+
+    public String genLine(int row){
+        // 产生的内容包含换行符
+        String line_content="";
+        String item_wrapper[]={"<td>","</td>"};
+        String line_wrapper[]={"<tr>\n","\n</tr>\n"};
+
+        // 添加序号信息
+        if(with_order)line_content+=item_wrapper[0]+(row+1)+item_wrapper[1];
+
+        for(int i: iutil.range(ncols))line_content+=item_wrapper[0]+getItem(row,i)+item_wrapper[1];
+        return line_wrapper[0]+line_content+line_wrapper[1];
+    }
+    //****************************************HTML Generator*******************************************
+
+    //*****************************************call API****************************************************
     public String genHTML(String []head){
         return genHTML(head,default_table_css);
     }
 
     public String genHTML(String []head,String table_css) {
         // if you don't need head,pass null
-        String content="";
+        String body_content="";
+        String head_wrapper[]={"<thead>\n","\n</thead>"};
+        String body_wrapper[]={"<tbody>\n","</tbody>"};
+        String table_wrapper[]=genTableWrapper(table_css);
+
+        // 加入head
         if (head!=null&&head.length != ncols) return null;
-        if(head!=null)content+=genHead(head);
-        for(int i:iutil.range(nrows))content+=genLine(i);
-        return "<table "+table_css+">\n"+content+"</table>\n";
-    }
+        if(head!=null)body_content+=head_wrapper[0]+genHead(head)+head_wrapper[1];
 
-    public String genHead(String []head){
-        String content="";
-        if(with_order)content+="<th>序号</th>";
-        for(String i:head){content+="<th>"+i+"</th>";}
-        return "<tr>\n"+content+"\n</tr>\n";
-    }
+        body_content+="\n";
 
-    public String genLine(int row){
-        String content="";
-        if(with_order)content+="<td>"+(row+1)+"</td>";
-        for(int i: iutil.range(ncols))content+="<td>"+getItem(row,i)+"</td>";
-        return "<tr>\n"+content+"\n</tr>\n";
+        // 加入body
+        body_content+=body_wrapper[0];
+        for(int i:iutil.range(nrows))body_content+=genLine(i);
+        body_content+=body_wrapper[1];
+
+        return table_wrapper[0]+body_content+table_wrapper[1];
     }
-    
-    public void makeShape(int data_nrow,int data_ncol){
-        this.nrows=data_nrow;
-        this.ncols=data_ncol;
-    }
+    //*****************************************call API****************************************************
 }
