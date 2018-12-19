@@ -6,7 +6,8 @@ import util.CommonConnection;
 
 public class Tsk_open2sift {
     public static boolean Finish(String rrid){
-        CommonConnection.Update("update recruitment_requirements set rec_recsta_id="+ RrStage.W_SIFT.toId()+" where rrid="+rrid, ConnectUser.SYS);
+        System.out.println("update recruitment_requirements set rr_sta_id="+ RrStage.W_SIFT.toId()+" where rr_id="+rrid);
+        CommonConnection.Update("update recruitment_requirements set rr_sta_id="+ RrStage.W_SIFT.toId()+" where rr_id="+rrid, ConnectUser.SYS);
         return true;
     }
 }
