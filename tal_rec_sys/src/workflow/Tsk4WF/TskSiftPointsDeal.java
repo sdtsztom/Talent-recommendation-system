@@ -12,4 +12,9 @@ public class TskSiftPointsDeal implements JavaDelegate {
         Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
         Tsk_sift.deal_points(arrangements);
     }
+
+    public void exec_debug(String json){
+        Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
+        Tsk_sift.deal_points(arrangements);
+    }
 }

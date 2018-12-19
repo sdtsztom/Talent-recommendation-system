@@ -21,4 +21,8 @@ public class TskSiftFinish implements JavaDelegate {
         finish = true;
         delegateExecution.setVariable("isFinish",finish);
     }
+
+    public void exec_debug(String json){
+
+    }
 }
