@@ -7,7 +7,7 @@ public class Table_for_SRM_vSift_Arr extends TableBase {
     public Table_for_SRM_vSift_Arr(){super();}
     public Table_for_SRM_vSift_Arr(TableBase table_load){ super(table_load);}
     public Table_for_SRM_vSift_Arr(String [][]str_load){super(str_load);}
-    public Table_for_SRM_vSift_Arr(String query, ConnectUser user){
+    public Table_for_SRM_vSift_Arr(String query, ConnectUser user)throws Exception{
         super(query,user);
     }
 
@@ -30,7 +30,7 @@ public class Table_for_SRM_vSift_Arr extends TableBase {
         }
         else if(col==ncols-1){
             String other_need_name="id_otherNeed_"+rec_id;
-            return "<input type=\"text\" name=\""+other_need_name+"\">";
+            return "<input type=\"text\" name=\""+other_need_name+"\">";    //TODO 这里应该个判断，因为安排其它需求就必须填写
         }
         else return null;
     }

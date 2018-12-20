@@ -8,7 +8,7 @@
   Time: 14:44
   To change this template use File | Settings | File Templates.
 
-  TO-DO:
+  TODO:
     1. javascript检验表单
     2.[Done] 检测用户名是否被用过并动态提醒
 --%>

@@ -10,7 +10,7 @@
   Date: 2018/11/15
   Time: 16:37
   To change this template use File | Settings | File Templates.
-  TO-DO:
+  TODO:
     1. 打开简历
     2. 待精简
 --%>

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /*
- * TO-DO:
+ * TODO:
  *  1. 应该还要对权限授予表中的项目做出反应
  */
 
@@ -59,6 +59,22 @@ public class SRMFilter implements Filter {
         SRM_Page corr_page= SRM_Page.convert(stage);
         if(corr_page==null||!url.equals(corr_page.toString())){
             response.sendRedirect(eErrorPage.NOTMATCHEDSTAGE.toString());
+            return;
+        }
+
+        // 判断对应表格是否由相应记录，若无，则跳转到NoRecordYet界面
+        String view_name=null;
+        switch (stage){
+            case OPEN:
+            case W_SIFT:view_name="SRM_OPEN_SIFT";break;
+            case W_ARR_S:view_name="SRM_SIFT_ARR";break;
+            case W_I1:view_name="SRM_INTV1";break;
+            case W_I2:view_name="SRM_INTV2";break;
+            case W_OC:view_name="SRM_OC";break;
+        }
+        boolean exist_record= CommonConnection.existQuery("select * from "+view_name+" where rec_rr_id="+rrid,ConnectUser.SYS);
+        if(!exist_record){
+            response.sendRedirect(eErrorPage.NOCORRESPONDINGRECORD.toString());
             return;
         }
 

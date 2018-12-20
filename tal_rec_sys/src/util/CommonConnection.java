@@ -60,7 +60,7 @@ public class CommonConnection {
     }
 
     public static ResultSet limitQuery(String query,int limit,int page){
-        // TO-DO
+        // TODO
         return null;
     }
 

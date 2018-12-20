@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /*
- * TO-DO
+ * TODO
  *  1. 允许HR结束需求，届时所有还在等待确认入职状态的推荐都会被关闭
  */
 

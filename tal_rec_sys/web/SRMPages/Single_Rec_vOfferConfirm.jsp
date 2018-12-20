@@ -1,7 +1,9 @@
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
 <%@ page import="ienum.ConnectUser" %>
-<%@ page import="table.TableBase" %><%--
+<%@ page import="table.TableBase" %>
+<%@ page import="util.CommonConnection" %>
+<%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
