@@ -18,10 +18,11 @@ public class Table_for_SRM_vSift_Arr extends TableBase {
 
     @Override
     public String getItem(int row, int col) {
+        String rpid=_getItem(row,1);
         String rec_id=_getItem(row,0);
 
         if(col<ncols-3)return _getItem(row, col);
-        else if (col==ncols-3)return "<a href=\"/recommend_person_details.jsp?rpid="+_getItem(row,0)+"\">查看详细信息</a>";
+        else if (col==ncols-3)return "<a href=\"/recommend_person_details.jsp?rpid="+rpid+"\">查看详细信息</a>";
         else if(col==ncols-2){
             String arr_name="arr_"+rec_id;
             return "<input type=\"radio\" name=\""+arr_name+"\" value=\"itv\">安排面试"+

@@ -39,6 +39,7 @@ public class Tsk_Itv2 {
     }
 
     public static void email(Arrangement[] arrangements){
+        // TODO
         for(Arrangement arrangement:arrangements) {
             String rec_id = arrangement.getRec_id();
             if(arrangement.getResult()==Arr_result.PASS){

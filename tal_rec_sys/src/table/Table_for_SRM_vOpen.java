@@ -22,7 +22,9 @@ public class Table_for_SRM_vOpen extends TableBase{
 
     @Override
     public String getItem(int row, int col) {
+        String rpid=_getItem(row,1);
+
         if(col!=ncols-1)return _getItem(row, col);
-        else return "<a href=\"/recommend_person_details.jsp?rpid="+_getItem(row,1)+"\">查看详细信息</a>";
+        else return "<a href=\"/recommend_person_details.jsp?rpid="+rpid+"\">查看详细信息</a>";
     }
 }
