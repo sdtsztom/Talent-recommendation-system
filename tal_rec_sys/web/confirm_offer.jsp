@@ -11,10 +11,12 @@
 <head>
     <title>履职确认</title>
     <script>
+        /*
         function choice_confirm(){
             var choice=window.confirm("确定履行此决定?");
             return choice;
         }
+        */
     </script>
 </head>
 <body>
@@ -26,7 +28,7 @@
     %>
 <%=name+sex%>，恭喜您，您已被我公司提供了一份offer.请选择您是否接收我们的offer并按时履职。
 点击下方的接收按钮接收我们的offer并注册员工账号，点击决绝按钮拒绝我们的offer.
-<button onclick="choice_confirm(this)"><a href="/Login/register.jsp">接受</a></button>
-<button onclick="choice_confirm(this)"><a href="<%=WF_Servlets.OC%>?type=refuse">拒绝</a></button>
+<button ><a href="/Login/register.jsp">接受</a></button>
+<button ><a href="<%=WF_Servlets.OC%>?type=refuse">拒绝</a></button>
 </body>
 </html>
