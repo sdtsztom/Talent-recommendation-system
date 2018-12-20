@@ -26,7 +26,7 @@ public class Table_for_SRM_vI2 extends TableBase{
         else if(col==ncols-1){
             boolean itv_exist= CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid,ConnectUser.SYS);
             if(itv_exist){
-                String arr_name="arr_"+rec_id;
+                String arr_name="res_"+rec_id;
                 return "<input type=\"radio\" name=\""+arr_name+"\" value=\"pass\">发放offer"+
                         "<input type=\"radio\" name=\""+arr_name+"\" value=\"fail\">不发放offer";
             }else return "<a href=\"...\">建立面试</a>";
