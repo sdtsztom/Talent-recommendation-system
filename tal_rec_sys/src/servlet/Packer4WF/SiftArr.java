@@ -3,6 +3,8 @@ package servlet.Packer4WF;
 import bean.Arrangement;
 import com.alibaba.fastjson.JSON;
 import ienum.Arr_result;
+import ienum.SRM_Page;
+import workflow.Tsk_sift_arr;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +43,9 @@ public class SiftArr extends HttpServlet {
         //************************pass it to workflow************************
         response.sendRedirect("/complete/5?json="+json_str);//userTask5
         //************************pass it to workflow************************
-        response.sendRedirect("");
+        boolean finish= Tsk_sift_arr.finish(rrid);
+        if(finish)response.sendRedirect("/function/Query_Recruit_HR.html");
+        else response.sendRedirect(SRM_Page.W_ARR_S.toString()+"?rrid="+rrid);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
