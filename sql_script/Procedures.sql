@@ -46,10 +46,10 @@ GO
 -- put2talents
 CREATE PROCEDURE put2talents(@rec_id int,@from_id tinyint) AS
 BEGIN
-	DECLARE @rec_recstf_id char(40),@rec_dealHR_id char(40)
-	select @rec_recstf_id=rec_recstu_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
-	insert into talents values(@rec_recstf_id,@rec_dealHR_id,@from_id)
-	update recommend set rec_recsta_id=0,rec_recres_id=1 where rec_id=@rec_id
+	DECLARE @rec_rp_id char(40),@rec_dealHR_id char(40)
+	select @rec_rp_id=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
+	insert into talents values(@rec_rp_id,@rec_dealHR_id,@from_id)
+	update recommend set rec_recsta_id=1,rec_recres_id=1 where rec_id=@rec_id
 END
 GO
 
@@ -59,7 +59,8 @@ BEGIN
 	DECLARE @newHR_id char(40),@rec_dealHR_id char(40),@rpid char(40)
 	select @rpid=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
 	select @newHR_id=rr_hr_id from recruitment_requirements where rr_id=@otherneed_id
-	insert into recommend values(@otherneed_id,@rec_dealHR_id,@rpid,@from_id,2,@newHR_id,6)
+	-- 必须先关闭此recommend，不然无法插入
 	update recommend set rec_recsta_id=1,rec_recres_id=2 where rec_id=@rec_id
+	insert into recommend values(@rpid,@rec_dealHR_id,6,2,@otherneed_id,@newHR_id,@from_id)
 END
 GO
