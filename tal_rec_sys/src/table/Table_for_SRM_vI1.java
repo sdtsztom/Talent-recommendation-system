@@ -2,6 +2,7 @@ package table;
 
 import ienum.ConnectUser;
 import util.CommonConnection;
+import util.iutil;
 
 public class Table_for_SRM_vI1 extends TableBase{
     private String rrid=null;
@@ -26,10 +27,14 @@ public class Table_for_SRM_vI1 extends TableBase{
         else if(col==ncols-2){
             boolean itv_exist= CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid,ConnectUser.SYS);
             if(itv_exist){
-                String arr_name="arr_"+rec_id;
-                return "<input type=\"radio\" name=\""+arr_name+"\" value=\"itv\">下一轮面试"+
-                        "<input type=\"radio\" name=\""+arr_name+"\" value=\"otherneed\">安排其它需求"+
-                        "<input type=\"radio\" name=\""+arr_name+"\" value=\"talents\"放入人才库>";
+                //TODO 每次都查询，效率需要改善
+                boolean access=CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid+" and itv_time<="+ iutil.getDate(),ConnectUser.SYS);
+                if(access){
+                    String arr_name="arr_"+rec_id;
+                    return "<input type=\"radio\" name=\""+arr_name+"\" value=\"itv\">下一轮面试"+
+                            "<input type=\"radio\" name=\""+arr_name+"\" value=\"otherneed\">安排其它需求"+
+                            "<input type=\"radio\" name=\""+arr_name+"\" value=\"talents\">放入人才库";
+                }else return "未到安排时间";
             }else return "<a href=\"...\">建立面试</a>";    //TODO: 建立面试
         }
         else if(col==ncols-1){
