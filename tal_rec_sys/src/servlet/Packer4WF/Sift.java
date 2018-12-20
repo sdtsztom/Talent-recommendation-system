@@ -4,9 +4,9 @@ import bean.Arrangement;
 import com.alibaba.fastjson.JSON;
 import ienum.Arr_result;
 import ienum.SRM_Page;
+import workflow.Tsk4WF.TskSiftFinish;
 import workflow.Tsk4WF.TskSiftPointsDeal;
 import workflow.Tsk4WF.TskSiftRecord;
-import workflow.Tsk_sift;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +40,7 @@ public class Sift extends HttpServlet {
         TskSiftRecord.execute_debug(json_str);
         TskSiftPointsDeal.exec_debug(json_str);
         //************************shoule be replaced by workflow*******************
-        boolean finish= Tsk_sift.finish(rrid);
+        boolean finish= TskSiftFinish.exec_debug(json_str);
         if(finish)response.sendRedirect("/function/Query_Recruit_HR.html");
         else response.sendRedirect(SRM_Page.W_SIFT.toString()+"?rrid="+rrid);
     }
