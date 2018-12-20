@@ -1,7 +1,9 @@
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
 <%@ page import="ienum.ConnectUser" %>
-<%@ page import="table.TableBase" %><%--
+<%@ page import="table.TableBase" %>
+<%@ page import="util.CommonConnection" %>
+<%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
@@ -21,6 +23,13 @@
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<%
+    boolean exist_record= CommonConnection.existQuery("select * from SRM_OC where rec_rr_id="+rrid,ConnectUser.SYS);
+    if(!exist_record){
+        response.sendRedirect(eErrorPage.NOCORRESPONDINGRECORD.toString());
+        return;
+    }
+%>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>
 <a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
