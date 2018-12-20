@@ -17,6 +17,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+/*
+ * TO-DO
+ *  1. 发送邮件的提示等待页面
+ */
+
 @WebServlet(name = "SiftArr")
 public class SiftArr extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
