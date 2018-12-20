@@ -23,7 +23,7 @@ public class Intv1 extends HttpServlet {
             Arrangement temp=new Arrangement();
             String key=keys.nextElement();
             if(key.equals("rrid"))rrid=request.getParameter(key);
-            else{
+            else if(key.startsWith("arr_")){
                 String rec_id=key.split("_")[1];
                 String value=request.getParameter(key);
                 Arr_result arr=null;
