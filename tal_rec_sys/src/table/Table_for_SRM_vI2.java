@@ -22,7 +22,7 @@ public class Table_for_SRM_vI2 extends TableBase{
         String rpid=_getItem(row,1);
 
         if(col<ncols-2)return _getItem(row, col);
-        else if (col==ncols-2)return "<button><a href=\"/recommend_person_details.jsp?rpid="+_getItem(row,0)+"\">查看详细信息</a></button>";
+        else if (col==ncols-2)return "<a href=\"/recommend_person_details.jsp?rpid="+_getItem(row,0)+"\">查看详细信息</a>";
         else if(col==ncols-1){
             boolean itv_exist= CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid,ConnectUser.SYS);
             if(itv_exist){
