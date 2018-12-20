@@ -18,10 +18,13 @@
 %>
 <head>
     <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_OC%>)</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>
-<body>
+<a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
+<a href="/function/Query_Recruit_HR.html">返回</a>
 <form action="" method="post">
     <%
         TableBase table=new TableBase ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc,rec_sta from SRM_OC where rec_rr_id="+rrid, ConnectUser.HR);
