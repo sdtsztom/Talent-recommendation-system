@@ -1,7 +1,8 @@
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
 <%@ page import="table.Table_for_SRM_vI1" %>
-<%@ page import="ienum.ConnectUser" %><%--
+<%@ page import="ienum.ConnectUser" %>
+<%@ page import="ienum.WF_Servlets" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
@@ -20,7 +21,7 @@
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>
 <body>
-<form action="" method="post">
+<form action="<%=WF_Servlets.INTV1%>" method="post">
     <%
         Table_for_SRM_vI1 table=new Table_for_SRM_vI1 ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_INTV1 where rec_rr_id="+rrid, ConnectUser.HR,rrid);
         String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息","面试结果选项","需求号"};

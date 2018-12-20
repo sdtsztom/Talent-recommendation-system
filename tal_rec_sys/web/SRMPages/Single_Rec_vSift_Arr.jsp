@@ -1,7 +1,8 @@
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
 <%@ page import="table.Table_for_SRM_vSift_Arr" %>
-<%@ page import="ienum.ConnectUser" %><%--
+<%@ page import="ienum.ConnectUser" %>
+<%@ page import="ienum.WF_Servlets" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
@@ -23,7 +24,7 @@
 <p>需求号：<%=rrid%></p>
 <a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
 <a href="/function/Query_Recruit_HR.html">返回</a>
-<form action="" method="post">
+<form action="<%=WF_Servlets.SIFTARR%>" method="post">
     <%
         Table_for_SRM_vSift_Arr table=new Table_for_SRM_vSift_Arr("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc from SRM_SIFT_ARR where rec_rr_id="+rrid, ConnectUser.HR);
         String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息","安排选项","需求号"};
