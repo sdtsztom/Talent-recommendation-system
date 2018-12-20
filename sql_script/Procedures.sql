@@ -49,7 +49,7 @@ BEGIN
 	DECLARE @rec_recstf_id char(40),@rec_dealHR_id char(40)
 	select @rec_recstf_id=rec_recstu_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
 	insert into talents values(@rec_recstf_id,@rec_dealHR_id,@from_id)
-	update recommend set rec_recsta_id=0,rec_recres_id=1 where rec_id=@rec_id
+	update recommend set rec_recsta_id=1,rec_recres_id=1 where rec_id=@rec_id
 END
 GO
 
