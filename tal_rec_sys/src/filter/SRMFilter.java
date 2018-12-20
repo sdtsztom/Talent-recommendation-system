@@ -63,7 +63,7 @@ public class SRMFilter implements Filter {
         }
 
         // 判断对应表格是否由相应记录，若无，则跳转到NoRecordYet界面
-        String view_name=null;
+/*        String view_name=null;
         switch (stage){
             case OPEN:
             case W_SIFT:view_name="SRM_OPEN_SIFT";break;
@@ -76,7 +76,7 @@ public class SRMFilter implements Filter {
         if(!exist_record){
             response.sendRedirect(eErrorPage.NOCORRESPONDINGRECORD.toString());
             return;
-        }
+        }*/
 
         chain.doFilter(req, resp);
     }
