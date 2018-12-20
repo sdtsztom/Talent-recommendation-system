@@ -25,7 +25,7 @@ public class SiftArrEmailTemplate extends emailTemplateBase {
     }
 
     public void genContent(){
-        this.content="您推荐的\""+rp_name+"\"已经通过了筛选，积分已经奖励至你的账户。\n我们对被推荐人做出了\""+
+        this.content="您推荐的\""+rp_name+"\"已经通过了筛选，积分已经奖励至你的账户。<br/><br/>我们对被推荐人做出了\""+
                 Arr+"\"的安排决定，感谢您的推荐！";
     }
 }

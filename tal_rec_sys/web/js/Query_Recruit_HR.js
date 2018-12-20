@@ -28,10 +28,9 @@ function getmc(){
                             case 4: path = "/SRMPages/Single_Rec_vSift.jsp?rrid=" + details.rr_id; break;
                             case 5: path = "/SRMPages/Single_Rec_vSift_Arr.jsp?rrid=" + details.rr_id; break;
                             case 6: path = "/SRMPages/Single_Rec_vIntv1.jsp?rrid=" + details.rr_id; break;
-                            case 7: path = "/SRMPages/Single_Rec_vIntv1_Arr.jsp?rrid=" + details.rr_id;break;
-                            case 8: path = "/SRMPages/Single_Rec_vIntv2.jsp?rrid=" + details.rr_id;break;
-                            case 9: path = "/SRMPages/Single_Rec_vOfferConfirm.jsp?rrid=" + details.rr_id;break;
-                            case 10: path = "/SRMPages/Single_Rec_vTW.jsp?rrid=" + details.rr_id;break;
+                            case 7: path = "/SRMPages/Single_Rec_vIntv2.jsp?rrid=" + details.rr_id;break;
+                            case 8: path = "/SRMPages/Single_Rec_vOfferConfirm.jsp?rrid=" + details.rr_id;break;
+                            //case 9: path = "/SRMPages/Single_Rec_vTW.jsp?rrid=" + details.rr_id;break;
                         }
                         window.location.href = path
                     }
