@@ -18,6 +18,7 @@
 <html>
 <head>
     <title>Rcommend Person Detais</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <%
@@ -30,6 +31,7 @@
     String rpid=request.getParameter("rpid");
     ResultSet rs= CommonConnection.makeQuery("select * from recommend_person_details where rp_id="+rpid,ConnectUser.HR);
     TableBase table=null;
+    String []head=null;
     try{
         rs.next();
         String name=rs.getString("rp_name");
@@ -46,16 +48,14 @@
         String abi=rs.getString("rp_abi");
         String cv_path=rs.getString("rp_res_path");
         rs.close();
-        String []head={"rec_id","名字","年龄","性别","电话","email","职位","学位","毕业学校","是否在读","毕业时间","主修专业","专业技能"};
+        head=new String []{"rec_id","名字","年龄","性别","电话","email","职位","学位","毕业学校","是否在读","毕业时间","主修专业","专业技能"};
         String []content={rpid,name,age,sex,tel_num,email,job,deg,uni,stu,grt,maj,abi};
-        String [][]table_content={head,content};
-        table_content= iutil.transpose(table_content);
+        String [][]table_content={content};
         table=new TableBase(table_content);
-        table.setWith_order(false);
     }catch(Exception e){
         e.printStackTrace();
     }
 %>
-<%=table.genHTML(null)%>
+<%=table.genVerticalHTML(head,"class=\"table table-sm\"")%>
 </body>
 </html>
