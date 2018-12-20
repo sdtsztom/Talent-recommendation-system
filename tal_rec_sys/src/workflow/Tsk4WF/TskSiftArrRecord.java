@@ -12,4 +12,9 @@ public class TskSiftArrRecord implements JavaDelegate {
         Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
         Tsk_sift_arr.record_res(arrangements);
     }
+
+    public static void exec_debug(String json){
+        Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
+        Tsk_sift_arr.record_res(arrangements);
+    }
 }
