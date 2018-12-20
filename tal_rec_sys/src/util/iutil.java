@@ -47,7 +47,7 @@ public class iutil {
     public static String getDate(){
         Date date=new Date();
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
-        return df.format(date);
+        return "'"+df.format(date)+"'";
     }
     
     public static String formattedDate(Date date){

@@ -32,7 +32,11 @@ public class OfferConfirm extends HttpServlet {
             pwd+=request.getParameter("pwd");
         }
 
-        //****************************code to register(use workflow)*************************************
+        //TODO 这些分散的参数应该放入map在序列化成json
+
+        //************************pass it to workflow************************
+
+        //************************pass it to workflow************************
         if(type.equals("confirm"))response.sendRedirect("");
         else if(type.equals("refuse"))response.sendRedirect("");
     }

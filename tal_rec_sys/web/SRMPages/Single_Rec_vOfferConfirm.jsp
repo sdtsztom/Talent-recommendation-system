@@ -1,7 +1,10 @@
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
 <%@ page import="ienum.ConnectUser" %>
-<%@ page import="table.TableBase" %><%--
+<%@ page import="table.TableBase" %>
+<%@ page import="util.CommonConnection" %>
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="table.Table_for_SRM_vOC" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/27
@@ -25,14 +28,12 @@
 <p>需求号：<%=rrid%></p>
 <a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
 <a href="/function/Query_Recruit_HR.html">返回</a>
-<form action="" method="post">
-    <%
-        TableBase table=new TableBase ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc,rec_sta from SRM_OC where rec_rr_id="+rrid, ConnectUser.HR);
-        String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","状态","详细信息"};
-        out.print(table.genHTML(head));
-    %>
+<%
+    Table_for_SRM_vOC table=new Table_for_SRM_vOC ("select rec_id,rec_rp_id,rec_rp_name,rec_stf_name,rec_from_desc,rec_sta from SRM_OC where rec_rr_id="+rrid, ConnectUser.HR,rrid);
+    String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","状态","详细信息"};
+    out.print(table.genHTML(head));
+%>
 
-    <input type="submit" value="保存">
 </form>
 </body>
 </html>

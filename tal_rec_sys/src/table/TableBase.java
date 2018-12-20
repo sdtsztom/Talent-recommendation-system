@@ -33,7 +33,7 @@ public class TableBase {
         this.receive(str_load);
     }
 
-    public TableBase(String query,ConnectUser user){
+    public TableBase(String query,ConnectUser user)throws Exception{
         this.receive(query,user);
     }
     //*******************************Initialize*************************************
@@ -54,7 +54,7 @@ public class TableBase {
         makeShape();
     }
 
-    public void receive(String query, ConnectUser user){
+    public void receive(String query, ConnectUser user) throws Exception{
         CachedRowSetImpl rs=CommonConnection.makeQuery(query,user);
         String [][]str_data=null;
         try{
@@ -68,6 +68,7 @@ public class TableBase {
             }
             rs.close();
             int nrows=str_array.size();
+            if(nrows==0)throw new Exception("no record!");
             str_data=new String[nrows][ncols];
             for(int i:iutil.range(nrows))str_data[i]=str_array.get(i);
         }catch(Exception e){
