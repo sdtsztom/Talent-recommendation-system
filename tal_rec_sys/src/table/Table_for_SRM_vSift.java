@@ -18,8 +18,10 @@ public class Table_for_SRM_vSift extends TableBase {
 
     @Override
     public String getItem(int row, int col) {
+        String rpid=_getItem(row,1);
+
         if(col<ncols-2)return _getItem(row, col);
-        else if (col==ncols-2)return "<a href=\"/recommend_person_details.jsp?rpid="+_getItem(row,1)+"\">查看详细信息</a>";
+        else if (col==ncols-2)return "<a href=\"/recommend_person_details.jsp?rpid="+rpid+"\">查看详细信息</a>";
         else if(col==ncols-1){
             String name="res_"+_getItem(row,0);
             return "<input type=\"radio\" name=\""+name+"\" value=\"pass\">通过"+
