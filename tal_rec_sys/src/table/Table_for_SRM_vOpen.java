@@ -11,7 +11,7 @@ public class Table_for_SRM_vOpen extends TableBase{
     public Table_for_SRM_vOpen(String [][]str_load){
         super(str_load);
     }
-    public Table_for_SRM_vOpen(String query, ConnectUser user)throws Exception{
+    public Table_for_SRM_vOpen(String query, ConnectUser user){
         super(query,user);
     }
 
