@@ -39,7 +39,7 @@ BEGIN
 	DECLARE @rec_recstf_id char(40)
 	select @rec_recstf_id=rec_recstu_id from recommend where rec_id=@rec_id
 	insert into points_change values(@rule_id,@rec_recstf_id,GETDATE())
-	update stuff set stf_pts=stf_pts+(select ptchr_change from points_change_rule) where stf_id=@rec_recstf_id
+	update stuff set stf_pts=stf_pts+(select ptchr_change from points_change_rule where ptchr_id=@rule_id) where stf_id=@rec_recstf_id
 END
 GO
 
