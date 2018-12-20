@@ -12,4 +12,9 @@ public class TskItv2PointsDeal implements JavaDelegate {
         Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
         Tsk_Itv2.deal_points(arrangements);
     }
+
+    public static void exec_debug(String json){
+        Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
+        Tsk_Itv2.deal_points(arrangements);
+    }
 }

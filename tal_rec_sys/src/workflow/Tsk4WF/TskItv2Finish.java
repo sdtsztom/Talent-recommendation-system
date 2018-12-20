@@ -21,4 +21,10 @@ public class TskItv2Finish implements JavaDelegate {
         delegateExecution.setVariable("isFinish",finish);
     }
 
+    public static boolean exec_debug(String json){
+        Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
+        String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+arrangements[0].getRec_id(), ConnectUser.SYS);
+        boolean finish = Tsk_Itv2.finish(rrid);
+        return finish;
+    }
 }
