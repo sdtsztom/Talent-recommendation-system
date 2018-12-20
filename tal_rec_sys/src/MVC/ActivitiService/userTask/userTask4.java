@@ -10,7 +10,7 @@ public class userTask4 implements userTask {
 
     private TaskService taskService = ProcessEngines.getDefaultProcessEngine().getTaskService();
 
-    //HR筛选
+    //resume_entry
     @Override
     public void execute(String taskId, Map<String,String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();

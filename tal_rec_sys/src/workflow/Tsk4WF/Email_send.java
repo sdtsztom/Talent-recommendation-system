@@ -14,8 +14,8 @@ public class Email_send implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception{
         Map<String, Object> map = JsonUtils.json2Map(delegateExecution.getVariable("Json").toString());
         String address = map.get("address").toString();
-        String subject = map.get("subject").toString();
-        String content = map.get("content").toString();
+        String subject = "新需求发布";//map.get("subject").toString();
+        String content = "新需求";//map.get("content").toString();
         Email email = new Email();
         email.setAddr_to(address);
         email.setSubject(subject);

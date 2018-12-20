@@ -35,7 +35,7 @@ public class SiftArr extends HttpServlet {
         }
         String json_str= JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/5?json="+json_str);//userTask5
+        response.sendRedirect("/complete/7?json="+json_str);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

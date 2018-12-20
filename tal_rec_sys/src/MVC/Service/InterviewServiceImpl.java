@@ -42,12 +42,14 @@ public class InterviewServiceImpl implements InterviewService {
         list.add(recommendPeopleDAO.getDesc());
         list.add(stuffDAO.getName());
         list.add(recruitmentRequirementsDAO.getAll());
+        list.add(dao.interview_result());
+        list.add(interviewDAO.getAll());
         return list;
     }
 
     @Override
-    public int Update(String id, String rnd, String res) {
-        return interviewDAO.update(id,res,rnd);
+    public int Update(String ip_id,String rp_id,String dealHR_id,String rr_id,String itv_time,String exmer_id,String itv_detail,String ip_rnd,String itv_res,String itv_id) {
+        return interviewDAO.update(ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail,ip_rnd,itv_res,itv_id);
     }
 }
 

@@ -10,12 +10,11 @@ public class userTask9 implements userTask {
 
     private TaskService taskService = ProcessEngines.getDefaultProcessEngine().getTaskService();
 
-    //安排其他需求
+    //Itv1
     @Override
     public void execute(String taskId,Map<String,String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();
-        //taskVariables.put("var9",vars);
+        taskVariables.put("json",vars.get("json"));
         taskService.complete(taskId,taskVariables);
-        System.out.println("安排其他需求");
     }
 }

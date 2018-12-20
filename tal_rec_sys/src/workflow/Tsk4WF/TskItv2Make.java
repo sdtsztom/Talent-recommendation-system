@@ -14,6 +14,6 @@ public class TskItv2Make implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) {
         String id = (String)delegateExecution.getVariable("itv_id");
         String res = (String)delegateExecution.getVariable("itv_res_id");
-        interviewService.Update(id,"2",res);
+        //interviewService.Update(id,"2",res);
     }
 }

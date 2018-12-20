@@ -14,7 +14,8 @@ public class userTask2 implements userTask{
     @Override
     public void execute(String taskId, Map<String,String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();
-        //taskVariables.put("var2",vars);
+        String var = vars.get("");
+        taskVariables.put("var2",var);
         taskService.complete(taskId,taskVariables);
         System.out.println("员工推荐");
     }

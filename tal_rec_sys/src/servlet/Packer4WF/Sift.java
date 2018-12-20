@@ -30,7 +30,7 @@ public class Sift extends HttpServlet {
         }
         String json_str=JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/4?json="+json_str);//userTask4
+        response.sendRedirect("/complete/6?json="+json_str);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

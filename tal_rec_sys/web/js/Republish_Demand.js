@@ -38,7 +38,12 @@ $(function() {
 
 $(document).ready(function(){
     $("#rr_id").change(function(){
-        var rr_id = $("#rr_id").val()-1;
+        var get_rr_id = $("#rr_id").val();
+        for(var i = 0; i < datas.length; i++) {
+            if(datas[i].rr_id === get_rr_id) {
+                var rr_id = i;
+            }
+        }
         $("#rr_num").val(datas[rr_id].rr_num);
         $("#wp_id").val(datas[rr_id].rr_wp_id);
         $("#st_id").val(datas[rr_id].rr_st_id);
