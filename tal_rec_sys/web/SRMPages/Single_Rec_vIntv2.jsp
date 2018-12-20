@@ -29,7 +29,7 @@
         String []head={"推荐id","被推荐人id","被推荐人","推荐人","推荐来源","详细信息","面试结果选项"};
         out.print(table.genHTML(head));
     %>
-
+    <input type="hidden" name="rrid" value="<%=rrid%>">
     <input type="submit" value="保存">
 </form>
 </body>
