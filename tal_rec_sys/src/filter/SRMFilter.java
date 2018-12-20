@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /*
- * TO-DO:
+ * TODO:
  *  1. 应该还要对权限授予表中的项目做出反应
  */
 

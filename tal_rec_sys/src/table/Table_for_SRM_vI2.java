@@ -29,7 +29,7 @@ public class Table_for_SRM_vI2 extends TableBase{
                 String arr_name="res_"+rec_id;
                 return "<input type=\"radio\" name=\""+arr_name+"\" value=\"pass\">发放offer"+
                         "<input type=\"radio\" name=\""+arr_name+"\" value=\"fail\">不发放offer";
-            }else return "<a href=\"...\">建立面试</a>";
+            }else return "<a href=\"...\">建立面试</a>";    //TODO: 建立面试
         }
         else return null;
     }

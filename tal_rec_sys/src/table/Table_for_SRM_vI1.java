@@ -30,9 +30,9 @@ public class Table_for_SRM_vI1 extends TableBase{
                 return "<input type=\"radio\" name=\""+arr_name+"\" value=\"itv\">下一轮面试"+
                         "<input type=\"radio\" name=\""+arr_name+"\" value=\"otherneed\">安排其它需求"+
                         "<input type=\"radio\" name=\""+arr_name+"\" value=\"talents\"放入人才库>";
-            }else return "<a href=\"...\">建立面试</a>";
+            }else return "<a href=\"...\">建立面试</a>";    //TODO: 建立面试
         }
-        else if(col==1){
+        else if(col==ncols-1){
             String other_need_name="id_otherNeed_"+rec_id;
             return "<input type=\"text\" name=\""+other_need_name+"\">";
         }

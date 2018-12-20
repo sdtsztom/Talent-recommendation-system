@@ -41,7 +41,7 @@
 
 <%-- should be done in workflow --%>
 <div><button><a href="<%=WF_Servlets.OPEN2SIFT%>?rrid=<%=rrid%>">开始筛选</a></button>
-    <button><a href="...">更新需求</a></button>
+    <button><a href="...">更新需求</a></button> <%--TODO: 更新需求 --%>
 </div>
 </body>
 </html>
