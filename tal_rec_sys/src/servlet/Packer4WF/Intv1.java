@@ -3,6 +3,11 @@ package servlet.Packer4WF;
 import bean.Arrangement;
 import com.alibaba.fastjson.JSON;
 import ienum.Arr_result;
+import ienum.SRM_Page;
+import workflow.Tsk4WF.TskItv1Finish;
+import workflow.Tsk4WF.TskItv1PointsDeal;
+import workflow.Tsk4WF.TskItv1Record;
+import workflow.Tsk4WF.TskSiftArrFinish;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +44,13 @@ public class Intv1 extends HttpServlet {
         }
         String json_str= JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/7?josn="+json_str);//userTask7
+        //response.sendRedirect("/complete/7?josn="+json_str);//userTask7
+        TskItv1Record.exec_debug(json_str);
+        TskItv1PointsDeal.exec_debug(json_str);
         //************************pass it to workflow************************
-        response.sendRedirect("");
+        boolean finish= TskItv1Finish.exec_debug(json_str);
+        if(finish)response.sendRedirect("/function/Query_Recruit_HR.html");
+        else response.sendRedirect(SRM_Page.W_I1.toString()+"?rrid="+rrid);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
