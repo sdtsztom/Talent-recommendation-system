@@ -18,18 +18,24 @@ public class Intv2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Enumeration<String> keys=request.getParameterNames();
         ArrayList<Arrangement> arrangements=new ArrayList<Arrangement>();
+        String rrid=null;
         while(keys.hasMoreElements()){
             String key=keys.nextElement();
-            String rec_id=key.split("_")[1];
-            String value=request.getParameter(key);
-            Arr_result arr=null;
-            if(key.equals("pass"))arr=Arr_result.PASS;
-            else if(key.equals("fail"))arr=Arr_result.NOOFFER;
-            arrangements.add(new Arrangement(rec_id,arr));
+            if(key.equals("rrid"))rrid=request.getParameter(key);
+            else{
+                String rec_id=key.split("_")[1];
+                String value=request.getParameter(key);
+                Arr_result arr=null;
+                if(value.equals("pass"))arr=Arr_result.PASS;
+                else if(value.equals("fail"))arr=Arr_result.NOOFFER;
+                arrangements.add(new Arrangement(rec_id,arr));
+            }
         }
         String json_str=JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
         response.sendRedirect("/complete/10?json="+json_str);//userTask10
+        //************************pass it to workflow************************
+        response.sendRedirect("");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
