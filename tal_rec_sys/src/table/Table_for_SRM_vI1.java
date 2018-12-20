@@ -9,7 +9,7 @@ public class Table_for_SRM_vI1 extends TableBase{
     public Table_for_SRM_vI1(){super();}
     public Table_for_SRM_vI1(TableBase table_load,String rrid){ super(table_load);this.rrid=rrid;}
     public Table_for_SRM_vI1(String [][]str_load,String rrid){super(str_load);this.rrid=rrid;}
-    public Table_for_SRM_vI1(String query, ConnectUser user,String rrid){ super(query,user);this.rrid=rrid;}
+    public Table_for_SRM_vI1(String query, ConnectUser user,String rrid)throws Exception{ super(query,user);this.rrid=rrid;}
 
     @Override
     public void makeShape(int data_nrow, int data_ncol) {
