@@ -164,7 +164,7 @@ public class CommonConnection {
     public static void execProcedure(Procedure procedureClass,ConnectUser connectUser){
         setConnectUser(connectUser);
         try{
-            CallableStatement procedure=conn.prepareCall("{"+procedureClass.getProcedureName()+"}");
+            CallableStatement procedure=conn.prepareCall("{call "+procedureClass.getProcedureName()+"}");
             procedureClass.setProcedure(procedure);
             procedure.execute();
             procedureClass.receive(procedure);
