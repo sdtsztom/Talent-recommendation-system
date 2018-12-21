@@ -2,7 +2,9 @@
 <%@ page import="table.Table_for_SRM_vOpen" %>
 <%@ page import="bean.LoginUser" %>
 <%@ page import="ienum.RrStage" %>
-<%@ page import="ienum.WF_Servlets" %><%--
+<%@ page import="ienum.WF_Servlets" %>
+<%@ page import="util.CommonConnection" %>
+<%@ page import="ienum.eErrorPage" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/11/12
@@ -32,7 +34,7 @@
 
 <%-- should be done in workflow --%>
 <div><button><a href="<%=WF_Servlets.OPEN2SIFT%>?rrid=<%=rrid%>">开始筛选</a></button>
-    <button><a href="...">更新需求</a></button>
+    <button><a href="/Republish_Demand">更新需求</a></button> <%--TODO: 更新需求 --%>
 </div>
 </body>
 </html>

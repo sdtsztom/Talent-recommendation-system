@@ -1,4 +1,4 @@
-package MVC.ActivitiService.serviceTask;
+package workflow.Tsk4WF;
 
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.JavaDelegate;
@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class serviceTask1 implements JavaDelegate {
+public class beginprocessWork implements JavaDelegate {
 
     //上传招聘需求
     @Override
@@ -18,9 +18,8 @@ public class serviceTask1 implements JavaDelegate {
         function();
     }
 
-    //
     public void function() {
-        System.out.println("this is function");
+        System.out.println("ok");
     }
 
     //设置Execution的NAME

@@ -167,19 +167,19 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="TskItv2Email" id="Shape-TskItv2Email">
-        <dc:Bounds height="55.0" width="85.0" x="1330.0" y="220.0"/>
+        <dc:Bounds height="55.0" width="85.0" x="1325.0" y="220.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="TskItv2Finish" id="Shape-TskItv2Finish">
-        <dc:Bounds height="55.0" width="85.0" x="1330.0" y="285.0"/>
+        <dc:Bounds height="55.0" width="85.0" x="1330.0" y="295.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_21" id="Shape-_21" isMarkerVisible="false">
-        <dc:Bounds height="32.0" width="32.0" x="1370.0" y="365.0"/>
+        <dc:Bounds height="32.0" width="32.0" x="1360.0" y="365.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
@@ -233,9 +233,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="TskOfferConfirm" id="Shape-TskOfferConfirm">
-        <dc:Bounds height="55.0" width="85.0" x="1485.0" y="140.0"/>
+        <dc:Bounds height="60.0" width="85.0" x="1485.0" y="140.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+          <dc:Bounds height="60.0" width="85.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_39" id="Shape-_39">
@@ -518,7 +518,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_63" id="BPMNEdge__63" sourceElement="_21" targetElement="OfferConfirm">
-        <di:waypoint x="1402.0" y="381.0"/>
+        <di:waypoint x="1392.0" y="381.0"/>
         <di:waypoint x="1480.0" y="65.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
@@ -539,7 +539,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_67" id="BPMNEdge__67" sourceElement="TskOfferConfirm" targetElement="TskOfferPointDeal">
-        <di:waypoint x="1527.5" y="195.0"/>
+        <di:waypoint x="1527.5" y="200.0"/>
         <di:waypoint x="1527.5" y="215.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
@@ -606,15 +606,15 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_2" id="BPMNEdge__2" sourceElement="TskItv2Email" targetElement="TskItv2Finish">
-        <di:waypoint x="1372.5" y="275.0"/>
-        <di:waypoint x="1372.5" y="285.0"/>
+        <di:waypoint x="1370.0" y="275.0"/>
+        <di:waypoint x="1370.0" y="295.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_3" id="BPMNEdge__3" sourceElement="TskItv2Finish" targetElement="_21">
-        <di:waypoint x="1386.0" y="340.0"/>
-        <di:waypoint x="1386.0" y="365.0"/>
+        <di:waypoint x="1376.0" y="350.0"/>
+        <di:waypoint x="1376.0" y="365.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
@@ -723,7 +723,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_22" id="BPMNEdge__22" sourceElement="_21" targetElement="Intv2">
-        <di:waypoint x="1370.0" y="381.0"/>
+        <di:waypoint x="1360.0" y="381.0"/>
         <di:waypoint x="1295.0" y="200.0"/>
         <di:waypoint x="1320.0" y="37.5"/>
         <bpmndi:BPMNLabel>
@@ -745,8 +745,8 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_25" id="BPMNEdge__25" sourceElement="TskItv2PointDeal" targetElement="TskItv2Email">
-        <di:waypoint x="1370.0" y="205.0"/>
-        <di:waypoint x="1370.0" y="220.0"/>
+        <di:waypoint x="1367.5" y="205.0"/>
+        <di:waypoint x="1367.5" y="220.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>

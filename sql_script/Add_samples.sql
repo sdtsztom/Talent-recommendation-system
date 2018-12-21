@@ -1,6 +1,8 @@
 use tal_rec_sys
 GO
 
+-- dbcc checkident(interview,reseed,0)
+
 -- table role
 insert into role values('Admin，拥有最高权限')
 insert into role values('stuff')
@@ -54,6 +56,11 @@ insert into points_change_rule values('通过初次面试等待终面',2)
 insert into points_change_rule values('通过终面',2)
 insert into points_change_rule values('入职',2)
 
+-- table interview_results
+insert into interview_results values('暂无')
+insert into interview_results values('通过')
+insert into interview_results values('不通过')
+
 -- table recommend_from
 insert into recommend_from values('员工推荐')
 insert into recommend_from values('筛选后推荐')
@@ -99,14 +106,14 @@ insert into stuff_type values('FTE','Full Time Employee')
 insert into stuff_type values('PTE','Part Time Employee')
 
 -- table stuff
-insert into stuff values(1,1,'小明',20,'男','h','123','xm@163.com',0,'18711111111')
-insert into stuff values(2,2,'小红',20,'女','hh','123','xh@163.com',0,'18711111111')
-insert into stuff values(3,3,'小白',20,'男','hhh','123','xb@163.com',0,'18711111111')
+insert into stuff values(1,1,'小明',20,'男','h','123','sdtsztom@163.com',0,'18711111111')
+insert into stuff values(2,2,'小红',20,'女','hh','123','sdtsztom@163.com',0,'18711111111')
+insert into stuff values(3,3,'小白',20,'男','hhh','123','sdtsztom@163.com',0,'18711111111')
 
 -- table recommend_people
-insert into recommend_people values(1,1,'小推','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
-insert into recommend_people values(1,1,'小推2','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
-insert into recommend_people values(1,1,'小推3','男',22,'13701111111','xiaotui@gmail.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
+insert into recommend_people values(1,1,'小推','男',22,'13701111111','sdtsztom@163.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
+insert into recommend_people values(1,1,'小推2','男',22,'13701111111','sdtsztom@163.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
+insert into recommend_people values(1,1,'小推3','男',22,'13701111111','sdtsztom@163.com','否','2017/06/25','软件工程','java','./xiaotui.pdf','是','测试人员')
 
 -- table requirements_common_info
 insert into requirements_common_info values(1,1,'C++开发岗位','熟练掌握C++，优秀应届毕业生')

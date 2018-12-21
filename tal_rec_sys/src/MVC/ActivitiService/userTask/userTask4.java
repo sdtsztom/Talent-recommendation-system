@@ -1,7 +1,10 @@
 package MVC.ActivitiService.userTask;
 
+import bean.Arrangement;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
+import util.TaskUtil;
+import workflow.Tsk4WF.ArrangementListUnpacker;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +15,10 @@ public class userTask4 implements userTask {
 
     //resume_entry
     @Override
-    public void execute(String taskId, Map<String,String> vars) {
+    public void execute(Map<String,String> vars) {
+        String rr_id = vars.get("rr_id");
+        String taskId = TaskUtil.getId(rr_id);
         Map<String,Object> taskVariables = new HashMap<>();
-        taskVariables.put("json",vars.get("json"));
         taskService.complete(taskId,taskVariables);
     }
 }

@@ -1,7 +1,9 @@
 package servlet.Packer4WF;
 
 import bean.ConfirmUser;
+import ienum.ConnectUser;
 import ienum.eErrorPage;
+import util.CommonConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +25,7 @@ public class OfferConfirm extends HttpServlet {
         String rec_id=user.getId();
         String name=user.getName();
         String sex=user.getSex();
+        String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+rec_id, ConnectUser.SYS);
 
         String type=request.getParameter("type");
         String username="";
@@ -32,8 +35,12 @@ public class OfferConfirm extends HttpServlet {
             pwd+=request.getParameter("pwd");
         }
 
-        //****************************code to register(use workflow)*************************************
-        if(type.equals("confirm"))response.sendRedirect("");
+        //TODO 这些分散的参数应该放入map在序列化成json
+
+        //************************pass it to workflow************************
+
+        //************************pass it to workflow************************
+        if(type.equals("confirm"))response.sendRedirect("/compelete/12?"+        "params = params");
         else if(type.equals("refuse"))response.sendRedirect("");
     }
 

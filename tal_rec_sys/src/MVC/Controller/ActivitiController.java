@@ -13,6 +13,7 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import util.TaskUtil;
 
 import java.util.*;
 
@@ -68,5 +69,11 @@ public class ActivitiController {
 
         mailService.sentMail("837070594@qq.com","mail3-subject","mail3-content");
         return "ok";
+    }
+
+    @RequestMapping(value = "/test",method = GET)
+    public String test(@RequestParam Map<String,String> vars) {
+        System.out.println(vars.get("test"));
+        return "aaa";
     }
 }

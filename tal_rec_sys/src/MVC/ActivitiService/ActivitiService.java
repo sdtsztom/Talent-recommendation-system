@@ -67,7 +67,7 @@ public class ActivitiService {
     }
 
     //设置Execution的NAME
-    private void setName(String name) {
+    /*private void setName(String name) {
         try{
             String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
             String conn="jdbc:sqlserver://localhost:1433;DatabaseName=activiti";
@@ -90,5 +90,5 @@ public class ActivitiService {
         catch(Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

@@ -2,7 +2,8 @@
 <%@ page import="ienum.ConnectUser" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="bean.LoginUser" %>
-<%@ page import="ienum.eErrorPage" %><%--
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="table.TableBase" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/10/28
@@ -17,16 +18,19 @@
 <body>
     <%
         LoginUser user=(LoginUser)session.getAttribute("user");
-        if(user==null){
-            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
-            return;
-        }
         String user_id =user.getId()+"";
-        String []rs=CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ user_id,2,ConnectUser.STUFF);
-        String name=rs[0];
-        int points=Integer.parseInt(rs[1]);
+        String [] values =CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ user_id,2,ConnectUser.STUFF);
+        String name= values[0];
+        int points=Integer.parseInt(values[1]);
     %>
     员工名称：<%=name%><br/>
     累计积分：<%=""+points%>
+
+<%
+    TableBase table=new TableBase("select pch_change,pch_desc,pch_time from points_change_details",ConnectUser.SYS);
+    String head[]={"积分变化","变化原因","变化时间"};
+    table.genHTML(head);
+%>
+
 </body>
 </html>

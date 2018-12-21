@@ -1,13 +1,14 @@
 <%@ page import="ienum.eErrorPage" %>
 <%@ page import="bean.ConfirmUser" %>
-<%@ page import="ienum.UtilServerFunctionType" %><%--
+<%@ page import="ienum.UtilServerFunctionType" %>
+<%@ page import="ienum.WF_Servlets" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/10/30
   Time: 14:44
   To change this template use File | Settings | File Templates.
 
-  TO-DO:
+  TODO:
     1. javascript检验表单
     2.[Done] 检测用户名是否被用过并动态提醒
 --%>
@@ -42,7 +43,7 @@
     String sex=user.getSex();%>
 
 <%=name+sex+"，请完善您的注册信息："%>
-<form action="/Register" method="post">
+<form action="<%=WF_Servlets.OC%>?type=confirm" method="post">
     <input type="text" name="username" onblur="check_dup(this)"><br/>
     <div rec_id="warning" style="display:none;color:red">此用户名已被注册过，请重新选择用户名!</div>
     <input type="password" name="pwd">

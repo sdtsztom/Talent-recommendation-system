@@ -3,7 +3,7 @@
   <process id="Process" isClosed="false" isExecutable="true" name="testProcess" processType="None">
     <startEvent id="_2" name="StartEvent"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_3" name="ExclusiveGateway"/>
-    <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.serviceTask.serviceTask1" id="ServiceTak1" name="ServiceTask"/>
+    <serviceTask activiti:exclusive="true" activiti:class="workflow.Tsk4WF.beginprocessWork" id="ServiceTak1" name="ServiceTask"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_5" name="ExclusiveGateway"/>
     <serviceTask activiti:exclusive="true" activiti:class="MVC.ActivitiService.serviceTask.serviceTask2" id="ServiceTask2" name="ServiceTask"/>
     <userTask activiti:exclusive="true" id="UserTask1" name="UserTask"/>

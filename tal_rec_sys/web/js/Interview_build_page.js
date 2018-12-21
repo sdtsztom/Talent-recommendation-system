@@ -37,6 +37,7 @@ function submit() {
             rr_id:$("#rr_id").val(),itv_time:$("#itv_time").val(),exmer_id:$("#exmer_id").val(),
             itv_detail:$("#itv_detail").val()
         }, function(msg){
+            $.get("test",{},function (msg) {});
             alert(msg.msg);
         });
     } else {
@@ -46,6 +47,7 @@ function submit() {
             itv_detail:$("#itv_detail").val(),ip_rnd:$("#ip_rnd").val(),itv_res:$("#itv_res").val(),
             itv_id:$("#itv_id").val()
         }, function(msg){
+            $.get("test",{},function (msg) {});
             alert(msg.msg);
         });
     }

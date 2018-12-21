@@ -12,9 +12,10 @@ public class userTask1 implements userTask{
 
     //post_need
     @Override
-    public void execute(String taskId, Map<String,String> vars) {
+    public void execute(Map<String,String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();
         String var = vars.get("");
+        String taskId = null;
         //紧急度
         //Json
         taskVariables.put("Json",var);

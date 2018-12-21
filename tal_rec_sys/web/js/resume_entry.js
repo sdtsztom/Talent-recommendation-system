@@ -26,6 +26,7 @@ function submit() {
         abi:$("#abi").val(),path:$("#path").val(),sex:$("#sex").val(),stu:$("#stu").val(),
         deg_id:$("#deg_id").val(),uni_id:$("#uni_id").val(),jb_id:$("#jb_id").val()
     }, function(msg){
+        $.get("test",{},function (msg) {});
         alert(msg.msg);
     });
 }

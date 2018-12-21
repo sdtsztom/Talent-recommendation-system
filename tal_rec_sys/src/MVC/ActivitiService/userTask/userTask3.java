@@ -2,6 +2,7 @@ package MVC.ActivitiService.userTask;
 
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
+import util.TaskUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +13,10 @@ public class userTask3 implements userTask {
 
     //Republish_Demand
     @Override
-    public void execute(String taskId, Map<String,String> vars) {
+    public void execute(Map<String,String> vars) {
+        String rr_id = vars.get("rr_id");
+        String taskId = TaskUtil.getId(rr_id);
         Map<String,Object> taskVariables = new HashMap<>();
-        //taskVariables.put("var3",vars);
         taskService.complete(taskId,taskVariables);
     }
 }

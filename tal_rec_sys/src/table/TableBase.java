@@ -9,6 +9,7 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 
 public class TableBase {
+    String []head=null;
      String [][]str_load=null;
      TableBase table_load=null;
      boolean switcher=true;  //开关，true使用str_load，false使用table_load
@@ -19,7 +20,7 @@ public class TableBase {
     //<link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
      String default_table_css="class=\"table\"";
      int npage=1;
-     boolean with_order=true;
+     boolean with_order;
 
      //*******************************Initialize*************************************
     public TableBase(){};
@@ -41,19 +42,24 @@ public class TableBase {
     public void receive(TableBase table_load){
         this.table_load=table_load;
         switcher=false;
+
+        // 清除内存
         if(str_load!=null)str_load=null;
-        int []s=table_load.shape();
-        makeShape(s[0],s[1]);
+
+        makeShape();
     }
 
     public void receive(String [][]str_load){
         this.str_load=str_load;
         switcher=true;
+
+        // 清除内存
         if(table_load!=null)table_load=null;
-        makeShape(str_load.length,str_load[0].length);
+
+        makeShape();
     }
 
-    public void receive(String query, ConnectUser user){
+    public void receive(String query, ConnectUser user) {
         CachedRowSetImpl rs=CommonConnection.makeQuery(query,user);
         String [][]str_data=null;
         try{
@@ -67,14 +73,33 @@ public class TableBase {
             }
             rs.close();
             int nrows=str_array.size();
-            str_data=new String[nrows][ncols];
-            for(int i:iutil.range(nrows))str_data[i]=str_array.get(i);
+            if(nrows!=0){
+                str_data=new String[nrows][ncols];
+                for(int i:iutil.range(nrows))str_data[i]=str_array.get(i);
+                this.receive(str_data);
+            }else{
+                String [][]str_load=null;
+                this.receive(str_load);
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
-        this.receive(str_data);
     }
     //*******************************Receive Methods*************************************
+    public int[] shape(){
+        int []s={nrows,ncols};
+        return s;
+    }
+
+    public void makeShape(){
+        if(switcher){
+            if(str_load!=null)makeShape(str_load.length,str_load[0].length);
+            else makeShape(0,0);
+        }else {
+            int []s=table_load.shape();
+            makeShape(s[0],s[1]);
+        }
+    }
 
     public void makeShape(int data_nrow,int data_ncol){
         this.nrows=data_nrow;
@@ -93,11 +118,6 @@ public class TableBase {
         return this._getItem(row,col);
     }
 
-    public int[] shape(){
-        int []s={nrows,ncols};
-        return s;
-    }
-
     //****************************************HTML Generator*******************************************
     public String[] genTableWrapper(String table_css){
         String pre="<div><table "+table_css+">\n";
@@ -106,7 +126,7 @@ public class TableBase {
         return table_wapper;
     }
 
-    public String genHead(String []head){
+    public String genHead(){
         // 产生的内容不包含换行符
         String head_content="";
         String item_wrapper[]={"<th>","</th>"};
@@ -131,32 +151,86 @@ public class TableBase {
         for(int i: iutil.range(ncols))line_content+=item_wrapper[0]+getItem(row,i)+item_wrapper[1];
         return line_wrapper[0]+line_content+line_wrapper[1];
     }
+
+    public String genLine4Vertical(int row){
+        // 产生的内容包含换行符
+        String line_content="";
+        String item_wrapper[]={"<td>","</td>"};
+        String head_wrapper[]={"<th scope=\"row\">","</th>"};
+        String line_wrapper[]={"<tr>\n","\n</tr>\n"};
+
+        //加入head
+        line_content+=head_wrapper[0]+head[row]+head_wrapper[1];
+
+        for(int i:iutil.range(ncols))line_content+=item_wrapper[0]+getItem(row,i)+item_wrapper[1];
+        return line_wrapper[0]+line_content+line_wrapper[1];
+    }
     //****************************************HTML Generator*******************************************
 
-    //*****************************************call API****************************************************
+    //*****************************************Horizontal table API****************************************************
     public String genHTML(String []head){
-        return genHTML(head,default_table_css);
+        return genHTML(head,default_table_css,true);
     }
 
-    public String genHTML(String []head,String table_css) {
+    public String genHTML(String []head,String table_css,boolean with_order) {
+        setWith_order(with_order);
+
         // if you don't need head,pass null
         String body_content="";
+        String table_wrapper[]=genTableWrapper(table_css);
         String head_wrapper[]={"<thead>\n","\n</thead>"};
         String body_wrapper[]={"<tbody>\n","</tbody>"};
-        String table_wrapper[]=genTableWrapper(table_css);
 
         // 加入head
-        if (head!=null&&head.length != ncols) return null;
-        if(head!=null)body_content+=head_wrapper[0]+genHead(head)+head_wrapper[1];
+        if (head!=null&&head.length != ncols){
+            System.out.println("Error:length of head don't correspond to content....");
+            System.out.println("length of head:"+head.length+"\tncols:"+ncols);
+            return null;
+        }
+        if(head!=null){
+            this.head=head;
+            body_content+=head_wrapper[0]+genHead()+head_wrapper[1];
+        }
+
 
         body_content+="\n";
 
         // 加入body
+        if(nrows!=0){
+            body_content+=body_wrapper[0];
+            for(int i:iutil.range(nrows))body_content+=genLine(i);
+            body_content+=body_wrapper[1];
+        }
+
+        return table_wrapper[0]+body_content+table_wrapper[1];
+    }
+    //*****************************************Horizontal table API****************************************************
+
+    //*****************************************Vertical table API****************************************************
+    public String genVerticalHTML(String []head){return genVerticalHTML(head,default_table_css);}
+
+    public String genVerticalHTML(String []head,String table_css){
+        str_load=iutil.transpose(str_load);
+        makeShape();
+
+        String body_content="";
+        String table_wrapper[]=genTableWrapper(table_css);
+        String body_wrapper[]={"<tbody>\n","</tbody>"};
+
+        // 加入head
+        if (head!=null&&head.length != nrows){
+            System.out.println("Error:length of head don't correspond to content....");
+            System.out.println("length of head:"+head.length+"\tnrows:"+nrows);
+            return null;
+        }
+        if(head!=null)this.head=head;
+
+        // 加入body
         body_content+=body_wrapper[0];
-        for(int i:iutil.range(nrows))body_content+=genLine(i);
+        for(int i:iutil.range(nrows))body_content+=genLine4Vertical(i);
         body_content+=body_wrapper[1];
 
         return table_wrapper[0]+body_content+table_wrapper[1];
     }
-    //*****************************************call API****************************************************
+    //*****************************************Vertical table API****************************************************
 }

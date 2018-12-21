@@ -16,7 +16,7 @@ public class Open2Sift extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String rrid=request.getParameter("rrid");
         //************************shoule be replaced by workflow*******************
-        //Tsk_open2sift.Finish(rrid);
+        Tsk_open2sift.finish(rrid);
         //************************shoule be replaced by workflow*******************
         //response.sendRedirect("/function/Query_Recruit_HR.html");
         response.sendRedirect("/complete/5?rr_id="+rrid);

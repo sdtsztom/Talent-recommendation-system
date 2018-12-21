@@ -6,7 +6,7 @@
     <userTask activiti:exclusive="true" name="UserTask1" isForCompensation="true" name="HR发布招聘需求"/>
 	<!-- activiti:candidateUsers="${myService.candidateUsers(execution)}"-->
     <sequenceFlow name="flow1" sourceRef="startprocess" targetRef="UserTask1"/>
-    <serviceTask activiti:exclusive="true" name="ServiceTask1" name="Create/Update Data" activiti:class="MVC.ActivitiService.serviceTask.serviceTask1"/>
+    <serviceTask activiti:exclusive="true" name="ServiceTask1" name="Create/Update Data" activiti:class="MVC.ActivitiService.serviceTask.beginprocessWork"/>
 	<!-- activiti:expression="#{service1.service1(execution)}" -->
     <sequenceFlow name="_10" sourceRef="UserTask1" targetRef="ServiceTask1"/>
     <exclusiveGateway gatewayDirection="Unspecified" name="ExclusiveGateWay1" name="判断紧急度"/>

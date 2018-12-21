@@ -17,6 +17,7 @@ function submit() {
         rr_ri_id:$("#ri_id").val(),rr_sta_id:$("#rrs_id").val(),
         rr_num:$("#rr_num").val(),rr_el:$("#rr_el").val(),rr_ept:$("#rr_ept").val(),rr_spreq:$("#rr_spreq").val()
     }, function(msg){
+        $.get("test",{},function (msg) {});
         alert(msg.msg);
     });
 }

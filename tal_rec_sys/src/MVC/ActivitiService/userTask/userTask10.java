@@ -2,6 +2,7 @@ package MVC.ActivitiService.userTask;
 
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
+import util.TaskUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,9 +14,9 @@ public class userTask10 implements userTask{
     //Itv2Make
     @Override
     public void execute(Map<String,String> vars) {
-        String taskId = vars.get("taskId");
+        String rr_id = vars.get("rr_id");
+        String taskId = TaskUtil.getId(rr_id);
         Map<String,Object> taskVariables = new HashMap<>();
-        //taskVariables.put("json",vars.get("json"));
         taskService.complete(taskId,taskVariables);
     }
 

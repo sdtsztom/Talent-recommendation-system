@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import Interface.Procedure;
-import Interface.Rs2List;
+import Interface.Rs2Bean;
 import com.sun.rowset.CachedRowSetImpl;
 import ienum.ConnectUser;
 
@@ -60,7 +60,7 @@ public class CommonConnection {
     }
 
     public static ResultSet limitQuery(String query,int limit,int page){
-        // TO-DO
+        // TODO
         return null;
     }
 
@@ -127,7 +127,7 @@ public class CommonConnection {
         return have_rs;
     }
 
-    public static <E extends Rs2List> ArrayList<E> listQuery (String query,E e,ConnectUser connect_user){
+    public static <E extends Rs2Bean> ArrayList<E> listQuery (String query, E e, ConnectUser connect_user){
         setConnectUser(connect_user);
         ArrayList<E>list=null;
         list=new ArrayList<E>();
@@ -139,12 +139,30 @@ public class CommonConnection {
             while(cached_rs.next()){
                 list.add((E)e.fromRs(cached_rs));
             }
-            rs.close();
+            cached_rs.close();
         } catch (SQLException e1) {
             System.out.println("the query caused error:"+query+"......");
             e1.printStackTrace();
         }
         return list;
+    }
+
+    public static <E extends Rs2Bean> E beanQuery(String query, E e, ConnectUser connect_user){
+        setConnectUser(connect_user);
+        E e_temp=null;
+        try {
+            CachedRowSetImpl cached_rs=new CachedRowSetImpl();
+            ResultSet rs=sql.executeQuery(query);
+            cached_rs.populate(rs);
+            rs.close();
+            cached_rs.next();
+            e_temp=(E)e.fromRs(cached_rs);
+            cached_rs.close();
+        } catch (SQLException e1) {
+            System.out.println("the query caused error:"+query+"......");
+            e1.printStackTrace();
+        }
+        return e_temp;
     }
 
     //********************************************************************** Update Methods*************************************************************
@@ -164,7 +182,7 @@ public class CommonConnection {
     public static void execProcedure(Procedure procedureClass,ConnectUser connectUser){
         setConnectUser(connectUser);
         try{
-            CallableStatement procedure=conn.prepareCall("{"+procedureClass.getProcedureName()+"}");
+            CallableStatement procedure=conn.prepareCall("{call "+procedureClass.getProcedureName()+"}");
             procedureClass.setProcedure(procedure);
             procedure.execute();
             procedureClass.receive(procedure);

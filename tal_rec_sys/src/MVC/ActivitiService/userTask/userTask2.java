@@ -12,10 +12,10 @@ public class userTask2 implements userTask{
 
     //员工推荐
     @Override
-    public void execute(String taskId, Map<String,String> vars) {
+    public void execute(Map<String,String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();
-        String var = vars.get("");
-        taskVariables.put("var2",var);
+        String taskId = vars.get("taskId");
+        //taskVariables.put("var2");
         taskService.complete(taskId,taskVariables);
         System.out.println("员工推荐");
     }
