@@ -1,12 +1,12 @@
 package bean;
 
-import Interface.Rs2List;
+import Interface.Rs2Bean;
 import com.sun.rowset.CachedRowSetImpl;
 import ienum.RrStage;
 
 import java.util.Date;
 
-public class Recruit implements Rs2List {
+public class Recruit implements Rs2Bean {
     private int rr_id;
     private String jb_name;
     private int rr_num;
