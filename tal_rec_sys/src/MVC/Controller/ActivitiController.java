@@ -35,11 +35,10 @@ public class ActivitiController {
         return "process start";
     }
 
-    //testURL : http://localhost:8080/complete/1/?taskId=12&var1=1&check1=1&var2=1&var3=1&check2=1&var4=1&var5=1&check3=1&var6=1&var7=1&var8=1&var9=1
     @RequestMapping(value = "/complete/{task}",method = GET)
     public String userTask(@PathVariable String task, @RequestParam Map<String,String> map) {
         userTask userTask = userTaskFactory.getuserTask(task);
-        userTask.execute(get(JSON.parseObject(map.get("json"),Arrangement.class).getRec_id()),map);
+        userTask.execute(map);
         return "ok";
     }
 

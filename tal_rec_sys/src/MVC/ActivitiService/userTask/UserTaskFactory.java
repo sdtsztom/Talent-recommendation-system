@@ -17,6 +17,7 @@ public class UserTaskFactory {
         if(id.equals("9")) return new userTask9();
         if(id.equals("10")) return new userTask10();
         if(id.equals("11")) return new userTask11();
+        if(id.equals("12")) return new userTask12();
         return null;
     }
 }
