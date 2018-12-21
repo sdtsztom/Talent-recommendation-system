@@ -56,11 +56,14 @@ GO
 -- put2otherneed
 CREATE PROCEDURE put2otherneed(@rec_id int,@otherneed_id int,@from_id tinyint) AS
 BEGIN
-	DECLARE @newHR_id char(40),@rec_dealHR_id char(40),@rpid char(40)
-	select @rpid=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
-	select @newHR_id=rr_hr_id from recruitment_requirements where rr_id=@otherneed_id
-	-- 必须先关闭此recommend，不然无法插入
-	update recommend set rec_recsta_id=1,rec_recres_id=2 where rec_id=@rec_id
-	insert into recommend values(@rpid,@rec_dealHR_id,6,2,@otherneed_id,@newHR_id,@from_id)
+	if (select rr_sta_id from recruitment_requirements where rr_id=@otherneed_id)=2	--开放
+	BEGIN
+		DECLARE @newHR_id char(40),@rec_dealHR_id char(40),@rpid char(40)
+		select @rpid=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
+		select @newHR_id=rr_hr_id from recruitment_requirements where rr_id=@otherneed_id
+		-- 必须先关闭此recommend，不然无法插入
+		update recommend set rec_recsta_id=1,rec_recres_id=2 where rec_id=@rec_id
+		insert into recommend values(@rpid,@rec_dealHR_id,6,2,@otherneed_id,@newHR_id,@from_id)
+	END
 END
 GO
