@@ -27,7 +27,9 @@ public class StuffAuthFilter implements Filter{
             response.sendRedirect("/Login/login.html");
             return;
         }
-        if(stf.getJob_type()!= JobType.STUFF) {
+
+        // 不允许权限低于Stuff的人访问
+        if(stf.getJob_type()!= JobType.STUFF&&stf.getJob_type()!=JobType.HR&&stf.getJob_type()!=JobType.ADMIN) {
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }

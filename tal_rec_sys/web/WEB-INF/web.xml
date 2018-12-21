@@ -99,7 +99,8 @@
     </filter>
     <filter-mapping>
         <filter-name>StuffAuthFilter</filter-name>
-        <url-pattern>/inexist/*</url-pattern>
+        <url-pattern>/view_points.jsp</url-pattern>
+        <url-pattern>/recommend_person_details.jsp</url-pattern>
     </filter-mapping>
 
     <filter>

@@ -20,12 +20,6 @@
 </head>
 <body>
 <%
-    //验证身份
-    LoginUser user=(LoginUser)session.getAttribute("user");
-    if(user==null){
-        response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
-        return;
-    }
     String rpid=request.getParameter("rpid");
     RP_Details rp_details=CommonConnection.<RP_Details>beanQuery("select * from recommend_person_details where rp_id="+rpid,new RP_Details(),ConnectUser.HR);
     String [][]table_content={rp_details.Convert2LineContent()};

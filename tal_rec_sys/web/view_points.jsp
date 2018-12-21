@@ -18,14 +18,10 @@
 <body>
     <%
         LoginUser user=(LoginUser)session.getAttribute("user");
-        if(user==null){
-            response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
-            return;
-        }
         String user_id =user.getId()+"";
-        String []rs=CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ user_id,2,ConnectUser.STUFF);
-        String name=rs[0];
-        int points=Integer.parseInt(rs[1]);
+        String [] values =CommonConnection.singleLineQuery("select stf_name,stf_pts from stuff where stf_id="+ user_id,2,ConnectUser.STUFF);
+        String name= values[0];
+        int points=Integer.parseInt(values[1]);
     %>
     员工名称：<%=name%><br/>
     累计积分：<%=""+points%>
