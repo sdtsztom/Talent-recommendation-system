@@ -41,7 +41,7 @@ public class RecruitDAOImpl implements RecruitDAO{
     @Override
     public List<Map> getDetails(String id,ConnectUser connectUser) throws SQLException{
         CachedRowSetImpl rs = CommonConnection.makeQuery("select * from requirement_details where rr_id = " + id,connectUser);
-        return JsonUtils.toMap(rs,"rr_id","rr_num","ed_name","st_name","st_desc","wp_name","wp_detail","jb_name",
+        return JsonUtils.toMap(rs,"rr_id","rr_sta_id","rr_num","ed_name","st_name","st_desc","wp_name","wp_detail","jb_name",
                 "jb_desc","jb_sal","jt_name","jt_desc","dp_name","dp_contact","rr_spreq");
     }
 
