@@ -2,7 +2,8 @@
 <%@ page import="ienum.ConnectUser" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="bean.LoginUser" %>
-<%@ page import="ienum.eErrorPage" %><%--
+<%@ page import="ienum.eErrorPage" %>
+<%@ page import="table.TableBase" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/10/28
@@ -28,5 +29,12 @@
     %>
     员工名称：<%=name%><br/>
     累计积分：<%=""+points%>
+
+<%
+    TableBase table=new TableBase("select pch_change,pch_desc,pch_time from points_change_details",ConnectUser.SYS);
+    String head[]={"积分变化","变化原因","变化时间"};
+    table.genHTML(head);
+%>
+
 </body>
 </html>

@@ -7,7 +7,7 @@ public class Table_for_SRM_vSift extends TableBase {
     public Table_for_SRM_vSift(){super();}
     public Table_for_SRM_vSift(TableBase table_load){ super(table_load);}
     public Table_for_SRM_vSift(String [][]str_load){super(str_load);}
-    public Table_for_SRM_vSift(String query, ConnectUser user)throws Exception{
+    public Table_for_SRM_vSift(String query, ConnectUser user){
         super(query,user);
     }
 

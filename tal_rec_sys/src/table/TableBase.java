@@ -33,7 +33,7 @@ public class TableBase {
         this.receive(str_load);
     }
 
-    public TableBase(String query,ConnectUser user)throws Exception{
+    public TableBase(String query,ConnectUser user){
         this.receive(query,user);
     }
     //*******************************Initialize*************************************
@@ -42,19 +42,24 @@ public class TableBase {
     public void receive(TableBase table_load){
         this.table_load=table_load;
         switcher=false;
+
+        // 清除内存
         if(str_load!=null)str_load=null;
-        int []s=table_load.shape();
-        makeShape(s[0],s[1]);
+
+        makeShape();
     }
 
     public void receive(String [][]str_load){
         this.str_load=str_load;
         switcher=true;
+
+        // 清除内存
         if(table_load!=null)table_load=null;
+
         makeShape();
     }
 
-    public void receive(String query, ConnectUser user) throws Exception{
+    public void receive(String query, ConnectUser user) {
         CachedRowSetImpl rs=CommonConnection.makeQuery(query,user);
         String [][]str_data=null;
         try{
@@ -68,13 +73,17 @@ public class TableBase {
             }
             rs.close();
             int nrows=str_array.size();
-            if(nrows==0)throw new Exception("no record!");
-            str_data=new String[nrows][ncols];
-            for(int i:iutil.range(nrows))str_data[i]=str_array.get(i);
+            if(nrows!=0){
+                str_data=new String[nrows][ncols];
+                for(int i:iutil.range(nrows))str_data[i]=str_array.get(i);
+                this.receive(str_data);
+            }else{
+                String [][]str_load=null;
+                this.receive(str_load);
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
-        this.receive(str_data);
     }
     //*******************************Receive Methods*************************************
     public int[] shape(){
@@ -83,7 +92,13 @@ public class TableBase {
     }
 
     public void makeShape(){
-        makeShape(str_load.length,str_load[0].length);
+        if(switcher){
+            if(str_load!=null)makeShape(str_load.length,str_load[0].length);
+            else makeShape(0,0);
+        }else {
+            int []s=table_load.shape();
+            makeShape(s[0],s[1]);
+        }
     }
 
     public void makeShape(int data_nrow,int data_ncol){
@@ -181,9 +196,11 @@ public class TableBase {
         body_content+="\n";
 
         // 加入body
-        body_content+=body_wrapper[0];
-        for(int i:iutil.range(nrows))body_content+=genLine(i);
-        body_content+=body_wrapper[1];
+        if(nrows!=0){
+            body_content+=body_wrapper[0];
+            for(int i:iutil.range(nrows))body_content+=genLine(i);
+            body_content+=body_wrapper[1];
+        }
 
         return table_wrapper[0]+body_content+table_wrapper[1];
     }
