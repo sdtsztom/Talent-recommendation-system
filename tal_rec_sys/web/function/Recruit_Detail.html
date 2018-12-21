@@ -22,9 +22,8 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div id="jobswitch">
-                <button v-if="job_type ==2" type="button" class="btn btn-default" @click="goto3(detail)">处理需求</button>
-                <button v-if="job_type ==3" type="button" class="btn btn-default" @click="goto3(detail)">处理需求</button>
-                <button v-if="job_type ==1" type="button" class="btn btn-default">提交推荐人</button>
+                <button v-if="job_type==2||job_type===3" id="button23" class="btn btn-default" @click="goto3(detail)">处理需求</button>
+                <button v-if="job_type ==1" id="button1" class="btn btn-default">提交推荐人</button>
             </div>
             <br/><br/>
             <table class="table table-bordered" >
