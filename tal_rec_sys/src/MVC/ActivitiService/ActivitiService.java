@@ -1,10 +1,13 @@
 package MVC.ActivitiService;
 
+import com.sun.rowset.CachedRowSetImpl;
+import ienum.ConnectUser;
 import org.activiti.engine.*;
 import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
+import util.CommonConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -48,11 +51,24 @@ public class ActivitiService {
 
     //开始流程
     public ProcessInstance startProcess() {
-        if(repositoryService.createDeploymentQuery().count()==0)
-        ProcessBuild();
+        if(repositoryService.createDeploymentQuery().count()==0) ProcessBuild();
         Map<String,Object> variables = new HashMap<String,Object>();
-        ProcessInstance pi = runtimeService.startProcessInstanceByKey("workflow",variables);
-        return pi;
+        String rr_id = "";
+        String rr_ed = "";
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rr_id,rr_ed_id from recruitment_requirements order by rr_id desc", ConnectUser.DEV);
+        try{
+            if(rs.first()) {
+                rr_id = rs.getString("rr_id");
+                rr_ed = rs.getString("rr_ed_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        variables.put("rr_id",rr_id);
+        variables.put("rr_ed",rr_ed);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("workflow",variables);
+        setName();
+        return processInstance;
     }
 
     //删除流程
@@ -67,13 +83,21 @@ public class ActivitiService {
     }
 
     //设置Execution的NAME
-    /*private void setName(String name) {
+    public void setName() {
         try{
             String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
             String conn="jdbc:sqlserver://localhost:1433;DatabaseName=activiti";
             String username="u_dev";
             String password="12345678a";
-
+            String name = "";
+            CachedRowSetImpl rs1 = CommonConnection.makeQuery("select rr_id,rr_ed_id from recruitment_requirements order by rr_id desc", ConnectUser.DEV);
+            try{
+                if(rs1.first()) {
+                    name = rs1.getString("rr_id");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Connection Conn= DriverManager.getConnection(conn,username,password);
             Statement stat=Conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
             String query = "SELECT ID_ FROM ACT_RU_EXECUTION WHERE NAME_ is null;";
@@ -90,5 +114,6 @@ public class ActivitiService {
         catch(Exception e) {
             e.printStackTrace();
         }
-    }*/
+        System.out.println("set name ok");
+    }
 }

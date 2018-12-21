@@ -7,9 +7,6 @@ public class UserTaskFactory {
 
     public userTask getuserTask(String id) {
         if(id.equals("1")) return new userTask1();
-        if(id.equals("2")) return new userTask2();
-        if(id.equals("3")) return new userTask3();
-        if(id.equals("4")) return new userTask4();
         if(id.equals("5")) return new userTask5();
         if(id.equals("6")) return new userTask6();
         if(id.equals("7")) return new userTask7();

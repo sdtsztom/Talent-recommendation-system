@@ -13,11 +13,13 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import util.ResResult;
 import util.TaskUtil;
 
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 public class ActivitiController {
@@ -30,10 +32,10 @@ public class ActivitiController {
 
 
     //开启流程实例
-    @RequestMapping(value = "/process",method = GET)
-    public String startProcessInstance() {
+    @RequestMapping(value = "/process",method = GET,produces = "application/json;charset=UTF-8")
+    public @ResponseBody ResResult startProcessInstance() {
         ProcessInstance pi = myService.startProcess();
-        return "process start";
+        return ResResult.build(200,"process start",null);
     }
 
     @RequestMapping(value = "/complete/{task}",method = GET)
@@ -72,8 +74,8 @@ public class ActivitiController {
     }
 
     @RequestMapping(value = "/test",method = GET)
-    public String test(@RequestParam Map<String,String> vars) {
-        System.out.println(vars.get("test"));
+    public @ResponseBody String test(@RequestParam Map<String,String> vars) {
+        System.out.println("aa");
         return "aaa";
     }
 }
