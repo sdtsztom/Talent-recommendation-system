@@ -90,3 +90,8 @@ GO
 create view recommend_notify as select rec_id,rec_recstu_id,rp_name,stf_email as recstu_email,rp_email
 from recommend inner join stuff on recommend.rec_recstu_id=stuff.stf_id
 inner join recommend_people on recommend.rec_rp_id=recommend_people.rp_id
+GO
+
+-- view points_change_details
+create view points_change_details as select pch_id,pch_stf_id,ptchr_change as pch_change,pch_time
+from points_change inner join points_change_rule on points_change.pch_from_id=points_change_rule.ptchr_id
