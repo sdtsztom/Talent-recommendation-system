@@ -1,7 +1,9 @@
 package servlet.Packer4WF;
 
 import bean.ConfirmUser;
+import ienum.ConnectUser;
 import ienum.eErrorPage;
+import util.CommonConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +25,7 @@ public class OfferConfirm extends HttpServlet {
         String rec_id=user.getId();
         String name=user.getName();
         String sex=user.getSex();
+        String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+rec_id, ConnectUser.SYS);
 
         String type=request.getParameter("type");
         String username="";
