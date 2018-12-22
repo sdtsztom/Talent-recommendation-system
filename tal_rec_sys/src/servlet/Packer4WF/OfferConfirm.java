@@ -40,8 +40,16 @@ public class OfferConfirm extends HttpServlet {
         //************************pass it to workflow************************
 
         //************************pass it to workflow************************
-        if(type.equals("confirm"))response.sendRedirect("");
-        else if(type.equals("refuse"))response.sendRedirect("");
+        /*if(type.equals("confirm"))*/response.sendRedirect("/complete/12?"+
+                "rr_id="+rrid+
+                "&red_id="+rec_id+
+                "&name="+name+
+                "&sex="+sex+
+                "&username="+username+
+                "&pwd="+pwd+
+                "&type="+type);
+                //"params = params");
+        //else if(type.equals("refuse"))response.sendRedirect("");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

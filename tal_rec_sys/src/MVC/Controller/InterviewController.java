@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import util.ResResult;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -37,4 +38,15 @@ public class InterviewController {
         if(interviewService.BuildInterview(ip_id,rp_id,dealHR_id,rr_id,parsed_itv_time,exmer_id,itv_detail)==0) return ResResult.build(200,"插入失败",null);
         else return ResResult.build(400,"插入成功",null);
     }
+
+    @RequestMapping(value = "/ajax.post.Interview_Build_Page2",method = RequestMethod.POST,produces = "application/json")
+    public @ResponseBody ResResult InterviewBuildPage2(String ip_id,String rp_id,String dealHR_id,String rr_id,String itv_time,String exmer_id,String itv_detail,String ip_rnd,String itv_res,String itv_id) throws Exception {
+        DateTimeFormatter local = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime time = LocalDateTime.parse(itv_time,local);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        String parsed_itv_time = time.format(formatter);
+        if(interviewService.Update(ip_id,rp_id,dealHR_id,rr_id,parsed_itv_time,exmer_id,itv_detail,ip_rnd,itv_res,itv_id)==0) return ResResult.build(400,"插入失败",null);
+        else return ResResult.build(400,"插入成功",null);
+    }
+
 }

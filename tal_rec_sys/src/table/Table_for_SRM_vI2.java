@@ -33,7 +33,7 @@ public class Table_for_SRM_vI2 extends TableBase{
                     return "<input type=\"radio\" name=\""+arr_name+"\" value=\"pass\">发放offer"+
                             "<input type=\"radio\" name=\""+arr_name+"\" value=\"fail\">不发放offer";
                 }else return "未到安排时间";
-            }else return "<a href=\"...\">建立面试</a>";    //TODO: 建立面试
+            }else return "<a href=\"/Republish_Demand\">建立面试</a>";    //TODO: 建立面试
         }
         else return null;
     }

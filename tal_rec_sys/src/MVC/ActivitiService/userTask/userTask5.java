@@ -2,6 +2,7 @@ package MVC.ActivitiService.userTask;
 
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
+import util.TaskUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +11,14 @@ public class userTask5 implements userTask {
 
     private TaskService taskService = ProcessEngines.getDefaultProcessEngine().getTaskService();
 
-    //安排结果
+    //Open2Sift
     @Override
-    public void execute(String taskId, Map<String,String> vars) {
+    public String execute(Map<String,String> vars) {
+        String rr_id = vars.get("rr_id");
+        String taskId = TaskUtil.getId(rr_id);
         Map<String,Object> taskVariables = new HashMap<>();
-        taskVariables.put("json",vars.get("json"));
+        taskVariables.put("rr_id",vars.get("rr_id"));
         taskService.complete(taskId,taskVariables);
+        return "/";
     }
 }

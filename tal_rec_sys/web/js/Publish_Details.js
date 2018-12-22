@@ -37,4 +37,5 @@ function checkForm(){
     var str= $('#summernote').summernote('code');
     document.getElementById("rr_spreq").value=str;
     document.getElementById("publish").submit();
+
 }

@@ -56,4 +56,9 @@ public class IDToDescDAOImpl {
         CachedRowSetImpl rs = CommonConnection.makeQuery("select rrs_id,rrs_desc from recruitment_requirements_stage;",ConnectUser.DEV);
         return JsonUtils.toMap(rs,"rrs_id","rrs_desc");
     }
+
+    public List<Map> interview_result() throws Exception {
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select ir_id,ir_desc from interview_results;",ConnectUser.DEV);
+        return JsonUtils.toMap(rs,"ir_id","ir_desc");
+    }
 }

@@ -17,6 +17,7 @@ function submit() {
         rr_ri_id:$("#ri_id").val(),rr_sta_id:$("#rrs_id").val(),
         rr_num:$("#rr_num").val(),rr_el:$("#rr_el").val(),rr_ept:$("#rr_ept").val(),rr_spreq:$("#rr_spreq").val()
     }, function(msg){
+        $.get("test",{},function (msg) {});
         alert(msg.msg);
     });
 }
@@ -38,7 +39,12 @@ $(function() {
 
 $(document).ready(function(){
     $("#rr_id").change(function(){
-        var rr_id = $("#rr_id").val()-1;
+        var get_rr_id = $("#rr_id").val();
+        for(var i = 0; i < datas.length; i++) {
+            if(datas[i].rr_id === get_rr_id) {
+                var rr_id = i;
+            }
+        }
         $("#rr_num").val(datas[rr_id].rr_num);
         $("#wp_id").val(datas[rr_id].rr_wp_id);
         $("#st_id").val(datas[rr_id].rr_st_id);

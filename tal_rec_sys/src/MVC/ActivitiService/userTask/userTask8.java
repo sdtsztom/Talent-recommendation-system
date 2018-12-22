@@ -2,6 +2,7 @@ package MVC.ActivitiService.userTask;
 
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
+import util.TaskUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,12 +11,13 @@ public class userTask8 implements userTask {
 
     private TaskService taskService = ProcessEngines.getDefaultProcessEngine().getTaskService();
 
-    //安排结果
+    //Itv1Make
     @Override
-    public void execute(String taskId,Map<String,String> vars) {
+    public String execute(Map<String,String> vars) {
+        String rr_id = vars.get("rr_id");
+        String taskId = TaskUtil.getId(rr_id);
         Map<String,Object> taskVariables = new HashMap<>();
-        //taskVariables.put("var8",vars);
         taskService.complete(taskId,taskVariables);
-        System.out.println("安排结果");
+        return "/";
     }
 }

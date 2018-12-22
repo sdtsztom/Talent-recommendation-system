@@ -46,11 +46,7 @@ public class SiftArr extends HttpServlet {
         }
         String json_str= JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/5?json="+json_str);//userTask5
-        //************************pass it to workflow************************
-        boolean finish= Tsk_sift_arr.finish(rrid);
-        if(finish)response.sendRedirect("/function/Query_Recruit_HR.html");
-        else response.sendRedirect(SRM_Page.W_ARR_S.toString()+"?rrid="+rrid);
+        response.sendRedirect("/complete/7?json="+json_str+"&result="+arrangements.get(0).getResult()+"&rr_id="+rrid);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
