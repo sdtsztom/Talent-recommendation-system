@@ -46,7 +46,7 @@ public class SiftArr extends HttpServlet {
         }
         String json_str= JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/7?json="+json_str);
+        response.sendRedirect("/complete/7?json="+json_str+"&result="+arrangements.get(0).getResult());
         //************************pass it to workflow************************
         boolean finish= Tsk_sift_arr.finish(rrid);
         if(finish)response.sendRedirect("/function/Query_Recruit_HR.html");

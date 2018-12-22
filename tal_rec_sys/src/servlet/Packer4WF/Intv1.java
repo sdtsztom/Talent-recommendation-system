@@ -41,7 +41,7 @@ public class Intv1 extends HttpServlet {
         }
         String json_str= JSON.toJSONString(arrangements);
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/7?josn="+json_str+",result="+arrangements.get(0).getResult());
+        response.sendRedirect("/complete/7?josn="+json_str+"&result="+arrangements.get(0).getResult());
         //************************pass it to workflow************************
         boolean finish= Tsk_Itv1.finish(rrid);
         if(finish)response.sendRedirect("/function/Query_Recruit_HR.html");

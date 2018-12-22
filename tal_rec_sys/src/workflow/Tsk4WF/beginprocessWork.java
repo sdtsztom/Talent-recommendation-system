@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class beginprocessWork implements JavaDelegate {
 
-    //上传招聘需求
+
     @Override
     public void execute(DelegateExecution delegateExecution) {
         String name = (String)delegateExecution.getVariable("rr_id");

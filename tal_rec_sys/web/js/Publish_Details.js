@@ -31,7 +31,6 @@ function gettype() {
 }
 
 function checkForm(){
-    $.get("../process",{},function (msg) {});
     var path = window.location.href
     var data = path.split("=")
     $.session.set("rr_id",data[1])

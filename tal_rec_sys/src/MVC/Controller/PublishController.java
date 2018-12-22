@@ -1,6 +1,7 @@
 package MVC.Controller;
 
 
+import MVC.ActivitiService.ActivitiService;
 import MVC.Service.PublishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class PublishController {
     @Autowired
     PublishService publishService;
 
+    @Autowired
+    ActivitiService activitiService;
+
     @RequestMapping(value = "/get.requirementinfo",produces = "application/json;charset=UTF-8")
     public @ResponseBody ResResult getRequireinfo() throws Exception{
         return  new ResResult(200,"查询成功",publishService.getRequirementInfo());
@@ -40,6 +44,8 @@ public class PublishController {
 
     @RequestMapping(value = "/publish.requirement",method = RequestMethod.POST)
     public @ResponseBody String publish(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        return publishService.Publish(request,response);
+        String result = publishService.Publish(request,response);
+        activitiService.startProcess();
+        return result;
     }
 }

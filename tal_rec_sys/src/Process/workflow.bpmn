@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1545002641658" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1545002641658" name="" targetNamespace="http://www.activiti.org/testm1545002641658" typeLanguage="http://www.w3.org/2001/XMLSchema">
-  <process id="myProcess" isClosed="false" isExecutable="true" processType="None">
+  <process id="workflow" isClosed="false" isExecutable="true" processType="None">
     <startEvent id="StartEvent" name="StartEvent"/>
     <endEvent id="EndEvent" name="EndEvent"/>
     <serviceTask activiti:class="workflow.Tsk4WF.TskOfferPointDeal" activiti:exclusive="true" id="TskOfferPointDeal" name="TskOfferPointDeal get rec_id"/>
@@ -14,7 +14,9 @@
     <serviceTask activiti:class="workflow.Tsk4WF.TskItv2Email" activiti:exclusive="true" id="TskItv2Email" name="TskItv2Email get json"/>
     <serviceTask activiti:class="workflow.Tsk4WF.TskItv2Finish" activiti:exclusive="true" id="TskItv2Finish" name="TskItv2Finish put isFinish"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_21" name="isFinish"/>
-    <sequenceFlow id="_22" name="false" sourceRef="_21" targetRef="Intv2"/>
+    <sequenceFlow id="_22" sourceRef="_21" targetRef="Intv2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == False}]]></conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="_23" sourceRef="Intv2" targetRef="TskItv2Record"/>
     <sequenceFlow id="_24" sourceRef="TskItv2Record" targetRef="TskItv2PointDeal"/>
     <sequenceFlow id="_25" sourceRef="TskItv2PointDeal" targetRef="TskItv2Email"/>
@@ -27,8 +29,12 @@
     <sequenceFlow id="_28" sourceRef="Intv1" targetRef="TskItv1Record"/>
     <sequenceFlow id="_30" sourceRef="TskItv1PointDeal" targetRef="TskItv1Finish"/>
     <sequenceFlow id="_31" sourceRef="TskItv1Finish" targetRef="_16"/>
-    <sequenceFlow id="_32" name="false" sourceRef="_16" targetRef="Intv1"/>
-    <sequenceFlow id="_33" name="true" sourceRef="_16" targetRef="Intv2"/>
+    <sequenceFlow id="_32" sourceRef="_16" targetRef="Intv1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == False}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_33" sourceRef="_16" targetRef="Intv2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == True}]]></conditionExpression>
+    </sequenceFlow>
     <serviceTask activiti:class="workflow.Tsk4WF.TskOfferConfirm" activiti:exclusive="true" id="TskOfferConfirm" name="TskOfferConfirm get type,recid,username,pwd"/>
     <serviceTask activiti:class="workflow.Tsk4WF.TskOpen2Sift" activiti:exclusive="true" id="_39" name="TskOpen2Sift get rr_id"/>
     <serviceTask activiti:class="workflow.Tsk4WF.TskSiftArrEmail" activiti:exclusive="true" id="TskSiftArrEmail" name="TskSiftArrEmail get json"/>
@@ -46,38 +52,60 @@
     <sequenceFlow id="_53" sourceRef="_43" targetRef="_42"/>
     <sequenceFlow id="_54" sourceRef="_42" targetRef="_44"/>
     <sequenceFlow id="_55" sourceRef="_44" targetRef="_46"/>
-    <sequenceFlow id="_56" name="false" sourceRef="_47" targetRef="SiftArr"/>
-    <sequenceFlow id="_57" name="true" sourceRef="_47" targetRef="Intv1"/>
-    <sequenceFlow id="_58" name="false" sourceRef="_46" targetRef="Sift"/>
-    <sequenceFlow id="_59" name="true" sourceRef="_46" targetRef="SiftArr"/>
+    <sequenceFlow id="_56" sourceRef="_47" targetRef="SiftArr">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == False}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_57" sourceRef="_47" targetRef="Intv1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == True}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_58" sourceRef="_46" targetRef="Sift">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == False}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_59" sourceRef="_46" targetRef="SiftArr">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == True}]]></conditionExpression>
+    </sequenceFlow>
     <userTask activiti:exclusive="true" id="OfferConfirm" name="OfferConfirm put rec_id,name,sex,type,username,pwd"/>
-    <sequenceFlow id="_63" sourceRef="_21" targetRef="OfferConfirm"/>
+    <sequenceFlow id="_63" sourceRef="_21" targetRef="OfferConfirm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == True}]]></conditionExpression>
+    </sequenceFlow>
     <serviceTask activiti:class="workflow.Tsk4WF.TskOfferFinish" activiti:exclusive="true" id="TskOfferFinish" name="TskOfferFinish put isFinish"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_65" name="isFinish"/>
     <sequenceFlow id="_66" sourceRef="OfferConfirm" targetRef="TskOfferConfirm"/>
     <sequenceFlow id="_67" sourceRef="TskOfferConfirm" targetRef="TskOfferPointDeal"/>
     <sequenceFlow id="_68" sourceRef="TskOfferPointDeal" targetRef="TskOfferFinish"/>
-    <sequenceFlow id="_69" name="false" sourceRef="_65" targetRef="OfferConfirm"/>
-    <sequenceFlow id="_5" name="true" sourceRef="_65" targetRef="EndEvent"/>
+    <sequenceFlow id="_69" sourceRef="_65" targetRef="OfferConfirm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == False}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_5" sourceRef="_65" targetRef="EndEvent">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == True}]]></conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="_10" sourceRef="TskOfferFinish" targetRef="_65"/>
     <sequenceFlow id="_34" sourceRef="_14" targetRef="_39"/>
     <sequenceFlow id="_60" sourceRef="_39" targetRef="Sift"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_29" name="json.result"/>
     <sequenceFlow id="_62" sourceRef="TskItv1Record" targetRef="_29"/>
     <userTask activiti:exclusive="true" id="Itv2Make" name="Itv2Make put itv_id,itv_res_id"/>
-    <sequenceFlow id="_71" sourceRef="_29" targetRef="Itv2Make"/>
+    <sequenceFlow id="_71" sourceRef="_29" targetRef="Itv2Make">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result == INTERVIEW}]]></conditionExpression>
+    </sequenceFlow>
     <serviceTask activiti:class="workflow.Tsk4WF.TskItv2Make" activiti:exclusive="true" id="TskItv2Make" name="TskItv2Make get itv_id,itv_res_id"/>
     <sequenceFlow id="_73" sourceRef="Itv2Make" targetRef="TskItv2Make"/>
     <sequenceFlow id="_74" sourceRef="TskItv2Make" targetRef="TskItv1PointDeal"/>
-    <sequenceFlow id="_75" sourceRef="_29" targetRef="TskItv1PointDeal"/>
+    <sequenceFlow id="_75" sourceRef="_29" targetRef="TskItv1PointDeal">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result != INTERVIEW}]]></conditionExpression>
+    </sequenceFlow>
     <exclusiveGateway gatewayDirection="Unspecified" id="_76" name="json.result"/>
     <sequenceFlow id="_77" sourceRef="TskSiftArrReord" targetRef="_76"/>
     <userTask activiti:exclusive="true" id="Itv1Make" name="Itv1Make put ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail"/>
     <serviceTask activiti:class="workflow.Tsk4WF.TskItv1Make" activiti:exclusive="true" id="TskItv1Make" name="TskItv1Make get ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail"/>
-    <sequenceFlow id="_80" sourceRef="_76" targetRef="TskSiftArrEmail"/>
+    <sequenceFlow id="_80" sourceRef="_76" targetRef="TskSiftArrEmail">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result != INTERVIEW}]]></conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="_49" sourceRef="Itv1Make" targetRef="TskItv1Make"/>
     <sequenceFlow id="_82" sourceRef="TskItv1Make" targetRef="TskSiftArrEmail"/>
-    <sequenceFlow id="_9" sourceRef="_76" targetRef="Itv1Make"/>
+    <sequenceFlow id="_9" sourceRef="_76" targetRef="Itv1Make">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${result == INTERVIEW}]]></conditionExpression>
+    </sequenceFlow>
     <serviceTask activiti:class="workflow.Tsk4WF.Mail" activiti:exclusive="true" id="_81" name="Mail"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_89" name="rr_ed"/>
     <sequenceFlow id="_95" sourceRef="_89" targetRef="_81">
@@ -92,7 +120,7 @@
     <sequenceFlow id="_15" sourceRef="_12" targetRef="_89"/>
   </process>
   <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
-    <bpmndi:BPMNPlane bpmnElement="myProcess">
+    <bpmndi:BPMNPlane bpmnElement="workflow">
       <bpmndi:BPMNShape bpmnElement="StartEvent" id="Shape-StartEvent">
         <dc:Bounds height="32.0" width="32.0" x="115.0" y="-10.0"/>
         <bpmndi:BPMNLabel>
@@ -488,6 +516,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="_59" id="BPMNEdge__59" sourceElement="_46" targetElement="SiftArr">
         <di:waypoint x="652.0" y="371.0"/>
+        <di:waypoint x="735.0" y="225.0"/>
         <di:waypoint x="865.0" y="67.5"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>

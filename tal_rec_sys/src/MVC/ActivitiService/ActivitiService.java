@@ -34,7 +34,7 @@ public class ActivitiService {
                 .createDeployment()//创建部署对象
                 .name("workflow")//声明流程的名称
                 .category("workflow")//修改category
-                .addClasspathResource("Process/blankProcess.bpmn").addClasspathResource("Process/blankProcess.png").deploy();
+                .addClasspathResource("Process/workflow.bpmn").addClasspathResource("Process/workflow.png").deploy();
     }
 
     //根据Execution的NAME获取task的id
