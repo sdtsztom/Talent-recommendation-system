@@ -1,8 +1,5 @@
-<%@ page import="util.CommonConnection" %>
-<%@ page import="ienum.ConnectUser" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="bean.LoginUser" %>
-<%@ page import="bean.ConfirmUser" %><%--
+<%@ page import="bean.ConfirmUser" %>
+<%@ page import="ienum.WF_Servlets" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
   Date: 2018/10/29
@@ -14,27 +11,24 @@
 <head>
     <title>履职确认</title>
     <script>
+        /*
         function choice_confirm(){
             var choice=window.confirm("确定履行此决定?");
             return choice;
         }
+        */
     </script>
 </head>
 <body>
 <%  //由于这个网站有过滤器的确保，因此不用检验session存不存在
     ConfirmUser user=(ConfirmUser)session.getAttribute("confirm_user");
-    String id=user.getId();
+    String user_id =user.getId();
     String name=user.getName();
     String sex=user.getSex();
     %>
 <%=name+sex%>，恭喜您，您已被我公司提供了一份offer.请选择您是否接收我们的offer并按时履职。
 点击下方的接收按钮接收我们的offer并注册员工账号，点击决绝按钮拒绝我们的offer.
-<form action="Login/register.jsp" method="post" onsubmit="return choice_confirm()">
-    <input type="hidden" name="id" value="<%=id%>">
-    <input type="hidden" name="name" value="<%=name%>">
-    <input type="hidden" name="sex" value="<%=sex%>">
-    <input type="submit"  value="接受">
-    <input type="submit" formaction="/refuse_offer" value="拒绝">
-</form>
+<button ><a href="/Login/register.jsp">接受</a></button>
+<button ><a href="<%=WF_Servlets.OC%>?type=refuse">拒绝</a></button>
 </body>
 </html>

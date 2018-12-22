@@ -7,7 +7,7 @@ BEGIN
 	DECLARE @name char(40),@sex char(2),@age tinyint,@tel_num char(40),@email char(40),@job_id smallint,@dpt_id smallint,@stuff_id smallint
 	select @job_id=ri_job_id,@dpt_id=ri_dpt_id from requirements_common_info where ri_id=
 		(select rr_ri_id from recruitment_requirements where rr_id=
-		(select rec_rr_id from recommend where rec_rp_id=@rp_id and rec_recsta_id=5)) --5是等待offer确认
+		(select rec_rr_id from recommend where rec_rp_id=@rp_id and rec_recsta_id=6)) --6是等待offer确认
 
 	if @job_id is NULL
 		RETURN -1
@@ -32,3 +32,38 @@ BEGIN
 END
 GO
 -- EXECUTE rp2stuff 1,'h','hh'
+
+-- pointsReward 积分奖励
+CREATE PROCEDURE pointsReward(@rec_id int,@rule_id tinyint) AS
+BEGIN
+	DECLARE @rec_recstf_id char(40)
+	select @rec_recstf_id=rec_recstu_id from recommend where rec_id=@rec_id
+	insert into points_change values(@rule_id,@rec_recstf_id,GETDATE())
+	update stuff set stf_pts=stf_pts+(select ptchr_change from points_change_rule where ptchr_id=@rule_id) where stf_id=@rec_recstf_id
+END
+GO
+
+-- put2talents
+CREATE PROCEDURE put2talents(@rec_id int,@from_id tinyint) AS
+BEGIN
+	DECLARE @rec_rp_id char(40),@rec_dealHR_id char(40)
+	select @rec_rp_id=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
+	insert into talents values(@rec_rp_id,@rec_dealHR_id,@from_id)
+	update recommend set rec_recsta_id=1,rec_recres_id=1 where rec_id=@rec_id
+END
+GO
+
+-- put2otherneed
+CREATE PROCEDURE put2otherneed(@rec_id int,@otherneed_id int,@from_id tinyint) AS
+BEGIN
+	if (select rr_sta_id from recruitment_requirements where rr_id=@otherneed_id)=2	--开放
+	BEGIN
+		DECLARE @newHR_id char(40),@rec_dealHR_id char(40),@rpid char(40)
+		select @rpid=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
+		select @newHR_id=rr_hr_id from recruitment_requirements where rr_id=@otherneed_id
+		-- 必须先关闭此recommend，不然无法插入
+		update recommend set rec_recsta_id=1,rec_recres_id=2 where rec_id=@rec_id
+		insert into recommend values(@rpid,@rec_dealHR_id,6,2,@otherneed_id,@newHR_id,@from_id)
+	END
+END
+GO

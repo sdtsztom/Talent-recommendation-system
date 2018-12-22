@@ -36,3 +36,19 @@
 
 ### 2018/11/19
 - fix some problems may happen when creating database
+
+### 2018/11/27
+- enum generator
+- many new enum class
+- add some samples
+- fix bug of JobType class and tables_details_all excel
+- add a workfow Example(Tsk_Sift)
+- update schedule in README.html
+
+### 2018/11/27 second commit
+- add pages for single recruitment management,but most of them are unfinished
+- add function getDate() in iutil class
+- modify HR_function.jsp
+- add some samples 
+- change the API of LoginUser bean,the type of job_type attribute changes from String into JobType
+- perfect Single_Rec_Management_Page class and change its name into SRM_Page

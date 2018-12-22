@@ -10,29 +10,16 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
-public class Email {
+public class Email{
 
-    //发件人地址
-    private static String senderAddress;
-    //收件人地址
-    private static String recipientAddress;
-    //发件人账户名
-    private static String senderAccount;
-    //发件人账户授权码
-    private static String senderPassword;
-    //邮件标题
+    private static final String account = "m13372407504@163.com";
+    private static final String pwd = "qazsxdrfvgbhu123";
+    private static final String addr_from = "m13372407504@163.com";
+    private static String addr_to;
     private static String subject;
-    //邮件内容
     private static String content;
 
-    Email(String senderAddress1,String recipientAddress1,String senderAccount1,String senderPassword1) throws Exception {
-        //设置发件与收件信息
-        senderAddress = senderAddress1;
-        recipientAddress = recipientAddress1;
-        senderAccount = senderAccount1;
-        senderPassword = senderPassword1;
-
-    }
+    public Email() { }
 
     public void SendEmail() throws Exception{
         //1、连接邮件服务器的参数配置
@@ -60,7 +47,7 @@ public class Email {
         Transport transport = session.getTransport();
 
         //设置发件人的账户名和密码
-        transport.connect(senderAccount, senderPassword);
+        transport.connect(account, pwd);
 
         //发送邮件，并发送到所有收件人地址，message.getAllRecipients() 获取到的是在创建邮件对象时添加的所有收件人, 抄送人, 密送人
         transport.sendMessage(msg,msg.getAllRecipients());
@@ -76,13 +63,13 @@ public class Email {
      * @throws AddressException
      */
 
-    private static MimeMessage getMimeMessage(Session session) throws Exception{
+    private MimeMessage getMimeMessage(Session session) throws Exception{
 
         //创建一封邮件的实例对象
         MimeMessage msg = new MimeMessage(session);
 
         //设置发件人地址
-        msg.setFrom(new InternetAddress(senderAddress));
+        msg.setFrom(new InternetAddress(addr_from));
 
         /**
          * 设置收件人地址（可以增加多个收件人、抄送、密送），即下面这一行代码书写多行
@@ -91,28 +78,26 @@ public class Email {
          * MimeMessage.RecipientType.BCC：密送
          */
 
-        msg.setRecipient(MimeMessage.RecipientType.TO,new InternetAddress(recipientAddress));
-        //设置邮件主题
-
+        msg.setRecipient(MimeMessage.RecipientType.CC,new InternetAddress(addr_from));
+        msg.setRecipient(MimeMessage.RecipientType.TO,new InternetAddress(addr_to));
         msg.setSubject(subject,"UTF-8");
-        //设置邮件正文
-
         msg.setContent(content, "text/html;charset=UTF-8");
+
         //设置邮件的发送时间,默认立即发送
         msg.setSentDate(new Date());
 
         return msg;
     }
 
-    private void changeRecipientAddress(String NewAddress){
-        recipientAddress = NewAddress;
+    public void setAddr_to(String NewAddress){
+        addr_to = NewAddress;
     }
 
-    private void changeSubject(String NewSubject){
+    public void setSubject(String NewSubject){
         subject = NewSubject;
     }
 
-    private void changeContent(String NewContent){
+    public void setContent(String NewContent){
         content = NewContent;
     }
 }

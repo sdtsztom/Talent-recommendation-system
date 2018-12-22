@@ -21,8 +21,7 @@ public class util_server extends HttpServlet {
         String type=request.getParameter("type");
         if(type.equals("check_dup_username")){
             String username=request.getParameter("username");
-            CommonConnection.setConnectUser(ConnectUser.SYS);
-            boolean exist=CommonConnection.existQuery("select stf_id from stuff where stf_username='"+username+"'");
+            boolean exist=CommonConnection.existQuery("select stf_id from stuff where stf_username='"+username+"'",ConnectUser.SYS);
             if(exist)response.setStatus(200);   //返回200OK意味着数据库中存在这样的数据
             else response.setStatus(404);   //返回404意味着数据库中不存在这样的数据
         }

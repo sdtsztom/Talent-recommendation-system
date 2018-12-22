@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        <property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;DatabaseName=activiti" />
+        <property name="jdbcDriver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+        <property name="jdbcUsername" value="u_dev" />
+        <property name="jdbcPassword" value="12345678a" />
+
+        <property name="databaseSchemaUpdate" value="true" />
+        <property name="jobExecutorActivate" value="false" />
+    </bean>
+</beans>

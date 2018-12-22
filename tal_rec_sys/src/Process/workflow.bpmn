@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1545002641658" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1545002641658" name="" targetNamespace="http://www.activiti.org/testm1545002641658" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="workflow" isClosed="false" isExecutable="true" processType="None">
+    <startEvent id="StartEvent" name="StartEvent"/>
+    <endEvent id="EndEvent" name="EndEvent"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskOfferPointDeal" activiti:exclusive="true" id="TskOfferPointDeal" name="TskOfferPointDeal get rec_id"/>
+    <userTask activiti:exclusive="true" id="Intv1" name="Intv1 put json"/>
+    <userTask activiti:exclusive="true" id="Intv2" name="Intv2 put json"/>
+    <userTask activiti:exclusive="true" id="Sift" name="Sift put json"/>
+    <userTask activiti:exclusive="true" id="SiftArr" name="SiftArr put json"/>
+    <userTask activiti:exclusive="true" id="_14" name="Open2Sift put rr_id"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv2PointDeal" activiti:exclusive="true" id="TskItv2PointDeal" name="TskItv2PointDeal get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv2Record" activiti:exclusive="true" id="TskItv2Record" name="TskItv2Record get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv2Email" activiti:exclusive="true" id="TskItv2Email" name="TskItv2Email get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv2Finish" activiti:exclusive="true" id="TskItv2Finish" name="TskItv2Finish put isFinish"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="_21" name="isFinish"/>
+    <sequenceFlow id="_22" sourceRef="_21" targetRef="Intv2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_23" sourceRef="Intv2" targetRef="TskItv2Record"/>
+    <sequenceFlow id="_24" sourceRef="TskItv2Record" targetRef="TskItv2PointDeal"/>
+    <sequenceFlow id="_25" sourceRef="TskItv2PointDeal" targetRef="TskItv2Email"/>
+    <sequenceFlow id="_2" sourceRef="TskItv2Email" targetRef="TskItv2Finish"/>
+    <sequenceFlow id="_3" sourceRef="TskItv2Finish" targetRef="_21"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv1PointDeal" activiti:exclusive="true" id="TskItv1PointDeal" name="TskItv1PointDeal get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv1Record" activiti:exclusive="true" id="TskItv1Record" name="TskItv1Record get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskItv1Finish" activiti:exclusive="true" id="TskItv1Finish" name="TskItv1Finish put isFinish"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="_16" name="isFinish"/>
+    <sequenceFlow id="_28" sourceRef="Intv1" targetRef="TskItv1Record"/>
+    <sequenceFlow id="_30" sourceRef="TskItv1PointDeal" targetRef="TskItv1Finish"/>
+    <sequenceFlow id="_31" sourceRef="TskItv1Finish" targetRef="_16"/>
+    <sequenceFlow id="_32" sourceRef="_16" targetRef="Intv1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_33" sourceRef="_16" targetRef="Intv2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskOfferConfirm" activiti:exclusive="true" id="TskOfferConfirm" name="TskOfferConfirm get type,recid,username,pwd"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskOpen2Sift" activiti:exclusive="true" id="_39" name="TskOpen2Sift get rr_id"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskSiftArrEmail" activiti:exclusive="true" id="TskSiftArrEmail" name="TskSiftArrEmail get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskSiftArrRecord" activiti:exclusive="true" id="TskSiftArrReord" name="TskSiftArrReord get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskSiftPointsDeal" activiti:exclusive="true" id="_42" name="TskSiftPointsDeal get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskSiftRecord" activiti:exclusive="true" id="_43" name="TskSiftRecord get json"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskSiftFinish" activiti:exclusive="true" id="_44" name="TskSiftFinish put isFinish"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskSiftArrFinish" activiti:exclusive="true" id="TskSiftArrFinish" name="TskSiftArrFinish put isFinish"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="_46" name="isFinish"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="_47" name="isFinish"/>
+    <sequenceFlow id="_51" sourceRef="TskSiftArrFinish" targetRef="_47"/>
+    <sequenceFlow id="_52" sourceRef="Sift" targetRef="_43"/>
+    <sequenceFlow id="_53" sourceRef="_43" targetRef="_42"/>
+    <sequenceFlow id="_54" sourceRef="_42" targetRef="_44"/>
+    <sequenceFlow id="_55" sourceRef="_44" targetRef="_46"/>
+    <sequenceFlow id="_56" sourceRef="_47" targetRef="SiftArr">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_57" sourceRef="_47" targetRef="Intv1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_58" sourceRef="_46" targetRef="Sift">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_59" sourceRef="_46" targetRef="SiftArr">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask activiti:exclusive="true" id="OfferConfirm" name="OfferConfirm put rec_id,name,sex,type,username,pwd"/>
+    <sequenceFlow id="_63" sourceRef="_21" targetRef="OfferConfirm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask activiti:class="workflow.Tsk4WF.TskOfferFinish" activiti:exclusive="true" id="TskOfferFinish" name="TskOfferFinish put isFinish"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="_65" name="isFinish"/>
+    <sequenceFlow id="_66" sourceRef="OfferConfirm" targetRef="TskOfferConfirm"/>
+    <sequenceFlow id="_67" sourceRef="TskOfferConfirm" targetRef="TskOfferPointDeal"/>
+    <sequenceFlow id="_68" sourceRef="TskOfferPointDeal" targetRef="TskOfferFinish"/>
+    <sequenceFlow id="_69" sourceRef="_65" targetRef="OfferConfirm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_5" sourceRef="_65" targetRef="EndEvent">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFinish == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_10" sourceRef="TskOfferFinish" targetRef="_65"/>
+    <sequenceFlow id="_34" sourceRef="_14" targetRef="_39"/>
+    <sequenceFlow id="_60" sourceRef="_39" targetRef="Sift"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.Email_send" activiti:exclusive="true" id="_81" name="Mail"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="_89" name="rr_ed"/>
+    <sequenceFlow id="_95" sourceRef="_89" targetRef="_81">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${rr_ed == 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_4" sourceRef="_89" targetRef="_14">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${rr_ed != 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6" sourceRef="_81" targetRef="_14"/>
+    <serviceTask activiti:class="workflow.Tsk4WF.beginprocessWork" activiti:exclusive="true" id="_12" name="startProcess put rr_ed"/>
+    <sequenceFlow id="_13" sourceRef="StartEvent" targetRef="_12"/>
+    <sequenceFlow id="_15" sourceRef="_12" targetRef="_89"/>
+    <sequenceFlow id="_11" sourceRef="TskItv1Record" targetRef="TskItv1PointDeal"/>
+    <sequenceFlow id="_7" sourceRef="TskSiftArrReord" targetRef="TskSiftArrEmail"/>
+    <sequenceFlow id="_8" sourceRef="TskSiftArrEmail" targetRef="TskSiftArrFinish"/>
+    <sequenceFlow id="_9" sourceRef="SiftArr" targetRef="TskSiftArrReord"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="workflow">
+      <bpmndi:BPMNShape bpmnElement="StartEvent" id="Shape-StartEvent">
+        <dc:Bounds height="32.0" width="32.0" x="115.0" y="-10.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="EndEvent" id="Shape-EndEvent">
+        <dc:Bounds height="32.0" width="32.0" x="1525.0" y="440.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskOfferPointDeal" id="Shape-TskOfferPointDeal">
+        <dc:Bounds height="55.0" width="85.0" x="1485.0" y="215.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Intv1" id="Shape-Intv1">
+        <dc:Bounds height="55.0" width="85.0" x="1145.0" y="15.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Intv2" id="Shape-Intv2">
+        <dc:Bounds height="55.0" width="85.0" x="1320.0" y="10.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Sift" id="Shape-Sift">
+        <dc:Bounds height="55.0" width="85.0" x="590.0" y="40.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="SiftArr" id="Shape-SiftArr">
+        <dc:Bounds height="55.0" width="85.0" x="865.0" y="40.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_14" id="Shape-_14">
+        <dc:Bounds height="55.0" width="85.0" x="420.0" y="40.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv2PointDeal" id="Shape-TskItv2PointDeal">
+        <dc:Bounds height="55.0" width="85.0" x="1325.0" y="150.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv2Record" id="Shape-TskItv2Record">
+        <dc:Bounds height="55.0" width="85.0" x="1320.0" y="80.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv2Email" id="Shape-TskItv2Email">
+        <dc:Bounds height="55.0" width="85.0" x="1325.0" y="220.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv2Finish" id="Shape-TskItv2Finish">
+        <dc:Bounds height="55.0" width="85.0" x="1330.0" y="295.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_21" id="Shape-_21" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="1360.0" y="365.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv1PointDeal" id="Shape-TskItv1PointDeal">
+        <dc:Bounds height="55.0" width="85.0" x="1160.0" y="380.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv1Record" id="Shape-TskItv1Record">
+        <dc:Bounds height="55.0" width="85.0" x="1145.0" y="85.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskItv1Finish" id="Shape-TskItv1Finish">
+        <dc:Bounds height="55.0" width="85.0" x="1160.0" y="455.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_16" id="Shape-_16" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="1185.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskOfferConfirm" id="Shape-TskOfferConfirm">
+        <dc:Bounds height="60.0" width="85.0" x="1485.0" y="140.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="60.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_39" id="Shape-_39">
+        <dc:Bounds height="55.0" width="85.0" x="420.0" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskSiftArrEmail" id="Shape-TskSiftArrEmail">
+        <dc:Bounds height="55.0" width="85.0" x="870.0" y="270.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskSiftArrReord" id="Shape-TskSiftArrReord">
+        <dc:Bounds height="55.0" width="85.0" x="865.0" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_42" id="Shape-_42">
+        <dc:Bounds height="55.0" width="85.0" x="590.0" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_43" id="Shape-_43">
+        <dc:Bounds height="55.0" width="85.0" x="590.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_44" id="Shape-_44">
+        <dc:Bounds height="55.0" width="85.0" x="595.0" y="260.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskSiftArrFinish" id="Shape-TskSiftArrFinish">
+        <dc:Bounds height="55.0" width="85.0" x="870.0" y="385.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_46" id="Shape-_46" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="620.0" y="355.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_47" id="Shape-_47" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="900.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="OfferConfirm" id="Shape-OfferConfirm">
+        <dc:Bounds height="110.0" width="85.0" x="1480.0" y="10.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="110.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="TskOfferFinish" id="Shape-TskOfferFinish">
+        <dc:Bounds height="55.0" width="85.0" x="1490.0" y="285.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_65" id="Shape-_65" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="1520.0" y="365.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_81" id="Shape-_81">
+        <dc:Bounds height="55.0" width="85.0" x="40.0" y="310.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_89" id="Shape-_89" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="115.0" y="245.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_12" id="Shape-_12">
+        <dc:Bounds height="55.0" width="85.0" x="90.0" y="100.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_34" id="BPMNEdge__34" sourceElement="_14" targetElement="_39">
+        <di:waypoint x="462.5" y="95.0"/>
+        <di:waypoint x="462.5" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2" id="BPMNEdge__2" sourceElement="TskItv2Email" targetElement="TskItv2Finish">
+        <di:waypoint x="1370.0" y="275.0"/>
+        <di:waypoint x="1370.0" y="295.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3" id="BPMNEdge__3" sourceElement="TskItv2Finish" targetElement="_21">
+        <di:waypoint x="1376.0" y="350.0"/>
+        <di:waypoint x="1376.0" y="365.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4" id="BPMNEdge__4" sourceElement="_89" targetElement="_14">
+        <di:waypoint x="147.0" y="261.0"/>
+        <di:waypoint x="420.0" y="67.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5" id="BPMNEdge__5" sourceElement="_65" targetElement="EndEvent">
+        <di:waypoint x="1538.5" y="394.5"/>
+        <di:waypoint x="1538.5" y="440.1965193707209"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="_81" targetElement="_14">
+        <di:waypoint x="125.0" y="337.5"/>
+        <di:waypoint x="720.0" y="233.0"/>
+        <di:waypoint x="505.0" y="67.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="TskSiftArrReord" targetElement="TskSiftArrEmail">
+        <di:waypoint x="910.0" y="185.0"/>
+        <di:waypoint x="910.0" y="270.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8" sourceElement="TskSiftArrEmail" targetElement="TskSiftArrFinish">
+        <di:waypoint x="912.5" y="325.0"/>
+        <di:waypoint x="912.5" y="385.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_51" id="BPMNEdge__51" sourceElement="TskSiftArrFinish" targetElement="_47">
+        <di:waypoint x="916.0" y="440.0"/>
+        <di:waypoint x="916.0" y="550.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_95" id="BPMNEdge__95" sourceElement="_89" targetElement="_81">
+        <di:waypoint x="115.0" y="261.0"/>
+        <di:waypoint x="65.0" y="350.0"/>
+        <di:waypoint x="65.0" y="310.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9" id="BPMNEdge__9" sourceElement="SiftArr" targetElement="TskSiftArrReord">
+        <di:waypoint x="907.5" y="95.0"/>
+        <di:waypoint x="907.5" y="130.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_53" id="BPMNEdge__53" sourceElement="_43" targetElement="_42">
+        <di:waypoint x="632.5" y="165.0"/>
+        <di:waypoint x="632.5" y="180.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_52" id="BPMNEdge__52" sourceElement="Sift" targetElement="_43">
+        <di:waypoint x="632.5" y="95.0"/>
+        <di:waypoint x="632.5" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_55" id="BPMNEdge__55" sourceElement="_44" targetElement="_46">
+        <di:waypoint x="636.0" y="315.0"/>
+        <di:waypoint x="636.0" y="355.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11" id="BPMNEdge__11" sourceElement="TskItv1Record" targetElement="TskItv1PointDeal">
+        <di:waypoint x="1195.0" y="140.0"/>
+        <di:waypoint x="1195.0" y="380.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_54" id="BPMNEdge__54" sourceElement="_42" targetElement="_44">
+        <di:waypoint x="635.0" y="235.0"/>
+        <di:waypoint x="635.0" y="260.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10" id="BPMNEdge__10" sourceElement="TskOfferFinish" targetElement="_65">
+        <di:waypoint x="1536.0" y="340.0"/>
+        <di:waypoint x="1536.0" y="365.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_57" id="BPMNEdge__57" sourceElement="_47" targetElement="Intv1">
+        <di:waypoint x="932.0" y="566.0"/>
+        <di:waypoint x="1005.0" y="305.0"/>
+        <di:waypoint x="1145.0" y="42.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_13" id="BPMNEdge__13" sourceElement="StartEvent" targetElement="_12">
+        <di:waypoint x="131.0" y="22.0"/>
+        <di:waypoint x="131.0" y="100.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_56" id="BPMNEdge__56" sourceElement="_47" targetElement="SiftArr">
+        <di:waypoint x="900.0" y="566.0"/>
+        <di:waypoint x="780.0" y="230.0"/>
+        <di:waypoint x="865.0" y="67.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_59" id="BPMNEdge__59" sourceElement="_46" targetElement="SiftArr">
+        <di:waypoint x="652.0" y="371.0"/>
+        <di:waypoint x="735.0" y="225.0"/>
+        <di:waypoint x="865.0" y="67.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_15" id="BPMNEdge__15" sourceElement="_12" targetElement="_89">
+        <di:waypoint x="131.0" y="155.0"/>
+        <di:waypoint x="131.0" y="245.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_58" id="BPMNEdge__58" sourceElement="_46" targetElement="Sift">
+        <di:waypoint x="620.0" y="371.0"/>
+        <di:waypoint x="560.0" y="205.0"/>
+        <di:waypoint x="590.0" y="67.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_60" id="BPMNEdge__60" sourceElement="_39" targetElement="Sift">
+        <di:waypoint x="505.0" y="157.5"/>
+        <di:waypoint x="525.0" y="55.0"/>
+        <di:waypoint x="590.0" y="55.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_63" id="BPMNEdge__63" sourceElement="_21" targetElement="OfferConfirm">
+        <di:waypoint x="1392.0" y="381.0"/>
+        <di:waypoint x="1480.0" y="65.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_66" id="BPMNEdge__66" sourceElement="OfferConfirm" targetElement="TskOfferConfirm">
+        <di:waypoint x="1525.0" y="120.0"/>
+        <di:waypoint x="1525.0" y="140.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_22" id="BPMNEdge__22" sourceElement="_21" targetElement="Intv2">
+        <di:waypoint x="1360.0" y="381.0"/>
+        <di:waypoint x="1295.0" y="200.0"/>
+        <di:waypoint x="1320.0" y="37.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_68" id="BPMNEdge__68" sourceElement="TskOfferPointDeal" targetElement="TskOfferFinish">
+        <di:waypoint x="1530.0" y="270.0"/>
+        <di:waypoint x="1530.0" y="285.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_24" id="BPMNEdge__24" sourceElement="TskItv2Record" targetElement="TskItv2PointDeal">
+        <di:waypoint x="1365.0" y="135.0"/>
+        <di:waypoint x="1365.0" y="150.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_67" id="BPMNEdge__67" sourceElement="TskOfferConfirm" targetElement="TskOfferPointDeal">
+        <di:waypoint x="1527.5" y="200.0"/>
+        <di:waypoint x="1527.5" y="215.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_23" id="BPMNEdge__23" sourceElement="Intv2" targetElement="TskItv2Record">
+        <di:waypoint x="1362.5" y="65.0"/>
+        <di:waypoint x="1362.5" y="80.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_69" id="BPMNEdge__69" sourceElement="_65" targetElement="OfferConfirm">
+        <di:waypoint x="1520.0" y="381.0"/>
+        <di:waypoint x="1470.0" y="215.0"/>
+        <di:waypoint x="1480.0" y="65.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_25" id="BPMNEdge__25" sourceElement="TskItv2PointDeal" targetElement="TskItv2Email">
+        <di:waypoint x="1367.5" y="205.0"/>
+        <di:waypoint x="1367.5" y="220.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_28" id="BPMNEdge__28" sourceElement="Intv1" targetElement="TskItv1Record">
+        <di:waypoint x="1187.5" y="70.0"/>
+        <di:waypoint x="1187.5" y="85.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_31" id="BPMNEdge__31" sourceElement="TskItv1Finish" targetElement="_16">
+        <di:waypoint x="1201.0" y="510.0"/>
+        <di:waypoint x="1201.0" y="525.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_30" id="BPMNEdge__30" sourceElement="TskItv1PointDeal" targetElement="TskItv1Finish">
+        <di:waypoint x="1202.5" y="435.0"/>
+        <di:waypoint x="1202.5" y="455.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_33" id="BPMNEdge__33" sourceElement="_16" targetElement="Intv2">
+        <di:waypoint x="1217.0" y="541.0"/>
+        <di:waypoint x="1320.0" y="37.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_32" id="BPMNEdge__32" sourceElement="_16" targetElement="Intv1">
+        <di:waypoint x="1185.0" y="541.0"/>
+        <di:waypoint x="1045.0" y="168.0"/>
+        <di:waypoint x="1145.0" y="42.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -32,6 +32,9 @@ hs_err_pid*
 .idea/**/tasks.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/*
+tal_rec_sys.iml
+src/example/Test*
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -78,3 +81,4 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+.idea

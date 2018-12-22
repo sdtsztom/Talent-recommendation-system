@@ -5,26 +5,8 @@
          version="4.0">
 
     <welcome-file-list>
-        <welcome-file>/Login/login.jsp</welcome-file>
+        <welcome-file>/Login/login.html</welcome-file>
     </welcome-file-list>
-
-    <servlet>
-        <servlet-name>exec_register</servlet-name>
-        <servlet-class>servlet.exec_register</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>exec_register</servlet-name>
-        <url-pattern>/exec_register</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>refuse_offer</servlet-name>
-        <servlet-class>servlet.refuse_offer</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>refuse_offer</servlet-name>
-        <url-pattern>/refuse_offer</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>util_server</servlet-name>
@@ -34,7 +16,7 @@
         <servlet-name>util_server</servlet-name>
         <url-pattern>/util_server</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>login_servlet</servlet-name>
         <servlet-class>servlet.login_servlet</servlet-class>
@@ -52,6 +34,93 @@
         <servlet-name>publish_requirement</servlet-name>
         <url-pattern>/publish_requirement</url-pattern>
     </servlet-mapping>
+
+    <!-- ************************Servlet for Workflow************************* -->
+    <servlet>
+        <servlet-name>Open2Sift</servlet-name>
+        <servlet-class>servlet.Packer4WF.Open2Sift</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Open2Sift</servlet-name>
+        <url-pattern>/Packer4WF/Open2Sift</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Sift</servlet-name>
+        <servlet-class>servlet.Packer4WF.Sift</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Sift</servlet-name>
+        <url-pattern>/Packer4WF/Sift</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SiftArr</servlet-name>
+        <servlet-class>servlet.Packer4WF.SiftArr</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SiftArr</servlet-name>
+        <url-pattern>/Packer4WF/SiftArr</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Intv1</servlet-name>
+        <servlet-class>servlet.Packer4WF.Intv1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Intv1</servlet-name>
+        <url-pattern>/Packer4WF/Intv1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Intv2</servlet-name>
+        <servlet-class>servlet.Packer4WF.Intv2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Intv2</servlet-name>
+        <url-pattern>/Packer4WF/Intv2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OfferConfirm</servlet-name>
+        <servlet-class>servlet.Packer4WF.OfferConfirm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OfferConfirm</servlet-name>
+        <url-pattern>/Packer4WF/OfferConfirm</url-pattern>
+    </servlet-mapping>
+
+    
+    <!--****************************** Filters ************************-->
+    
+    <filter>
+        <filter-name>StuffAuthFilter</filter-name>
+        <filter-class>filter.StuffAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>StuffAuthFilter</filter-name>
+        <url-pattern>/view_points.jsp</url-pattern>
+        <url-pattern>/recommend_person_details.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>HRAuthFilter</filter-name>
+        <filter-class>filter.HRAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HRAuthFilter</filter-name>
+        <url-pattern>/Query_Recruit_HR.jsp</url-pattern>
+        <url-pattern>/SRMPages/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminAuthFilter</filter-name>
+        <filter-class>filter.AdminAuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminAuthFilter</filter-name>
+        <url-pattern>/inexist/*</url-pattern>
+    </filter-mapping>
     
     <filter>
         <filter-name>ConfirmOfferFilter</filter-name>
@@ -64,11 +133,36 @@
 
     <filter>
         <filter-name>SingleRecManagementFilter</filter-name>
-        <filter-class>filter.SingleRecManagementFilter</filter-class>
+        <filter-class>filter.SRMFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>SingleRecManagementFilter</filter-name>
-        <url-pattern>/Single_Rec_Management/unexist.jsp</url-pattern>
+        <url-pattern>/SRMPages/*</url-pattern>
     </filter-mapping>
+
+    <!-- SpringConfig -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc-servlet.xml</param-value>
+        </init-param>
+        <!-- <load-on-startup>1</load-on-startup> -->
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
 </web-app>

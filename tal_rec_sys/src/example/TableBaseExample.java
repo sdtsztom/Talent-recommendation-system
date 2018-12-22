@@ -14,8 +14,9 @@ public class TableBaseExample {
         System.out.println(table.genHTML(head));
 
         // usr query to create table
-        TableBase table2=new TableBase("select * from SRM_OPEN", ConnectUser.HR);
-        String []head2={"推荐id","推荐人","被推荐人","推荐来源"};
+
+        TableBase table2 = new TableBase("select * from SRM_OPEN", ConnectUser.HR);
+        String[] head2 = {"推荐id", "推荐人", "被推荐人", "推荐来源"};
         System.out.println(table2.genHTML(head2));
     }
 }
