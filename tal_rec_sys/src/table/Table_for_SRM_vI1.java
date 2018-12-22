@@ -39,7 +39,7 @@ public class Table_for_SRM_vI1 extends TableBase{
         }
         else if(col==ncols-1){
             String other_need_name="id_otherNeed_"+rec_id;
-            return "<input type=\"text\" name=\""+other_need_name+"\">";
+            return "<input type=\"text\" name=\""+other_need_name+"\" style=\"display:none\">";
         }
         else return null;
     }

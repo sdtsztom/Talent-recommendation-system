@@ -19,6 +19,8 @@
 %>
 <head>
     <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_I1%>)</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/Check.js"></script>
 </head>
