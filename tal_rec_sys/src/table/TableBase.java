@@ -182,7 +182,7 @@ public class TableBase {
         String body_wrapper[]={"<tbody>\n","</tbody>"};
 
         // 加入head
-        if (head!=null&&head.length != ncols){
+        if (head!=null&&nrows!=0&&head.length != ncols){
             System.out.println("Error:length of head don't correspond to content....");
             System.out.println("length of head:"+head.length+"\tncols:"+ncols);
             return null;
