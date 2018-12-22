@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface userTask {
 
-    void execute(Map<String,String> vars);
+    String execute(Map<String,String> vars);
 }

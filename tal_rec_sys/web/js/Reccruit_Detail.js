@@ -1,17 +1,3 @@
-function GetQueryString(name)
-{
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
-    if(r!=null)return  unescape(r[2]); return null;
-}
-
-function Open2Sift() {
-    var rr_id = GetQueryString("rr_id");
-    $(location).attr('href', '/complete/5?rr_id='+rr_id);
-}
-
-
-
 $(function () {
     gettype()
     getmc()

@@ -13,7 +13,7 @@ public class userTask12 implements userTask {
 
     //OfferConfirm
     @Override
-    public void execute(Map<String, String> vars) {
+    public String execute(Map<String, String> vars) {
         Map<String,Object> taskVariables = new HashMap<>();
         taskVariables.put("rec_id",vars.get("rec_id"));
         taskVariables.put("name",vars.get("name"));
@@ -23,5 +23,6 @@ public class userTask12 implements userTask {
         taskVariables.put("pwd",vars.get("pwd"));
         String taskId = null;
         taskService.complete(taskId,taskVariables);
+        return "/";
     }
 }

@@ -13,11 +13,12 @@ public class userTask10 implements userTask{
 
     //Itv2Make
     @Override
-    public void execute(Map<String,String> vars) {
+    public String execute(Map<String,String> vars) {
         String rr_id = vars.get("rr_id");
         String taskId = TaskUtil.getId(rr_id);
         Map<String,Object> taskVariables = new HashMap<>();
         taskService.complete(taskId,taskVariables);
+        return "/";
     }
 
 }

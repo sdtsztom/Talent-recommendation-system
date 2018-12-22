@@ -21,13 +21,12 @@ public class RecommendPeopleDAOImpl implements RecommendPeopleDAO {
                 "degree.deg_name,\n" +
                 "university.uni_name,\n" +
                 "rp_name,rp_sex,rp_age,rp_tel_num,rp_email,rp_stu,rp_grt,rp_maj,rp_abi,rp_res_path,rp_vali,\n" +
-                "job.jb_name\n" +
+                "rp_job\n" +
                 "from recommend_people\n" +
                 "inner join degree on degree.deg_id = rp_deg\n" +
                 "inner join university on rp_uni = university.uni_id\n" +
-                "inner join job on rp_job = job.jb_id\n" +
                 "where rp_vali = '是'",ConnectUser.DEV);
-        return JsonUtils.toMap(rs,"rp_id","deg_name","uni_name","rp_name","rp_sex","rp_age","rp_tel_num","rp_email","rp_stu","rp_grt","rp_maj","rp_abi","rp_res_path","rp_vali","jb_name");
+        return JsonUtils.toMap(rs,"rp_id","deg_name","uni_name","rp_name","rp_sex","rp_age","rp_tel_num","rp_email","rp_stu","rp_grt","rp_maj","rp_abi","rp_res_path","rp_vali","rp_job");
     }
 
 

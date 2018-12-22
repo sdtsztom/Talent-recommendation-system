@@ -40,7 +40,7 @@ public class OfferConfirm extends HttpServlet {
         //************************pass it to workflow************************
 
         //************************pass it to workflow************************
-        /*if(type.equals("confirm"))*/response.sendRedirect("/compelete/12?"+
+        /*if(type.equals("confirm"))*/response.sendRedirect("/complete/12?"+
                 "rr_id="+rrid+
                 "&red_id="+rec_id+
                 "&name="+name+

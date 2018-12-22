@@ -12,6 +12,7 @@ import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import util.ResResult;
 import util.TaskUtil;
@@ -21,7 +22,7 @@ import java.util.*;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-@RestController
+@Controller
 public class ActivitiController {
 
     @Autowired
@@ -41,19 +42,18 @@ public class ActivitiController {
     @RequestMapping(value = "/complete/{task}",method = GET)
     public String userTask(@PathVariable String task, @RequestParam Map<String,String> map) {
         userTask userTask = userTaskFactory.getuserTask(task);
-        userTask.execute(map);
-        return "ok";
+        return userTask.execute(map);
     }
 
     //根据需求Id获取TaskId
     @RequestMapping(value = "/getTaskId",method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
-    public String get(String name) {
+    public @ResponseBody String get(String name) {
         return myService.getTaskIdByName(name);
     }
 
     //获取所有任务
     @RequestMapping(value="/Tasks",method = GET)
-    public List<TaskRepresentation> getTasks() {
+    public @ResponseBody List<TaskRepresentation> getTasks() {
         List<Task> tasks = myService.getTasks();
         List<TaskRepresentation> list = new ArrayList<TaskRepresentation>();
         for(Task task : tasks) {
