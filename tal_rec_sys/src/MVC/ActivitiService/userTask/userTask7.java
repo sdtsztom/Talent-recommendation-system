@@ -18,6 +18,7 @@ public class userTask7 implements userTask {
     //SiftArr
     @Override
     public String execute(Map<String,String> vars) {
+        System.out.println("userTask7");
         String json = vars.get("json");
         Arrangement[] arrangements= ArrangementListUnpacker.unpack2array(json);
         String rr_id = TaskUtil.getrr_id(arrangements[0].getRec_id());

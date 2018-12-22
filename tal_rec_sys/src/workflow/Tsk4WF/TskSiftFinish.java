@@ -20,6 +20,7 @@ public class TskSiftFinish implements JavaDelegate {
         // 故选择这样稍不优雅的实现方式
         String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+arrangements[0].getRec_id(), ConnectUser.SYS);
         boolean finish = Tsk_sift.finish(rrid);
-        delegateExecution.setVariable("isFinish",finish);
+        int isFinish = finish ? 1 : 0;
+        delegateExecution.setVariable("isFinish",isFinish);
     }
 }

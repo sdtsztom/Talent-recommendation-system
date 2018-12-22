@@ -7,7 +7,7 @@ BEGIN
 	DECLARE @name char(40),@sex char(2),@age tinyint,@tel_num char(40),@email char(40),@job_id smallint,@dpt_id smallint,@stuff_id smallint
 	select @job_id=ri_job_id,@dpt_id=ri_dpt_id from requirements_common_info where ri_id=
 		(select rr_ri_id from recruitment_requirements where rr_id=
-		(select rec_rr_id from recommend where rec_rp_id=@rp_id and rec_recsta_id=5)) --5是等待offer确认
+		(select rec_rr_id from recommend where rec_rp_id=@rp_id and rec_recsta_id=6)) --6是等待offer确认
 
 	if @job_id is NULL
 		RETURN -1

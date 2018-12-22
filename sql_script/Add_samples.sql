@@ -39,6 +39,7 @@ insert into interview_place values(1,'一楼面试大厅')
 insert into interview_results values('通过')
 insert into interview_results values('不通过')
 insert into interview_results values('安排其它需求')
+insert into interview_results values('暂无')
 
 -- table job_type
 insert into job_type values('开发人员','开发人员')
@@ -55,11 +56,6 @@ insert into points_change_rule values('通过筛选加分',1)
 insert into points_change_rule values('通过初次面试等待终面',2)
 insert into points_change_rule values('通过终面',2)
 insert into points_change_rule values('入职',2)
-
--- table interview_results
-insert into interview_results values('暂无')
-insert into interview_results values('通过')
-insert into interview_results values('不通过')
 
 -- table recommend_from
 insert into recommend_from values('员工推荐')

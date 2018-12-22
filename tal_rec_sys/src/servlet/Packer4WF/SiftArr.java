@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -44,9 +45,10 @@ public class SiftArr extends HttpServlet {
                 arrangements.add(temp);
             }
         }
-        String json_str= JSON.toJSONString(arrangements);
+        String json_str= URLEncoder.encode(JSON.toJSONString(arrangements));
         //************************pass it to workflow************************
-        response.sendRedirect("/complete/7?json="+json_str+"&result="+arrangements.get(0).getResult()+"&rr_id="+rrid);
+
+        response.sendRedirect("/complete/7?json="+json_str+"&rr_id="+rrid);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

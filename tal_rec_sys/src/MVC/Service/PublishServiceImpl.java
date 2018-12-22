@@ -54,9 +54,8 @@ public class PublishServiceImpl implements PublishService {
 
     @Override
     public String Publish(HttpServletRequest request, HttpServletResponse response) throws Exception{
-        int rr_ri_id = Integer.parseInt(request.getSession().getAttribute("ri_id").toString());
         int rr_hr_id = Integer.parseInt( ( (LoginUser) request.getSession().getAttribute("user") ).getId() );
-        request.getSession().removeAttribute("ri_id");
+        int rr_ri_id = Integer.parseInt(request.getParameter("rr_id"));
         int rr_wp_id = Integer.parseInt(request.getParameter("rr_wp_id"));
         int rr_num = Integer.parseInt(request.getParameter("rr_num"));
         int rr_st_id = Integer.parseInt(request.getParameter("rr_st_id"));
@@ -79,9 +78,9 @@ public class PublishServiceImpl implements PublishService {
                 em.setContent("亲爱的员工 " + name +" :您好\r\n有一个新需求发布，请及时查看！");
             }
 
-            return "redirect: /HR.html";
+            return "redirect: /function/Query_Recruit_HR.html";
         }else{
-            return "redirect: /HR.html";
+            return "redirect: /function/Query_Recruit_HR.html";
         }
 
     }

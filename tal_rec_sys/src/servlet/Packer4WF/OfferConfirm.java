@@ -2,6 +2,7 @@ package servlet.Packer4WF;
 
 import bean.ConfirmUser;
 import ienum.ConnectUser;
+import ienum.RecStage;
 import ienum.eErrorPage;
 import util.CommonConnection;
 
@@ -22,10 +23,14 @@ public class OfferConfirm extends HttpServlet {
             response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
             return;
         }
-        String rec_id=user.getId();
+        String rp_id=user.getId();
         String name=user.getName();
         String sex=user.getSex();
-        String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+rec_id, ConnectUser.SYS);
+        String values[]=CommonConnection.singleLineQuery("select rec_id,rec_rr_id from recommend where rec_rp_id="+rp_id+" and rec_recsta_id="+RecStage.W_OC.toId(),2,ConnectUser.SYS);
+        String rec_id=values[0];
+        String rrid= values[1];
+
+        System.out.println(rec_id+"|"+rrid+"|"+"select rec_id,rec_rr_id from recommend where rec_rp_id="+rp_id+" and rec_recsta_id="+RecStage.W_OC.toId());
 
         String type=request.getParameter("type");
         String username="";
@@ -42,7 +47,7 @@ public class OfferConfirm extends HttpServlet {
         //************************pass it to workflow************************
         /*if(type.equals("confirm"))*/response.sendRedirect("/complete/12?"+
                 "rr_id="+rrid+
-                "&red_id="+rec_id+
+                "&rec_id="+rec_id+
                 "&name="+name+
                 "&sex="+sex+
                 "&username="+username+

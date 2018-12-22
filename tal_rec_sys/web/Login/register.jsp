@@ -44,9 +44,9 @@
 
 <%=name+sex+"，请完善您的注册信息："%>
 <form action="<%=WF_Servlets.OC%>?type=confirm" method="post">
-    <input type="text" name="username" onblur="check_dup(this)"><br/>
+    username:<input type="text" name="username" onblur="check_dup(this)"><br/>
     <div rec_id="warning" style="display:none;color:red">此用户名已被注册过，请重新选择用户名!</div>
-    <input type="password" name="pwd">
+    password:<input type="password" name="pwd">
     <input type="submit" value="提交">
 </form>
 </body>

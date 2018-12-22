@@ -15,7 +15,7 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-
+    <!--<script src="https://ciphertrick.com/demo/jquerysession/js/jquerysession.js"></script>-->
     <script src="/js/Publish_Details.js"></script>
     <style>
         [v-cloak] {
@@ -49,7 +49,7 @@
                     <input type="datetime-local" class="form-control" id="rr_el" name="rr_el"/>
                 </div>
                 <div class="form-group">
-                    <label for="rr_ept">工作年限</label><input type="number"name="rr_ept" id="rr_ept" class="form-control"/>
+                    <label for="rr_ept">工作年限</label><input type="number" name="rr_ept" id="rr_ept" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label for="rr_ed_id">紧急度</label>
@@ -71,6 +71,9 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="rr_spreq" id="rr_spreq" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="rr_id" id="rr_id" class="form-control"/>
                 </div>
                 <button type="button" class="btn btn-default" onclick="checkForm()">提交</button>
             </form>

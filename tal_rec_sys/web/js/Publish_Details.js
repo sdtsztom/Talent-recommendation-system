@@ -31,10 +31,11 @@ function gettype() {
 }
 
 function checkForm(){
-    var path = window.location.href
-    var data = path.split("=")
-    $.session.set("rr_id",data[1])
+    var path = window.location.href;
+    var data = path.split("=");
+    //$.session.set("rr_id",data[1])
     var str= $('#summernote').summernote('code');
+    document.getElementById("rr_id").value = data[1];
     document.getElementById("rr_spreq").value=str;
     document.getElementById("publish").submit();
 

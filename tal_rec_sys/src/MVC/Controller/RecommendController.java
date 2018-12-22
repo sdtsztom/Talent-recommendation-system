@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import util.ResResult;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +66,11 @@ public class RecommendController {
 
     @RequestMapping(value = "/ajax.post.resume_entry",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
     public @ResponseBody ResResult resume_entry_Insert(String name,String age,String tel,String email,String grt,String major,String abi,String path,String sex,String stu,String deg_id,String uni_id,String jb_id) throws Exception {
-        if(recommendService.RecommendPeopleInsert(name,age,tel,email,grt,major,abi,path,sex,stu,deg_id,uni_id,jb_id) == 0) return ResResult.build(200,"插入失败",null);
+        DateTimeFormatter local = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime time = LocalDateTime.parse(grt,local);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        String parsed_itv_time = time.format(formatter);
+        if(recommendService.RecommendPeopleInsert(name,age,tel,email,parsed_itv_time,major,abi,path,sex,stu,deg_id,uni_id,jb_id) == 0) return ResResult.build(200,"插入失败",null);
         else return ResResult.build(400,"ok",null);
     }
 

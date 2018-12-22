@@ -10,7 +10,7 @@ public class TskOfferConfirm implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String type=(String)delegateExecution.getVariable("type");
-        String recid=(String)delegateExecution.getVariable("recid");
+        String recid=(String)delegateExecution.getVariable("rec_id");
         String username=(String)delegateExecution.getVariable("username");
         String pwd=(String)delegateExecution.getVariable("pwd");
         Tsk_offer_confirm.record_res(type,recid,username,pwd);

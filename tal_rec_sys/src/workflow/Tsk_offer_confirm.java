@@ -14,6 +14,7 @@ public class Tsk_offer_confirm {
     public static void record_res(String type,String rec_id,String username,String pwd){
         if(type.equals("confirm")){
             String rpid=CommonConnection.singleResultQuery("select rec_rp_id from recommend where rec_id="+rec_id,ConnectUser.SYS);
+            System.out.println("rp2stuff,rpid="+rpid);
             rp2stuff procedure=new rp2stuff(rpid,username,pwd);
             CommonConnection.execProcedure(procedure,ConnectUser.SYS);
         }else if(type.equals("refuse")){
@@ -29,7 +30,7 @@ public class Tsk_offer_confirm {
         CommonConnection.execProcedure(procedure,ConnectUser.SYS);
     }
 
-    public static boolean finish(int rrid){
+    public static boolean finish(String rrid){
         boolean unfinish_person= CommonConnection.existQuery("select * from recommend where rec_rr_id="+rrid+" and rec_recsta_id="+ RecStage.W_OC.toId(), ConnectUser.SYS);
         if(unfinish_person)return false;
         else{

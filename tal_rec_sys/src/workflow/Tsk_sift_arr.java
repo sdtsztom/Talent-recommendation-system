@@ -40,14 +40,17 @@ public class Tsk_sift_arr {
     //**************************************API Function***********************************************
     public static void interview(String rec_id){
         // 更新阶段或(与)结果
+        System.out.println("DEBUG: "+"update recommend set rec_recsta_id="+ RecStage.W_I1.toId()+" where rec_id="+rec_id);
         CommonConnection.Update("update recommend set rec_recsta_id="+ RecStage.W_I1.toId()+" where rec_id="+rec_id,ConnectUser.SYS);
     }
     public static void talents(String rec_id){
+        System.out.println("**********here talents****************");
         put2talents procedure=new put2talents(Integer.parseInt(rec_id),TalentsFrom.AFT_SIFT.toId());
         CommonConnection.execProcedure(procedure,ConnectUser.SYS);
     }
 
     public static void otherneed(Arrangement a){
+        System.out.println("DEBUG: "+"come to other need");
         String rec_id=a.getRec_id();
         String rr_id_of_otherNeed=a.getRr_id_of_otherNeed();
         put2otherneed procedure=new put2otherneed(Integer.parseInt(rec_id),Integer.parseInt(rr_id_of_otherNeed),RecFrom.AFT_SIFT.toId());

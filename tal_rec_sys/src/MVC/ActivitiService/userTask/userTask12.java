@@ -1,8 +1,10 @@
 package MVC.ActivitiService.userTask;
 
 
+import javafx.concurrent.Task;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
+import util.TaskUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +23,11 @@ public class userTask12 implements userTask {
         taskVariables.put("type",vars.get("type"));
         taskVariables.put("username",vars.get("username"));
         taskVariables.put("pwd",vars.get("pwd"));
-        String taskId = null;
+        String rr_id = vars.get("rr_id");
+        taskVariables.put("rr_id",rr_id);
+        String taskId = TaskUtil.getId(rr_id);
+        System.out.println(rr_id);
+        System.out.println(taskId);
         taskService.complete(taskId,taskVariables);
         return "/";
     }

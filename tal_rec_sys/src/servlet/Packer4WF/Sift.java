@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.net.URLEncoder;
 
 @WebServlet(name = "Sift")
 public class Sift extends HttpServlet {
@@ -34,8 +35,10 @@ public class Sift extends HttpServlet {
             }
         }
         String json_str=JSON.toJSONString(arrangements);
+        json_str = URLEncoder.encode(json_str);
         //************************pass it to workflow************************
         response.sendRedirect("/complete/6?json="+json_str+"&rr_id="+rrid);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

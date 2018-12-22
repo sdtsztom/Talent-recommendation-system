@@ -43,7 +43,7 @@ public class PublishController {
     }
 
     @RequestMapping(value = "/publish.requirement",method = RequestMethod.POST)
-    public @ResponseBody String publish(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public String publish(HttpServletRequest request, HttpServletResponse response) throws Exception{
         String result = publishService.Publish(request,response);
         activitiService.startProcess();
         return result;

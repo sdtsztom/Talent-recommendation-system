@@ -16,6 +16,7 @@ public class TskItv1Finish implements JavaDelegate {
         Arrangement[] arrangements=ArrangementListUnpacker.unpack2array(json);
         String rrid= CommonConnection.singleResultQuery("select rec_rr_id from recommend where rec_id="+arrangements[0].getRec_id(), ConnectUser.SYS);
         boolean finish = Tsk_Itv1.finish(rrid);
-        delegateExecution.setVariable("isFinish",finish);
+        int isFinish = finish ? 1 : 0;
+        delegateExecution.setVariable("isFinish",isFinish);
     }
 }
