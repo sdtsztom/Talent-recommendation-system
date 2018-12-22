@@ -60,7 +60,7 @@ inner join university on recommend_people.rp_uni=university.uni_id
 GO
 
 -- view requirement_details
-create view requirement_details as select rr_id,rr_hr_id,rr_num,ed_name,st_name,st_desc,wp_name,
+create view requirement_details as select rr_id,rr_sta_id,rr_hr_id,rr_num,ed_name,st_name,st_desc,wp_name,
 wp_detail,jb_name,jb_desc,jb_sal,jt_name,jt_desc,dp_name,dp_contact,rr_spreq
 from recruitment_requirements inner join  work_place on recruitment_requirements.rr_wp_id = work_place.wp_id
 inner join stuff_type on recruitment_requirements.rr_st_id = stuff_type.st_id
