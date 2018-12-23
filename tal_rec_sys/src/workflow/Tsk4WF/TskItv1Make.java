@@ -19,6 +19,7 @@ public class TskItv1Make implements JavaDelegate {
         String itv_time = (String)delegateExecution.getVariable("itv_time");
         String exmer_id = (String)delegateExecution.getVariable("exmer_id");
         String itv_detail = (String)delegateExecution.getVariable("itv_detail");
-        interviewService.BuildInterview(ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail);
+        String ip_rnd = (String)delegateExecution.getVariable("ip_rnd");
+        interviewService.BuildInterview(ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail,ip_rnd);
     }
 }

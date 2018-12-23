@@ -35,12 +35,14 @@ public class InterviewController {
         LocalDateTime time = LocalDateTime.parse(itv_time,local);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         String parsed_itv_time = time.format(formatter);
+        //System.out.println("ip_rnd---------------------------"+ip_rnd+"ip_id------------"+ip_id);
+
         if(interviewService.BuildInterview(ip_id,rp_id,dealHR_id,rr_id,parsed_itv_time,exmer_id,itv_detail,ip_rnd)==0) return ResResult.build(200,"插入失败",null);
         else return ResResult.build(400,"插入成功",null);
     }
-
     @RequestMapping(value = "/ajax.post.Interview_Build_Page2",method = RequestMethod.POST,produces = "application/json")
     public @ResponseBody ResResult InterviewBuildPage2(String ip_id,String rp_id,String dealHR_id,String rr_id,String itv_time,String exmer_id,String itv_detail,String ip_rnd,String itv_res,String itv_id) throws Exception {
+        System.out.println("interview update");
         DateTimeFormatter local = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime time = LocalDateTime.parse(itv_time,local);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
