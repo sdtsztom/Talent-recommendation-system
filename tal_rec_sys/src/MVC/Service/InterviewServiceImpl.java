@@ -31,8 +31,8 @@ public class InterviewServiceImpl implements InterviewService {
     RecruitmentRequirementsDAO recruitmentRequirementsDAO;
 
     @Override
-    public int BuildInterview(String ip_id, String rp_id, String dealHR_id, String rr_id, String itv_time, String exmer_id, String itv_detail) {
-        return interviewDAO.insert(ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail);
+    public int BuildInterview(String ip_id, String rp_id, String dealHR_id, String rr_id, String itv_time, String exmer_id, String itv_detail,String itv_rnd) {
+        return interviewDAO.insert(ip_id,rp_id,dealHR_id,rr_id,itv_time,exmer_id,itv_detail,itv_rnd);
     }
 
     @Override

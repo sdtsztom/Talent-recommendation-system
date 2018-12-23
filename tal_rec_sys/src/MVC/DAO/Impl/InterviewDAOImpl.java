@@ -15,8 +15,8 @@ import java.util.Map;
 public class InterviewDAOImpl implements InterviewDAO {
 
     @Override
-    public int insert(String ip_id,String rp_id,String dealHR_id,String rr_id,String itv_time,String exmer_id,String itv_detail) {
-        return CommonConnection.Update("INSERT INTO interview VALUES("+ip_id+",4,"+rp_id+","+dealHR_id+","+rr_id+",1,'"+itv_time+"',"+exmer_id+",'"+itv_detail+"');",ConnectUser.DEV);
+    public int insert(String ip_id,String rp_id,String dealHR_id,String rr_id,String itv_time,String exmer_id,String itv_detail,String itv_rnd) {
+        return CommonConnection.Update("INSERT INTO interview VALUES("+ip_id+",4,"+rp_id+","+dealHR_id+","+rr_id+",+"+itv_rnd+"+,'"+itv_time+"',"+exmer_id+",'"+itv_detail+"');",ConnectUser.DEV);
     }
 
     @Override
