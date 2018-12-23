@@ -1,15 +1,30 @@
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+
+
 $(function () {
     $("#ip_id").val("0");
     $("#itv_res").hide();
     $("#forhide").hide();
     getmc();
+    var rr_id = getQueryString("rr_id");
+    var rec_rp_id = getQueryString("rec_rp_id");
+    var rec_rp_name = getQueryString("rec_rp_name");
+    var ip_rnd = getQueryString("ip_rnd")
     tr = new Vue({
         el: '#div',
         data: {
+            rrid: rr_id,
+            recrpname: rec_rp_name,
+            iprnd: ip_rnd,
             ips: [],
-            rps: [],
+            //rps: [],
             sts: [],
-            rrs: [],
+            //rrs: [],
             ress: [],
             datas: []
         }
@@ -22,7 +37,7 @@ function getmc(){
             tr.ips = msg.data[0];
             tr.rps = msg.data[1];
             tr.sts = msg.data[2];
-            tr.rrs = msg.data[3];
+            //tr.rrs = msg.data[3];
             tr.ress = msg.data[4];
             tr.datas = msg.data[5];
             datas = msg.data[5]
@@ -33,9 +48,9 @@ function submit() {
     var get_itv_id = $("#itv_id").val();
     if(get_itv_id === '0') {
         $.post("ajax.post.Interview_Build_Page",{
-            ip_id:$("#ip_id").val(),rp_id:$("#rp_id").val(),dealHR_id:$("#dealHR_id").val(),
-            rr_id:$("#rr_id").val(),itv_time:$("#itv_time").val(),exmer_id:$("#exmer_id").val(),
-            itv_detail:$("#itv_detail").val(),ip_rnd:$("#ip_rnd").val()
+            ip_id:$("#ip_id").val(),rp_id:getQueryString("rec_rp_id")/*$("#rp_id").val()*/,dealHR_id:$("#dealHR_id").val(),
+            rr_id:getQueryString("rr_id")/*$("#rr_id").val()*/,itv_time:$("#itv_time").val(),exmer_id:$("#exmer_id").val(),
+            itv_detail:$("#itv_detail").val(),ip_rnd:getQueryString("ip_rnd")/*$("#ip_rnd").val()*/
         }, function(msg){
             alert(msg.msg);
         });
