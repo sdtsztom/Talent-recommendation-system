@@ -21,13 +21,13 @@ BEGIN
 		print @dpt_id
 		*/
 		-- 更改推荐表中对应行的状态与结果列
-		update recommend set rec_recsta_id=1,rec_recres_id=4 where rec_rp_id=@rp_id and rec_recsta_id=5;
+		update recommend set rec_recsta_id=1,rec_recres_id=5 where rec_rp_id=@rp_id and rec_recsta_id=6;
 		-- 更改推荐人的有效状态
 		update recommend_people set rp_vali='否' where rp_id=@rp_id
 		-- 添加新员工
 		insert into stuff values(@job_id,@dpt_id,@name,@age,@sex,@username,@pwd,@email,0,@tel_num)
 		-- 授予对应权限
-		select @stuff_id=stf_id from stuff where stf_name=@username
+		select @stuff_id=stf_id from stuff where stf_username=@username
 		insert into role_grant values(@stuff_id,2)
 END
 GO
@@ -43,12 +43,11 @@ BEGIN
 END
 GO
 
--- put2talents
 CREATE PROCEDURE put2talents(@rec_id int,@from_id tinyint) AS
 BEGIN
 	DECLARE @rec_rp_id char(40),@rec_dealHR_id char(40)
 	select @rec_rp_id=rec_rp_id,@rec_dealHR_id=rec_dealHR_id from recommend where rec_id=@rec_id
-	insert into talents values(@rec_rp_id,@rec_dealHR_id,@from_id)
+	insert into talents values(@from_id,@rec_rp_id,@rec_dealHR_id)
 	update recommend set rec_recsta_id=1,rec_recres_id=1 where rec_id=@rec_id
 END
 GO

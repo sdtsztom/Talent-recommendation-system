@@ -59,7 +59,7 @@ public class PublishServiceImpl implements PublishService {
         int rr_wp_id = Integer.parseInt(request.getParameter("rr_wp_id"));
         int rr_num = Integer.parseInt(request.getParameter("rr_num"));
         int rr_st_id = Integer.parseInt(request.getParameter("rr_st_id"));
-        String rr_el = request.getParameter("rr_el").replace("T"," ");
+        String rr_el = request.getParameter("rr_el");
         int rr_ept = Integer.parseInt(request.getParameter("rr_ept"));
         int rr_ed_id = Integer.parseInt(request.getParameter("rr_ed_id"));
         String rr_spreq = null;

@@ -1,7 +1,7 @@
 use tal_rec_sys
 GO
 
--- dbcc checkident(interview,reseed,0)
+-- dbcc checkident(points_change,reseed,0)
 
 -- table role
 insert into role values('Admin，拥有最高权限')
