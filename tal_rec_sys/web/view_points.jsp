@@ -1,8 +1,6 @@
 <%@ page import="util.CommonConnection" %>
 <%@ page import="ienum.ConnectUser" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="bean.LoginUser" %>
-<%@ page import="ienum.eErrorPage" %>
 <%@ page import="table.TableBase" %><%--
   Created by IntelliJ IDEA.
   User: sdtsz
@@ -14,6 +12,7 @@
 <html>
 <head>
     <title>积分查询</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <%
@@ -24,12 +23,11 @@
         int points=Integer.parseInt(values[1]);
     %>
     员工名称：<%=name%><br/>
-    累计积分：<%=""+points%>
-
+    累计积分：<%=""+points%><br/>
 <%
-    TableBase table=new TableBase("select pch_change,pch_desc,pch_time from points_change_details",ConnectUser.SYS);
+    TableBase table=new TableBase("select pch_change,pch_desc,pch_time from points_change_details where pch_stf_id="+user_id,ConnectUser.SYS);
     String head[]={"积分变化","变化原因","变化时间"};
-    table.genHTML(head);
+    out.print(table.genHTML(head));
 %>
 
 </body>

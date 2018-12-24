@@ -1,5 +1,6 @@
 package table;
 
+import ienum.DebugLevel;
 import util.CommonConnection;
 import ienum.ConnectUser;
 import util.iutil;
@@ -94,7 +95,10 @@ public class TableBase {
     public void makeShape(){
         if(switcher){
             if(str_load!=null)makeShape(str_load.length,str_load[0].length);
-            else makeShape(0,0);
+            else {
+                iutil.log(DebugLevel.WARNING,"Tablebase,makeShape","empty str_load");
+                makeShape(0,0);
+            }
         }else {
             int []s=table_load.shape();
             makeShape(s[0],s[1]);
