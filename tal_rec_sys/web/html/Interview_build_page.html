@@ -13,7 +13,7 @@
 <div class="row" id="div" name="div">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        需求id:{{rrid}} 被推荐人:{{recrpname}} 面试轮数:{{iprnd}}
+        需求id:{{rrid}} 被推荐人:{{recrpname}} 面试轮数:{{iprnd}} 处理HR id:{{hr}}
         <br/>
         <form method="post" onsubmit="return false">
             <!--<label>面试ID/新建面试</label>-->
@@ -34,10 +34,10 @@
             <select class="form-control" name="rp_id" id="rp_id">
                 <option v-for="rp in rps" :value="rp.rp_id">{{rp.rp_name}}</option>
             </select>-->
-            <label>处理HR</label>
+            <!--<label>处理HR</label>
             <select class="form-control" name="dealHR_id" id="dealHR_id">
                 <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
-            </select>
+            </select>-->
             <!--<label>需求id</label>
             <select class="form-control" name="rr_id" id="rr_id">
                 <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>

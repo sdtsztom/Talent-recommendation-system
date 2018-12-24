@@ -28,20 +28,24 @@ public class Table_for_SRM_vI1 extends TableBase{
         else if (col==ncols-3)return "<a href=\"/recommend_person_details.jsp?rpid="+rpid+"\">查看详细信息</a>";
         else if(col==ncols-2){
             boolean itv_exist= CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid,ConnectUser.SYS);
+            System.out.println("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid);
+            System.out.println("Table for SRM vl1 itv_exist---------"+itv_exist+"---------");
             if(itv_exist){
                 //TODO 每次都查询，效率需要改善
                 boolean access=CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid+" and itv_time<="+ iutil.getDate(),ConnectUser.SYS);
+                System.out.println("Table for SRM vl1 access---------"+access+"---------");
                 if(access){
                     String arr_name="arr_"+rec_id;
                     return "<input type=\"radio\" name=\""+arr_name+"\" value=\"itv\">下一轮面试"+
                             "<input type=\"radio\" name=\""+arr_name+"\" value=\"otherneed\">安排其它需求"+
                             "<input type=\"radio\" name=\""+arr_name+"\" value=\"talents\">放入人才库";
                 }else return "未到安排时间";
-            }else return "<a href=\"/Interview_build_page?rr_id=" + _getItem(row,0) +
-                    "&rec_rp_id=" + _getItem(row,1) +
-                    "&rec_rp_name=" + _getItem(row,2) +
-                    "&ip_rnd=1" +
-                    "\">建立面试</a>";    //TODO: 建立面试
+            }else return "<a href=\"/Interview_build_page?rr_id=" + rrid +
+                        "&rec_rp_id=" + _getItem(row,1) +
+                        "&rec_rp_name=" + _getItem(row,2) +
+                        "&ip_rnd=1" +
+                        "&dealHR=" + CommonConnection.singleResultQuery("select rec_dealHR_id from recommend where rec_id="+rec_id,ConnectUser.HR)+
+                        "\">建立面试</a>";    //TODO: 建立面试
         }
         else if(col==ncols-1){
             String other_need_name="id_otherNeed_"+rec_id;

@@ -14,17 +14,19 @@ $(function () {
     var rr_id = getQueryString("rr_id");
     var rec_rp_id = getQueryString("rec_rp_id");
     var rec_rp_name = getQueryString("rec_rp_name");
-    var ip_rnd = getQueryString("ip_rnd")
+    var ip_rnd = getQueryString("ip_rnd");
+    var hrid = getQueryString("dealHR")
     tr = new Vue({
         el: '#div',
         data: {
             rrid: rr_id,
             recrpname: rec_rp_name,
             iprnd: ip_rnd,
+            hr: hrid,
             ips: [],
-            //rps: [],
+            /*rps: [],
             sts: [],
-            //rrs: [],
+            rrs: [],*/
             ress: [],
             datas: []
         }
@@ -45,10 +47,15 @@ function getmc(){
 }
 
 function submit() {
+    var itvtime = $("#itv_time").val();
+    if(itvtime === "") {
+        alert("请输入具体时间" + itvtime);
+        return;
+    }
     var get_itv_id = $("#itv_id").val();
     if(get_itv_id === '0') {
         $.post("ajax.post.Interview_Build_Page",{
-            ip_id:$("#ip_id").val(),rp_id:getQueryString("rec_rp_id")/*$("#rp_id").val()*/,dealHR_id:$("#dealHR_id").val(),
+            ip_id:$("#ip_id").val(),rp_id:getQueryString("rec_rp_id")/*$("#rp_id").val()*/,dealHR_id:getQueryString("dealHR")/*$("#dealHR_id").val()*/,
             rr_id:getQueryString("rr_id")/*$("#rr_id").val()*/,itv_time:$("#itv_time").val(),exmer_id:$("#exmer_id").val(),
             itv_detail:$("#itv_detail").val(),ip_rnd:getQueryString("ip_rnd")/*$("#ip_rnd").val()*/
         }, function(msg){

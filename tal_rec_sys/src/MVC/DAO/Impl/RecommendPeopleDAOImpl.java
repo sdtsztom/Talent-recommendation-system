@@ -31,6 +31,12 @@ public class RecommendPeopleDAOImpl implements RecommendPeopleDAO {
 
 
     @Override
+    public List<Map> getVali() throws SQLException {
+        CachedRowSetImpl rs = CommonConnection.makeQuery("select rp_id,rp_name from recommend_people where rp_id not in (select rec_rp_id from recommend where  rec_recsta_id != 1 )and rp_vali = '是'",ConnectUser.DEV);
+        return JsonUtils.toMap(rs,"rp_id","rp_name");
+    }
+
+    @Override
     public int Insert(String name,String age,String tel,String email,String grt,String major,String abi,String path,String sex,String stu,String deg_id,String uni_id,String jb_id) {
         /* 待完善:检验重复插入 */
         return CommonConnection.Update("INSERT INTO recommend_people VALUES ("+deg_id+","+uni_id+",'"+name+"','"+sex+"',"+age+",'"+tel+"','"+email+"','"+stu+"','"+grt+"','"+major+"','"+abi+"','"+path+"','"+'是'+"',"+jb_id+");",ConnectUser.DEV);
