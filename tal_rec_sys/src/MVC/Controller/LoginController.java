@@ -12,6 +12,9 @@ import util.ResResult;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -42,5 +45,14 @@ public class LoginController {
             type = ((LoginUser) request.getSession().getAttribute("user") ).getJob_type().toString();
         }
         return type;
+    }
+
+    @RequestMapping(value = "/get_log_message")
+    public @ResponseBody ResResult get_log_message(HttpServletRequest request, HttpServletResponse response){
+        LoginUser loginUser = (LoginUser) request.getSession().getAttribute("user");
+        Map<String,String> message = new HashMap<>();
+        message.put("log_name",loginUser.getUsername());
+        message.put("jb_type",loginUser.getJob_type().toString());
+        return new ResResult(200,"返回成功",message);
     }
 }
