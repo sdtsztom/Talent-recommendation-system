@@ -25,51 +25,22 @@ To change this template use File | Settings | File Templates.
 </script>
 </head>
 <body>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="page-header">
-                <h1>
-                    企业人才推荐系统 <small>人才内推实现</small>
-                </h1>
-            </div>
-            <div class="row clearfix">
-                <div class="col-md-3 column">
-                </div>
-                <div class="col-md-6 column" style="margin-top:100px">
-                    <form class="form-horizontal" id="login_form" method="post" action="/check_login" role="form">
-                        <div class="form-group">
-                            <label for="log_name" class="col-sm-2 control-label">用户名</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="username" id="log_name" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="log_passwd" class="col-sm-2 control-label">密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" name="pwd" id="log_passwd"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" />记住用户</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">登陆</button>
-                            </div>
-                        </div>
-                        <div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
-                    </form>
-                </div>
-                <div class="col-md-3 column">
-                </div>
-            </div>
+<div class="jumbotron">
+    <h1 class="display-4">企业人才推荐系统 登录页面</h1>
+</div>
+<div style="width:340px;margin:0 auto">
+    <form id="login_form" method="post" action="/check_login" role="form">
+        <div class="form-group">
+            <label for="log_name">用户名</label>
+                <input type="text" class="form-control" name="username" id="log_name" />
         </div>
-    </div>
+        <div class="form-group">
+            <label for="log_passwd">密码</label>
+                <input type="password" class="form-control" name="pwd" id="log_passwd"/>
+        </div>
+        <button type="submit" class="btn btn-default">登陆</button>
+        <div id="alert_msg" style="color:red;display:none;">用户名或密码不正确</div>
+    </form>
 </div>
 <!--<div id="login" class="divForm">-->
     <!--<form id="login_form" method="post" action="/login_servlet">-->

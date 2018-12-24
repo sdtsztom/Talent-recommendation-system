@@ -25,10 +25,16 @@
     ConfirmUser user=(ConfirmUser)session.getAttribute("confirm_user");
     String name=user.getName();
     String sex=user.getSex();
-    %>
-<p><%=name+sex%>，恭喜您，您已被我公司聘用!请选择您是否接受我们为您提供的offer。
-    点击下方的接受按钮接受我们的offer并注册员工账号，点击拒绝按钮拒绝我们的offer.</p>
-<button class="btn btn-light"><a href="/Login/register.jsp">接受</a></button>
-<button class="btn btn-light"><a href="<%=WF_Servlets.OC%>?type=refuse">拒绝</a></button>
+%>
+
+<div class="card" style="width: 18rem;margin:100px auto;">
+    <div class="card-body">
+        <h5 class="card-title">Offer 确认</h5>
+        <p class="card-text"><%=name+sex%>，恭喜您，您已被我公司聘用!请选择您是否接受我们为您提供的offer。</p>
+        <a href="/Login/register.jsp" class="card-link">接受</a>
+        <a href="<%=WF_Servlets.OC%>?type=refuse" class="card-link">拒绝</a>
+    </div>
+</div>
+
 </body>
 </html>

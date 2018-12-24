@@ -29,7 +29,6 @@ public class Table_for_SRM_vI1 extends TableBase{
         else if(col==ncols-2){
             boolean itv_exist= CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid,ConnectUser.SYS);
             System.out.println("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid);
-            System.out.println("Table for SRM vl1 itv_exist---------"+itv_exist+"---------");
             if(itv_exist){
                 //TODO 每次都查询，效率需要改善
                 boolean access=CommonConnection.existQuery("select * from interview where itv_rr_id="+rrid+" and itv_rnd=1 and itv_rp_id="+rpid+" and itv_time<="+ iutil.getDate(),ConnectUser.SYS);

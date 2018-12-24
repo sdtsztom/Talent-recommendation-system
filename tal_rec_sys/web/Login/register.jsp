@@ -16,6 +16,7 @@
 <html>
 <head>
     <title>新员工注册</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <script>
         function check_dup(un){
             var username=un.value;
@@ -51,8 +52,11 @@
     String name=user.getName();
     String sex=user.getSex();%>
 
-<%=name+sex+"，请完善您的注册信息："%>
+<div class="jumbotron">
+    <h1 class="display-4">注册</h1>
+</div>
 
+<div style="width:340px;margin:0 auto">
 <form action="<%=WF_Servlets.OC%>?type=confirm" method="post" onsubmit="return check_pwd(this)">
     <div class="form-group">
         <label for="username">用户名</label>
@@ -69,6 +73,7 @@
     </div>
     <button type="submit" class="btn btn-primary">提交</button>
 </form>
+</div>
 
 </body>
 </html>
