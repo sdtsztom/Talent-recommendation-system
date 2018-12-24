@@ -1,8 +1,17 @@
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+
 $(function () {
+    var rr_id = getQueryString("rr_id");
     getmc();
     tr = new Vue({
         el: '#div',
         data: {
+            rrid: rr_id,
             rrs: [],
             rps: [],
             recfs: [],
@@ -10,6 +19,7 @@ $(function () {
         }
     });
 });
+
 
 function getmc(){
     $.get("ajax.get.Stuff_Recommend_Page",
@@ -22,7 +32,7 @@ function getmc(){
 }
 
 function submit() {
-    var rr_id = $("#rr_id").val();
+    var rr_id = getQueryString("rr_id");//$("#rr_id").val();
     var rp_id = $("#rp_id").val();
     var recf_id = $("#recf_id").val();
     $.post("ajax.post.Stuff_Recommend_Page",{

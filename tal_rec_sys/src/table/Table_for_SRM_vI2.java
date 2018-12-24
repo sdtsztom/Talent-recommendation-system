@@ -33,10 +33,11 @@ public class Table_for_SRM_vI2 extends TableBase{
                     return "<input type=\"radio\" name=\""+arr_name+"\" value=\"pass\">发放offer"+
                             "<input type=\"radio\" name=\""+arr_name+"\" value=\"fail\">不发放offer";
                 }else return "未到安排时间";
-            }else return "<a href=\"/Interview_build_page?rr_id=" + _getItem(row,0) +
+            }else return "<a href=\"/Interview_build_page?rr_id=" +rrid+
                     "&rec_rp_id=" + _getItem(row,1) +
                     "&rec_rp_name=" + _getItem(row,2) +
-                    "&ip_rnd=1" +
+                    "&ip_rnd=2" +
+                    "&dealHR=" + CommonConnection.singleResultQuery("select rec_dealHR_id from recommend where rec_id="+rec_id,ConnectUser.HR)+
                     "\">建立面试</a>";    //TODO: 建立面试
         }
         else return null;

@@ -1,3 +1,5 @@
+use master
+GO
 create database activiti
 GO
 use activiti
