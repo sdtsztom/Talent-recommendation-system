@@ -1,8 +1,10 @@
 package table;
 
+import bean.LoginUser;
 import ienum.ConnectUser;
 import util.CommonConnection;
 import util.iutil;
+
 
 public class Table_for_SRM_vI1 extends TableBase{
     private String rrid=null;
@@ -35,7 +37,11 @@ public class Table_for_SRM_vI1 extends TableBase{
                             "<input type=\"radio\" name=\""+arr_name+"\" value=\"otherneed\">安排其它需求"+
                             "<input type=\"radio\" name=\""+arr_name+"\" value=\"talents\">放入人才库";
                 }else return "未到安排时间";
-            }else return "<a href=\"/Interview_build_page\">建立面试</a>";    //TODO: 建立面试
+            }else return "<a href=\"/Interview_build_page?rr_id=" + _getItem(row,0) +
+                    "&rec_rp_id=" + _getItem(row,1) +
+                    "&rec_rp_name=" + _getItem(row,2) +
+                    "&ip_rnd=1" +
+                    "\">建立面试</a>";    //TODO: 建立面试
         }
         else if(col==ncols-1){
             String other_need_name="id_otherNeed_"+rec_id;

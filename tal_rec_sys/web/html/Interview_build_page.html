@@ -13,33 +13,35 @@
 <div class="row" id="div" name="div">
     <div class="col-md-2"></div>
     <div class="col-md-8">
+        需求id:{{rrid}} 被推荐人:{{recrpname}} 面试轮数:{{iprnd}}
+        <br/>
         <form method="post" onsubmit="return false">
-            <label>面试ID/新建面试</label>
-            <select class="form-control" name="itv_id" id="itv_id">
+            <!--<label>面试ID/新建面试</label>-->
+            <select class="form-control" name="itv_id" id="itv_id" hidden>
                 <option value="0">新建面试</option>
                 <option v-for="data in datas" :value="data.itv_id">{{data.itv_id}}</option>
             </select>
-            <label>面试轮数</label>
+            <!--<label>面试轮数</label>
             <select class="form-control" name="ip_rnd" id="ip_rnd">
                 <option value="1">1</option>
                 <option value="2">2</option>
-            </select>
+            </select>-->
             <label>面试地点</label>
             <select class="form-control" name="ip_id" id="ip_id">
                 <option v-for="ip in ips" :value="ip.ip_id">{{ip.ip_detail}}</option>
             </select>
-            <label>被推荐人</label>
+            <!--<label>被推荐人</label>
             <select class="form-control" name="rp_id" id="rp_id">
                 <option v-for="rp in rps" :value="rp.rp_id">{{rp.rp_name}}</option>
-            </select>
+            </select>-->
             <label>处理HR</label>
             <select class="form-control" name="dealHR_id" id="dealHR_id">
                 <option v-for="st in sts" :value="st.stf_id">{{st.stf_name}}</option>
             </select>
-            <label>需求id</label>
+            <!--<label>需求id</label>
             <select class="form-control" name="rr_id" id="rr_id">
                 <option v-for="rr in rrs" :value="rr.rr_id">{{rr.rr_id}}</option>
-            </select>
+            </select>-->
             <div class="form-group">
                 <label for="itv_time">面试时间</label>
                 <input type="datetime-local" class="form-control" id="itv_time" name="itv_time">
