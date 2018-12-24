@@ -30,6 +30,15 @@
             xmlhttp.send("type=<%=UtilServerFunctionType.CHECKDUPUSERNAME.toString()%>&username="+username);
             //******************************code to use ajax to check duplicate username*****************************
         }
+
+        function check_pwd(form) {
+            var pwd=form.password.value;
+            var pwd2=form.password.value;
+            if(pwd!==pwd2){
+                window.alert("两次输入密码不一致!");
+                return false;
+            }else return true;
+        }
     </script>
 </head>
 <body>
@@ -43,11 +52,23 @@
     String sex=user.getSex();%>
 
 <%=name+sex+"，请完善您的注册信息："%>
-<form action="<%=WF_Servlets.OC%>?type=confirm" method="post">
-    username:<input type="text" name="username" onblur="check_dup(this)"><br/>
-    <div rec_id="warning" style="display:none;color:red">此用户名已被注册过，请重新选择用户名!</div>
-    password:<input type="password" name="pwd">
-    <input type="submit" value="提交">
+
+<form action="<%=WF_Servlets.OC%>?type=confirm" method="post" onsubmit="return check_pwd(this)">
+    <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username" name="username" onblur="check_dup(this)">
+        <small id="warning" class="form-text text-muted" style="display:none;color:red">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" name="pwd">
+    </div>
+    <div class="form-group">
+        <label for="password_check">确认密码</label>
+        <input type="password" class="form-control" id="password_check" placeholder="Password" name="pwd_check">
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
 </form>
+
 </body>
 </html>
