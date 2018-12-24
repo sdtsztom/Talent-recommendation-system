@@ -1,5 +1,8 @@
 package util;
 
+import ienum.DebugLevel;
+import sun.security.ssl.Debug;
+
 import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,5 +56,13 @@ public class iutil {
     public static String formattedDate(Date date){
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
         return df.format(date);
+    }
+
+    public static void log(DebugLevel level,String place,String msg){
+        System.out.println(level+":  in place "+place+"  log msg:"+msg);
+    }
+
+    public static void log(String  place,String key,String value){
+        System.out.println("Variable Log:  in place "+place+"  ["+key+":"+value+"]");
     }
 }
