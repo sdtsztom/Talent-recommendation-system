@@ -21,7 +21,7 @@
     <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.W_SIFT%>)</title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body><div class="container"><div style="height:50px;"></div>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>
 <a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
@@ -33,7 +33,7 @@
         out.print(table.genHTML(head));
     %>
     <input type="hidden" name="rrid" value="<%=rrid%>">
-    <input type="submit" value="保存">
+    <button class="btn btn-light" type="submit">保存</button>
 </form>
-</body>
+</div></body>
 </html>

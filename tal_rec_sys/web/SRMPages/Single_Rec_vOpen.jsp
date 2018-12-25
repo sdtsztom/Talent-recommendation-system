@@ -21,7 +21,7 @@
     <title>需求(id:<%=rrid%>)的管理页面(状态：<%=RrStage.OPEN%>)</title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body><div class="container"><div style="height:50px;"></div>
 <p>登录人：<%=name%></p>
 <p>需求号：<%=rrid%></p>
 <a href="/function/Recruit_Detail.html?rr_id=<%=rrid%>">需求详情</a>
@@ -36,5 +36,5 @@
 <div><button class="btn btn-light"><a href="<%=WF_Servlets.OPEN2SIFT%>?rrid=<%=rrid%>">开始筛选</a></button>
     <button class="btn btn-light"><a href="/Republish_Demand">更新需求</a></button>
 </div>
-</body>
+</div></body>
 </html>

@@ -18,7 +18,7 @@
     <title>Rcommend Person Detais</title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body><div class="container"><div style="height:50px;"></div>
 <%
     String rpid=request.getParameter("rpid");
     RP_Details rp_details=CommonConnection.<RP_Details>beanQuery("select * from recommend_person_details where rp_id="+rpid,new RP_Details(),ConnectUser.HR);
@@ -27,5 +27,5 @@
     String []head=new String []{"rp_id","名字","年龄","性别","电话","email","职位","学位","毕业学校","是否在读","毕业时间","主修专业","专业技能"};;
     out.print(table.genVerticalHTML(head,"class=\"table table-sm\""));
 %>
-</body>
+</div></body>
 </html>
