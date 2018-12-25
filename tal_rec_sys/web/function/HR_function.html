@@ -9,6 +9,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
     <script src="https://cdn.bootcss.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <script src="/js/functionPages.js"></script>
     <script>
         $(function () {
             gettype()
@@ -33,14 +34,17 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <ul class="nav nav-stacked nav-pills">
-                <li class="active">
-                    <a href="/function/Query_Recruit.html" target="right">查看所有需求</a>
+                <li class="active" onclick="change_active(this)">
+                    <a href="/function/Query_Recruit.html" target="right" >查看所有需求</a>
                 </li>
-                <li>
+                <li onclick="change_active(this)">
                     <a href="/function/Query_Recruit_HR.html" target="right">管理已发布的需求</a>
                 </li>
-                <li>
+                <li onclick="change_active(this)">
                     <a href="/function/Publish_Requirements.html" target="right">发布需求</a>
+                </li>
+                <li onclick="change_active(this)">
+                    <a href="/view_points.jsp" target="right">查询积分</a>
                 </li>
             </ul>
         </div>
