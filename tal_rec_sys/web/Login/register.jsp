@@ -8,9 +8,6 @@
   Time: 14:44
   To change this template use File | Settings | File Templates.
 
-  TODO:
-    1. javascript检验表单
-    2.[Done] 检测用户名是否被用过并动态提醒
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -47,10 +44,7 @@
     if(user==null){
         response.sendRedirect(eErrorPage.PERMISSIONDENY.toString());
         return;
-    }
-    String user_id =user.getId();
-    String name=user.getName();
-    String sex=user.getSex();%>
+    }%>
 
 <div class="jumbotron">
     <h1 class="display-4">注册</h1>
@@ -61,7 +55,7 @@
     <div class="form-group">
         <label for="username">用户名</label>
         <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username" name="username" onblur="check_dup(this)">
-        <small id="warning" class="form-text text-muted" style="display:none;color:red">We'll never share your email with anyone else.</small>
+        <small id="warning" class="form-text text-muted" style="display:none;color:red">此用户名已被注册过，请重新选择用户名!</small>
     </div>
     <div class="form-group">
         <label for="password">密码</label>
